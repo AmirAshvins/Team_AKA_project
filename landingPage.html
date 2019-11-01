@@ -2,9 +2,62 @@
 <html>
     <head>
         <title>Landing Page</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+        <style>
+            .horizontal-center{
+                margin-top: 50px;
+                text-align: center;
+            }
+            .jumbotron{
+                background-size: cover;
+                background-attachment: scroll;
+                background-repeat: no-repeat;
+                background-image: url('images/landing_page_bg.jpg');
+                height:500px ;
+            }
+            p, h2{
+                text-align: center;
+            }
+            .glyphicon {
+                font-size: 200%;;
+            }
+        </style>
     </head>
     <body>
-        <h1>Landing Page</h1>
-        <a href="login.html"><p>Sign-In</p></a>
+        <div class="jumbotron horizontal-center ">
+            <h1>Landing Page</h1>
+            <a class="btn btn-warning" href="login.html" role='button'> Sign in</a>
+        </div>
+        <div>
+            <h2 style="font-family: cursive;"> Features</h2>
+            <p style="font-family: cursive;"> Our Website is mostly focused on providing easier access to the assingments for our term which can be prioritized
+            based on user's decision</p>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-1">
+                    <p style="font-family: cursive;">
+                        <span class="glyphicon glyphicon-calendar"></span><br>
+                        Assignemnts are shown in an interactive Calendar
+                    </p>
+                </div>
+                <div class="col-lg-4 col-1">
+                    <p style="font-family: cursive;"> 
+                        <span class="glyphicon glyphicon-edit"></span><br>
+                        You can add assingments and edit the existing ones.
+                    </p>
+                </div>
+                <div class="col-lg-4 col-1"></div>
+                    <p style="font-family: cursive;"> 
+                        <span class="glyphicon glyphicon-filter"></span><br>
+                       you can use different filters as you prioritize your assingment list
+                    </p>
+                </div>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     </body>
 </html>

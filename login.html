@@ -1,75 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Index</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Index</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+  <style>
+    
+  </style>
 </head>
+
 <body>
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+    <div class="row justify-content-md-center">
+      <div class="jumbotron">
+        <div class="container">
+            <section class="col-md-auto">
+                <!-- <div class='jumbotron'> -->
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <span class="glyphicon glyphicon-menu-hamburger"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="landingPage.html">List</a></li>
+                            <li><a href="#">Calendar</a></li>
+                        </ul>
+                    </div>
+                <!-- </div> -->
+                </section>
+        </div>
+        <div class="container">
+            <section class="col-md-auto">
+                <!-- <div class="jumbotron"> -->
+                    <h2 style="text-align: center;"> Log In</h2>
+                <!-- </div> -->
+              </section>
+        </div>
+        <div class="container">
+            <section class="col-md-auto">
+                <!-- <div class="jumbotron"> -->
+                    <a class="btn btn-default" href="###########"><span class="glyphicon glyphicon-user"></span></a>
+                <!-- </div> -->
+              </section>
+        </div>
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-<script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
+      </div>
+    </div>
 
-<script>
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyA_-CQ7oIjLIeTU8B05p8lD-UbOJ9MXm_Y",
-    authDomain: "team-aka.firebaseapp.com",
-    databaseURL: "https://team-aka.firebaseio.com",
-    projectId: "team-aka",
-    storageBucket: "team-aka.appspot.com",
-    messagingSenderId: "192089508874",
-    appId: "1:192089508874:web:15181dc2fc7a40725ce3f3"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-</script>
 
-<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
 
-<script>
-// Initialize the FirebaseUI Widget using Firebase.
-var ui = new firebaseui.auth.AuthUI(firebase.auth());
-var uiConfig = {
-  callbacks: {
-    signInSuccessWithAuthResult: function(authResult, redirectUrl) {
-      // User successfully signed in.
-      // Return type determines whether we continue the redirect automatically
-      // or whether we leave that to developer to handle.
-      return true;
-    },
-    uiShown: function() {
-      // The widget is rendered.
-      // Hide the loader.
-      document.getElementById('loader').style.display = 'none';
-    }
-  },
-  // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
-  signInFlow: 'popup',
-  signInSuccessUrl: 'main.html',
-  signInOptions: [
-    // Leave the lines as is for the providers you want to offer your users.
-    firebase.auth.EmailAuthProvider.PROVIDER_ID,
-  ],
-  // Terms of service url.
-  tosUrl: '<your-tos-url>',
-  // Privacy policy url.
-  privacyPolicyUrl: '<your-privacy-policy-url>'
-};
-// The start method will wait until the DOM is loaded.
-ui.start('#firebaseui-auth-container', uiConfig);
-</script>
 
-<!-- The surrounding HTML is left untouched by FirebaseUI.
-     Your app may use that space for branding, controls and other customizations.-->
-     <h1>Welcome to My Awesome App</h1>
-     <div id="firebaseui-auth-container"></div>
-     <div id="loader">Loading...</div>
 
+
+
+
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyA_-CQ7oIjLIeTU8B05p8lD-UbOJ9MXm_Y",
+      authDomain: "team-aka.firebaseapp.com",
+      databaseURL: "https://team-aka.firebaseio.com",
+      projectId: "team-aka",
+      storageBucket: "team-aka.appspot.com",
+      messagingSenderId: "192089508874",
+      appId: "1:192089508874:web:15181dc2fc7a40725ce3f3"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+  <script>
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    var uiConfig = {
+      callbacks: {
+        signInSuccessWithAuthResult: function (authResult, redirectUrl) {
+          return true;
+        },
+        uiShown: function () {
+          document.getElementById('loader').style.display = 'none';
+        }
+      },
+      signInFlow: 'popup',
+      signInSuccessUrl: 'main.html',
+      signInOptions: [
+        firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      ],
+      tosUrl: '#',
+      privacyPolicyUrl: '#'
+    };
+    ui.start('#firebaseui-auth-container', uiConfig);
+  </script>
+  <div id="firebaseui-auth-container"></div>
+  <div id="loader">Loading...</div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
