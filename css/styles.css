@@ -1,0 +1,9 @@
+.inline-elem{
+    display: inline;
+}
+
+#headers{
+    text-align: center;
+    background-color: darkgray;
+    color: orange;
+}
