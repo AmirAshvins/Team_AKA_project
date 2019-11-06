@@ -8,16 +8,15 @@
     color: orange;
 }
 
-.margin-10{
-    margin: 10px;
-}
-
-.align-center-down{
-    transform: translate(0, 50%);
+.align-center-up{
+    transform: translate(0, -50%);
 }
 
 #grad {
-    background-image: linear-gradient(lightgrey, black)
+    background-image: linear-gradient(darkgrey, black);
+    height: 10vh;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 body{
@@ -30,13 +29,31 @@ body{
     top: 10%;
     left: 45%;
 }
-.list {
-    background-color: #626567;
-
-}
 
 .listText {
     color: darkorange;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 150%;
+}
+.container {
+    height: 80vh;
+    
+}
+#grad2 {
+    background-image: linear-gradient(black, darkgray);
+    height: 10vh;
+    margin-bottom: 0px;
+}
+.colorGray {
+    background-color: #626567;
+}
+.noBottomMargin{
+    margin-bottom: 0px;
+}
+.listRow {
+    background-color: rgba(128, 128, 128, 0.432);
+}
+.addMargin{
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
