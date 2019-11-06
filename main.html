@@ -66,20 +66,20 @@
             let listRow = buildRow(assignmentInstance.ID);
 
             //build course name
-            let courseName = buildCourseNameCol(assignmentInstance.courseName);
+            let courseNameCol = buildCourseNameCol(assignmentInstance.courseName);
 
             // build assignmentName
-            let assignmentName = buildAssignmentNameCol(assignmentInstance.AssignmentName);
+            let assignmentNameCol = buildAssignmentNameCol(assignmentInstance.assignmentName);
             
             // Build due date
-            let dueDate = buildDueDateCol(assignmentInstance.dueDate)
+            let dueDateCol = buildDueDateCol(assignmentInstance.dueDate)
             
 
             // put it all together
-            listRow.appendChild(dueDate);
-            listRow.appendChild(assignmentName);
-            listRow.appendChild(courseName);
-            document.getElementById('listContainer').appendChild(listRow)
+            listRow.appendChild(dueDateCol);
+            listRow.appendChild(assignmentNameCol);
+            listRow.appendChild(courseNameCol);
+            document.getElementById('listContainer').appendChild(listRow);
         }
 
         function buildRow(assignmentId){
