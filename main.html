@@ -68,34 +68,31 @@
             listRow.id = assignmentInstance.ID;
             listRow.class = "row"
             let listCol = document.createElement('div');
-            listCol.class = "col-auto"
+            listCol.className = "col-lg-auto col-md-auto col-sm-auto col-xs-auto"
 
             //build course name
-            let courseNameRow = document.createElement('div');
-            courseNameRow.class = "row";
             let courseName = document.createElement('div');
-            courseName.class = "col-auto text-left";
-            courseName.innerHTML = "<p class='listCourseName'>" + assignmentInstance.courseName + "</p>";
+            courseName.class = "col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right";
+            courseName.innerHTML = "<p class='listCourseName listText'>" + assignmentInstance.courseName + "</p>";
             
-            //build assignmentrow
+            //build assignment row
             let assignmentRow = document.createElement('div');
             assignmentRow.class= 'row'
 
-            // build assignmentInstance name
+            // build assignmentName
             let assignmentName = document.createElement('div');
-            assignmentName.class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-left";
-            assignmentName.innerHTML = "<p class='listAssignmentName'>" + assignmentInstance.assignmentName + "</p>";
+            assignmentName.className ="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left";
+            assignmentName.innerHTML = "<p class='listAssignmentName listText'>" + assignmentInstance.assignmentName + "</p>";
 
             // Build due date
             let dueDate = document.createElement('div');
-            dueDate.class = "col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right";
-            dueDate.innerHTML = "<p class='listDueDate'>" + assignmentInstance.dueDate + "</p>";
+            dueDate.classList = "col-lg-4 col-md-4 col-sm-4 col-xs-4 text-left";
+            dueDate.innerHTML = "<p class='listDueDate listText'>" + assignmentInstance.dueDate + "</p>";
 
             // put it all together
-            assignmentRow.appendChild(assignmentName);
             assignmentRow.appendChild(dueDate);
-            courseNameRow.appendChild(courseName);
-            listCol.appendChild(courseNameRow);
+            assignmentRow.appendChild(assignmentName);
+            assignmentRow.appendChild(courseName);
             listCol.appendChild(assignmentRow);
             listRow.appendChild(listCol);
             document.getElementById('listContainer').appendChild(listRow)
