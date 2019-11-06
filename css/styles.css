@@ -7,3 +7,11 @@
     background-color: darkgray;
     color: orange;
 }
+
+.margin-10{
+    margin: 10px;
+}
+
+.align-center-down{
+    transform: translate(0, 50%);
+}
