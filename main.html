@@ -25,10 +25,11 @@
         </div>
     </div>
     <div class="container colorGray">
-        <div class="jumbotron colorGray noBottomMargin" >
-            <section class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-left listText"> Due Date</section>
-            <section class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left listText"> Assignment Name</section>
-            <section class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center listText"> course</section>
+        <div class="colorGray noBottomMargin" >
+
+            <section class="col-lg-4 col-md-4 col-sm-4 col-xs-4  listText addMargin"> Due Date</section>
+            <section class="col-lg-6 col-md-6 col-sm-6 col-xs-6  listText addMargin"> Assignment Name</section>
+            <section class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right listText addMargin"> course</section>
 
 
 
@@ -62,42 +63,56 @@
 
     <script>
         function buildListRow(assignmentInstance){
-            // rowContent must be a WeakMap
 
             // Build the main container
-            let listRow = document.createElement('div');
-            listRow.id = assignmentInstance.ID;
-            listRow.class = "row"
-            let listCol = document.createElement('div');
-            listCol.className = "col-lg-auto col-md-auto col-sm-auto col-xs-auto"
+            let listRow = buildRow(assignmentInstance.ID);
 
             //build course name
-            let courseName = document.createElement('div');
-            courseName.class = "col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right";
-            courseName.innerHTML = "<p class='listCourseName listText'>" + assignmentInstance.courseName + "</p>";
-            
-            //build assignment row
-            let assignmentRow = document.createElement('div');
-            assignmentRow.class= 'row'
+            let courseName = buildCourseNameCol(assignmentInstance.courseName);
 
             // build assignmentName
-            let assignmentName = document.createElement('div');
-            assignmentName.className ="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left";
-            assignmentName.innerHTML = "<p class='listAssignmentName listText'>" + assignmentInstance.assignmentName + "</p>";
-
+            let assignmentName = buildAssignmentNameCol(assignmentInstance.AssignmentName);
+            
             // Build due date
-            let dueDate = document.createElement('div');
-            dueDate.classList = "col-lg-4 col-md-4 col-sm-4 col-xs-4 text-left";
-            dueDate.innerHTML = "<p class='listDueDate listText'>" + assignmentInstance.dueDate + "</p>";
+            let dueDate = buildDueDateCol(assignmentInstance.dueDate)
+            
 
             // put it all together
-            assignmentRow.appendChild(dueDate);
-            assignmentRow.appendChild(assignmentName);
-            assignmentRow.appendChild(courseName);
-            listCol.appendChild(assignmentRow);
-            listRow.appendChild(listCol);
+            listRow.appendChild(dueDate);
+            listRow.appendChild(assignmentName);
+            listRow.appendChild(courseName);
             document.getElementById('listContainer').appendChild(listRow)
         }
+
+        function buildRow(assignmentId){
+            // Build a col of auto span
+            let listRow = document.createElement('div');
+            listRow.id = assignmentId;
+            listRow.class = "row listRow";
+            return listRow;
+        }
+
+        function buildCourseNameCol(courseName){
+            let courseNameCol = document.createElement('div');
+            courseNameCol.class = "col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right";
+            courseNameCol.innerHTML = "<p class='listCourseName listText'>" + courseName + "</p>";
+            return courseNameCol;
+        }
+
+        function buildAssignmentNameCol(assignmentName){
+            let assignmentNameCol = document.createElement('div');
+            assignmentNameCol.className ="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left";
+            assignmentNameCol.innerHTML = "<p class='listAssignmentName listText'>" + assignmentName + "</p>";
+            return assignmentNameCol;
+        }
+
+        function buildDueDateCol(dueDate){
+            let dueDateCol = document.createElement('div');
+            dueDateCol.classList = "col-lg-4 col-md-4 col-sm-4 col-xs-4 text-left";
+            dueDateCol.innerHTML = "<p class='listDueDate listText'>" + dueDate + "</p>";
+            return dueDateCol
+        }
+
         
         class assignment{
             constructor(course, assignmentName, dueDate, assignmentID){

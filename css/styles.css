@@ -53,3 +53,7 @@ body{
 .listRow {
     background-color: rgba(128, 128, 128, 0.432);
 }
+.addMargin{
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
