@@ -10,21 +10,98 @@
 <body>
     <div class="jumbotron">
         <div class="row justified-content-center">
-            <section class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-right">
+            <section class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></section>
+            <section class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center">
                 <!-- <div class="jumbotron"> -->
-                <h2 style="text-align: center; margin-top: 10px;"> Your List</h2>
+                <h2 style="text-align: center; margin-top: 10px;" class="margin-10"> Your List</h2>
                 <!-- </div> -->
             </section>
 
-            <section class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
+            <section class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-down">
                 <!-- <div class="jumbotron"> -->
                 <a class="btn btn-default" href="###########"><span class="glyphicon glyphicon-user"></span></a>
                 <!-- </div> -->
-            </section>
-
-    
+                </section>    
         </div>
     </div>
-</body>
 
+    <div id="listContainer">
+
+    </div>
+
+
+
+
+
+
+
+    <!-- BOTTOM BAR -->
+    <div class="jumbotron push-to-bottom"> 
+        <div class=" row justified-content-center">
+            <section class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                
+            </section>
+
+            <section class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+
+            </section>
+        </div>
+    </div>
+
+    <script>
+        function buildListRow(assignmentInstance){
+            // rowContent must be a WeakMap
+
+            // Build the main container
+            let listRow = document.createElement('div');
+            listRow.id = assignmentInstance.ID;
+            listRow.class = "row"
+            let listCol = document.createElement('div');
+            listCol.class = "col-auto"
+
+            //build course name
+            let courseNameRow = document.createElement('div');
+            courseNameRow.class = "row";
+            let courseName = document.createElement('div');
+            courseName.class = "col-auto text-left";
+            courseName.innerHTML = "<p class='listCourseName'>" + assignmentInstance.courseName + "</p>";
+            
+            //build assignmentrow
+            let assignmentRow = document.createElement('div');
+            assignmentRow.class= 'row'
+
+            // build assignmentInstance name
+            let assignmentName = document.createElement('div');
+            assignmentName.class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-left";
+            assignmentName.innerHTML = "<p class='listAssignmentName'>" + assignmentInstance.assignmentName + "</p>";
+
+            // Build due date
+            let dueDate = document.createElement('div');
+            dueDate.class = "col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right";
+            dueDate.innerHTML = "<p class='listDueDate'>" + assignmentInstance.dueDate + "</p>";
+
+            // put it all together
+            assignmentRow.appendChild(assignmentName);
+            assignmentRow.appendChild(dueDate);
+            courseNameRow.appendChild(courseName);
+            listCol.appendChild(courseNameRow);
+            listCol.appendChild(assignmentRow);
+            listRow.appendChild(listCol);
+            document.getElementById('listContainer').appendChild(listRow)
+        }
+        
+        class assignment{
+            constructor(course, assignmentName, dueDate, assignmentID){
+                this.courseName =  course;
+                this.assignmentName = assignmentName;
+                this.dueDate = dueDate;
+                this.ID = assignmentID;
+            }
+        }
+
+        testAssignment = new assignment('COMM 1930', 'BIG PROJECT TOP SECRET', 'November 7, 2019', 'ass1');
+        buildListRow(testAssignment);
+        
+    </script>
+</body>
 </html>

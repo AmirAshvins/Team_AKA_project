@@ -15,3 +15,7 @@
 .align-center-down{
     transform: translate(0, 50%);
 }
+
+.push-to-bottom{
+    bottom: 0%;
+}
