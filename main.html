@@ -14,18 +14,18 @@
             <section class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></section>
 
             <section class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center">
-                <h2 class="headText"> Your List</h2>
+                <h2 class="headText align-center-up"> Your List</h2>
             </section>
 
-            <section class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-down">
+            <section class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-up">
 
                 <a class="btn btn-default" href="###########"><span class="glyphicon glyphicon-user"></span></a>
 
                 </section>    
         </div>
     </div>
-    <div class="container list">
-        <div class="jumbotron list" >
+    <div class="container colorGray">
+        <div class="jumbotron colorGray noBottomMargin" >
             <section class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-left listText"> Due Date</section>
             <section class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left listText"> Assignment Name</section>
             <section class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center listText"> course</section>
@@ -36,6 +36,7 @@
         <div id="listContainer" >
 
         </div>
+        
 
     </div>
 
@@ -46,8 +47,7 @@
 
 
 
-    <!-- BOTTOM BAR -->
-    <div class="jumbotron push-to-bottom"> 
+    <div class="jumbotron push-to-bottom" id="grad2"> 
         <div class=" row justified-content-center">
             <section class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 
@@ -58,6 +58,7 @@
             </section>
         </div>
     </div>
+
 
     <script>
         function buildListRow(assignmentInstance){
@@ -107,7 +108,7 @@
             }
         }
 
-        testAssignment = new assignment('COMM 1930', 'BIG PROJECT TOP SECRET', 'November 7, 2019', 'ass1');
+        testAssignment = new assignment('COMM 1930', 'Top secret', 'November 7, 2019', 'ass1');
         buildListRow(testAssignment);
         
     </script>
