@@ -7,14 +7,13 @@
     <link rel="stylesheet" href="./css/styles.css" type="text/css">
 </head>
 
-<body>
-    <div class="jumbotron" id="grad">
-        <div class="row justified-content-center">
+<body class="mainbody">
+    <div class="jumbotron grad">
 
             <section class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></section>
 
             <section class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center">
-                <h2 class="headText align-center-up"> Your List</h2>
+                <h2 class="headText" style="position: fixed;"> Your List</h2>
             </section>
 
             <section class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-up">
@@ -22,7 +21,6 @@
                 <a class="btn btn-default" href="###########"><span class="glyphicon glyphicon-user"></span></a>
 
                 </section>    
-        </div>
     </div>
     <div class="container colorGray pageContent">
         <div class="row colorGray noBottomMargin" >
@@ -49,7 +47,7 @@
 
 
 
-    <div class="jumbotron push-to-bottom" id="grad2"> 
+    <div class="jumbotron push-to-bottom grad2"> 
         <div class=" row justified-content-center">
             <section class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 
@@ -127,9 +125,9 @@
         testAssignment = new assignment('COMM 1930', 'Top secret', 'November 7, 2019', 'ass1');
         buildListRow(testAssignment);
 
-        function movefirebase();
-            document.getElementById('firebaseui-auth-container').style.top = 45%;
-        
+        function movefirebase(){
+            document.getElementById('firebaseui-auth-container').style.top = "45%";
+        }
     </script>
 </body>
 </html>
