@@ -58,7 +58,7 @@
     background-color: rgb(216, 136, 83);
 }
 .noBottomMargin{
-    margin-bottom: 0px;
+    margin-bottom: -10px;
 }
 .listRow {
     background-color:whitesmoke;
@@ -71,5 +71,5 @@
 .mainbody{
     background-image: url("../images/landing_page_bg.jpg");
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: 100% 100%;
 }
