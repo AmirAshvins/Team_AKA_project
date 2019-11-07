@@ -56,5 +56,23 @@
 }
 
 .mainbody{
-    background-color: black;
+    background-color: white;
+}
+.horizontal-center{
+    margin-top: 50px;
+    text-align: center;
+}
+.jumbotron{
+    background-size: cover;
+    background-attachment: scroll;
+    background-repeat: no-repeat;
+    background-image: url('images/landing_page_bg.jpg');
+    height:500px ;
+}
+p, h2{
+    text-align: center;
+    color: black;
+}
+.glyphicon {
+    font-size: 200%;;
 }
