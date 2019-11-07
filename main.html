@@ -10,44 +10,33 @@
 <body class="mainbody">
     <div class="jumbotron grad">
 
-            <section class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></section>
+        <section class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></section>
 
-            <section class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center">
-                <h2 class="headText" style="position: fixed;"> Your List</h2>
-            </section>
+        <section class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center align-center-up">
+            <h2 class="headText">Your List</h2>
+        </section>
 
-            <section class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-up">
+        <section class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-up">
 
-                <a class="btn btn-default" href="###########"><span class="glyphicon glyphicon-user"></span></a>
+            <a class="btn btn-default" href="###########"><span class="glyphicon glyphicon-user"></span></a>
 
-                </section>    
+        </section>
     </div>
     <div class="container colorGray pageContent">
-        <div class="row colorGray noBottomMargin" >
+        <div class="row colorGray noBottomMargin">
 
             <section class="col-lg-4 col-md-4 col-sm-4 col-xs-4  listText addMargin"> Due Date</section>
             <section class="col-lg-6 col-md-6 col-sm-6 col-xs-6  listText addMargin"> Assignment Name</section>
             <section class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right listText addMargin"> course</section>
-
-
-
         </div>
 
         <div id="listContainer">
 
         </div>
-        
 
     </div>
 
-   
-
-
-
-
-
-
-    <div class="jumbotron push-to-bottom grad2"> 
+    <div class="jumbotron push-to-bottom grad2">
         <div class=" row justified-content-center">
             <section class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
                 <a href="#" class="btn headText" type="btn">Calendar</a>
@@ -60,7 +49,7 @@
 
 
     <script>
-        function buildListRow(assignmentInstance){
+        function buildListRow(assignmentInstance) {
 
             // Build the main container
             let listRow = buildRow(assignmentInstance.ID);
@@ -70,10 +59,10 @@
 
             // build assignmentName
             let assignmentNameCol = buildAssignmentNameCol(assignmentInstance.assignmentName);
-            
+
             // Build due date
             let dueDateCol = buildDueDateCol(assignmentInstance.dueDate)
-            
+
 
             // put it all together
             listRow.appendChild(dueDateCol);
@@ -82,7 +71,7 @@
             document.getElementById('listContainer').appendChild(listRow);
         }
 
-        function buildRow(assignmentId){
+        function buildRow(assignmentId) {
             // Build a col of auto span
             let listRow = document.createElement('div');
             listRow.id = assignmentId;
@@ -90,31 +79,31 @@
             return listRow;
         }
 
-        function buildCourseNameCol(courseName){
+        function buildCourseNameCol(courseName) {
             let courseNameCol = document.createElement('div');
             courseNameCol.className = "col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right";
             courseNameCol.innerHTML = "<p class='listCourseName listText'>" + courseName + "</p>";
             return courseNameCol;
         }
 
-        function buildAssignmentNameCol(assignmentName){
+        function buildAssignmentNameCol(assignmentName) {
             let assignmentNameCol = document.createElement('div');
-            assignmentNameCol.className ="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left";
+            assignmentNameCol.className = "col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left";
             assignmentNameCol.innerHTML = "<p class='listAssignmentName listText'>" + assignmentName + "</p>";
             return assignmentNameCol;
         }
 
-        function buildDueDateCol(dueDate){
+        function buildDueDateCol(dueDate) {
             let dueDateCol = document.createElement('div');
             dueDateCol.className = "col-lg-4 col-md-4 col-sm-4 col-xs-4 text-left";
             dueDateCol.innerHTML = "<p class='listDueDate listText'>" + dueDate + "</p>";
             return dueDateCol
         }
 
-        
-        class assignment{
-            constructor(course, assignmentName, dueDate, assignmentID){
-                this.courseName =  course;
+
+        class assignment {
+            constructor(course, assignmentName, dueDate, assignmentID) {
+                this.courseName = course;
                 this.assignmentName = assignmentName;
                 this.dueDate = dueDate;
                 this.ID = assignmentID;
@@ -124,9 +113,10 @@
         testAssignment = new assignment('COMM 1930', 'Top secret', 'November 7, 2019', 'ass1');
         buildListRow(testAssignment);
 
-        function movefirebase(){
+        function movefirebase() {
             document.getElementById('firebaseui-auth-container').style.top = "45%";
         }
     </script>
 </body>
+
 </html>
