@@ -8,6 +8,29 @@
 </head>
 
 <body class="mainbody">
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+ https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyA_-CQ7oIjLIeTU8B05p8lD-UbOJ9MXm_Y",
+            authDomain: "team-aka.firebaseapp.com",
+            databaseURL: "https://team-aka.firebaseio.com",
+            projectId: "team-aka",
+            storageBucket: "team-aka.appspot.com",
+            messagingSenderId: "192089508874",
+            appId: "1:192089508874:web:15181dc2fc7a40725ce3f3"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        var db = firebase.firestore();
+    </script>
+
     <div class="jumbotron grad">
 
         <section class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></section>
