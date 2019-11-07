@@ -12,22 +12,20 @@
     transform: translate(0, -50%);
 }
 
-#grad {
+.grad {
     background-image: linear-gradient(darkgrey, black);
     height: 10vh;
     margin-top: 0px;
     margin-bottom: 0px;
 }
 
-body{
-    background-color: black;
-}
 .headText {
     color: white;
     font-size: 200%;
     position: absolute;
-    top: 10%;
+    top: 1%;
     left: 45%;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .listText {
@@ -39,7 +37,7 @@ body{
     height: 80vh;
     
 }
-#grad2 {
+.grad2 {
     background-image: linear-gradient(black, darkgray);
     height: 10vh;
     margin-bottom: 0px;
@@ -56,4 +54,8 @@ body{
 .addMargin{
     margin-bottom: 10px;
     margin-top: 10px;
+}
+
+.mainbody{
+    background-color: black;
 }
