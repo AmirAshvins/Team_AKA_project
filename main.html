@@ -33,47 +33,43 @@
         var db = firebase.firestore();
     </script>
     <!-- header -->
-        <div class="jumbotron header-footer-div header-div">
+    <div class="jumbotron header-footer-div header-div">
 
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
 
-            <section class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center align-center-up">
-                <h2 class="head-text-list">Your List</h2>
-            </section>
+        <section class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center align-center-up">
+            <h2 class="head-text-list">Your List</h2>
+        </section>
 
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-up">
-                <a class="btn btn-default" href="###########"><span class="glyphicon glyphicon-user"></span></a>
-            </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-up">
+            <a class="btn btn-default" href="###########"><span class="glyphicon glyphicon-user"></span></a>
         </div>
+    </div>
     <!-- content -->
-        <div class="container page-content">
-                <div class="row section-header section-item">
+    <div class="container page-content">
+        <div class="row section-header section-item">
 
-                        <p class="col-lg-4 col-md-4 col-sm-4 col-xs-4  listText addMargin"> Due Date</p>
-                        <p class="col-lg-6 col-md-6 col-sm-6 col-xs-6  listText addMargin"> Assignment Name</p>
-                        <p class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right listText addMargin"> course</p>
-                    </div>
-            <div id="listContainer" class='container-flow'>
-                
-            </div>
+            <p class="col-lg-4 col-md-4 col-sm-4 col-xs-4  listText addMargin"> Due Date</p>
+            <p class="col-lg-6 col-md-6 col-sm-6 col-xs-6  listText addMargin"> Assignment Name</p>
+            <p class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right listText addMargin"> course</p>
+        </div>
+        <div id="listContainer" class='container-flow'>
 
         </div>
+
+    </div>
     <!-- footer -->
-        <div class="jumbotron footer-div header-footer-div">
-            <div class=" row justified-content-center">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
-                    <a href="#" class="btn headText">Calendar</a>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
-                    <a href="#" class="btn headText">Add</a>
-                </div>
+    <div class="jumbotron footer-div header-footer-div">
+        <div class=" row justified-content-center">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
+                <a href="./calendar.html" class="btn headText">Calendar</a>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
+                <a href="./addasignment.html" class="btn headText">Add</a>
             </div>
         </div>
+    </div>
 
-    <!-- onload -->
-    <script>
-        
-    </script>
 
     <script>
         function buildListRow(assignmentInstance) {
@@ -129,9 +125,23 @@
 
         testAssignment = new assignment('COMM 1930', 'Top secret', 'November 7, 2019', 'https://learn.bcit.ca/d2l/lms/dropbox/user/folder_submit_files.d2l?db=197227&grpid=0&isprv=0&bp=' 
         + '&ou=581646', '', '', '', '');
-        testAssignment.setID
-        //buildListRow(testAssignment);
+        testAssignment.setID();
+        testAssignment.checkDBforID()
 
+
+        //buildListRow(testAssignment);
+        db.collection("assignments").get().then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+                // doc.data() is never undefined for query doc snapshots
+                assignmentDetails = doc.data();
+                newAssignment = new assignment(assignmentDetails['course'], assignmentDetails['name'], assignmentDetails['due date'], assignmentDetails['D2L Link'], assignmentDetails['Instructions'], assignmentDetails['additional information'], assignmentDetails['instructor']);
+                buildListRow(newAssignment);
+            });
+        });
+
+        function movefirebase() {
+            document.getElementById('firebaseui-auth-container').style.top = "45%";
+        }
     </script>
 </body>
 

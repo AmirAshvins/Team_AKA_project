@@ -152,4 +152,12 @@ body{
 #firebaseui-auth-container{
     position: absolute;
     top: 30%;
+<<<<<<< HEAD
+    left: 37%;
+}
+
+#mdl-button{
+    background-color: yellow;
+=======
+>>>>>>> 9384dc28e91be1703db933bc0bf4cd4af6e3f9af
 }

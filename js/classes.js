@@ -1,12 +1,12 @@
 class assignment {
-    constructor(assignmentName, course, dueDate, D2LLink, instructions, additionalInstructions, assignmentName, instructorID) {
-        this.courseName = course;
-        this.assignmentName = assignmentName;
+    constructor(course, assignmentName, dueDate, D2LLink, instructions, additionalInstructions, instructorID) {
+        this.course = course;
+        this.name = assignmentName;
         this.dueDate = dueDate;
-        this.ID = null;
         this.D2LLink = D2LLink;
+        this.ID = null;
         this.instructions = instructions;
-        this.addtionalInstructions = additionalInstructions;
+        this.additionalInstructions = additionalInstructions;
         this.instructorID = instructorID;
     }
 
