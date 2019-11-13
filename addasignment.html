@@ -76,13 +76,13 @@
             return document.getElementById('instructionsBox').innerHTML
         }
 
-        function getAditionalInstructions(){
+        function getAdditionalInstructions(){
             return document.getElementById('additionalInstructionsBox').innerHTML
         }
 
         function AssignmentClassBuilder(){
-            return new assignment(
-                
+            newAssignment =  new assignment(
+                getCourse, getAssignmentName, getDueDate, getD2LLink, getInstructions, getAdditionalInstructions, getInstructorID
             )
         } //call the getter functions
 
