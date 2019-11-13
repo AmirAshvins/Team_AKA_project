@@ -24,8 +24,9 @@
         </div>
     <!-- content -->
         <div class="container page-content">
+            <div class="floater">
                 
-
+            </div> 
         </div>
     <!-- footer -->
         <div class="jumbotron footer-div header-footer-div">
@@ -38,5 +39,70 @@
                 </div>
             </div>
         </div>
+    <!-- js -->
+
+    <!-- recall clasess -->
+    <script src="./js/classes.js"></script>
+    
+    <!-- event handlers -->
+
+    <script>
+        function submitHandler(){}
+
+        function cancelHandler(){}
+    </script>
+
+    <!-- collect data into classes -->
+    
+    <script>
+        // Assignment class getters
+        function getAssignmentName(){
+            return document.getElementById('assignmentNameBox').innerHTML;
+        }
+
+        function getDueDate(){
+            return document.getElementById('dueDateBox').innerHTML
+        }
+
+        function getCourse(){
+            return document.getElementById('courseNameBox').innerHTML
+        }
+
+        function getD2LLink(){
+            return document.getElementById('D2LBox').innerHTML
+        }
+
+        function getInstructions(){
+            return document.getElementById('instructionsBox').innerHTML
+        }
+
+        function getAditionalInstructions(){
+            return document.getElementById('additionalInstructionsBox').innerHTML
+        }
+
+        function AssignmentClassBuilder(){
+            return new assignment(
+                
+            )
+        } //call the getter functions
+
+        //instructor class getter
+
+        function getInstructor(){}
+
+        function getInstructorEmail(){}
+
+        function instructorClassBuilder(){} //call the getter functions
+    </script>
+
+    <!-- send data -->
+
+    <script>
+        function checkID(){} //return boolean
+
+        function sendAssignment(){}
+
+        function sendInstructor(){}
+    </script>
 </body>
 </html>
