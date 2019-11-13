@@ -1,120 +1,122 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/styles.css" type="text/css">
     <script src="./js/scripts.js"></script>
 </head>
+
 <body>
-       <!-- header -->
-       <div class="jumbotron header-footer-div header-div">
+    <!-- header -->
+    <div class="jumbotron header-footer-div header-div">
 
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
 
-            <section class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center align-center-up">
-                <h2 class="head-text-list">Add assignment</h2>
-            </section>
+        <section class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center align-center-up">
+            <h2 class="head-text-list">Add assignment</h2>
+        </section>
 
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-up">
-                <a class="btn btn-default" href="###########"><span class="glyphicon glyphicon-user"></span></a>
-            </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-up">
+            <a class="btn btn-default" href="###########"><span class="glyphicon glyphicon-user"></span></a>
         </div>
+    </div>
     <!-- content -->
-        <div class="container page-content">
-            <div class="floater">
-                
-            </div> 
+    <div class="container page-content">
+        <div class="floater">
+
         </div>
+    </div>
     <!-- footer -->
-        <div class="jumbotron footer-div header-footer-div">
-            <div class=" row justified-content-center">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
-                    <a href="#" class="btn headText">Calendar</a>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
-                    <a href="#" class="btn headText">Add</a>
-                </div>
+    <div class="jumbotron footer-div header-footer-div">
+        <div class=" row justified-content-center">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
+                <a href="#" class="btn headText">Calendar</a>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
+                <a href="#" class="btn headText">Add</a>
             </div>
         </div>
+    </div>
     <!-- js -->
 
     <!-- recall clasess -->
     <script src="./js/classes.js"></script>
-    
+
     <!-- event handlers -->
 
     <script>
-        function submitHandler(){}
+        function submitHandler() { }
 
-        function cancelHandler(){}
+        function cancelHandler() { }
     </script>
 
     <!-- collect data into classes -->
-    
+
     <script>
         // Assignment class getters
-        function getAssignmentName(){
+        function getAssignmentName() {
             return document.getElementById('assignmentNameBox').innerHTML;
         }
 
-        function getDueDate(){
+        function getDueDate() {
             return document.getElementById('dueDateBox').innerHTML
         }
 
-        function getCourse(){
+        function getCourse() {
             return document.getElementById('courseNameBox').innerHTML
         }
 
-        function getD2LLink(){
+        function getD2LLink() {
             return document.getElementById('D2LBox').innerHTML
         }
 
-        function getInstructions(){
+        function getInstructions() {
             return document.getElementById('instructionsBox').innerHTML
         }
 
-        function getAdditionalInstructions(){
+        function getAdditionalInstructions() {
             return document.getElementById('additionalInstructionsBox').innerHTML
         }
 
-        function AssignmentClassBuilder(){
-            newAssignment =  new assignment(
+        function AssignmentClassBuilder() {
+            newAssignment = new assignment(
                 getCourse, getAssignmentName, getDueDate, getD2LLink, getInstructions, getAdditionalInstructions, getInstructorID
             )
         } //call the getter functions
 
         //instructor class getter
 
-        function getInstructor(){}
+        function getInstructor() { }
 
-        function getInstructorEmail(){}
+        function getInstructorEmail() { }
 
-        function instructorClassBuilder(){} //call the getter functions
+        function instructorClassBuilder() { } //call the getter functions
     </script>
 
     <!-- send data -->
-    function addAssignment(assignment, idName) {
-        db.collection("assignments").doc(idName).set({
-            'course': assignment.course,
-            'name': assignment.name,
-            'due date': assignment.dueDate,
-            'D2L Link': assignment.D2LLink,
-            'instructions': assignment.instructions,
-            'additional information': assignment.additionalInstructions,
-            'instructorID': assignment.instructorID
-        })
-    }
 
     <script>
-        function checkID(){} //return boolean
+        function checkID() { } //return boolean
 
-        function sendAssignment(){}
+        function addAssignment(assignment, idName) {
+            db.collection("assignments").doc(idName).set({
+                'course': assignment.course,
+                'name': assignment.name,
+                'due date': assignment.dueDate,
+                'D2L Link': assignment.D2LLink,
+                'instructions': assignment.instructions,
+                'additional information': assignment.additionalInstructions,
+                'instructorID': assignment.instructorID
+            })
+        }
 
-        function sendInstructor(){}
+        function sendInstructor() { }
     </script>
 </body>
+
 </html>
