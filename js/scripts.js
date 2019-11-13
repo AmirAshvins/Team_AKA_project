@@ -26,13 +26,16 @@ class assignment {
     }
 
     IDinDB(ID){
-        db.collection('assignments').doc(ID).get().then(function() {
-            console.log("Assignment already present.");
-            return true;
-        }).catch(function() {
-            console.log("Assignment NOT present.");
-            return false;
-        });
+        db.collection('assignments').doc(ID).get()
+            .then(function(docSnapshot) {
+                if (docSnapshot.exists) {
+                    db.collection('assignments').doc(ID).onSnapshot(function(doc) {
+                        console.log("Exists.");
+                    });
+                } else {
+                    console.log("Doesn't exist.");
+                }
+            });
     }
 }
 
