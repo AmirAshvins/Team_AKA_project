@@ -150,13 +150,22 @@ body{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 150%;
 }
-    /* CSS BY ID */
 
-#featuresContainer{
-    background-color: rgba(250, 253, 226, 0.3);
+.floater {
+    background-color: rgba(250, 253, 226, 0.4);
     border-radius: 8px;
 }
+    /* CSS BY ID */
 
 #loginButtonDiv{
     height: 30%;
+}
+
+#firebaseui-auth-container{
+    position: absolute;
+    top: 30%;
+}
+
+#mdl-button{
+    background-color: yellow;
 }
