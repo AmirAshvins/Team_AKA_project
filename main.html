@@ -6,7 +6,7 @@
     <meta lang="english">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/styles.css" type="text/css">
-    <script src="./js/classes.js"></script>
+    <script src="./js/scripts.js"></script>
 </head>
 
 <body>
@@ -123,47 +123,14 @@
             return dueDateCol
         }
 
-        class assignment {
-            constructor(course, assignmentName, dueDate, D2LLink, instructions, additionalInstructions, instructorID) {
-                this.course = course;
-                this.name = assignmentName;
-                this.dueDate = dueDate;
-                this.D2LLink = D2LLink;
-                this.instructions = instructions;
-                this.additionalInstructions = additionalInstructions;
-                this.instructorID = instructorID;
-            }
-        }
-
-        function addAssignment(assignment, idName) {
-            db.collection("assignments").doc(idName).set({
-                'course': assignment.course,
-                'name': assignment.name,
-                'due date': assignment.dueDate,
-                'D2L Link': assignment.D2LLink,
-                'instructions': assignment.instructions,
-                'additional information': assignment.additionalInstructions,
-                'instructorID': assignment.instructorID
-            })
-        }
-
-        let assignment1 = new assignment('COMP-1712', 'pepe', 'Date', 'Link', 'Instructions', 'Additional Instructions', 'Instructor');
-        let assignment2 = new assignment('COMP-1113', 'luis', 'Date', 'Link', 'Instructions', 'Additional Instructions', 'Instructor');
-
-        addAssignment(assignment1, 'Biz Analysis');
-        addAssignment(assignment2, 'Math');
-
         db.collection("assignments").get().then(function (querySnapshot) {
             let assignmentList = [];
             querySnapshot.forEach(function (doc) {
                 // doc.data() is never undefined for query doc snapshots
                 assignmentDetails = doc.data();
-                console.log(assignmentDetails);
-                console.log(assignmentDetails['name']);
                 newAssignment = new assignment(assignmentDetails['course'], assignmentDetails['name'], assignmentDetails['due date'],
                                                 assignmentDetails['D2L Link'], assignmentDetails['instructions'],
                                                 assignmentDetails['additional information'], assignmentDetails['instructorID']);
-                console.log(newAssignment);
                 assignmentList.push(newAssignment);
                 newAssignment = new assignment(assignmentDetails['course'], assignmentDetails['name'], assignmentDetails['due date'], assignmentDetails['D2L Link'], assignmentDetails['Instructions'], assignmentDetails['additional information'], assignmentDetails['instructor']);
                 buildListRow(newAssignment);

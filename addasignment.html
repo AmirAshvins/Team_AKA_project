@@ -7,6 +7,7 @@
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/styles.css" type="text/css">
+    <script src="./js/scripts.js"></script>
 </head>
 <body>
        <!-- header -->
@@ -96,6 +97,17 @@
     </script>
 
     <!-- send data -->
+    function addAssignment(assignment, idName) {
+        db.collection("assignments").doc(idName).set({
+            'course': assignment.course,
+            'name': assignment.name,
+            'due date': assignment.dueDate,
+            'D2L Link': assignment.D2LLink,
+            'instructions': assignment.instructions,
+            'additional information': assignment.additionalInstructions,
+            'instructorID': assignment.instructorID
+        })
+    }
 
     <script>
         function checkID(){} //return boolean
