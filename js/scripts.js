@@ -25,9 +25,14 @@ class assignment {
         }
     }
 
-    checkDBforID(){
-        let assignments = db.collection('assignments');
-        console.log(assignments);
+    IDinDB(ID){
+        db.collection('assignments').doc(ID).get().then(function() {
+            console.log("Assignment already present.");
+            return true;
+        }).catch(function() {
+            console.log("Assignment NOT present.");
+            return false;
+        });
     }
 }
 

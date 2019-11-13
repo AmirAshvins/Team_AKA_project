@@ -129,8 +129,8 @@
                 // doc.data() is never undefined for query doc snapshots
                 assignmentDetails = doc.data();
                 newAssignment = new assignment(assignmentDetails['course'], assignmentDetails['name'], assignmentDetails['due date'],
-                                                assignmentDetails['D2L Link'], assignmentDetails['instructions'],
-                                                assignmentDetails['additional information'], assignmentDetails['instructorID']);
+                    assignmentDetails['D2L Link'], assignmentDetails['instructions'],
+                    assignmentDetails['additional information'], assignmentDetails['instructorID']);
                 assignmentList.push(newAssignment);
                 newAssignment = new assignment(assignmentDetails['course'], assignmentDetails['name'], assignmentDetails['due date'], assignmentDetails['D2L Link'], assignmentDetails['Instructions'], assignmentDetails['additional information'], assignmentDetails['instructor']);
                 buildListRow(newAssignment);
@@ -138,6 +138,18 @@
             window.localStorage.setItem("list", JSON.stringify(assignmentList));
             console.log(JSON.parse(window.localStorage.getItem('list')));
         });
+
+        db.collection('assignments').doc("comm").get()
+            .then(function(docSnapshot) {
+                if (docSnapshot.exists) {
+                    db.collection('assignments').doc("comm").onSnapshot(function(doc) {
+                        console.log("Exists");
+                    });
+                } else {
+                    console.log("Doesn't exist");
+                }
+            });
+
     </script>
 </body>
 
