@@ -61,14 +61,18 @@
         <div class="jumbotron footer-div header-footer-div">
             <div class=" row justified-content-center">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
-                    <a href="./calendar.html" class="btn headText">Calendar</a>
+                    <a href="#" class="btn headText">Calendar</a>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
-                    <a href="./addasignment.html" class="btn headText">Add</a>
+                    <a href="#" class="btn headText">Add</a>
                 </div>
             </div>
         </div>
 
+    <!-- onload -->
+    <script>
+        
+    </script>
 
     <script>
         function buildListRow(assignmentInstance) {
@@ -122,22 +126,9 @@
             return dueDateCol
         }
 
-
-        class assignment {
-            constructor(course, assignmentName, dueDate, assignmentID) {
-                this.courseName = course;
-                this.assignmentName = assignmentName;
-                this.dueDate = dueDate;
-                this.ID = assignmentID;
-            }
-        }
-
         testAssignment = new assignment('COMM 1930', 'Top secret', 'November 7, 2019', 'ass1');
         buildListRow(testAssignment);
 
-        function movefirebase() {
-            document.getElementById('firebaseui-auth-container').style.top = "45%";
-        }
     </script>
 </body>
 
