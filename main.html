@@ -6,6 +6,7 @@
     <meta lang="english">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/styles.css" type="text/css">
+    <script src="./js/classes.js"></script>
 </head>
 
 <body>
@@ -164,16 +165,12 @@
                                                 assignmentDetails['additional information'], assignmentDetails['instructorID']);
                 console.log(newAssignment);
                 assignmentList.push(newAssignment);
+                newAssignment = new assignment(assignmentDetails['course'], assignmentDetails['name'], assignmentDetails['due date'], assignmentDetails['D2L Link'], assignmentDetails['Instructions'], assignmentDetails['additional information'], assignmentDetails['instructor']);
                 buildListRow(newAssignment);
             });
             window.localStorage.setItem("list", JSON.stringify(assignmentList));
             console.log(JSON.parse(window.localStorage.getItem('list')));
         });
-
-
-        function movefirebase() {
-            document.getElementById('firebaseui-auth-container').style.top = "45%";
-        }
     </script>
 </body>
 
