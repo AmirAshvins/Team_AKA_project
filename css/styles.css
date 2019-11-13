@@ -164,6 +164,7 @@ body{
 #firebaseui-auth-container{
     position: absolute;
     top: 30%;
+    left: 37%;
 }
 
 #mdl-button{
