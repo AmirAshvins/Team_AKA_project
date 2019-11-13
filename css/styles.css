@@ -46,18 +46,6 @@ p, h2{
     font-weight: bolder;
 }
 
-.head-text-landing {
-    color: black;
-    font-size: 100%;
-    position: absolute;
-    top: 4%;
-    left: 36%;
-    bottom: 100px;
-    margin-top: -15px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bolder;
-}
-
 .head-text-list {
     color: black;
     font-size: 200%;
@@ -164,9 +152,12 @@ body{
 #firebaseui-auth-container{
     position: absolute;
     top: 30%;
+<<<<<<< HEAD
     left: 37%;
 }
 
 #mdl-button{
     background-color: yellow;
+=======
+>>>>>>> 9384dc28e91be1703db933bc0bf4cd4af6e3f9af
 }
