@@ -10,54 +10,55 @@ class assignment {
         this.instructorID = instructorID;
     }
 
-    setID(){
+    setID() {
         let assignmentID = '';
-        for (let i=0; i<this.D2LLink.length; i++){
-            if (!isNaN(this.D2LLink[i])){
+        for (let i = 0; i < this.D2LLink.length; i++) {
+            if (!isNaN(this.D2LLink[i])) {
                 assignmentID += this.D2LLink[i];
             }
         }
-        if (assignmentID != ''){
+        if (assignmentID != '') {
             this.ID = assignmentID;
         }
-        else{
+        else {
             console.log('Cannot create ID. Empty D2L link');
         }
     }
 
-    IDinDB(ID){
-        db.collection('assignments').doc(ID).get()
-            .then(function(docSnapshot) {
+    IDinDB(collectionName, ID) {
+        db.collection(collectionName).doc(ID).get()
+            .then(function (docSnapshot) {
                 if (docSnapshot.exists) {
-                    db.collection('assignments').doc(ID).onSnapshot(function(doc) {
+                    db.collection(collectionName).doc(ID).onSnapshot(function (doc) {
                         console.log("Exists.");
+                        return true;
                     });
                 } else {
                     console.log("Doesn't exist.");
+                    return false;
                 }
             });
     }
 }
 
-class instructor{
-    constructor(instructorName, instructorEmail){
+class instructor {
+    constructor(instructorName, instructorEmail) {
         this.ID = null;
         this.name = instructorName;
         this.email = instructorEmail;
     }
 
-    setID(){
+    setID() {
         let instructorID = ''
-        for (let i=0; i< this.email.length(); i++){
-            if (email[i] != '@'){
+        for (let i = 0; i < this.email.length(); i++) {
+            if (email[i] != '@') {
                 instructorID += this.email[i];
             }
-            else
-            {
+            else {
                 this.ID = instructorID;
             }
 
-            if (instructorID === ''){
+            if (instructorID === '') {
                 console.log('Cannot create instructor ID')
             }
         }
