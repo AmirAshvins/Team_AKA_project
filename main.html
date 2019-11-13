@@ -3,11 +3,12 @@
 
 <head>
     <title>List Page</title>
+    <meta lang="english">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/styles.css" type="text/css">
 </head>
 
-<body class="mainbody">
+<body>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
 
@@ -30,43 +31,43 @@
         firebase.initializeApp(firebaseConfig);
         var db = firebase.firestore();
     </script>
+    <!-- header -->
+        <div class="jumbotron header-footer-div header-div">
 
-    <div class="jumbotron grad">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
 
-        <section class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></section>
-
-        <section class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center align-center-up">
-            <h2 class="headTextList">Your List</h2>
-        </section>
-
-        <section class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-up">
-            <a class="btn btn-default" href="###########"><span class="glyphicon glyphicon-user"></span></a>
-        </section>
-    </div>
-    <div class="container pageContent">
-        <div class="row headerColour noBottomMargin">
-
-            <section class="col-lg-4 col-md-4 col-sm-4 col-xs-4  listText addMargin"> Due Date</section>
-            <section class="col-lg-6 col-md-6 col-sm-6 col-xs-6  listText addMargin"> Assignment Name</section>
-            <section class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right listText addMargin"> course</section>
-        </div>
-
-        <div id="listContainer">
-
-        </div>
-
-    </div>
-
-    <div class="jumbotron push-to-bottom grad2">
-        <div class=" row justified-content-center">
-            <section class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
-                <a href="#" class="btn headText" type="btn">Calendar</a>
+            <section class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center align-center-up">
+                <h2 class="head-text-list">Your List</h2>
             </section>
-            <section class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
-                <a href="#" class="btn headText" type="btn">Add</a>
-            </section>
+
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-up">
+                <a class="btn btn-default" href="###########"><span class="glyphicon glyphicon-user"></span></a>
+            </div>
         </div>
-    </div>
+    <!-- content -->
+        <div class="container page-content">
+                <div class="row section-header section-item">
+
+                        <p class="col-lg-4 col-md-4 col-sm-4 col-xs-4  listText addMargin"> Due Date</p>
+                        <p class="col-lg-6 col-md-6 col-sm-6 col-xs-6  listText addMargin"> Assignment Name</p>
+                        <p class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right listText addMargin"> course</p>
+                    </div>
+            <div id="listContainer" class='container-flow'>
+                
+            </div>
+
+        </div>
+    <!-- footer -->
+        <div class="jumbotron footer-div header-footer-div">
+            <div class=" row justified-content-center">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
+                    <a href="#" class="btn headText">Calendar</a>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
+                    <a href="#" class="btn headText">Add</a>
+                </div>
+            </div>
+        </div>
 
 
     <script>
@@ -96,28 +97,28 @@
             // Build a col of auto span
             let listRow = document.createElement('div');
             listRow.id = assignmentId;
-            listRow.className = "row listRow";
+            listRow.className = "section-item row list-row section-item";
             return listRow;
         }
 
         function buildCourseNameCol(courseName) {
             let courseNameCol = document.createElement('div');
             courseNameCol.className = "col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right";
-            courseNameCol.innerHTML = "<p class='listCourseName listText'>" + courseName + "</p>";
+            courseNameCol.innerHTML = "<p class='list-course-name list-text'>" + courseName + "</p>";
             return courseNameCol;
         }
 
         function buildAssignmentNameCol(assignmentName) {
             let assignmentNameCol = document.createElement('div');
             assignmentNameCol.className = "col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left";
-            assignmentNameCol.innerHTML = "<p class='listAssignmentName listText'>" + assignmentName + "</p>";
+            assignmentNameCol.innerHTML = "<p class='list-assignment-name list-text'>" + assignmentName + "</p>";
             return assignmentNameCol;
         }
 
         function buildDueDateCol(dueDate) {
             let dueDateCol = document.createElement('div');
             dueDateCol.className = "col-lg-4 col-md-4 col-sm-4 col-xs-4 text-left";
-            dueDateCol.innerHTML = "<p class='listDueDate listText'>" + dueDate + "</p>";
+            dueDateCol.innerHTML = "<p class='list-due-date list-text'>" + dueDate + "</p>";
             return dueDateCol
         }
 

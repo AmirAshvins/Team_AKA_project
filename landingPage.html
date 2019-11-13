@@ -1,65 +1,62 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Landing Page</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-        <link rel="stylesheet" href="./css/styles.css" type ="text/css">
-        <style>
-            .horizontal-center{
-                margin-top: 50px;
-                text-align: center;
-            }
-            .jumbotron{
-                background-size: cover;
-                background-attachment: scroll;
-                background-repeat: no-repeat;
-                background-image: url('images/landing_page_bg.jpg');
-                height:500px ;
-            }
-            p, h2{
-                text-align: center;
-                color: black;
-            }
-            .glyphicon {
-                font-size: 200%;;
-            }
-        </style>
-    </head>
-    <body style="background-color: white;">
-        <div class="jumbotron horizontal-center ">
+<head>
+    <title>Landing Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="./css/styles.css" type="text/css">
+</head>
+
+<body>
+    <!-- header -->
+    <div class="jumbotron header-footer-div header-div">
+        <section>
             <h1>Landing Page</h1>
+        </section>
+    </div>
+
+    <!-- content -->
+    <div class='page-content'>
+        <div id="loginButtonDiv" class="horizontal-center">
+
             <a class="btn btn-warning" href="login.html" role='button'> Sign in</a>
         </div>
-        <div>
-            <h2 style="font-family: Arial, Helvetica, sans-serif;"> Features</h2>
-            <p style="font-family: Arial, Helvetica, sans-serif;"> Our Website is mostly focused on providing easier access to the assingments for our term which can be prioritized
-            based on user's decision</p>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-1">
-                    <p style="font-family: Arial, Helvetica, sans-serif;">
-                        <span class="glyphicon glyphicon-calendar"></span><br>
-                        Assignemnts are shown in an interactive Calendar
-                    </p>
-                </div>
-                <div class="col-lg-4 col-1">
-                    <p style="font-family: Arial, Helvetica, sans-serif;"> 
-                        <span class="glyphicon glyphicon-edit"></span><br>
-                        You can add assingments and edit the existing ones.
-                    </p>
-                </div>
-                <div class="col-lg-4 col-1"></div>
-                    <p style="font-family: Arial, Helvetica, sans-serif;"> 
-                        <span class="glyphicon glyphicon-filter"></span><br>
-                       you can use different filters as you prioritize your assingment list
-                    </p>
+        <div  id="featuresContainer" >
+            <div>
+                <h2 style="font-family: Arial, Helvetica, sans-serif;"> Features</h2>
+                <p style="font-family: Arial, Helvetica, sans-serif;"> Our Website is mostly focused on providing easier
+                    access to the assingments for our term which can be prioritized
+                    based on user's decision</p>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <p style="font-family: Arial, Helvetica, sans-serif;">
+                            <span class="glyphicon glyphicon-calendar"></span><br>
+                            Assignemnts are shown in an interactive Calendar
+                        </p>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <p style="font-family: Arial, Helvetica, sans-serif;">
+                            <span class="glyphicon glyphicon-edit"></span><br>
+                            You can add assingments and edit the existing ones.
+                        </p>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <p style="font-family: Arial, Helvetica, sans-serif;">
+                            <span class="glyphicon glyphicon-filter"></span><br>
+                            you can use different filters as you prioritize your assingment list
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    </body>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</body>
+
 </html>
