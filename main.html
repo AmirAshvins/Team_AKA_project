@@ -123,6 +123,7 @@
             return dueDateCol
         }
 
+<<<<<<< HEAD
         testAssignment = new assignment('COMM 1930', 'Top secret', 'November 7, 2019', 'https://learn.bcit.ca/d2l/lms/dropbox/user/folder_submit_files.d2l?db=197227&grpid=0&isprv=0&bp=' 
         + '&ou=581646', '', '', '', '');
         testAssignment.setID();
@@ -130,15 +131,59 @@
 
 
         //buildListRow(testAssignment);
+=======
+        class assignment {
+            constructor(course, assignmentName, dueDate, D2LLink, instructions, additionalInstructions, instructorID) {
+                this.course = course;
+                this.assignment = assignmentName;
+                this.dueDate = dueDate;
+                this.D2LLink = D2LLink;
+                this.instructions = instructions;
+                this.additionalInstructions = additionalInstructions;
+                this.instructorID = instructorID;
+            }
+        }
+
+        function addAssignment(assignment, idName) {
+            db.collection("assignments").doc(idName).set({
+                'course': assignment.course,
+                'name': assignment.assignment,
+                'due date': assignment.dueDate,
+                'D2L Link': assignment.D2LLink,
+                'instructions': assignment.instructions,
+                'additional information': assignment.additionalInstructions,
+                'instructor': assignment.instructorID
+            })
+        }
+
+        let assignment1 = new assignment('COMP-1712', 'Name', 'Date', 'Link', 'Instructions', 'Additional Instructions', 'Instructor');
+        let assignment2 = new assignment('COMP-1113', 'Name', 'Date', 'Link', 'Instructions', 'Additional Instructions', 'Instructor');
+
+        addAssignment(assignment1, 'Biz Analysis');
+        addAssignment(assignment2, 'Math');
+
+        let assignmentList = [];
+
+>>>>>>> 4545f3ca257b87d76ab2e0474d26a877c49ddffc
         db.collection("assignments").get().then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
                 // doc.data() is never undefined for query doc snapshots
                 assignmentDetails = doc.data();
                 newAssignment = new assignment(assignmentDetails['course'], assignmentDetails['name'], assignmentDetails['due date'], assignmentDetails['D2L Link'], assignmentDetails['Instructions'], assignmentDetails['additional information'], assignmentDetails['instructor']);
+<<<<<<< HEAD
                 buildListRow(newAssignment);
             });
         });
 
+=======
+                window.localStorage.setItem(doc.id, JSON.stringify(newAssignment));
+                buildListRow(newAssignment);
+                console.log(JSON.parse(window.localStorage.getItem(doc.id)));
+            });
+        });
+
+
+>>>>>>> 4545f3ca257b87d76ab2e0474d26a877c49ddffc
         function movefirebase() {
             document.getElementById('firebaseui-auth-container').style.top = "45%";
         }
