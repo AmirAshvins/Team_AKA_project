@@ -1,46 +1,94 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/styles.css" type="text/css">
 </head>
+
 <body>
-       <!-- header -->
-       <div class="jumbotron header-footer-div header-div">
+    <!-- header -->
+    <div class="jumbotron header-footer-div header-div">
 
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
 
-            <section class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center align-center-up">
-                <h2 class="head-text">Assignment Details</h2>
-            </section>
+        <section class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center align-center-up">
+            <h2 class="head-text">Assignment Details</h2>
+        </section>
 
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-up">
-                <a class="btn btn-default" href="###########"><span class="glyphicon glyphicon-user"></span></a>
-            </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-up">
+            <a id="profile" class="btn btn-default" href="###########"><span class="glyphicon glyphicon-user"></span></a>
         </div>
+    </div>
     <!-- content -->
-        <div class="container page-content">
-                <div class="floater">
-                    
-                </div>
+    <div class="form-container page-content">
+        <div class="row">
+            <div class="col-25">
+                <label>Course:</label>
+            </div>
+            <div id="course" class="col-75"></div>
         </div>
+        <div class="row">
+            <div class="col-25">
+                <label>Assignment Name:</label>
+            </div>
+            <div id="name" class="col-75"></div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label>Due Date:</label>
+            </div>
+            <div id="dueDate" class="col-75"></div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label>D2L Link:</label>
+            </div>
+            <div id="d2lLink" class="col-75"></div>
+        </div>
+        <div class="row">
+                <div class="col-25">
+                    <label>Instructor:</label>
+                </div>
+                <div id="instructorID" class="col-75"></div>
+            </div>
+        <hr>
+        <div class="row">
+            <div class="col-25">
+                <label>Instructions:</label>
+            </div>
+            <div id="instructions" class="col-75"></div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label>Additional Information:</label>
+            </div>
+            <div id="additionalInformation" class="col-75"></div>
+        </div>
+    </div>
     <!-- footer -->
-        <div class="jumbotron footer-div header-footer-div">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
-                    <a href="./main.html" class="btn foot-text">List</a>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
-                    <a href="./calendar.html" class="btn foot-text">Calendar</a>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
-                    <a href="./addasignment.html" class="btn foot-text">Edit</a>
-                </div>
+    <div class="jumbotron footer-div header-footer-div">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
+                <a href="./main.html" class="btn foot-text">List</a>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
+                <a href="./calendar.html" class="btn foot-text">Calendar</a>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
+                <a href="./addasignment.html" class="btn foot-text">Edit</a>
             </div>
         </div>
+    </div>
+    <!--Get Assignments-->
+    <script>        
+        function getInformation(assignmentId) {
+        }
+    </script>
 </body>
+
 </html>
