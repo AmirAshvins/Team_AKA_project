@@ -33,6 +33,10 @@ p, h2{
     transform: translate(0, -50%);
 }
 
+.align-center-down{
+    
+}
+
 @media screen and (min-width: 768px) {
     .head-text {
         font-size: 250%;
@@ -213,7 +217,7 @@ float: right;
 border-radius: 5px;
 background-color:rgba(255, 255, 255, 0.75);
 padding: 30px;
-height: 72vh;
+height: 70vh;
 overflow-y: scroll;
 }
 
