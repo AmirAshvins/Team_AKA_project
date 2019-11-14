@@ -28,7 +28,8 @@
     <!-- content -->
     <div class="container page-content">
         <div class="row section-header section-item">
-            <p class="col-lg-4 col-md-4 col-sm-4 col-xs-4 section-heading list-text addMargin"> Due Date</p>
+            <p class="col-lg-2 col-md-2 col-sm-2 col-xs-2 section-heading list-text addMargin"> Due Date</p>
+            <p class="col-lg-2 col-md-2 col-sm-2 col-xs-2 section-heading list-text addMargin"> Due Time</p>
             <p class="col-lg-6 col-md-6 col-sm-6 col-xs-6 section-heading list-text addMargin"> Assignment Name</p>
             <p class="col-lg-2 col-md-2 col-sm-2 col-xs-2 section-heading list-text addMargin"> Course</p>
         </div>
@@ -39,10 +40,10 @@
     <div class="jumbotron footer-div header-footer-div">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
-                <a href="./calendar.html" class="btn foot-text" role="button">Calendar</a>
+                <a href="./calendar.html" class="btn foot-button foot-text" role="button">Calendar</a>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
-                <a href="./addasignment.html" class="btn foot-text">Add</a>
+                <a href="./addasignment.html" class="btn foot-button foot-text">Add</a>
             </div>
         </div>
     </div>
@@ -56,8 +57,8 @@
 
     <script>
         function onListItemClick(clickedItem){
-            window.sessionStorage("needDetails", clickedItem.id)
-            document.location.href = "./details.html";
+            sessionStorage.setItem("needDetails", clickedItem.id);
+            window.location.href = "./details.html";
         }
 
         function onPageLoad(){}

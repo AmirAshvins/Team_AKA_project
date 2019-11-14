@@ -74,7 +74,7 @@ class instructor {
         for (let i = 0; i < this.email.length(); i++) {
             if (email[i] != '@') {
                 instructorID += this.email[i];
-            }else{
+            } else {
                 break;
             }
         }
