@@ -15,7 +15,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
 
-function loadDBToStorage(){
+function loadDBToStorage() {
     db.collection("assignments").get().then(function (querySnapshot) {
         let assignmentList = [];
         querySnapshot.forEach(function (doc) {
@@ -32,7 +32,7 @@ function loadDBToStorage(){
 }
 
 
-function IDinDB(collectionName, ID){
+function IDinDB(collectionName, ID) {
     db.collection(collectionName).doc(ID).get()
         .then(function (docSnapshot) {
             if (docSnapshot.exists) {
@@ -84,7 +84,7 @@ class instructor {
 // ##########################
 // UTILITIES
 
-function getUrlQueries(){
+function getUrlQueries() {
     let urlQuery = decodeURI(window.location.search());
     let queries = urlQuery.split('?');
     delete queries[0];
