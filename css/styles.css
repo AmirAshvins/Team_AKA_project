@@ -12,10 +12,11 @@
     background-image: url('images/landing_page_bg.jpg');
     height:500px ;
 } */
-p, h2{
+p, h1, h2{
     text-align: center;
     color: black;
 }
+
 .glyphicon {
     font-size: 200%;;
 }
@@ -36,26 +37,26 @@ p, h2{
     transform: translate(0, -50%);
 }
 
-.head-text {
-    color: black;
-    font-size: 200%;
-    position: absolute;
-    top: 1%;
-    left: 45%;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bolder;
+@media screen and (min-width: 768px) {
+    .head-text {
+        font-size: 250%;
+        position: static;
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bolder;
+        line-height: 0px;
+    }
 }
 
-.head-text-list {
-    color: black;
-    font-size: 200%;
-    position: absolute;
-    top: 1%;
-    left: 45%;
-    bottom: 100px;
-    margin-top: -15px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bolder;
+@media screen and (max-width: 767px) {
+    .head-text {
+        font-size: 150%;
+        position: static;
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bolder;
+        line-height: 0px;
+    }
 }
 
 .noBottomMargin{
@@ -85,9 +86,9 @@ body{
 
 .header-footer-div{
     width: 100%;
-    margin: 0px;
+    margin: 0;
     background-color: rgb(255, 167, 60);
-    height: 7%;
+    height: 1vh;
 }
 
 /* fixed position puts the header and fotter fixed both edges of the screen. */
@@ -142,6 +143,7 @@ body{
 .floater {
     background-color: rgba(250, 253, 226, 0.4);
     border-radius: 8px;
+    margin-top: 20px;
 }
     /* CSS BY ID */
 
@@ -150,14 +152,12 @@ body{
 }
 
 #firebaseui-auth-container{
-    position: absolute;
-    top: 30%;
-<<<<<<< HEAD
-    left: 37%;
+    position: static;
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #mdl-button{
     background-color: yellow;
-=======
->>>>>>> 9384dc28e91be1703db933bc0bf4cd4af6e3f9af
 }

@@ -4,6 +4,7 @@
 <head>
     <title>List Page</title>
     <meta lang="english">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/styles.css" type="text/css">
     <script src="./js/scripts.js"></script>
@@ -38,7 +39,7 @@
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
 
         <section class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center align-center-up">
-            <h2 class="head-text-list">Your List</h2>
+            <h2 class="head-text">Your List</h2>
         </section>
 
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-up">
@@ -126,29 +127,16 @@
         db.collection("assignments").get().then(function (querySnapshot) {
             let assignmentList = [];
             querySnapshot.forEach(function (doc) {
-                // doc.data() is never undefined for query doc snapshots
                 assignmentDetails = doc.data();
-                newAssignment = new assignment(assignmentDetails['course'], assignmentDetails['name'], assignmentDetails['due date'],
-                    assignmentDetails['D2L Link'], assignmentDetails['instructions'],
-                    assignmentDetails['additional information'], assignmentDetails['instructorID']);
+                newAssignment = new assignment(assignmentDetails['course'], assignmentDetails['name'], assignmentDetails['dueDate'],
+                    assignmentDetails['d2lLink'], assignmentDetails['instructions'],
+                    assignmentDetails['additionalInformation'], assignmentDetails['instructorID']);
                 assignmentList.push(newAssignment);
-                newAssignment = new assignment(assignmentDetails['course'], assignmentDetails['name'], assignmentDetails['due date'], assignmentDetails['D2L Link'], assignmentDetails['Instructions'], assignmentDetails['additional information'], assignmentDetails['instructor']);
                 buildListRow(newAssignment);
             });
             window.localStorage.setItem("list", JSON.stringify(assignmentList));
             console.log(JSON.parse(window.localStorage.getItem('list')));
         });
-
-        db.collection('assignments').doc("comm").get()
-            .then(function(docSnapshot) {
-                if (docSnapshot.exists) {
-                    db.collection('assignments').doc("comm").onSnapshot(function(doc) {
-                        console.log("Exists");
-                    });
-                } else {
-                    console.log("Doesn't exist");
-                }
-            });
 
     </script>
 </body>
