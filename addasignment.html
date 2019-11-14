@@ -15,17 +15,15 @@
 <body>
     <!-- header -->
     <div class="jumbotron header-footer-div header-div">
-
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
-
         <section class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center align-center-up">
             <h2 class="head-text">Add Assignment</h2>
         </section>
-
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-up">
             <a class="btn btn-default" href="###########"><span class="glyphicon glyphicon-user"></span></a>
         </div>
     </div>
+
     <!-- content -->
     <div class="form-container page-content">
         <form action="#">
@@ -91,6 +89,7 @@
             </div>
         </form>
     </div>
+    
     <!-- footer -->
     <div class="jumbotron footer-div header-footer-div">
         <div class="row">
@@ -114,21 +113,21 @@
     <!-- validation -->
 
     <script>
-    function allFilled(){
-        let entryFields = document.getElementsByClassName('entryFields');
-        for (item of entryFields){
-            if (item.innerHTML === ''){
-                invalidField(item.id, ' is empty.')
-                return false;
+        function allFilled() {
+            let entryFields = document.getElementsByClassName('entryFields');
+            for (item of entryFields) {
+                if (item.innerHTML === '') {
+                    invalidField(item.id, ' is empty.')
+                    return false;
+                }
             }
+            return true
         }
-        return true
-    }
 
-    function validateInstructorEmail(){
-        let instructorEmail = document.getElementById('indstructorEmail').innerHTML;
+        function validateInstructorEmail() {
+            let instructorEmail = document.getElementById('indstructorEmail').innerHTML;
 
-    }
+        }
     </script>
     <!-- collect data into classes -->
 
@@ -142,7 +141,7 @@
             return document.getElementById('dueDateBox').innerHTML;
         }
 
-        function getDueTime(){
+        function getDueTime() {
             return document.getElementById('dueTimeBox').innerHTML;
         }
 
@@ -166,20 +165,20 @@
             let newAssignment = new assignment(
                 getCourse(), getAssignmentName(), getDueDate(), getD2LLink(),
                 getInstructions(), getAdditionalInstructions(), getInstructorID()
-                );
+            );
             newAssignment.generateID();
             return newAssignment;
-        } 
+        }
 
         //instructor class getter
 
         function getInstructorName() {
             return document.getElementById('instructorNameBox').innerHTML;
-         }
+        }
 
         function getInstructorEmail() {
             return document.getElementById('instructorEmailBox').innerHTML;
-         }
+        }
 
         function instructorClassBuilder() {  //call the getter functions
             let newInstructor = new instructor(
@@ -206,24 +205,24 @@
         }
 
         function sendInstructor(instructorInstance) {
-            if (!IDinDB('instructors')){
+            if (!IDinDB('instructors')) {
                 db.collection("assignments").doc(instructorInstance.ID).set({
                     'name': instructor.name,
                     'email': instructorInstance.email
                 });
             }
-         }
+        }
     </script>
 
     <!-- error handling -->
 
     <script>
-        function assignmentInDB(){
+        function assignmentInDB() {
 
         }
 
-        function invalidField(invalidFieldName, errorMessage){
-            
+        function invalidField(invalidFieldName, errorMessage) {
+
         }
     </script>
 </body>
