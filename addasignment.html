@@ -26,7 +26,7 @@
 
     <!-- content -->
     <div class="form-container page-content floater">
-        <form action="#">
+        <form>
             <div class="row">
                 <div class="col-25">
                     <label for="course" autocomplete="on">Course (e.g. XXXX-XXXX)</label>
@@ -204,14 +204,14 @@
 
         function AssignmentClassBuilder(instructorID) { 
             let newAssignment = new assignment(
-                document.getElementById('courseNameBox').innerHTML,
-                document.getElementById('assignmentNameBox').innerHTML,
-                document.getElementById('dueDateBox').innerHTML,
-                document.getElementById('dueTimeBox').innerHTML,
-                document.getElementById('D2LBox').innerHTML,
-                document.getElementById('instructionsBox').innerHTML,
-                document.getElementById('additionalInstructionsBox').innerHTML,
-                instructorID
+                document.getElementById('course').value,
+                document.getElementById('name').value,
+                document.getElementById('dueDate').value,
+                document.getElementById('dueTimeBox').value,
+                document.getElementById('d2lLink').value,
+                document.getElementById('instructions').value,
+                document.getElementById('additionalInformation').value,
+                document.getElementById('instructorID').value
             );
             return newAssignment;
         }
