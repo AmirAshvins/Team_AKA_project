@@ -20,6 +20,19 @@ function loadDBToStorage() {
         let assignmentList = [];
         querySnapshot.forEach(function (doc) {
             assignmentDetails = doc.data();
+            newAssignment = new assignment(assignmentDetails['course'], assignmentDetails['name'], assignmentDetails['dueDate'],
+            assignmentDetails['dueTime'], assignmentDetails['d2lLink'], assignmentDetails['instructions'], 
+            assignmentDetails['additionalInformation'], assignmentDetails['instructorID']);
+            assignmentList.push(newAssignment);
+            buildListRow(newAssignment);
+        });
+        window.localStorage.setItem("list", JSON.stringify(assignmentList));
+        console.log(JSON.parse(window.localStorage.getItem('list')));
+    });
+    db.collection("instructors").get().then(function (querySnapshot) {
+        let instructorsList = [];
+        querySnapshot.forEach(function (doc) {
+            assignmentDetails = doc.data();
             newAssignment = new assignment(assignmentDetails['course'], assignmentDetails['name'], assignmentDetails['dueDate'], assignmentDetails['dueTime'],
                 assignmentDetails['d2lLink'], assignmentDetails['instructions'],
                 assignmentDetails['additionalInformation'], assignmentDetails['instructorID']);
@@ -54,7 +67,7 @@ class assignment {
         this.dueDate = dueDate;
         this.dueTime = dueTime;
         this.d2lLink = d2lLink;
-        this.ID = '';
+        this.ID = 'ass';
         this.instructions = instructions;
         this.additionalInformation = additionalInformation;
         this.instructorID = instructorID;
@@ -85,9 +98,10 @@ class instructor {
 // UTILITIES
 
 function getUrlQueries() {
-    let urlQuery = decodeURI(window.location.search());
+    let urlQuery = decodeURI(window.location.search);
     let queries = urlQuery.split('?');
     delete queries[0];
+    console.log("success");
     return queries;
 }
 

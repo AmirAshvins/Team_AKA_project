@@ -58,7 +58,7 @@
     <script>
         function onListItemClick(clickedItem){
             sessionStorage.setItem("needDetails", clickedItem.id);
-            window.location.href = "./details.html";
+            window.location.href = "./details.html?" + clickedItem.id;;
         }
 
         function onPageLoad(){}
@@ -98,7 +98,7 @@
             listRow.id = assignmentId;
             listRow.className = "section-item row list-row";
             listRow.onclick = function() {
-                onListItemClick(assignmentId);
+                onListItemClick(this);
             }
             return listRow;
         }

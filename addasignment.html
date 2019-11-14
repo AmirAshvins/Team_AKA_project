@@ -8,6 +8,8 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/styles.css" type="text/css">
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
     <!-- recall clasess -->
     <script src="./js/scripts.js"></script>
 </head>
@@ -33,7 +35,11 @@
                     <label for="courseBox">Course</label>
                 </div>
                 <div class="autocomplete col-75">
+<<<<<<< HEAD
                     <input type="text" id="courseBox" name="course" placeholder="Type course code here..." pattern=" COMM-1116|COMP-1100|COMP-1113|COMP-1510|COMP-1536|COMP-1712|COMP-1930" required>
+=======
+                    <input type="text" id="courseBox" name="course" placeholder="Type course code here..." required pattern="COMM-1116">
+>>>>>>> ebc2c266768e2a8a118c147c5b57e1cdcc9982b7
                 </div>
             </div>
             <div class="row">
@@ -108,7 +114,7 @@
                 </div>
             </div>
             <div class="row">
-                <input type="submit" value="Submit">
+                <input id="submitButton" type="submit" value="Submit">
             </div>
         </form>
     </div>
@@ -120,7 +126,11 @@
                 <a href="./main.html" class="btn foot-button foot-text">Back</a>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
+<<<<<<< HEAD
                 <a href="./main.html" class="btn foot-button foot-text" onclick="">Submit</a>
+=======
+                <button href="./main.html" class="btn foot-button foot-text" onclick="document.getElementById('submitButton').click()">Submit</button>
+>>>>>>> ebc2c266768e2a8a118c147c5b57e1cdcc9982b7
             </div>
         </div>
         
@@ -130,23 +140,38 @@
     <!-- event handlers -->
 
     <script>
+        console.log('passed thru here');
+        if (getUrlQueries().length != 0){
+            editModeLoader(getUrlQueries()[0]);
+        }
+
         document.getElementById('submitButton').onclick = submitHandler();
-        document.onload = pageOnLoadHandler();
+        
 
         function submitHandler() {
+<<<<<<< HEAD
             let urlQueries = getUrlQueries()
-            if (urlQueries.length != 0){
+            if (urlQueries.length != 0) {
                 editModeLoader(urlQueries[0]);
             }
+=======
+            
+>>>>>>> f79197594de30268c616d20ab2cb1467197f7bcd
         }
 
         function cancelHandler() { }
 
-        function pageOnLoadHandler(){
-              
+<<<<<<< HEAD
+        function pageOnLoadHandler() {
+
         }
+<<<<<<< HEAD
         
 
+=======
+=======
+>>>>>>> f79197594de30268c616d20ab2cb1467197f7bcd
+>>>>>>> ebc2c266768e2a8a118c147c5b57e1cdcc9982b7
     </script>
 
     <!--Autocomplete Function-->
@@ -259,7 +284,7 @@
     </script>
 
     <!-- set the current date for the date-->
-    
+
     <script>
         let today = new Date();
         let dd = today.getDate();
@@ -274,7 +299,7 @@
 
         today = yyyy + '-' + mm + '-' + dd;
         document.getElementById("date").setAttribute("min", today);
-   
+
     </script>
 
     <!-- ADD functionality -->
@@ -284,11 +309,12 @@
     <!-- EDIT functionality  -->
 
     <script>
-        function editModeLoader(assignmentId){
+        function editModeLoader(assignmentId) {
             changeLabelsToEdit(assignmentId);
+            loadAssignmentDetails(assignmentId);
         }
 
-        function loadAssignmentDetails(assignmentId){
+        function loadAssignmentDetails(assignmentId) {
             let assignmentInstance = window.localStorage.assignments.assignmentId;
             let instructorInstance = window.localStorage.instructors[assignmentInstance.instructorID];
             document.getElementById('assignmentNameBox').value = assignmentInstance.name;
@@ -303,7 +329,7 @@
 
         }
 
-        function changeLabelsToEdit(assignmentId){
+        function changeLabelsToEdit(assignmentId) {
             document.getElementById('headerText').innerHTML = "Edit: " + window.localStorage.assignmentId.name;
         }
     </script>
@@ -311,7 +337,7 @@
     <!-- validation -->
 
     <script>
-        function allValid(){}
+        function allValid() { }
 
         function allFilled() {
             let entryFields = document.getElementsByClassName('entryFields');
@@ -432,7 +458,7 @@
         }
     </script>
 
-    
+
 </body>
 
 </html>
