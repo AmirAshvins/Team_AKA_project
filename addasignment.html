@@ -20,80 +20,90 @@
             <h2 class="head-text">Add Assignment</h2>
         </section>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-up">
-            <a id="profile" class="btn btn-default" href="###########"><span class="glyphicon glyphicon-user"></span></a>
+            <a id="profile" class="btn btn-default" href="###########"><span
+                    class="glyphicon glyphicon-user"></span></a>
         </div>
     </div>
 
     <!-- content -->
     <div class="form-container page-content floater">
-        <form>
+        <form autocomplete="off">
             <div class="row">
                 <div class="col-25">
-                    <label for="course" autocomplete="on">Course (e.g. XXXX-XXXX)</label>
+                    <label for="courseBox">Course (e.g. XXXX-XXXX)</label>
                 </div>
-                <div class="col-75">
-                    <input type="text" id="course" name="course"
-                        placeholder="Type course code here...">
+                <div class="autocomplete col-75">
+                    <input type="text" id="courseBox" name="course" placeholder="Type course code here...">
                 </div>
             </div>
             <div class="row">
                 <div class="col-25">
-                    <label for="assignmentName">Assignment Name</label>
+                    <label for="assignmentNameBox">Assignment Name</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" id="assignmentName" name="assignmentName"
-                        placeholder="Type name here..." autocomplete="on">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="dueDate">Due Date (e.g. yyyy-mm-dd)</label>
-                </div>
-                <div class="col-75">
-                    <input type="date" name="dueDate">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="dueTime">Due Time (e.g. --:-- AM/PM)</label>
-                </div>
-                <div class="col-75">
-                    <input type="time" name="dueTime">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="d2lLink">D2L Link (e.g. www.d2l.com)</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" id="d2lLink" name="d2lLink" placeholder="Type D2L link here..."
+                    <input type="text" id="assignmentNameBox" name="assignmentName" placeholder="Type name here..."
                         autocomplete="on">
                 </div>
             </div>
             <div class="row">
                 <div class="col-25">
-                    <label for="instructorID">Instructor ID</label>
+                    <label for="dueDateBox">Due Date (e.g. yyyy-mm-dd)</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" id="instructorID" name="instructorID" placeholder="Type instructor's id here..."
+                    <input type="date" name="dueDate" id="dueDateBox">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="dueTimeBox">Due Time (e.g. --:-- AM/PM)</label>
+                </div>
+                <div class="col-75">
+                    <input type="time" name="dueTime" id="dueTimeBox">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="d2lLinkBox">D2L Link (e.g. www.d2l.com)</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="d2lLinkBox" name="d2lLink" placeholder="Type D2L link here..."
                         autocomplete="on">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="instructorNameBox">Instructor Name</label>
+                </div>
+                <div class="autocomplete col-75">
+                    <input type="text" id="instructorNameBox" name="instructorName"
+                        placeholder="Type instructor's name here...">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="instructorEmailBox">Instructor Email</label>
+                </div>
+                <div class="autocomplete col-75">
+                    <input type="text" id="instructorEmailBox" name="instructorEmail"
+                        placeholder="Type instructor's email here...">
                 </div>
             </div>
             <hr>
             <div class="row">
                 <div class="col-25">
-                    <label for="instructions">Instructions</label>
+                    <label for="instructionsBox">Instructions</label>
                 </div>
                 <div class="col-75">
-                    <textarea id="instructions" name="instructions" placeholder="Type instructions here..."></textarea>
+                    <textarea id="instructionsBox" name="instructions"
+                        placeholder="Type instructions here..."></textarea>
                 </div>
             </div>
             <div class="row">
                 <div class="col-25">
-                    <label for="additionalInformation">Additional Information</label>
+                    <label for="additionalInformationBox">Additional Information</label>
                 </div>
                 <div class="col-75">
-                    <textarea id="additionalInformation" name="additionalInformation"
+                    <textarea id="additionalInformationBox" name="additionalInformation"
                         placeholder="Type additional information here..."></textarea>
                 </div>
             </div>
@@ -128,10 +138,120 @@
 
         function cancelHandler() { }
 
-        function pageOnLoadHandler(){
+        function pageOnLoadHandler() {
 
         }
     </script>
+
+    <!--Autocomplete Function-->
+
+    <script>
+        function autocomplete(inp, arr) {
+            /*the autocomplete function takes two arguments,
+            the text field element and an array of possible autocompleted values:*/
+            var currentFocus;
+            /*execute a function when someone writes in the text field:*/
+            inp.addEventListener("input", function (e) {
+                var a, b, i, val = this.value;
+                /*close any already open lists of autocompleted values*/
+                closeAllLists();
+                if (!val) { return false; }
+                currentFocus = -1;
+                /*create a DIV element that will contain the items (values):*/
+                a = document.createElement("DIV");
+                a.setAttribute("id", this.id + "autocomplete-list");
+                a.setAttribute("class", "autocomplete-items");
+                /*append the DIV element as a child of the autocomplete container:*/
+                this.parentNode.appendChild(a);
+                /*for each item in the array...*/
+                for (i = 0; i < arr.length; i++) {
+                    /*check if the item starts with the same letters as the text field value:*/
+                    if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                        /*create a DIV element for each matching element:*/
+                        b = document.createElement("DIV");
+                        /*make the matching letters bold:*/
+                        b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                        b.innerHTML += arr[i].substr(val.length);
+                        /*insert a input field that will hold the current array item's value:*/
+                        b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                        /*execute a function when someone clicks on the item value (DIV element):*/
+                        b.addEventListener("click", function (e) {
+                            /*insert the value for the autocomplete text field:*/
+                            inp.value = this.getElementsByTagName("input")[0].value;
+                            /*close the list of autocompleted values,
+                            (or any other open lists of autocompleted values:*/
+                            closeAllLists();
+                        });
+                        a.appendChild(b);
+                    }
+                }
+            });
+            /*execute a function presses a key on the keyboard:*/
+            inp.addEventListener("keydown", function (e) {
+                var x = document.getElementById(this.id + "autocomplete-list");
+                if (x) x = x.getElementsByTagName("div");
+                if (e.keyCode == 40) {
+                    /*If the arrow DOWN key is pressed,
+                    increase the currentFocus variable:*/
+                    currentFocus++;
+                    /*and and make the current item more visible:*/
+                    addActive(x);
+                } else if (e.keyCode == 38) { //up
+                    /*If the arrow UP key is pressed,
+                    decrease the currentFocus variable:*/
+                    currentFocus--;
+                    /*and and make the current item more visible:*/
+                    addActive(x);
+                } else if (e.keyCode == 13) {
+                    /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                    e.preventDefault();
+                    if (currentFocus > -1) {
+                        /*and simulate a click on the "active" item:*/
+                        if (x) x[currentFocus].click();
+                    }
+                }
+            });
+            function addActive(x) {
+                /*a function to classify an item as "active":*/
+                if (!x) return false;
+                /*start by removing the "active" class on all items:*/
+                removeActive(x);
+                if (currentFocus >= x.length) currentFocus = 0;
+                if (currentFocus < 0) currentFocus = (x.length - 1);
+                /*add class "autocomplete-active":*/
+                x[currentFocus].classList.add("autocomplete-active");
+            }
+            function removeActive(x) {
+                /*a function to remove the "active" class from all autocomplete items:*/
+                for (var i = 0; i < x.length; i++) {
+                    x[i].classList.remove("autocomplete-active");
+                }
+            }
+            function closeAllLists(elmnt) {
+                /*close all autocomplete lists in the document,
+                except the one passed as an argument:*/
+                var x = document.getElementsByClassName("autocomplete-items");
+                for (var i = 0; i < x.length; i++) {
+                    if (elmnt != x[i] && elmnt != inp) {
+                        x[i].parentNode.removeChild(x[i]);
+                    }
+                }
+            }
+            /*execute a function when someone clicks in the document:*/
+            document.addEventListener("click", function (e) {
+                closeAllLists(e.target);
+            });
+        }
+
+        let courseList = ["COMM-1116", "COMP-1100", "COMP-1113", "COMP-1510", "COMP-1536", "COMP-1712", "COMP-1930"];
+        let instructorNameList = ["Sam Lee", "Christopher Thompson", "Takashi Nakamura", "Amir Amintabar", "Shravan Yedulla", "Neda Changizi"];
+        let instructorEmailList = ["slee789@bcit.ca", "cthompson98@bcit.ca", "Takashi_Nakamura@bcit.ca", "aamintabar@bcit.ca", "syedulla@bcit.ca", "nchangizi@bcit.ca"];
+
+        autocomplete(document.getElementById("courseBox"), courseList);
+        autocomplete(document.getElementById("instructorNameBox"), instructorNameList);
+        autocomplete(document.getElementById("instructorEmailBox"), instructorEmailList);
+    </script>
+
 
     <!-- ADD functionality -->
 
@@ -140,7 +260,7 @@
     <!-- EDIT functionality  -->
 
     <script>
-        
+
     </script>
 
     <!-- validation -->
@@ -165,44 +285,44 @@
             let startsWithLetter = false;
             // check that starts with letter
             let instructorEmail = document.getElementById('indstructorEmail').innerHTML;
-            if ( instructorEmail[0].charCodeAt() >= 65 && 90 >= instructorEmail[0].charCodeAt() ||
-                instructorEmail[0].charCodeAt >= 97 && 122 >= instructorEmail[0].charCodeAt()){
-                    startsWithLetter = true;
-                    for (let i=0; i<instructorEmail.length; i++){
-                        // check for @
-                        if (instructorEmail[i] === '@'){
-                            hasAt =true;
-                        }
-                        //check for string past @
-                        if ((instructorEmail[0].charCodeAt() >= 65 && 90 >= instructorEmail[0].charCodeAt() ||
-                            instructorEmail[0].charCodeAt >= 97 && 122 >= instructorEmail[0].charCodeAt()) && hasAt){
-                            stringPastAt = true;
-                        }
-                        // check for dot past string past @
-                        if (instructorEmail[i] === '.' && hasAt){
-                            hasDotPastAt = true;
-                        }
-                        // check for string past dot past string past @
-                        if ((instructorEmail[i].charCodeAt() >= 65 && 90 >= instructorEmail[i].charCodeAt() ||
-                        instructorEmail[0].charCodeAt >= 97 && 122 >= instructorEmail[].charCodeAt()) && hasDotPastAt){
-                            stringPastDot = true;
-                        }
+            if (instructorEmail[0].charCodeAt() >= 65 && 90 >= instructorEmail[0].charCodeAt() ||
+                instructorEmail[0].charCodeAt >= 97 && 122 >= instructorEmail[0].charCodeAt()) {
+                startsWithLetter = true;
+                for (let i = 0; i < instructorEmail.length; i++) {
+                    // check for @
+                    if (instructorEmail[i] === '@') {
+                        hasAt = true;
+                    }
+                    //check for string past @
+                    if ((instructorEmail[0].charCodeAt() >= 65 && 90 >= instructorEmail[0].charCodeAt() ||
+                        instructorEmail[0].charCodeAt >= 97 && 122 >= instructorEmail[0].charCodeAt()) && hasAt) {
+                        stringPastAt = true;
+                    }
+                    // check for dot past string past @
+                    if (instructorEmail[i] === '.' && hasAt) {
+                        hasDotPastAt = true;
+                    }
+                    // check for string past dot past string past @
+                    if ((instructorEmail[i].charCodeAt() >= 65 && 90 >= instructorEmail[i].charCodeAt() ||
+                        instructorEmail[0].charCodeAt >= 97 && 122 >= instructorEmail[].charCodeAt()) && hasDotPastAt) {
+                        stringPastDot = true;
                     }
                 }
-                if (startsWithLetter && hasAt && stringPastAt && hasDotPastAt && stringPastDot){
-                    return true;
-                }else{
-                    return false;
-                }        
+            }
+            if (startsWithLetter && hasAt && stringPastAt && hasDotPastAt && stringPastDot) {
+                return true;
+            } else {
+                return false;
+            }
         }
     </script>
 
     <!-- collect data into classes -->
 
     <script>
-        function getInstructorID(){}
+        function getInstructorID() { }
 
-        function AssignmentClassBuilder(instructorID) { 
+        function AssignmentClassBuilder(instructorID) {
             let newAssignment = new assignment(
                 document.getElementById('course').value,
                 document.getElementById('name').value,
@@ -218,7 +338,7 @@
 
         //instructor class getter
 
-        function instructorBuilder() {  
+        function instructorBuilder() {
             let newInstructor = new instructor(
                 document.getElementById('instructorNameBox').innerHTML,
                 document.getElementById('instructorEmailBox').innerHTML
