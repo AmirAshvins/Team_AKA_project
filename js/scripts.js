@@ -10,7 +10,7 @@ class assignment {
         this.instructorID = instructorID;
     }
 
-    setID() {
+    generateID() {
         let assignmentID = '';
         for (let i = 0; i < this.D2LLink.length; i++) {
             if (!isNaN(this.D2LLink[i])) {
@@ -24,21 +24,6 @@ class assignment {
             console.log('Cannot create ID. Empty D2L link');
         }
     }
-
-    IDinDB(collectionName, ID) {
-        db.collection(collectionName).doc(ID).get()
-            .then(function (docSnapshot) {
-                if (docSnapshot.exists) {
-                    db.collection(collectionName).doc(ID).onSnapshot(function (doc) {
-                        console.log("Exists.");
-                        return true;
-                    });
-                } else {
-                    console.log("Doesn't exist.");
-                    return false;
-                }
-            });
-    }
 }
 
 class instructor {
@@ -48,7 +33,7 @@ class instructor {
         this.email = instructorEmail;
     }
 
-    setID() {
+    generateID() {
         let instructorID = ''
         for (let i = 0; i < this.email.length(); i++) {
             if (email[i] != '@') {
@@ -63,4 +48,19 @@ class instructor {
             }
         }
     }
+}
+
+function IDinDB(collectionName, ID){
+    db.collection(collectionName).doc(ID).get()
+        .then(function (docSnapshot) {
+            if (docSnapshot.exists) {
+                db.collection(collectionName).doc(ID).onSnapshot(function (doc) {
+                    console.log("Exists.");
+                    return true;
+                });
+            } else {
+                console.log("Doesn't exist.");
+                return false;
+            }
+        });
 }
