@@ -20,7 +20,8 @@
             <h2 class="head-text">Add Assignment</h2>
         </section>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-up">
-            <a id="profile" class="btn btn-default" href="###########"><span class="glyphicon glyphicon-user"></span></a>
+            <a id="profile" class="btn btn-default" href="###########"><span
+                    class="glyphicon glyphicon-user"></span></a>
         </div>
     </div>
 
@@ -32,8 +33,7 @@
                     <label for="course" autocomplete="on">Course (e.g. XXXX-XXXX)</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" id="course" name="course"
-                        placeholder="Type course code here...">
+                    <input type="text" id="course" name="course" placeholder="Type course code here..." required>
                 </div>
             </div>
             <div class="row">
@@ -41,8 +41,8 @@
                     <label for="assignmentName">Assignment Name</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" id="assignmentName" name="assignmentName"
-                        placeholder="Type name here..." autocomplete="on">
+                    <input type="text" id="assignmentName" name="assignmentName" placeholder="Type name here..."
+                        autocomplete="on" required>
                 </div>
             </div>
             <div class="row">
@@ -50,7 +50,7 @@
                     <label for="dueDate">Due Date</label>
                 </div>
                 <div class="col-75">
-                    <input type="date" name="dueDate">
+                    <input id="date" type="date" name="dueDate" required>
                 </div>
             </div>
             <div class="row">
@@ -58,7 +58,7 @@
                     <label for="dueTime">Due Time</label>
                 </div>
                 <div class="col-75">
-                    <input type="time" name="dueTime">
+                    <input type="time" name="dueTime" required>
                 </div>
             </div>
             <div class="row">
@@ -128,9 +128,28 @@
 
         function cancelHandler() { }
 
-        function pageOnLoadHandler(){
+        function pageOnLoadHandler() {
 
         }
+    </script>
+
+    <!-- set the current date for the date-->
+    
+    <script>
+        let today = new Date();
+        let dd = today.getDate();
+        let mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById("date").setAttribute("min", today);
+   
     </script>
 
     <!-- ADD functionality -->
@@ -140,7 +159,7 @@
     <!-- EDIT functionality  -->
 
     <script>
-        
+
     </script>
 
     <!-- validation -->
@@ -165,44 +184,44 @@
             let startsWithLetter = false;
             // check that starts with letter
             let instructorEmail = document.getElementById('indstructorEmail').innerHTML;
-            if ( instructorEmail[0].charCodeAt() >= 65 && 90 >= instructorEmail[0].charCodeAt() ||
-                instructorEmail[0].charCodeAt >= 97 && 122 >= instructorEmail[0].charCodeAt()){
-                    startsWithLetter = true;
-                    for (let i=0; i<instructorEmail.length; i++){
-                        // check for @
-                        if (instructorEmail[i] === '@'){
-                            hasAt =true;
-                        }
-                        //check for string past @
-                        if ((instructorEmail[0].charCodeAt() >= 65 && 90 >= instructorEmail[0].charCodeAt() ||
-                            instructorEmail[0].charCodeAt >= 97 && 122 >= instructorEmail[0].charCodeAt()) && hasAt){
-                            stringPastAt = true;
-                        }
-                        // check for dot past string past @
-                        if (instructorEmail[i] === '.' && hasAt){
-                            hasDotPastAt = true;
-                        }
-                        // check for string past dot past string past @
-                        if ((instructorEmail[i].charCodeAt() >= 65 && 90 >= instructorEmail[i].charCodeAt() ||
-                        instructorEmail[0].charCodeAt >= 97 && 122 >= instructorEmail[].charCodeAt()) && hasDotPastAt){
-                            stringPastDot = true;
-                        }
+            if (instructorEmail[0].charCodeAt() >= 65 && 90 >= instructorEmail[0].charCodeAt() ||
+                instructorEmail[0].charCodeAt >= 97 && 122 >= instructorEmail[0].charCodeAt()) {
+                startsWithLetter = true;
+                for (let i = 0; i < instructorEmail.length; i++) {
+                    // check for @
+                    if (instructorEmail[i] === '@') {
+                        hasAt = true;
+                    }
+                    //check for string past @
+                    if ((instructorEmail[0].charCodeAt() >= 65 && 90 >= instructorEmail[0].charCodeAt() ||
+                        instructorEmail[0].charCodeAt >= 97 && 122 >= instructorEmail[0].charCodeAt()) && hasAt) {
+                        stringPastAt = true;
+                    }
+                    // check for dot past string past @
+                    if (instructorEmail[i] === '.' && hasAt) {
+                        hasDotPastAt = true;
+                    }
+                    // check for string past dot past string past @
+                    if ((instructorEmail[i].charCodeAt() >= 65 && 90 >= instructorEmail[i].charCodeAt() ||
+                        instructorEmail[0].charCodeAt >= 97 && 122 >= instructorEmail[].charCodeAt()) && hasDotPastAt) {
+                        stringPastDot = true;
                     }
                 }
-                if (startsWithLetter && hasAt && stringPastAt && hasDotPastAt && stringPastDot){
-                    return true;
-                }else{
-                    return false;
-                }        
+            }
+            if (startsWithLetter && hasAt && stringPastAt && hasDotPastAt && stringPastDot) {
+                return true;
+            } else {
+                return false;
+            }
         }
     </script>
 
     <!-- collect data into classes -->
 
     <script>
-        function getInstructorID(){}
+        function getInstructorID() { }
 
-        function AssignmentClassBuilder(instructorID) { 
+        function AssignmentClassBuilder(instructorID) {
             let newAssignment = new assignment(
                 document.getElementById('courseNameBox').innerHTML,
                 document.getElementById('assignmentNameBox').innerHTML,
@@ -218,7 +237,7 @@
 
         //instructor class getter
 
-        function instructorBuilder() {  
+        function instructorBuilder() {
             let newInstructor = new instructor(
                 document.getElementById('instructorNameBox').innerHTML,
                 document.getElementById('instructorEmailBox').innerHTML
