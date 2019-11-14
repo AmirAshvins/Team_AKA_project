@@ -28,7 +28,8 @@
     <!-- content -->
     <div class="container page-content">
         <div class="row section-header section-item">
-            <p class="col-lg-4 col-md-4 col-sm-4 col-xs-4 section-heading list-text addMargin"> Due Date</p>
+            <p class="col-lg-2 col-md-2 col-sm-2 col-xs-2 section-heading list-text addMargin"> Due Date</p>
+            <p class="col-lg-2 col-md-2 col-sm-2 col-xs-2 section-heading list-text addMargin"> Due Time</p>
             <p class="col-lg-6 col-md-6 col-sm-6 col-xs-6 section-heading list-text addMargin"> Assignment Name</p>
             <p class="col-lg-2 col-md-2 col-sm-2 col-xs-2 section-heading list-text addMargin"> Course</p>
         </div>
@@ -57,7 +58,7 @@
     <script>
         function onListItemClick(clickedItem){
             window.sessionStorage("needDetails", clickedItem.id)
-            document.location.href = "./details.html";
+            window.location.href = "./details.html";
         }
 
         function onPageLoad(){}

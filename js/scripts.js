@@ -42,14 +42,14 @@ class instructor {
         for (let i = 0; i < this.email.length(); i++) {
             if (email[i] != '@') {
                 instructorID += this.email[i];
-            }else{
+            } else {
                 break;
             }
         }
     }
 }
 
-function IDinDB(collectionName, ID){
+function IDinDB(collectionName, ID) {
     db.collection(collectionName).doc(ID).get()
         .then(function (docSnapshot) {
             if (docSnapshot.exists) {
@@ -64,13 +64,13 @@ function IDinDB(collectionName, ID){
         });
 }
 
-function loadDBToStorage(){
+function loadDBToStorage() {
     db.collection("assignments").get().then(function (querySnapshot) {
         let assignmentList = [];
         querySnapshot.forEach(function (doc) {
             assignmentDetails = doc.data();
             newAssignment = new assignment(assignmentDetails['course'], assignmentDetails['name'], assignmentDetails['dueDate'],
-                assignmentDetails['d2lLink'], assignmentDetails['instructions'],
+                assignmentDetails['dueTime'], assignmentDetails['d2lLink'], assignmentDetails['instructions'],
                 assignmentDetails['additionalInformation'], assignmentDetails['instructorID']);
             assignmentList.push(newAssignment);
             buildListRow(newAssignment);
