@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Add Assignment</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/styles.css" type="text/css">
@@ -18,7 +18,7 @@
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
 
         <section class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center align-center-up">
-            <h2 class="head-text-list">Add assignment</h2>
+            <h2 class="head-text">Add Assignment</h2>
         </section>
 
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-up">
@@ -27,18 +27,61 @@
     </div>
     <!-- content -->
     <div class="container page-content">
-        <div class="floater">
-
+        <div class="container">
+            <form action="#">
+                <div class="row">
+                    <div class="col-25">
+                        <label for="country">Course</label>
+                    </div>
+                    <div class="col-75">
+                        <select id="course" name="course">
+                            <option value="comm-1116">COMM-1116</option>
+                            <option value="comp-1100">COMP-1100</option>
+                            <option value="comp-1113">COMP-1113</option>
+                            <option value="comp-1510">COMP-1510</option>
+                            <option value="comp-1536">COMP-1536</option>
+                            <option value="comp-1712">COMP-1712</option>
+                            <option value="comp-1930">COMP-1930</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="fname">First Name</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="fname" name="firstname" placeholder="Your name..">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="lname">Last Name</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="subject">Subject</label>
+                    </div>
+                    <div class="col-75">
+                        <textarea id="subject" name="subject" placeholder="Write something.."></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <input type="submit" value="Submit">
+                </div>
+            </form>
         </div>
     </div>
     <!-- footer -->
     <div class="jumbotron footer-div header-footer-div">
-        <div class=" row justified-content-center">
+        <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
-                <a href="#" class="btn headText">Calendar</a>
+                <a href="./main.html" class="btn foot-text">Back</a>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
-                <a href="#" class="btn headText">Add</a>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
             </div>
         </div>
     </div>

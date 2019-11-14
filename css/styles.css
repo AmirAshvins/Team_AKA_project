@@ -1,18 +1,9 @@
-
-/* styles from landing page */
-
 .horizontal-center{
     margin-top: 50px;
     text-align: center;
 }
-/* .jumbotron{
-    background-size: cover;
-    background-attachment: scroll;
-    background-repeat: no-repeat;
-    background-image: url('images/landing_page_bg.jpg');
-    height:500px ;
-} */
-p, h1, h2{
+
+p, h2{
     text-align: center;
     color: black;
 }
@@ -20,8 +11,6 @@ p, h1, h2{
 .glyphicon {
     font-size: 200%;;
 }
-
-/* end of styles from landing page */
 
 .inline-elem{
     display: inline;
@@ -53,6 +42,28 @@ p, h1, h2{
         font-size: 150%;
         position: static;
         margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bolder;
+        line-height: 0px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .foot-text {
+        font-size: 250%;
+        position: static;
+        margin-bottom: 1vw;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bolder;
+        line-height: 0px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .foot-text {
+        font-size: 150%;
+        position: static;
+        margin-bottom: 1vw;
         font-family: Arial, Helvetica, sans-serif;
         font-weight: bolder;
         line-height: 0px;
@@ -115,19 +126,19 @@ body{
 
 /* LIST PAGE CSS */
 .section-header{
-    background-color: rgb(216, 136, 83); 
+    background-color: rgb(216, 136, 83);
+    height: 5vw;
 }
 
 .section-item{
     margin-bottom: 3px;
     margin-top: 3px;
     border-radius: 8px;
-    height: 10%;
-    /* We want px height, so when zoomed the text doesn't flow out of the screen */
 }
 
-#listContainer{
-    height: 100%;
+.section-heading {
+    font-weight: bold;
+    margin-top: 1vw;
 }
 
 .list-row {
@@ -137,13 +148,19 @@ body{
 .list-text {
     color: black;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 150%;
+    font-size: 1.75vw;
+}
+
+#listContainer{
+    height: 50vw;
 }
 
 .floater {
     background-color: rgba(250, 253, 226, 0.4);
     border-radius: 8px;
     margin-top: 20px;
+    height: 65vh;
+    overflow: scroll;
 }
     /* CSS BY ID */
 
@@ -161,3 +178,69 @@ body{
 #mdl-button{
     background-color: yellow;
 }
+
+/*Styling for Add Assignment */
+/* Style inputs, select elements and textareas */
+input[type=text], select, textarea{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+  }
+  
+  /* Style the label to display next to the inputs */
+  label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+  }
+  
+  /* Style the submit button */
+  input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+  }
+  
+  /* Style the container */
+  .container {
+    border-radius: 5px;
+    background-color:rgba(255, 255, 255, 0.75);
+    padding: 20px;
+    height: 72vh;
+    overflow-y: scroll;
+  }
+  
+  /* Floating column for labels: 25% width */
+  .col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+  }
+  
+  /* Floating column for inputs: 75% width */
+  .col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+  @media screen and (max-width: 600px) {
+    .col-25, .col-75, input[type=submit] {
+      width: 100%;
+      margin-top: 0;
+    }
+  }
