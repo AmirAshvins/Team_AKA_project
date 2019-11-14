@@ -17,7 +17,7 @@
     <div class="jumbotron header-footer-div header-div">
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
         <section class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center align-center-up">
-            <h2 class="head-text">Add Assignment</h2>
+            <h2 class="head-text" id="headerText">Add Assignment</h2>
         </section>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-up">
             <a id="profile" class="btn btn-default" href="###########"><span class="glyphicon glyphicon-user"></span></a>
@@ -114,14 +114,16 @@
         document.onload = pageOnLoadHandler();
 
         function submitHandler() {
-            let instructor = instructorBuilder();
-            let assignment = AssignmentClassBuilder(instructorID);
+            let urlQueries = getUrlQueries()
+            if (urlQueries.length != 0){
+                editModeLoader(urlQueries[0]);
+            }
         }
 
         function cancelHandler() { }
 
         function pageOnLoadHandler(){
-
+              
         }
     </script>
 
@@ -132,12 +134,20 @@
     <!-- EDIT functionality  -->
 
     <script>
-        
+        function editModeLoader(assignmentId){
+            changeLabelsToEdit(assignmentId);
+        } 
+
+        function changeLabelsToEdit(assignmentId){
+            document.getElementById('headerText').innerHTML = "Edit: " + window.localStorage.assignmentId.name;
+        }
     </script>
 
     <!-- validation -->
 
     <script>
+        function allValid(){}
+
         function allFilled() {
             let entryFields = document.getElementsByClassName('entryFields');
             for (item of entryFields) {
@@ -255,6 +265,8 @@
 
         }
     </script>
+
+    
 </body>
 
 </html>
