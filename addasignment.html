@@ -55,6 +55,14 @@
             </div>
             <div class="row">
                 <div class="col-25">
+                    <label for="dueTime">Due Time</label>
+                </div>
+                <div class="col-75">
+                    <input type="time" name="dueTim">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
                     <label for="d2lLink">D2L Link (e.g. www.d2l.com)</label>
                 </div>
                 <div class="col-75">
@@ -227,6 +235,7 @@
                 'course': assignmentInstance.course,
                 'name': assignmentInstance.name,
                 'dueDate': assignmentInstance.dueDate,
+                'dueTime': assignmentInstance.dueTime,
                 'D2LLink': assignmentInstance.D2LLink,
                 'instructions': assignmentInstance.instructions,
                 'additionalInformation': assignmentInstance.additionalInstructions,
