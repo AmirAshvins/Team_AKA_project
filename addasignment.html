@@ -27,28 +27,20 @@
     <!-- content -->
     <div class="form-container page-content">
         <form action="#">
-            <div class="row">
-                <div class="col-25">
-                    <label for="course">Course</label>
-                </div>
-                <div class="col-75">
-                    <select id="course" name="course">
-                        <option value="comm-1116">COMM-1116</option>
-                        <option value="comp-1100">COMP-1100</option>
-                        <option value="comp-1113">COMP-1113</option>
-                        <option value="comp-1510">COMP-1510</option>
-                        <option value="comp-1536">COMP-1536</option>
-                        <option value="comp-1712">COMP-1712</option>
-                        <option value="comp-1930">COMP-1930</option>
-                    </select>
-                </div>
-            </div>
+                <div class="row">
+                        <div class="col-25">
+                            <label for="course" autocomplete="on">course</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="course" name="course" placeholder="Type course code here (e.g. COMP-1100)...">
+                        </div>
+                    </div>
             <div class="row">
                 <div class="col-25">
                     <label for="assignmentName">Assignment Name</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" id="assignmentName" name="assignmentName" placeholder="Assignment Name">
+                    <input type="text" id="assignmentName" name="assignmentName" placeholder="Type assignment name here..." autocomplete="on">
                 </div>
             </div>
             <div class="row">
@@ -64,7 +56,7 @@
                     <label for="d2lLink">D2L Link</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" id="d2lLink" name="d2lLink" placeholder="D2L Link">
+                    <input type="text" id="d2lLink" name="d2lLink" placeholder="D2L Link" autocomplete="on">
                 </div>
             </div>
             <div class="row">
@@ -89,7 +81,7 @@
             </div>
         </form>
     </div>
-    
+
     <!-- footer -->
     <div class="jumbotron footer-div header-footer-div">
         <div class="row">
