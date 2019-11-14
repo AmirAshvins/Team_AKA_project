@@ -89,6 +89,9 @@
             let listRow = document.createElement('div');
             listRow.id = assignmentId;
             listRow.className = "section-item row list-row section-item";
+            listRow.onclick = function() {
+                document.location.href = "./details.html";
+            }
             return listRow;
         }
 
