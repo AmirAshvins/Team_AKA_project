@@ -8,6 +8,8 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/styles.css" type="text/css">
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
     <!-- recall clasess -->
     <script src="./js/scripts.js"></script>
 </head>
@@ -33,7 +35,7 @@
                     <label for="courseBox">Course (e.g. XXXX-XXXX)</label>
                 </div>
                 <div class="autocomplete col-75">
-                    <input type="text" id="courseBox" name="course" placeholder="Type course code here...">
+                    <input type="text" id="courseBox" name="course" placeholder="Type course code here..." required pattern="COMM-1116">
                 </div>
             </div>
             <div class="row">
@@ -108,7 +110,7 @@
                 </div>
             </div>
             <div class="row">
-                <input type="submit" value="Submit">
+                <input id="submitButton" type="submit" value="Submit">
             </div>
         </form>
     </div>
@@ -119,7 +121,8 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
                 <a href="./main.html" class="btn foot-button foot-text">Back</a>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
+                <button href="./main.html" class="btn foot-button foot-text" onclick="document.getElementById('submitButton').click()">Submit</button>
             </div>
         </div>
     </div>
@@ -133,15 +136,15 @@
 
         function submitHandler() {
             let urlQueries = getUrlQueries()
-            if (urlQueries.length != 0){
+            if (urlQueries.length != 0) {
                 editModeLoader(urlQueries[0]);
             }
         }
 
         function cancelHandler() { }
 
-        function pageOnLoadHandler(){
-              
+        function pageOnLoadHandler() {
+
         }
     </script>
 
@@ -255,7 +258,7 @@
     </script>
 
     <!-- set the current date for the date-->
-    
+
     <script>
         let today = new Date();
         let dd = today.getDate();
@@ -270,7 +273,7 @@
 
         today = yyyy + '-' + mm + '-' + dd;
         document.getElementById("date").setAttribute("min", today);
-   
+
     </script>
 
     <!-- ADD functionality -->
@@ -280,11 +283,11 @@
     <!-- EDIT functionality  -->
 
     <script>
-        function editModeLoader(assignmentId){
+        function editModeLoader(assignmentId) {
             changeLabelsToEdit(assignmentId);
         }
 
-        function loadAssignmentDetails(assignmentId){
+        function loadAssignmentDetails(assignmentId) {
             let assignmentInstance = window.localStorage.assignments.assignmentId;
             let instructorInstance = window.localStorage.instructors[assignmentInstance.instructorID];
             document.getElementById('assignmentNameBox').value = assignmentInstance.name;
@@ -299,7 +302,7 @@
 
         }
 
-        function changeLabelsToEdit(assignmentId){
+        function changeLabelsToEdit(assignmentId) {
             document.getElementById('headerText').innerHTML = "Edit: " + window.localStorage.assignmentId.name;
         }
     </script>
@@ -307,7 +310,7 @@
     <!-- validation -->
 
     <script>
-        function allValid(){}
+        function allValid() { }
 
         function allFilled() {
             let entryFields = document.getElementsByClassName('entryFields');
@@ -428,7 +431,7 @@
         }
     </script>
 
-    
+
 </body>
 
 </html>
