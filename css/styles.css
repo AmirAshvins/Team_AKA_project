@@ -86,8 +86,6 @@ p, h2{
     margin-top: 10px;
 }
 
-/* All karel from here on down */
-
 /* GENERIC CSS */
 body{
     
@@ -183,7 +181,7 @@ body{
 
 /*Styling for Add Assignment */
 
-/* Style inputs, select elements and textareas */
+Style inputs, select elements and textareas
 input[type=text], select, textarea{
     width: 100%;
     padding: 12px;

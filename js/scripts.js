@@ -1,27 +1,35 @@
+// #####################
+// FIREBASE CONFIG
+
+// Your web app's Firebase configuration
+var firebaseConfig = {
+    apiKey: "AIzaSyA_-CQ7oIjLIeTU8B05p8lD-UbOJ9MXm_Y",
+    authDomain: "team-aka.firebaseapp.com",
+    databaseURL: "https://team-aka.firebaseio.com",
+    projectId: "team-aka",
+    storageBucket: "team-aka.appspot.com",
+    messagingSenderId: "192089508874",
+    appId: "1:192089508874:web:15181dc2fc7a40725ce3f3"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+var db = firebase.firestore();
+
 class assignment {
-    constructor(course, assignmentName, dueDate, d2lLink, instructions, additionalInformation, instructorID) {
+    constructor(course, assignmentName, dueDate, dueTime, d2lLink, instructions, additionalInformation, instructorID) {
         this.course = course;
         this.name = assignmentName;
         this.dueDate = dueDate;
+        this.dueTime = dueTime;
         this.d2lLink = d2lLink;
-        this.ID = null;
+        this.ID = '';
         this.instructions = instructions;
         this.additionalInformation = additionalInformation;
         this.instructorID = instructorID;
-    }
-
-    generateID() {
-        let assignmentID = '';
-        for (let i = 0; i < this.D2LLink.length; i++) {
-            if (!isNaN(this.D2LLink[i])) {
-                assignmentID += this.D2LLink[i];
+        for (let i = 0; i < this.d2lLink.length; i++) {
+            if (!isNaN(this.d2lLink[i])) {
+                this.ID += this.d2lLink[i];
             }
-        }
-        if (assignmentID != '') {
-            this.ID = assignmentID;
-        }
-        else {
-            console.log('Cannot create ID. Empty D2L link');
         }
     }
 }
@@ -31,20 +39,11 @@ class instructor {
         this.ID = null;
         this.name = instructorName;
         this.email = instructorEmail;
-    }
-
-    generateID() {
-        let instructorID = ''
         for (let i = 0; i < this.email.length(); i++) {
             if (email[i] != '@') {
                 instructorID += this.email[i];
-            }
-            else {
-                this.ID = instructorID;
-            }
-
-            if (instructorID === '') {
-                console.log('Cannot create instructor ID')
+            }else{
+                break;
             }
         }
     }
@@ -64,3 +63,20 @@ function IDinDB(collectionName, ID){
             }
         });
 }
+
+function loadDBToStorage(){
+    db.collection("assignments").get().then(function (querySnapshot) {
+        let assignmentList = [];
+        querySnapshot.forEach(function (doc) {
+            assignmentDetails = doc.data();
+            newAssignment = new assignment(assignmentDetails['course'], assignmentDetails['name'], assignmentDetails['dueDate'],
+                assignmentDetails['d2lLink'], assignmentDetails['instructions'],
+                assignmentDetails['additionalInformation'], assignmentDetails['instructorID']);
+            assignmentList.push(newAssignment);
+            buildListRow(newAssignment);
+        });
+        window.localStorage.setItem("list", JSON.stringify(assignmentList));
+        console.log(JSON.parse(window.localStorage.getItem('list')));
+    });
+}
+

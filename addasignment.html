@@ -1,4 +1,4 @@
-<html lang="en">
+﻿<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -110,9 +110,29 @@
     <!-- event handlers -->
 
     <script>
-        function submitHandler() { }
+        document.getElementById('submitButton').onclick = submitHandler();
+        document.onload = pageOnLoadHandler();
+
+        function submitHandler() {
+            let instructor = instructorBuilder();
+            let assignment = AssignmentClassBuilder(instructorID);
+        }
 
         function cancelHandler() { }
+
+        function pageOnLoadHandler(){
+
+        }
+    </script>
+
+    <!-- ADD functionality -->
+
+
+
+    <!-- EDIT functionality  -->
+
+    <script>
+        
     </script>
 
     <!-- validation -->
@@ -130,66 +150,71 @@
         }
 
         function validateInstructorEmail() {
+            let hasAt = false;
+            let hasDotPastAt = false;
+            let stringPastAt = false;
+            let stringPastDot = false;
+            let startsWithLetter = false;
+            // check that starts with letter
             let instructorEmail = document.getElementById('indstructorEmail').innerHTML;
-
+            if ( instructorEmail[0].charCodeAt() >= 65 && 90 >= instructorEmail[0].charCodeAt() ||
+                instructorEmail[0].charCodeAt >= 97 && 122 >= instructorEmail[0].charCodeAt()){
+                    startsWithLetter = true;
+                    for (let i=0; i<instructorEmail.length; i++){
+                        // check for @
+                        if (instructorEmail[i] === '@'){
+                            hasAt =true;
+                        }
+                        //check for string past @
+                        if ((instructorEmail[0].charCodeAt() >= 65 && 90 >= instructorEmail[0].charCodeAt() ||
+                            instructorEmail[0].charCodeAt >= 97 && 122 >= instructorEmail[0].charCodeAt()) && hasAt){
+                            stringPastAt = true;
+                        }
+                        // check for dot past string past @
+                        if (instructorEmail[i] === '.' && hasAt){
+                            hasDotPastAt = true;
+                        }
+                        // check for string past dot past string past @
+                        if ((instructorEmail[i].charCodeAt() >= 65 && 90 >= instructorEmail[i].charCodeAt() ||
+                        instructorEmail[0].charCodeAt >= 97 && 122 >= instructorEmail[].charCodeAt()) && hasDotPastAt){
+                            stringPastDot = true;
+                        }
+                    }
+                }
+                if (startsWithLetter && hasAt && stringPastAt && hasDotPastAt && stringPastDot){
+                    return true;
+                }else{
+                    return false;
+                }        
         }
     </script>
+
     <!-- collect data into classes -->
 
     <script>
-        // Assignment class getters
-        function getAssignmentName() {
-            return document.getElementById('assignmentNameBox').innerHTML;
-        }
+        function getInstructorID(){}
 
-        function getDueDate() {
-            return document.getElementById('dueDateBox').innerHTML;
-        }
-
-        function getDueTime() {
-            return document.getElementById('dueTimeBox').innerHTML;
-        }
-
-        function getCourse() {
-            return document.getElementById('courseNameBox').innerHTML;
-        }
-
-        function getD2LLink() {
-            return document.getElementById('D2LBox').innerHTML;
-        }
-
-        function getInstructions() {
-            return document.getElementById('instructionsBox').innerHTML;
-        }
-
-        function getAdditionalInstructions() {
-            return document.getElementById('additionalInstructionsBox').innerHTML;
-        }
-
-        function AssignmentClassBuilder() { //call the getter functions
+        function AssignmentClassBuilder(instructorID) { 
             let newAssignment = new assignment(
-                getCourse(), getAssignmentName(), getDueDate(), getD2LLink(),
-                getInstructions(), getAdditionalInstructions(), getInstructorID()
+                document.getElementById('courseNameBox').innerHTML,
+                document.getElementById('assignmentNameBox').innerHTML,
+                document.getElementById('dueDateBox').innerHTML,
+                document.getElementById('dueTimeBox').innerHTML,
+                document.getElementById('D2LBox').innerHTML,
+                document.getElementById('instructionsBox').innerHTML,
+                document.getElementById('additionalInstructionsBox').innerHTML,
+                instructorID
             );
-            newAssignment.generateID();
             return newAssignment;
         }
 
         //instructor class getter
 
-        function getInstructorName() {
-            return document.getElementById('instructorNameBox').innerHTML;
-        }
-
-        function getInstructorEmail() {
-            return document.getElementById('instructorEmailBox').innerHTML;
-        }
-
-        function instructorClassBuilder() {  //call the getter functions
+        function instructorBuilder() {  
             let newInstructor = new instructor(
-                getInstructorName(), getInstructorEmail()
+                document.getElementById('instructorNameBox').innerHTML,
+                document.getElementById('instructorEmailBox').innerHTML
             )
-            newInstructor.generateID();
             return newInstructor;
         }
     </script>
