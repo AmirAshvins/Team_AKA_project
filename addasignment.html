@@ -8,6 +8,8 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/styles.css" type="text/css">
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
     <!-- recall clasess -->
     <script src="./js/scripts.js"></script>
 </head>
@@ -30,10 +32,10 @@
         <form autocomplete="off">
             <div class="row">
                 <div class="col-25">
-                    <label for="courseBox">Course (e.g. XXXX-XXXX)</label>
+                    <label for="courseBox">Course</label>
                 </div>
                 <div class="autocomplete col-75">
-                    <input type="text" id="courseBox" name="course" placeholder="Type course code here...">
+                    <input type="text" id="courseBox" name="course" placeholder="Type course code here..." pattern=" COMM-1116|COMP-1100|COMP-1113|COMP-1510|COMP-1536|COMP-1712|COMP-1930" required>
                 </div>
             </div>
             <div class="row">
@@ -42,32 +44,32 @@
                 </div>
                 <div class="col-75">
                     <input type="text" id="assignmentNameBox" name="assignmentName" placeholder="Type name here..."
-                        autocomplete="on">
+                        autocomplete="on" required>
                 </div>
             </div>
             <div class="row">
                 <div class="col-25">
-                    <label for="dueDateBox">Due Date (e.g. yyyy-mm-dd)</label>
+                    <label for="dueDateBox">Due Date</label>
                 </div>
                 <div class="col-75">
-                    <input type="date" name="dueDate" id="dueDateBox">
+                    <input type="date" name="dueDate" id="dueDateBox" required>
                 </div>
             </div>
             <div class="row">
                 <div class="col-25">
-                    <label for="dueTimeBox">Due Time (e.g. --:-- AM/PM)</label>
+                    <label for="dueTimeBox">Due Time</label>
                 </div>
                 <div class="col-75">
-                    <input type="time" name="dueTime" id="dueTimeBox">
+                    <input type="time" name="dueTime" id="dueTimeBox" required>
                 </div>
             </div>
             <div class="row">
                 <div class="col-25">
-                    <label for="d2lLinkBox">D2L Link (e.g. www.d2l.com)</label>
+                    <label for="d2lLinkBox">D2L Link</label>
                 </div>
                 <div class="col-75">
                     <input type="text" id="d2lLinkBox" name="d2lLink" placeholder="Type D2L link here..."
-                        autocomplete="on">
+                        autocomplete="on" required>
                 </div>
             </div>
             <div class="row">
@@ -76,7 +78,7 @@
                 </div>
                 <div class="autocomplete col-75">
                     <input type="text" id="instructorNameBox" name="instructorName"
-                        placeholder="Type instructor's name here...">
+                        placeholder="Type instructor's name here..." pattern="Sam Lee|Christopher Thompson|Takashi Nakamura|Amir Amintabar|Shravan Yedulla|Neda Changizi" required>
                 </div>
             </div>
             <div class="row">
@@ -85,7 +87,7 @@
                 </div>
                 <div class="autocomplete col-75">
                     <input type="text" id="instructorEmailBox" name="instructorEmail"
-                        placeholder="Type instructor's email here...">
+                        placeholder="Type instructor's email here..." pattern="slee789@bcit.ca|cthompson98@bcit.ca|Takashi_Nakamura@bcit.ca|aamintabar@bcit.ca|syedulla@bcit.ca|nchangizi@bcit.ca" required>
                 </div>
             </div>
             <hr>
@@ -108,7 +110,7 @@
                 </div>
             </div>
             <div class="row">
-                <input type="submit" value="Submit">
+                <input id="submitButton" type="submit" value="Submit">
             </div>
         </form>
     </div>
@@ -119,9 +121,11 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
                 <a href="./main.html" class="btn foot-button foot-text">Back</a>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
+                <button href="./main.html" class="btn foot-button foot-text" onclick="document.getElementById('submitButton').click()">Submit</button>
             </div>
         </div>
+        
     </div>
     <!-- js -->
 
@@ -137,11 +141,17 @@
         
 
         function submitHandler() {
-            
+            let urlQueries = getUrlQueries()
+            if (urlQueries.length != 0) {
+                editModeLoader(urlQueries[0]);
+            }
         }
 
         function cancelHandler() { }
 
+        function pageOnLoadHandler() {
+
+        }
     </script>
 
     <!--Autocomplete Function-->
@@ -254,7 +264,7 @@
     </script>
 
     <!-- set the current date for the date-->
-    
+
     <script>
         let today = new Date();
         let dd = today.getDate();
@@ -269,7 +279,7 @@
 
         today = yyyy + '-' + mm + '-' + dd;
         document.getElementById("date").setAttribute("min", today);
-   
+
     </script>
 
     <!-- ADD functionality -->
@@ -279,12 +289,12 @@
     <!-- EDIT functionality  -->
 
     <script>
-        function editModeLoader(assignmentId){
+        function editModeLoader(assignmentId) {
             changeLabelsToEdit(assignmentId);
             loadAssignmentDetails(assignmentId);
         }
 
-        function loadAssignmentDetails(assignmentId){
+        function loadAssignmentDetails(assignmentId) {
             let assignmentInstance = window.localStorage.assignments.assignmentId;
             let instructorInstance = window.localStorage.instructors[assignmentInstance.instructorID];
             document.getElementById('assignmentNameBox').value = assignmentInstance.name;
@@ -298,7 +308,7 @@
             document.getElementById('additionalInformationBox').value = assignmentInstance.additionalInformation;
         }
 
-        function changeLabelsToEdit(assignmentId){
+        function changeLabelsToEdit(assignmentId) {
             document.getElementById('headerText').innerHTML = "Edit: " + window.localStorage.assignmentId.name;
         }
     </script>
@@ -306,7 +316,7 @@
     <!-- validation -->
 
     <script>
-        function allValid(){}
+        function allValid() { }
 
         function allFilled() {
             let entryFields = document.getElementsByClassName('entryFields');
@@ -427,7 +437,7 @@
         }
     </script>
 
-    
+
 </body>
 
 </html>
