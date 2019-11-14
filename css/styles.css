@@ -159,8 +159,6 @@ body{
     background-color: rgba(250, 253, 226, 0.4);
     border-radius: 8px;
     margin-top: 20px;
-    height: 65vh;
-    overflow: scroll;
 }
     /* CSS BY ID */
 
@@ -209,7 +207,7 @@ input[type=text], select, textarea{
   }
   
   /* Style the container */
-  .container {
+  .form-container {
     border-radius: 5px;
     background-color:rgba(255, 255, 255, 0.75);
     padding: 30px;
