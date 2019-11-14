@@ -58,7 +58,8 @@
     <script>
         function onListItemClick(clickedItem){
             sessionStorage.setItem("needDetails", clickedItem.id);
-            window.location.href = "./details.html?" + clickedItem.id;;
+            sessionStorage.setItem("previousPage", './main.html');
+            window.location.href = "./details.html";
         }
 
         function onPageLoad(){}

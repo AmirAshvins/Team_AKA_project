@@ -133,7 +133,7 @@
 
     <script>
         console.log('passed thru here');
-        if (getUrlQueries().length != 0){
+        if (sessionStorage.needDetails != ''){
             editModeLoader(getUrlQueries()[0]);
         }
 
@@ -306,7 +306,6 @@
             document.getElementById('instuctorEmailBox').value = instructorInstance.email;
             document.getElementById('instructionsBox').value = assignmentInstance.instructions;
             document.getElementById('additionalInformationBox').value = assignmentInstance.additionalInformation;
-
         }
 
         function changeLabelsToEdit(assignmentId) {
