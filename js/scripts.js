@@ -20,9 +20,9 @@ function loadDBToStorage() {
         let assignmentList = [];
         querySnapshot.forEach(function (doc) {
             assignmentDetails = doc.data();
-            newAssignment = new assignment(assignmentDetails['course'], assignmentDetails['name'], assignmentDetails['dueDate'], assignmentDetails['dueTime'],
-                assignmentDetails['d2lLink'], assignmentDetails['instructions'],
-                assignmentDetails['additionalInformation'], assignmentDetails['instructorID']);
+            newAssignment = new assignment(assignmentDetails['course'], assignmentDetails['name'], assignmentDetails['dueDate'],
+            assignmentDetails['dueTime'], assignmentDetails['d2lLink'], assignmentDetails['instructions'], 
+            assignmentDetails['additionalInformation'], assignmentDetails['instructorID']);
             assignmentList.push(newAssignment);
             buildListRow(newAssignment);
         });
@@ -67,7 +67,7 @@ class assignment {
         this.dueDate = dueDate;
         this.dueTime = dueTime;
         this.d2lLink = d2lLink;
-        this.ID = '';
+        this.ID = 'ass';
         this.instructions = instructions;
         this.additionalInformation = additionalInformation;
         this.instructorID = instructorID;
@@ -101,6 +101,7 @@ function getUrlQueries() {
     let urlQuery = decodeURI(window.location.search);
     let queries = urlQuery.split('?');
     delete queries[0];
+    console.log("success");
     return queries;
 }
 

@@ -131,21 +131,33 @@
     <!-- event handlers -->
 
     <script>
+        console.log('passed thru here');
+        if (getUrlQueries().length != 0){
+            editModeLoader(getUrlQueries()[0]);
+        }
+
         document.getElementById('submitButton').onclick = submitHandler();
-        document.onload = pageOnLoadHandler();
+        
 
         function submitHandler() {
+<<<<<<< HEAD
             let urlQueries = getUrlQueries()
             if (urlQueries.length != 0) {
                 editModeLoader(urlQueries[0]);
             }
+=======
+            
+>>>>>>> f79197594de30268c616d20ab2cb1467197f7bcd
         }
 
         function cancelHandler() { }
 
+<<<<<<< HEAD
         function pageOnLoadHandler() {
 
         }
+=======
+>>>>>>> f79197594de30268c616d20ab2cb1467197f7bcd
     </script>
 
     <!--Autocomplete Function-->
@@ -285,6 +297,7 @@
     <script>
         function editModeLoader(assignmentId) {
             changeLabelsToEdit(assignmentId);
+            loadAssignmentDetails(assignmentId);
         }
 
         function loadAssignmentDetails(assignmentId) {
