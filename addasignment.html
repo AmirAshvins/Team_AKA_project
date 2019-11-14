@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/styles.css" type="text/css">
+    <!-- recall clasess -->
     <script src="./js/scripts.js"></script>
 </head>
 
@@ -44,9 +45,6 @@
     </div>
     <!-- js -->
 
-    <!-- recall clasess -->
-    <script src="./js/classes.js"></script>
-
     <!-- event handlers -->
 
     <script>
@@ -55,6 +53,25 @@
         function cancelHandler() { }
     </script>
 
+    <!-- validation -->
+
+    <script>
+    function allFilled(){
+        let entryFields = document.getElementsByClassName('entryFields');
+        for (item of entryFields){
+            if (item.innerHTML === ''){
+                invalidField(item.id, ' is empty.')
+                return false;
+            }
+        }
+        return true
+    }
+
+    function validateInstructorEmail(){
+        let instructorEmail = document.getElementById('indstructorEmail').innerHTML;
+
+    }
+    </script>
     <!-- collect data into classes -->
 
     <script>
@@ -64,58 +81,92 @@
         }
 
         function getDueDate() {
-            return document.getElementById('dueDateBox').innerHTML
+            return document.getElementById('dueDateBox').innerHTML;
+        }
+
+        function getDueTime(){
+            return document.getElementById('dueTimeBox').innerHTML;
         }
 
         function getCourse() {
-            return document.getElementById('courseNameBox').innerHTML
+            return document.getElementById('courseNameBox').innerHTML;
         }
 
         function getD2LLink() {
-            return document.getElementById('D2LBox').innerHTML
+            return document.getElementById('D2LBox').innerHTML;
         }
 
         function getInstructions() {
-            return document.getElementById('instructionsBox').innerHTML
+            return document.getElementById('instructionsBox').innerHTML;
         }
 
         function getAdditionalInstructions() {
-            return document.getElementById('additionalInstructionsBox').innerHTML
+            return document.getElementById('additionalInstructionsBox').innerHTML;
         }
 
-        function AssignmentClassBuilder() {
-            newAssignment = new assignment(
-                getCourse, getAssignmentName, getDueDate, getD2LLink, getInstructions, getAdditionalInstructions, getInstructorID
-            )
-        } //call the getter functions
+        function AssignmentClassBuilder() { //call the getter functions
+            let newAssignment = new assignment(
+                getCourse(), getAssignmentName(), getDueDate(), getD2LLink(),
+                getInstructions(), getAdditionalInstructions(), getInstructorID()
+                );
+            newAssignment.generateID();
+            return newAssignment;
+        } 
 
         //instructor class getter
 
-        function getInstructor() { }
+        function getInstructorName() {
+            return document.getElementById('instructorNameBox').innerHTML;
+         }
 
-        function getInstructorEmail() { }
+        function getInstructorEmail() {
+            return document.getElementById('instructorEmailBox').innerHTML;
+         }
 
-        function instructorClassBuilder() { } //call the getter functions
+        function instructorClassBuilder() {  //call the getter functions
+            let newInstructor = new instructor(
+                getInstructorName(), getInstructorEmail()
+            )
+            newInstructor.generateID();
+            return newInstructor;
+        }
     </script>
 
     <!-- send data -->
 
     <script>
-        function checkID() { } //return boolean
-
-        function addAssignment(assignment, idName) {
-            db.collection("assignments").doc(idName).set({
-                'course': assignment.course,
-                'name': assignment.name,
-                'due date': assignment.dueDate,
-                'D2L Link': assignment.D2LLink,
-                'instructions': assignment.instructions,
-                'additional information': assignment.additionalInstructions,
-                'instructorID': assignment.instructorID
-            })
+        function sendAssignment(assignmentInstance) {
+            db.collection("assignments").doc(assignmentInstance.ID).set({
+                'course': assignmentInstance.course,
+                'name': assignmentInstance.name,
+                'dueDate': assignmentInstance.dueDate,
+                'D2LLink': assignmentInstance.D2LLink,
+                'instructions': assignmentInstance.instructions,
+                'additionalInformation': assignmentInstance.additionalInstructions,
+                'instructorID': assignmentInstance.instructorID
+            });
         }
 
-        function sendInstructor() { }
+        function sendInstructor(instructorInstance) {
+            if (!IDinDB('instructors')){
+                db.collection("assignments").doc(instructorInstance.ID).set({
+                    'name': instructor.name,
+                    'email': instructorInstance.email
+                });
+            }
+         }
+    </script>
+
+    <!-- error handling -->
+
+    <script>
+        function assignmentInDB(){
+
+        }
+
+        function invalidField(invalidFieldName, errorMessage){
+            
+        }
     </script>
 </body>
 
