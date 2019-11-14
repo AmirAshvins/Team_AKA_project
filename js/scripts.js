@@ -15,6 +15,38 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
 
+function loadDBToStorage() {
+    db.collection("assignments").get().then(function (querySnapshot) {
+        let assignmentList = [];
+        querySnapshot.forEach(function (doc) {
+            assignmentDetails = doc.data();
+            newAssignment = new assignment(assignmentDetails['course'], assignmentDetails['name'], assignmentDetails['dueDate'], assignmentDetails['dueTime'],
+                assignmentDetails['d2lLink'], assignmentDetails['instructions'],
+                assignmentDetails['additionalInformation'], assignmentDetails['instructorID']);
+            assignmentList.push(newAssignment);
+            buildListRow(newAssignment);
+        });
+        window.localStorage.setItem("list", JSON.stringify(assignmentList));
+        console.log(JSON.parse(window.localStorage.getItem('list')));
+    });
+}
+
+
+function IDinDB(collectionName, ID) {
+    db.collection(collectionName).doc(ID).get()
+        .then(function (docSnapshot) {
+            if (docSnapshot.exists) {
+                db.collection(collectionName).doc(ID).onSnapshot(function (doc) {
+                    console.log("Exists.");
+                    return true;
+                });
+            } else {
+                console.log("Doesn't exist.");
+                return false;
+            }
+        });
+}
+
 class assignment {
     constructor(course, assignmentName, dueDate, dueTime, d2lLink, instructions, additionalInformation, instructorID) {
         this.course = course;
@@ -49,34 +81,15 @@ class instructor {
     }
 }
 
-function IDinDB(collectionName, ID) {
-    db.collection(collectionName).doc(ID).get()
-        .then(function (docSnapshot) {
-            if (docSnapshot.exists) {
-                db.collection(collectionName).doc(ID).onSnapshot(function (doc) {
-                    console.log("Exists.");
-                    return true;
-                });
-            } else {
-                console.log("Doesn't exist.");
-                return false;
-            }
-        });
+// ##########################
+// UTILITIES
+
+function getUrlQueries() {
+    let urlQuery = decodeURI(window.location.search());
+    let queries = urlQuery.split('?');
+    delete queries[0];
+    return queries;
 }
 
-function loadDBToStorage() {
-    db.collection("assignments").get().then(function (querySnapshot) {
-        let assignmentList = [];
-        querySnapshot.forEach(function (doc) {
-            assignmentDetails = doc.data();
-            newAssignment = new assignment(assignmentDetails['course'], assignmentDetails['name'], assignmentDetails['dueDate'],
-                assignmentDetails['dueTime'], assignmentDetails['d2lLink'], assignmentDetails['instructions'],
-                assignmentDetails['additionalInformation'], assignmentDetails['instructorID']);
-            assignmentList.push(newAssignment);
-            buildListRow(newAssignment);
-        });
-        window.localStorage.setItem("list", JSON.stringify(assignmentList));
-        console.log(JSON.parse(window.localStorage.getItem('list')));
-    });
-}
+
 
