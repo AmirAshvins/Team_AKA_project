@@ -7,16 +7,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/styles.css" type="text/css">
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
     <script src="./js/scripts.js"></script>
 </head>
 
 <body>
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+    <!-- header -->
+    <div class="jumbotron header-footer-div header-div">
 
-    <!-- TODO: Add SDKs for Firebase products that you want to use
- https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+
+        <section class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center align-center-up">
+            <h2 class="head-text">Your List</h>
+        </section>
+
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-up">
+            <a class="btn btn-default" href="###########"><span class="glyphicon glyphicon-user"></span></a>
+        </div>
+    </div>
+    <!-- content -->
+    <div class="container page-content">
+        <div class="row section-header section-item">
+            <p class="col-lg-4 col-md-4 col-sm-4 col-xs-4 section-heading list-text addMargin"> Due Date</p>
+            <p class="col-lg-6 col-md-6 col-sm-6 col-xs-6 section-heading list-text addMargin"> Assignment Name</p>
+            <p class="col-lg-2 col-md-2 col-sm-2 col-xs-2 section-heading list-text addMargin"> Course</p>
+        </div>
+        <div id="listContainer" class='container-flow'>
+
+        </div>
+
+    </div>
+    <!-- footer -->
+    <div class="jumbotron footer-div header-footer-div">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
+                <a href="./calendar.html" class="btn foot-text" role="button">Calendar</a>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
+                <a href="./addasignment.html" class="btn foot-text">Add</a>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Your web app's Firebase configuration
@@ -33,44 +65,6 @@
         firebase.initializeApp(firebaseConfig);
         var db = firebase.firestore();
     </script>
-    <!-- header -->
-    <div class="jumbotron header-footer-div header-div">
-
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
-
-        <section class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center align-center-up">
-            <h2 class="head-text">Your List</h2>
-        </section>
-
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-up">
-            <a class="btn btn-default" href="###########"><span class="glyphicon glyphicon-user"></span></a>
-        </div>
-    </div>
-    <!-- content -->
-    <div class="container page-content">
-        <div class="row section-header section-item">
-
-            <p class="col-lg-4 col-md-4 col-sm-4 col-xs-4  listText addMargin"> Due Date</p>
-            <p class="col-lg-6 col-md-6 col-sm-6 col-xs-6  listText addMargin"> Assignment Name</p>
-            <p class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right listText addMargin"> course</p>
-        </div>
-        <div id="listContainer" class='container-flow'>
-
-        </div>
-
-    </div>
-    <!-- footer -->
-    <div class="jumbotron footer-div header-footer-div">
-        <div class=" row justified-content-center">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
-                <a href="./calendar.html" class="btn headText">Calendar</a>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
-                <a href="./addasignment.html" class="btn headText">Add</a>
-            </div>
-        </div>
-    </div>
-
 
     <script>
         function buildListRow(assignmentInstance) {
@@ -137,7 +131,6 @@
             window.localStorage.setItem("list", JSON.stringify(assignmentList));
             console.log(JSON.parse(window.localStorage.getItem('list')));
         });
-
     </script>
 </body>
 
