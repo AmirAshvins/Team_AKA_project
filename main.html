@@ -9,11 +9,11 @@
     <link rel="stylesheet" href="./css/styles.css" type="text/css">
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
-    
+
 </head>
 
 <body>
-    
+
     <!-- header -->
     <div class="jumbotron header-div header-footer-div">
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
@@ -21,7 +21,8 @@
             <h2 class="head-text">Your List</h>
         </section>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-up">
-            <a id="profile" class="btn btn-default" href="###########"><span class="glyphicon glyphicon-user"></span></a>
+            <a id="profile" class="btn btn-default" href="###########"><span
+                    class="glyphicon glyphicon-user"></span></a>
         </div>
     </div>
 
@@ -52,18 +53,6 @@
 
     <script src="./js/scripts.js" type="text/javascript"></script>
 
-
-    <!-- event handlers -->
-
-    <script>
-        function onListItemClick(clickedItem){
-            sessionStorage.setItem("needDetails", clickedItem.id);
-            sessionStorage.setItem("previousPage", './main.html');
-            window.location.href = "./details.html";
-        }
-
-        function onPageLoad(){}
-    </script>
 
     <!-- build list -->
 
@@ -98,7 +87,7 @@
             let listRow = document.createElement('div');
             listRow.id = assignmentId;
             listRow.className = "section-item row list-row";
-            listRow.onclick = function() {
+            listRow.onclick = function () {
                 onListItemClick(this);
             }
             return listRow;
@@ -125,18 +114,57 @@
             return dueDateCol
         }
 
-        function buildDueTimeCol(dueTime){
+        function buildDueTimeCol(dueTime) {
             let dueTimeCol = document.createElement('div');
             dueTimeCol.className = "col-lg-2 col-md-2 col-sm-2 col-xs-2 text-left";
             dueTimeCol.innerHTML = "<p class='list-due-time list-text'>" + dueTime + "</p>";
             return dueTimeCol
-        }
-        
-
-        loadDBToStorage();
+        }    
     </script>
 
-    
+    <!-- load list -->
+
+    <script>
+        function loadList() {
+            let parsedAssignmentList = JSON.parse(window.localStorage.assignmentList)
+            for (let i=0; i < parsedAssignmentList.length; i++){
+                buildListRow(parsedAssignmentList[i]);
+            }
+        }
+    </script>
+
+    <!-- event handlers -->
+
+    <script>
+        db.collection('assignments').onSnapshot(function (doc){
+            document.getElementById('listContainer').innerHTML = "";
+            window.localStorage.assignmentsLoaded = false;
+            onPageLoad();
+        });
+        db.collection('instructors').onSnapshot(function (doc){
+            document.getElementById('listContainer').innerHTML = "";
+            window.localStorage.assignmentsLoaded = false;
+            onPageLoad();
+        });
+        document.onload = onPageLoad();
+        function onListItemClick(clickedItem) {
+            sessionStorage.setItem("needDetails", clickedItem.id);
+            sessionStorage.setItem("previousPage", './main.html');
+            window.location.href = "./details.html";
+        }
+
+        function onPageLoad() {
+            if (!window.localStorage.assignmentsLoaded) {
+                loadAssignmentsToStorage();
+            }
+            if (!window.localStorage.instructorsLoaded) {
+                loadInstructorsToStorage();
+            }
+            loadList();
+        }
+
+    </script>
+
 </body>
 
 </html>

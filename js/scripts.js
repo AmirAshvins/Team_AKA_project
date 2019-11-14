@@ -15,10 +15,10 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
 
-function loadDBToStorage() {
-    db.collection("assignments").get().then(function (querySnapshot) {
+function loadAssignmentsToStorage() {
+    db.collection("assignments").get().then(function (assignmentsQuery) {
         let assignmentList = [];
-        querySnapshot.forEach(function (doc) {
+        assignmentsQuery.forEach(function (doc) {
             assignmentDetails = doc.data();
             newAssignment = new assignment(assignmentDetails['course'], assignmentDetails['name'], assignmentDetails['dueDate'],
             assignmentDetails['dueTime'], assignmentDetails['d2lLink'], assignmentDetails['instructions'], 
@@ -26,19 +26,24 @@ function loadDBToStorage() {
             assignmentList.push(newAssignment);
             buildListRow(newAssignment);
         });
-        window.localStorage.setItem("assignmentList", JSON.stringify(assignmentList));
-        console.log(JSON.parse(window.localStorage.getItem('assignmentList')));
+        window.localStorage.setItem("list", JSON.stringify(assignmentList));
+        console.log(JSON.parse(window.localStorage.getItem('list')));
+        window.localStorage.assignmentsLoaded = true;
     });
-    db.collection("instructors").get().then(function (querySnapshot) {
+}
+
+function loadInstructorsToStorage(){
+    db.collection("instructors").get().then(function (instructorsQuery) {
         let instructorsList = [];
-        querySnapshot.forEach(function (doc) {
+        instructorsQuery.forEach(function (doc) {
             instructorsDetails = doc.data();
-            newInstructor = new instructor(assignmentDetails['name'], assignmentDetails['email']);
+            newInstructor = new instructor(instructorsDetails['name'], instructorsDetails['email']);
             instructorsList.push(newInstructor);
             buildListRow(newInstructor);
         });
         window.localStorage.setItem("instructorsList", JSON.stringify(instructorsList));
         console.log(JSON.parse(window.localStorage.getItem('instructorsList')));
+        window.localStorage.instructorsLoaded = true;
     });
 }
 
@@ -68,7 +73,7 @@ class assignment {
         this.ID = 'ass';
         this.instructions = instructions;
         this.additionalInformation = additionalInformation;
-        this.instructorID = instructorID;
+        this.instructorID = '';
         for (let i = 0; i < this.d2lLink.length; i++) {
             if (!isNaN(this.d2lLink[i])) {
                 this.ID += this.d2lLink[i];
@@ -82,9 +87,9 @@ class instructor {
         this.ID = null;
         this.name = instructorName;
         this.email = instructorEmail;
-        for (let i = 0; i < this.email.length(); i++) {
-            if (email[i] != '@') {
-                instructorID += this.email[i];
+        for (let i = 0; i < this.email.length; i++) {
+            if (this.email[i] != '@') {
+                this.ID += this.email[i];
             } else {
                 break;
             }
@@ -96,12 +101,25 @@ class instructor {
 // UTILITIES
 
 function getUrlQueries() {
-    let urlQuery = decodeURI(window.location.search);
+    let urlQuery = decodeURI(window.location.search());
     let queries = urlQuery.split('?');
     delete queries[0];
     console.log("success");
     return queries;
 }
 
+function loadAssignmentDetails(assignmentId){
+    let assignmentInstance = window.localStorage.assignments.assignmentId;
+    let instructorInstance = window.localStorage.instructors[assignmentInstance.instructorID];
+    document.getElementById('assignmentNameBox').value = assignmentInstance.name;
+    document.getElementById('courseBox').value = assignmentInstance.course;
+    document.getElementById('dueDateBox').value = assignmentInstance.dueDate;
+    document.getElementById('dueTimeBox').value = assignmentInstance.dueTime;
+    document.getElementById('d2lLinkBox').value = assignmentInstance.d2lLink;
+    document.getElementById('instructorNameBox').value = instructorInstance.name;
+    document.getElementById('instuctorEmailBox').value = instructorInstance.email;
+    document.getElementById('instructionsBox').value = assignmentInstance.instructions;
+    document.getElementById('additionalInformationBox').value = assignmentInstance.additionalInformation;
+}
 
 
