@@ -30,10 +30,10 @@
         <form autocomplete="off">
             <div class="row">
                 <div class="col-25">
-                    <label for="courseBox">Course (e.g. XXXX-XXXX)</label>
+                    <label for="courseBox">Course</label>
                 </div>
                 <div class="autocomplete col-75">
-                    <input type="text" id="courseBox" name="course" placeholder="Type course code here...">
+                    <input type="text" id="courseBox" name="course" placeholder="Type course code here..." pattern=" COMM-1116|COMP-1100|COMP-1113|COMP-1510|COMP-1536|COMP-1712|COMP-1930" required>
                 </div>
             </div>
             <div class="row">
@@ -42,32 +42,32 @@
                 </div>
                 <div class="col-75">
                     <input type="text" id="assignmentNameBox" name="assignmentName" placeholder="Type name here..."
-                        autocomplete="on">
+                        autocomplete="on" required>
                 </div>
             </div>
             <div class="row">
                 <div class="col-25">
-                    <label for="dueDateBox">Due Date (e.g. yyyy-mm-dd)</label>
+                    <label for="dueDateBox">Due Date</label>
                 </div>
                 <div class="col-75">
-                    <input type="date" name="dueDate" id="dueDateBox">
+                    <input type="date" name="dueDate" id="dueDateBox" required>
                 </div>
             </div>
             <div class="row">
                 <div class="col-25">
-                    <label for="dueTimeBox">Due Time (e.g. --:-- AM/PM)</label>
+                    <label for="dueTimeBox">Due Time</label>
                 </div>
                 <div class="col-75">
-                    <input type="time" name="dueTime" id="dueTimeBox">
+                    <input type="time" name="dueTime" id="dueTimeBox" required>
                 </div>
             </div>
             <div class="row">
                 <div class="col-25">
-                    <label for="d2lLinkBox">D2L Link (e.g. www.d2l.com)</label>
+                    <label for="d2lLinkBox">D2L Link</label>
                 </div>
                 <div class="col-75">
                     <input type="text" id="d2lLinkBox" name="d2lLink" placeholder="Type D2L link here..."
-                        autocomplete="on">
+                        autocomplete="on" required>
                 </div>
             </div>
             <div class="row">
@@ -76,7 +76,7 @@
                 </div>
                 <div class="autocomplete col-75">
                     <input type="text" id="instructorNameBox" name="instructorName"
-                        placeholder="Type instructor's name here...">
+                        placeholder="Type instructor's name here..." pattern="Sam Lee|Christopher Thompson|Takashi Nakamura|Amir Amintabar|Shravan Yedulla|Neda Changizi" required>
                 </div>
             </div>
             <div class="row">
@@ -85,7 +85,7 @@
                 </div>
                 <div class="autocomplete col-75">
                     <input type="text" id="instructorEmailBox" name="instructorEmail"
-                        placeholder="Type instructor's email here...">
+                        placeholder="Type instructor's email here..." pattern="slee789@bcit.ca|cthompson98@bcit.ca|Takashi_Nakamura@bcit.ca|aamintabar@bcit.ca|syedulla@bcit.ca|nchangizi@bcit.ca" required>
                 </div>
             </div>
             <hr>
@@ -119,9 +119,11 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
                 <a href="./main.html" class="btn foot-button foot-text">Back</a>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
+                <a href="./main.html" class="btn foot-button foot-text" onclick="">Submit</a>
             </div>
         </div>
+        
     </div>
     <!-- js -->
 
@@ -143,6 +145,8 @@
         function pageOnLoadHandler(){
               
         }
+        
+
     </script>
 
     <!--Autocomplete Function-->
