@@ -118,21 +118,20 @@
     <!-- event handlers -->
 
     <script>
+        console.log('passed thru here');
+        if (getUrlQueries().length != 0){
+            editModeLoader(getUrlQueries()[0]);
+        }
+
         document.getElementById('submitButton').onclick = submitHandler();
-        document.onload = pageOnLoadHandler();
+        
 
         function submitHandler() {
-            let urlQueries = getUrlQueries()
-            if (urlQueries.length != 0){
-                editModeLoader(urlQueries[0]);
-            }
+            
         }
 
         function cancelHandler() { }
 
-        function pageOnLoadHandler(){
-              
-        }
     </script>
 
     <!-- ADD functionality -->
@@ -144,6 +143,7 @@
     <script>
         function editModeLoader(assignmentId){
             changeLabelsToEdit(assignmentId);
+            loadAssignmentDetails(assignmentId);
         }
 
         function loadAssignmentDetails(assignmentId){
