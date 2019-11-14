@@ -1,3 +1,4 @@
+/* GENERIC CSS */
 .horizontal-center{
     margin-top: 50px;
     text-align: center;
@@ -90,7 +91,6 @@ p, h2{
     margin-top: 10px;
 }
 
-/* GENERIC CSS */
 body{
     
     padding: 0px;
