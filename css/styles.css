@@ -221,7 +221,7 @@ overflow-y: scroll;
 }
 
 textarea {
-    width: 30%;
+    width: 350px;
     height: 25%;
     border: 1px solid transparent;
     background-color: #f1f1f1;
@@ -281,7 +281,7 @@ font-size: 16px;
 
 input[type=text] {
 background-color: #f1f1f1;
-width: 30%;
+width: 350px;
 overflow-x: scroll;
 }
 
@@ -295,6 +295,7 @@ z-index: 99;
 top: 100%;
 left: 0;
 right: 0;
+width: 350px;
 }
 
 .autocomplete-items div {

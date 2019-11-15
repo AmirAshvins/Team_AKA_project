@@ -35,7 +35,8 @@
                     <label for="courseBox">Course</label>
                 </div>
                 <div class="autocomplete col-75">
-                    <input type="text" id="courseBox" name="course" placeholder="Type course code here..." pattern=" COMM-1116|COMP-1100|COMP-1113|COMP-1510|COMP-1536|COMP-1712|COMP-1930" required>
+                    <input type="text" id="courseBox" name="course" placeholder="Type course code here..."
+                        pattern="COMM-1116|COMP-1100|COMP-1113|COMP-1510|COMP-1536|COMP-1712|COMP-1930" required>
                 </div>
             </div>
             <div class="row">
@@ -78,7 +79,9 @@
                 </div>
                 <div class="autocomplete col-75">
                     <input type="text" id="instructorNameBox" name="instructorName"
-                        placeholder="Type instructor's name here..." pattern="Sam Lee|Christopher Thompson|Takashi Nakamura|Amir Amintabar|Shravan Yedulla|Neda Changizi" required>
+                        placeholder="Type instructor's name here..."
+                        pattern="Sam Lee|Christopher Thompson|Takashi Nakamura|Amir Amintabar|Shravan Yedulla|Neda Changizi"
+                        required>
                 </div>
             </div>
             <div class="row">
@@ -87,7 +90,9 @@
                 </div>
                 <div class="autocomplete col-75">
                     <input type="text" id="instructorEmailBox" name="instructorEmail"
-                        placeholder="Type instructor's email here..." pattern="slee789@bcit.ca|cthompson98@bcit.ca|Takashi_Nakamura@bcit.ca|aamintabar@bcit.ca|syedulla@bcit.ca|nchangizi@bcit.ca" required>
+                        placeholder="Type instructor's email here..."
+                        pattern="slee789@bcit.ca|cthompson98@bcit.ca|Takashi_Nakamura@bcit.ca|aamintabar@bcit.ca|syedulla@bcit.ca|nchangizi@bcit.ca"
+                        required>
                 </div>
             </div>
             <hr>
@@ -122,17 +127,17 @@
                 <a href="./main.html" class="btn btn-warning foot-text">Back</a>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
-                <a href="./main.html" class="btn btn-warning foot-text" onclick="document.getElementById('submitButton').click()">Submit</a>
+                <button class="btn btn-warning foot-text" onclick="submitOnClick()">Submit</button>
             </div>
         </div>
-        
+
     </div>
     <!-- js -->
 
+
     <!-- event handlers -->
 
-    <script>
-        console.log('passed thru here');
+    <!-- <script>
         if (sessionStorage.needDetails != ''){
             editModeLoader(getUrlQueries()[0]);
         }
@@ -152,7 +157,7 @@
         function pageOnLoadHandler() {
 
         }
-    </script>
+    </script> -->
 
     <!--Autocomplete Function-->
 
@@ -265,7 +270,7 @@
 
     <!-- set the current date for the date-->
 
-    <script>
+    <!-- <script>
         let today = new Date();
         let dd = today.getDate();
         let mm = today.getMonth() + 1;
@@ -279,12 +284,34 @@
 
         today = yyyy + '-' + mm + '-' + dd;
         document.getElementById("date").setAttribute("min", today);
-
-    </script>
+    </script> -->
 
     <!-- ADD functionality -->
 
+    <script>
+        function submitOnClick() {
+            // document.getElementById('submitButton').click();
 
+            console.log("Works");
+            newAssignment = new assignment(document.getElementById('courseBox').value,
+                document.getElementById('assignmentNameBox').value,
+                document.getElementById('dueDateBox').value,
+                document.getElementById('dueTimeBox').value,
+                document.getElementById('d2lLinkBox').value,
+                document.getElementById('instructionsBox').value,
+                document.getElementById('additionalInformationBox').value, "slee789");
+
+            console.log(newAssignment);
+
+            db.collection("assignments").doc("newAdded").set({
+                name: "name"
+            }).then(function () {
+                console.log("Document successfully written!");
+            }).catch(function () {
+                console.error("Error writing document");
+            });
+        }
+    </script>
 
     <!-- EDIT functionality  -->
 
@@ -315,75 +342,76 @@
 
     <!-- validation -->
 
+    //
     <script>
-        function allValid() { }
+    //     function allValid() { }
 
-        function allFilled() {
-            let entryFields = document.getElementsByClassName('entryFields');
-            for (item of entryFields) {
-                if (item.innerHTML === '') {
-                    invalidField(item.id, ' is empty.')
-                    return false;
-                }
-            }
-            return true
-        }
+    //     function allFilled() {
+    //         let entryFields = document.getElementsByClassName('entryFields');
+    //         for (item of entryFields) {
+    //             if (item.innerHTML === '') {
+    //                 invalidField(item.id, ' is empty.')
+    //                 return false;
+    //             }
+    //         }
+    //         return true
+    //     }
 
-        // function validateInstructorEmail() {
-        //     let hasAt = false;
-        //     let hasDotPastAt = false;
-        //     let stringPastAt = false;
-        //     let stringPastDot = false;
-        //     let startsWithLetter = false;
-        //     // check that starts with letter
-        //     let instructorEmail = document.getElementById('indstructorEmail').innerHTML;
-        //     if (instructorEmail[0].charCodeAt() >= 65 && 90 >= instructorEmail[0].charCodeAt() ||
-        //         instructorEmail[0].charCodeAt >= 97 && 122 >= instructorEmail[0].charCodeAt()) {
-        //         startsWithLetter = true;
-        //         for (let i = 0; i < instructorEmail.length; i++) {
-        //             // check for @
-        //             if (instructorEmail[i] === '@') {
-        //                 hasAt = true;
-        //             }
-        //             //check for string past @
-        //             if ((instructorEmail[0].charCodeAt() >= 65 && 90 >= instructorEmail[0].charCodeAt() ||
-        //                 instructorEmail[0].charCodeAt >= 97 && 122 >= instructorEmail[0].charCodeAt()) && hasAt) {
-        //                 stringPastAt = true;
-        //             }
-        //             // check for dot past string past @
-        //             if (instructorEmail[i] === '.' && hasAt) {
-        //                 hasDotPastAt = true;
-        //             }
-        //             // check for string past dot past string past @
-        //             if ((instructorEmail[i].charCodeAt() >= 65 && 90 >= instructorEmail[i].charCodeAt() ||
-        //                 instructorEmail[0].charCodeAt >= 97 && 122 >= instructorEmail[].charCodeAt()) && hasDotPastAt) {
-        //                 stringPastDot = true;
-        //             }
-        //         }
-        //     }
-        //     if (startsWithLetter && hasAt && stringPastAt && hasDotPastAt && stringPastDot) {
-        //         return true;
-        //     } else {
-        //         return false;
-        //     }
-        // }
-    </script>
+    //     // function validateInstructorEmail() {
+    //     //     let hasAt = false;
+    //     //     let hasDotPastAt = false;
+    //     //     let stringPastAt = false;
+    //     //     let stringPastDot = false;
+    //     //     let startsWithLetter = false;
+    //     //     // check that starts with letter
+    //     //     let instructorEmail = document.getElementById('indstructorEmail').innerHTML;
+    //     //     if (instructorEmail[0].charCodeAt() >= 65 && 90 >= instructorEmail[0].charCodeAt() ||
+    //     //         instructorEmail[0].charCodeAt >= 97 && 122 >= instructorEmail[0].charCodeAt()) {
+    //     //         startsWithLetter = true;
+    //     //         for (let i = 0; i < instructorEmail.length; i++) {
+    //     //             // check for @
+    //     //             if (instructorEmail[i] === '@') {
+    //     //                 hasAt = true;
+    //     //             }
+    //     //             //check for string past @
+    //     //             if ((instructorEmail[0].charCodeAt() >= 65 && 90 >= instructorEmail[0].charCodeAt() ||
+    //     //                 instructorEmail[0].charCodeAt >= 97 && 122 >= instructorEmail[0].charCodeAt()) && hasAt) {
+    //     //                 stringPastAt = true;
+    //     //             }
+    //     //             // check for dot past string past @
+    //     //             if (instructorEmail[i] === '.' && hasAt) {
+    //     //                 hasDotPastAt = true;
+    //     //             }
+    //     //             // check for string past dot past string past @
+    //     //             if ((instructorEmail[i].charCodeAt() >= 65 && 90 >= instructorEmail[i].charCodeAt() ||
+    //     //                 instructorEmail[0].charCodeAt >= 97 && 122 >= instructorEmail[].charCodeAt()) && hasDotPastAt) {
+    //     //                 stringPastDot = true;
+    //     //             }
+    //     //         }
+    //     //     }
+    //     //     if (startsWithLetter && hasAt && stringPastAt && hasDotPastAt && stringPastDot) {
+    //     //         return true;
+    //     //     } else {
+    //     //         return false;
+    //     //     }
+    //     // }
+    // </script>
 
     <!-- collect data into classes -->
 
     <script>
         function getInstructorID() { }
 
-        function AssignmentClassBuilder(instructorID) {
+        function assignmentClassBuilder(instructorID) {
             let newAssignment = new assignment(
-                document.getElementById('course').value,
-                document.getElementById('name').value,
-                document.getElementById('dueDate').value,
+                document.getElementById('courseBox').value,
+                document.getElementById('nameBox').value,
+                document.getElementById('dueDateBox').value,
                 document.getElementById('dueTimeBox').value,
-                document.getElementById('d2lLink').value,
-                document.getElementById('instructions').value,
-                document.getElementById('additionalInformation').value,
-                document.getElementById('instructorID').value
+                document.getElementById('d2lLinkBox').value,
+                document.getElementById('instructionsBox').value,
+                document.getElementById('additionalInformationBox').value,
+                instructorID
             );
             return newAssignment;
         }

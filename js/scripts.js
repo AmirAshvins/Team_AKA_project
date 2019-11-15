@@ -26,19 +26,8 @@ function loadDBToStorage() {
             assignmentList.push(newAssignment);
             buildListRow(newAssignment);
         });
-        window.localStorage.setItem("assignmentList", JSON.stringify(assignmentList));
-        console.log(JSON.parse(window.localStorage.getItem('assignmentList')));
-    });
-    db.collection("instructors").get().then(function (querySnapshot) {
-        let instructorsList = [];
-        querySnapshot.forEach(function (doc) {
-            instructorsDetails = doc.data();
-            newInstructor = new instructor(assignmentDetails['name'], assignmentDetails['email']);
-            instructorsList.push(newInstructor);
-            buildListRow(newInstructor);
-        });
-        window.localStorage.setItem("instructorsList", JSON.stringify(instructorsList));
-        console.log(JSON.parse(window.localStorage.getItem('instructorsList')));
+        window.localStorage.setItem("list", JSON.stringify(assignmentList));
+        console.log(JSON.parse(window.localStorage.getItem('list')));
     });
 }
 
@@ -69,11 +58,11 @@ class assignment {
         this.instructions = instructions;
         this.additionalInformation = additionalInformation;
         this.instructorID = instructorID;
-        for (let i = 0; i < this.d2lLink.length; i++) {
-            if (!isNaN(this.d2lLink[i])) {
-                this.ID += this.d2lLink[i];
-            }
-        }
+        // for (let i = 0; i < this.d2lLink.length; i++) {
+        //     if (!isNaN(this.d2lLink[i])) {
+        //         this.ID += this.d2lLink[i];
+        //     }
+        // }
     }
 }
 
