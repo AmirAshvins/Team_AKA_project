@@ -27,6 +27,21 @@ function loadAssignmentsToStorage() {
         });
         window.localStorage.setItem("list", JSON.stringify(assignmentList));
         console.log(JSON.parse(window.localStorage.getItem('list')));
+        window.localStorage.assignmentsLoaded = true;
+    });
+}
+
+function loadInstructorsToStorage(){
+    db.collection("instructors").get().then(function (instructorsQuery) {
+        let instructorsList = [];
+        instructorsQuery.forEach(function (doc) {
+            instructorsDetails = doc.data();
+            newInstructor = new instructor(instructorsDetails['name'], instructorsDetails['email']);
+            instructorsList.push(newInstructor);
+        });
+        window.localStorage.setItem("instructorsList", JSON.stringify(instructorsList));
+        console.log(JSON.parse(window.localStorage.getItem('instructorsList')));
+        window.localStorage.instructorsLoaded = true;
     });
 }
 
@@ -56,12 +71,12 @@ class assignment {
         this.ID = 'ass';
         this.instructions = instructions;
         this.additionalInformation = additionalInformation;
-        this.instructorID = instructorID;
-        // for (let i = 0; i < this.d2lLink.length; i++) {
-        //     if (!isNaN(this.d2lLink[i])) {
-        //         this.ID += this.d2lLink[i];
-        //     }
-        // }
+        this.instructorID = '';
+        for (let i = 0; i < this.d2lLink.length; i++) {
+            if (!isNaN(this.d2lLink[i])) {
+                this.ID += this.d2lLink[i];
+            }
+        }
     }
 }
 
@@ -84,71 +99,92 @@ class instructor {
 // UTILITIES
 
 function getUrlQueries() {
-    let urlQuery = decodeURI(window.location.search());
+    let urlQuery = decodeURI(window.location.search);
     let queries = urlQuery.split('?');
     delete queries[0];
     console.log("success");
     return queries;
 }
 
-let today = new Date();
-let currentMonth = today.getMonth();
-let currentYear = today.getFullYear();
+function loadAssignmentDetails(assignmentId){
+    let assignmentInstance = getElementByIdByCollectionFromLocStorage(assignmentId, 'assignmentList');
+    let instructorInstance = getElementByIdByCollectionFromLocStorage(assignmentInstance.instructorID, 'instructorsList');
+    document.getElementById('assignmentNameBox').innerHTML = assignmentInstance.name;
+    document.getElementById('courseBox').innerHTML = assignmentInstance.course;
+    document.getElementById('dueDateBox').innerHTML = assignmentInstance.dueDate;
+    document.getElementById('dueTimeBox').innerHTML = assignmentInstance.dueTime;
+    document.getElementById('d2lLinkBox').href = assignmentInstance.d2lLink;
+    document.getElementById('instructorNameBox').innerHTML = instructorInstance.name;
+    document.getElementById('instructorEmailBox').innerHTML = instructorInstance.email;
+    document.getElementById('instructionsBox').innerHTML = assignmentInstance.instructions;
+    document.getElementById('additionalInformationBox').innerHTML = assignmentInstance.additionalInformation;
+}
 
-let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-let monthAndYear = document.getElementById('monthAndYear')
-
-showCalendar(currentMonth, currentYear);
-
-
-function showCalendar(month, year) {
-    let firstDay = new Date(year, month).getDate();
-    let daysInMonth = 32 - new Date(year, month, 32).getDate();
-
-    let tbl = document.getElementById('calendar-body');
-
-    tbl.innerHTML = '';
-    monthAndYear.innerHTML = months[month] + " " + year;
-
-    let date = 1;
-
-    for(let i = 0; i < 6 ; i++) {
-        let row = document.createElement('tr');
-
-        for (let j = 0; j < 7; j++){
-            
-            if (i === 0 && j < firstDay) {
-                console.log(firstDay);
-                let cell = document.createElement('td');
-                let cellText = document.createTextNode("");
-                cell.appendChild(cellText);
-                row.appendChild(cell);
-            }else if (date > daysInMonth) {
-                break;
-            }else {
-                let cell = document.createElement('td');
-                let cellText = document.createElement(date);
-                cell.appendChild(cellText);
-                row.appendChild(cell);
-            }
-
-            date ++;
+function getElementByIdByCollectionFromLocStorage(elementID, collectionName){
+    let collectionList = JSON.parse(window.localStorage[collectionName]);
+    for (let i=0; i < collectionList.length; i++){
+        if (collectionList[i].ID === elementID){
+            return collectionList[i];
         }
-        tbl.appendChild(row);
     }
 }
+// let today = new Date();
+// let currentMonth = today.getMonth();
+// let currentYear = today.getFullYear();
 
-function previous() {
-    currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
-    currentMonth = currentMonth === 0 ? 11 : currentMonth - 1;
-    showCalendar(currentMonth, currentYear);
+// let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-}
-function next () {
-    currentYear = currentMonth === 11 ? currentYear + 1 : currentYear;
-    currentMonth = (currentMonth + 1) % 12;
-    showCalendar(currentMonth, currentYear);
+// let monthAndYear = document.getElementById('monthAndYear')
 
-}
+// showCalendar(currentMonth, currentYear);
 
+
+// function showCalendar(month, year) {
+//     let firstDay = new Date(year, month).getDate();
+//     let daysInMonth = 32 - new Date(year, month, 32).getDate();
+
+//     let tbl = document.getElementById('calendar-body');
+
+//     tbl.innerHTML = '';
+//     monthAndYear.innerHTML = months[month] + " " + year;
+
+//     let date = 1;
+
+//     for(let i = 0; i < 6 ; i++) {
+//         let row = document.createElement('tr');
+
+//         for (let j = 0; j < 7; j++){
+            
+//             if (i === 0 && j < firstDay) {
+//                 console.log(firstDay);
+//                 let cell = document.createElement('td');
+//                 let cellText = document.createTextNode("");
+//                 cell.appendChild(cellText);
+//                 row.appendChild(cell);
+//             }else if (date > daysInMonth) {
+//                 break;
+//             }else {
+//                 let cell = document.createElement('td');
+//                 let cellText = document.createElement(date);
+//                 cell.appendChild(cellText);
+//                 row.appendChild(cell);
+//             }
+
+//             date ++;
+//         }
+//         tbl.appendChild(row);
+//     }
+// }
+
+// function previous() {
+//     currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
+//     currentMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+//     showCalendar(currentMonth, currentYear);
+
+// }
+// function next () {
+//     currentYear = currentMonth === 11 ? currentYear + 1 : currentYear;
+//     currentMonth = (currentMonth + 1) % 12;
+//     showCalendar(currentMonth, currentYear);
+
+// }
