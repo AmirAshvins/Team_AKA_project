@@ -27,7 +27,6 @@ function loadAssignmentsToStorage() {
         });
         window.localStorage.setItem("list", JSON.stringify(assignmentList));
         console.log(JSON.parse(window.localStorage.getItem('list')));
-<<<<<<< HEAD
         window.localStorage.assignmentsLoaded = true;
     });
 }
@@ -43,8 +42,6 @@ function loadInstructorsToStorage(){
         window.localStorage.setItem("instructorsList", JSON.stringify(instructorsList));
         console.log(JSON.parse(window.localStorage.getItem('instructorsList')));
         window.localStorage.instructorsLoaded = true;
-=======
->>>>>>> d15075de5d4fcc66f29348d38d4ff197c4bfb6fd
     });
 }
 
@@ -74,21 +71,12 @@ class assignment {
         this.ID = 'ass';
         this.instructions = instructions;
         this.additionalInformation = additionalInformation;
-<<<<<<< HEAD
         this.instructorID = '';
         for (let i = 0; i < this.d2lLink.length; i++) {
             if (!isNaN(this.d2lLink[i])) {
                 this.ID += this.d2lLink[i];
             }
         }
-=======
-        this.instructorID = instructorID;
-        // for (let i = 0; i < this.d2lLink.length; i++) {
-        //     if (!isNaN(this.d2lLink[i])) {
-        //         this.ID += this.d2lLink[i];
-        //     }
-        // }
->>>>>>> d15075de5d4fcc66f29348d38d4ff197c4bfb6fd
     }
 }
 
@@ -111,14 +99,13 @@ class instructor {
 // UTILITIES
 
 function getUrlQueries() {
-    let urlQuery = decodeURI(window.location.search());
+    let urlQuery = decodeURI(window.location.search);
     let queries = urlQuery.split('?');
     delete queries[0];
     console.log("success");
     return queries;
 }
 
-<<<<<<< HEAD
 function loadAssignmentDetails(assignmentId){
     let assignmentInstance = getElementByIdByCollectionFromLocStorage(assignmentId, 'assignmentList');
     let instructorInstance = getElementByIdByCollectionFromLocStorage(assignmentInstance.instructorID, 'instructorsList');
@@ -138,71 +125,66 @@ function getElementByIdByCollectionFromLocStorage(elementID, collectionName){
     for (let i=0; i < collectionList.length; i++){
         if (collectionList[i].ID === elementID){
             return collectionList[i];
-        }else{
-            console.log("i'm a stupid machine");
         }
     }
 }
-=======
-let today = new Date();
-let currentMonth = today.getMonth();
-let currentYear = today.getFullYear();
->>>>>>> 4f67ea62c305aee4d3edb99b357d43cc8ac206bb
+// let today = new Date();
+// let currentMonth = today.getMonth();
+// let currentYear = today.getFullYear();
 
-let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+// let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-let monthAndYear = document.getElementById('monthAndYear')
+// let monthAndYear = document.getElementById('monthAndYear')
 
-showCalendar(currentMonth, currentYear);
+// showCalendar(currentMonth, currentYear);
 
 
-function showCalendar(month, year) {
-    let firstDay = new Date(year, month).getDate();
-    let daysInMonth = 32 - new Date(year, month, 32).getDate();
+// function showCalendar(month, year) {
+//     let firstDay = new Date(year, month).getDate();
+//     let daysInMonth = 32 - new Date(year, month, 32).getDate();
 
-    let tbl = document.getElementById('calendar-body');
+//     let tbl = document.getElementById('calendar-body');
 
-    tbl.innerHTML = '';
-    monthAndYear.innerHTML = months[month] + " " + year;
+//     tbl.innerHTML = '';
+//     monthAndYear.innerHTML = months[month] + " " + year;
 
-    let date = 1;
+//     let date = 1;
 
-    for(let i = 0; i < 6 ; i++) {
-        let row = document.createElement('tr');
+//     for(let i = 0; i < 6 ; i++) {
+//         let row = document.createElement('tr');
 
-        for (let j = 0; j < 7; j++){
+//         for (let j = 0; j < 7; j++){
             
-            if (i === 0 && j < firstDay) {
-                console.log(firstDay);
-                let cell = document.createElement('td');
-                let cellText = document.createTextNode("");
-                cell.appendChild(cellText);
-                row.appendChild(cell);
-            }else if (date > daysInMonth) {
-                break;
-            }else {
-                let cell = document.createElement('td');
-                let cellText = document.createElement(date);
-                cell.appendChild(cellText);
-                row.appendChild(cell);
-            }
+//             if (i === 0 && j < firstDay) {
+//                 console.log(firstDay);
+//                 let cell = document.createElement('td');
+//                 let cellText = document.createTextNode("");
+//                 cell.appendChild(cellText);
+//                 row.appendChild(cell);
+//             }else if (date > daysInMonth) {
+//                 break;
+//             }else {
+//                 let cell = document.createElement('td');
+//                 let cellText = document.createElement(date);
+//                 cell.appendChild(cellText);
+//                 row.appendChild(cell);
+//             }
 
-            date ++;
-        }
-        tbl.appendChild(row);
-    }
-}
+//             date ++;
+//         }
+//         tbl.appendChild(row);
+//     }
+// }
 
-function previous() {
-    currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
-    currentMonth = currentMonth === 0 ? 11 : currentMonth - 1;
-    showCalendar(currentMonth, currentYear);
+// function previous() {
+//     currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
+//     currentMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+//     showCalendar(currentMonth, currentYear);
 
-}
-function next () {
-    currentYear = currentMonth === 11 ? currentYear + 1 : currentYear;
-    currentMonth = (currentMonth + 1) % 12;
-    showCalendar(currentMonth, currentYear);
+// }
+// function next () {
+//     currentYear = currentMonth === 11 ? currentYear + 1 : currentYear;
+//     currentMonth = (currentMonth + 1) % 12;
+//     showCalendar(currentMonth, currentYear);
 
-}
-
+// }
