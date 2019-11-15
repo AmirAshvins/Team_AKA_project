@@ -24,7 +24,6 @@ function loadAssignmentsToStorage() {
             assignmentDetails['dueTime'], assignmentDetails['d2lLink'], assignmentDetails['instructions'], 
             assignmentDetails['additionalInformation'], assignmentDetails['instructorID']);
             assignmentList.push(newAssignment);
-            buildListRow(newAssignment);
         });
         window.localStorage.setItem("list", JSON.stringify(assignmentList));
         console.log(JSON.parse(window.localStorage.getItem('list')));
@@ -39,7 +38,6 @@ function loadInstructorsToStorage(){
             instructorsDetails = doc.data();
             newInstructor = new instructor(instructorsDetails['name'], instructorsDetails['email']);
             instructorsList.push(newInstructor);
-            buildListRow(newInstructor);
         });
         window.localStorage.setItem("instructorsList", JSON.stringify(instructorsList));
         console.log(JSON.parse(window.localStorage.getItem('instructorsList')));
@@ -84,7 +82,7 @@ class assignment {
 
 class instructor {
     constructor(instructorName, instructorEmail) {
-        this.ID = null;
+        this.ID = '';
         this.name = instructorName;
         this.email = instructorEmail;
         for (let i = 0; i < this.email.length; i++) {
@@ -109,17 +107,28 @@ function getUrlQueries() {
 }
 
 function loadAssignmentDetails(assignmentId){
-    let assignmentInstance = window.localStorage.assignments.assignmentId;
-    let instructorInstance = window.localStorage.instructors[assignmentInstance.instructorID];
-    document.getElementById('assignmentNameBox').value = assignmentInstance.name;
-    document.getElementById('courseBox').value = assignmentInstance.course;
-    document.getElementById('dueDateBox').value = assignmentInstance.dueDate;
-    document.getElementById('dueTimeBox').value = assignmentInstance.dueTime;
-    document.getElementById('d2lLinkBox').value = assignmentInstance.d2lLink;
-    document.getElementById('instructorNameBox').value = instructorInstance.name;
-    document.getElementById('instuctorEmailBox').value = instructorInstance.email;
-    document.getElementById('instructionsBox').value = assignmentInstance.instructions;
-    document.getElementById('additionalInformationBox').value = assignmentInstance.additionalInformation;
+    let assignmentInstance = getElementByIdByCollectionFromLocStorage(assignmentId, 'assignmentList');
+    let instructorInstance = getElementByIdByCollectionFromLocStorage(assignmentInstance.instructorID, 'instructorsList');
+    document.getElementById('assignmentNameBox').innerHTML = assignmentInstance.name;
+    document.getElementById('courseBox').innerHTML = assignmentInstance.course;
+    document.getElementById('dueDateBox').innerHTML = assignmentInstance.dueDate;
+    document.getElementById('dueTimeBox').innerHTML = assignmentInstance.dueTime;
+    document.getElementById('d2lLinkBox').href = assignmentInstance.d2lLink;
+    document.getElementById('instructorNameBox').innerHTML = instructorInstance.name;
+    document.getElementById('instructorEmailBox').innerHTML = instructorInstance.email;
+    document.getElementById('instructionsBox').innerHTML = assignmentInstance.instructions;
+    document.getElementById('additionalInformationBox').innerHTML = assignmentInstance.additionalInformation;
+}
+
+function getElementByIdByCollectionFromLocStorage(elementID, collectionName){
+    let collectionList = JSON.parse(window.localStorage[collectionName]);
+    for (let i=0; i < collectionList.length; i++){
+        if (collectionList[i].ID === elementID){
+            return collectionList[i];
+        }else{
+            console.log("i'm a stupid machine");
+        }
+    }
 }
 
 

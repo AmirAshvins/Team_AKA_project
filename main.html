@@ -136,19 +136,19 @@
     <!-- event handlers -->
 
     <script>
-        db.collection('assignments').onSnapshot(function (doc){
+        db.collection('assignments').onSnapshot(function (){
             document.getElementById('listContainer').innerHTML = "";
             window.localStorage.assignmentsLoaded = false;
             onPageLoad();
         });
-        db.collection('instructors').onSnapshot(function (doc){
+        db.collection('instructors').onSnapshot(function (){
             document.getElementById('listContainer').innerHTML = "";
             window.localStorage.assignmentsLoaded = false;
             onPageLoad();
         });
         document.onload = onPageLoad();
         function onListItemClick(clickedItem) {
-            sessionStorage.setItem("needDetails", clickedItem.id);
+            sessionStorage.setItem("needsDetails", clickedItem.id);
             sessionStorage.setItem("previousPage", './main.html');
             window.location.href = "./details.html";
         }
@@ -160,6 +160,7 @@
             if (!window.localStorage.instructorsLoaded) {
                 loadInstructorsToStorage();
             }
+            loadInstructorsToStorage();
             loadList();
         }
 

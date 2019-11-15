@@ -8,9 +8,9 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/styles.css" type="text/css">
-    <script src="./js/scripts.js" type="text/javascript"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+    <script src="./js/scripts.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -33,50 +33,56 @@
             <div class="col-25">
                 <label>Course:</label>
             </div>
-            <div id="course" class="col-75"></div>
+            <p id="courseBox" class="col-75"></p>
         </div>
         <div class="row">
             <div class="col-25">
                 <label>Assignment Name:</label>
             </div>
-            <div id="name" class="col-75"></div>
+            <p id="assignmentNameBox" class="col-75"></p>
         </div>
         <div class="row">
             <div class="col-25">
                 <label>Due Date:</label>
             </div>
-            <div id="dueDate" class="col-75"></div>
+            <p id="dueDateBox" class="col-75"></p>
         </div>
         <div class="row">
             <div class="col-25">
                 <label>Due Time:</label>
             </div>
-            <div id="dueTime" class="col-75"></div>
+            <p id="dueTimeBox" class="col-75"></p>
         </div>
         <div class="row">
             <div class="col-25">
                 <label>D2L Link:</label>
-                <span class="glyphicon glyphicon-link align-center-down"></span>
+                <a id="d2lLinkBox" class="glyphicon glyphicon-link align-center-down"></a>
             </div>
         </div>
         <div class="row">
                 <div class="col-25">
-                    <label>Instructor:</label>
+                    <label>Instructor name:</label>
                 </div>
-                <div id="instructorID" class="col-75"></div>
+                <p id="instructorNameBox" class="col-75"></p>
+            </div>
+        <div class="row">
+                <div class="col-25">
+                    <label>InstructorEmail:</label>
+                </div>
+                <p id="instructorEmailBox" class="col-75"></p>
             </div>
         <hr>
         <div class="row">
             <div class="col-25">
                 <label>Instructions:</label>
             </div>
-            <div id="instructions" class="col-75"></div>
+            <p id="instructionsBox" class="col-75"></p>
         </div>
         <div class="row">
             <div class="col-25">
                 <label>Additional Information:</label>
             </div>
-            <div id="additionalInformation" class="col-75"></div>
+            <p id="additionalInformationBox" class="col-75"></p>
         </div>
     </div>
     <!-- footer -->
@@ -95,7 +101,7 @@
     </div>
     <!--Get Assignments-->
     <script>        
-        document.onload = function() {loadAssignmentDetails(sessionStorage.needsDetails)};
+        loadAssignmentDetails(sessionStorage.needsDetails);
     </script>
 </body>
 
