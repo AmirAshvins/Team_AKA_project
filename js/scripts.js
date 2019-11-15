@@ -27,6 +27,7 @@ function loadAssignmentsToStorage() {
         });
         window.localStorage.setItem("list", JSON.stringify(assignmentList));
         console.log(JSON.parse(window.localStorage.getItem('list')));
+<<<<<<< HEAD
         window.localStorage.assignmentsLoaded = true;
     });
 }
@@ -42,6 +43,8 @@ function loadInstructorsToStorage(){
         window.localStorage.setItem("instructorsList", JSON.stringify(instructorsList));
         console.log(JSON.parse(window.localStorage.getItem('instructorsList')));
         window.localStorage.instructorsLoaded = true;
+=======
+>>>>>>> d15075de5d4fcc66f29348d38d4ff197c4bfb6fd
     });
 }
 
@@ -71,12 +74,21 @@ class assignment {
         this.ID = 'ass';
         this.instructions = instructions;
         this.additionalInformation = additionalInformation;
+<<<<<<< HEAD
         this.instructorID = '';
         for (let i = 0; i < this.d2lLink.length; i++) {
             if (!isNaN(this.d2lLink[i])) {
                 this.ID += this.d2lLink[i];
             }
         }
+=======
+        this.instructorID = instructorID;
+        // for (let i = 0; i < this.d2lLink.length; i++) {
+        //     if (!isNaN(this.d2lLink[i])) {
+        //         this.ID += this.d2lLink[i];
+        //     }
+        // }
+>>>>>>> d15075de5d4fcc66f29348d38d4ff197c4bfb6fd
     }
 }
 
