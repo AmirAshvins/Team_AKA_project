@@ -26,21 +26,19 @@ function loadDBToStorage() {
             assignmentList.push(newAssignment);
             buildListRow(newAssignment);
         });
-        window.localStorage.setItem("list", JSON.stringify(assignmentList));
-        console.log(JSON.parse(window.localStorage.getItem('list')));
+        window.localStorage.setItem("assignmentList", JSON.stringify(assignmentList));
+        console.log(JSON.parse(window.localStorage.getItem('assignmentList')));
     });
     db.collection("instructors").get().then(function (querySnapshot) {
         let instructorsList = [];
         querySnapshot.forEach(function (doc) {
-            assignmentDetails = doc.data();
-            newAssignment = new assignment(assignmentDetails['course'], assignmentDetails['name'], assignmentDetails['dueDate'], assignmentDetails['dueTime'],
-                assignmentDetails['d2lLink'], assignmentDetails['instructions'],
-                assignmentDetails['additionalInformation'], assignmentDetails['instructorID']);
-            assignmentList.push(newAssignment);
-            buildListRow(newAssignment);
+            instructorsDetails = doc.data();
+            newInstructor = new instructor(assignmentDetails['name'], assignmentDetails['email']);
+            instructorsList.push(newInstructor);
+            buildListRow(newInstructor);
         });
-        window.localStorage.setItem("list", JSON.stringify(assignmentList));
-        console.log(JSON.parse(window.localStorage.getItem('list')));
+        window.localStorage.setItem("instructorsList", JSON.stringify(instructorsList));
+        console.log(JSON.parse(window.localStorage.getItem('instructorsList')));
     });
 }
 
