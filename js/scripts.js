@@ -99,25 +99,11 @@ class instructor {
 // UTILITIES
 
 function getUrlQueries() {
-    let urlQuery = decodeURI(window.location.search);
+    let urlQuery = decodeURI(window.location.search());
     let queries = urlQuery.split('?');
     delete queries[0];
     console.log("success");
     return queries;
-}
-
-function loadAssignmentDetails(assignmentId){
-    let assignmentInstance = getElementByIdByCollectionFromLocStorage(assignmentId, 'assignmentList');
-    let instructorInstance = getElementByIdByCollectionFromLocStorage(assignmentInstance.instructorID, 'instructorsList');
-    document.getElementById('assignmentNameBox').innerHTML = assignmentInstance.name;
-    document.getElementById('courseBox').innerHTML = assignmentInstance.course;
-    document.getElementById('dueDateBox').innerHTML = assignmentInstance.dueDate;
-    document.getElementById('dueTimeBox').innerHTML = assignmentInstance.dueTime;
-    document.getElementById('d2lLinkBox').href = assignmentInstance.d2lLink;
-    document.getElementById('instructorNameBox').innerHTML = instructorInstance.name;
-    document.getElementById('instructorEmailBox').innerHTML = instructorInstance.email;
-    document.getElementById('instructionsBox').innerHTML = assignmentInstance.instructions;
-    document.getElementById('additionalInformationBox').innerHTML = assignmentInstance.additionalInformation;
 }
 
 function getElementByIdByCollectionFromLocStorage(elementID, collectionName){

@@ -261,31 +261,16 @@
         document.getElementById("date").setAttribute("min", today);
     </script> -->
 
-    <!-- ADD functionality -->
+    <!-- submit functions-->
 
     <script>
-        function submitOnClick() {
-            // document.getElementById('submitButton').click();
-
-            console.log("Works");
-            newAssignment = new assignment(document.getElementById('courseBox').value,
-                document.getElementById('assignmentNameBox').value,
-                document.getElementById('dueDateBox').value,
-                document.getElementById('dueTimeBox').value,
-                document.getElementById('d2lLinkBox').value,
-                document.getElementById('instructionsBox').value,
-                document.getElementById('additionalInformationBox').value, "slee789");
-
-            console.log(newAssignment);
-
-            db.collection("assignments").doc("newAdded").set({
-                name: "name"
-            }).then(function () {
-                console.log("Document successfully written!");
-            }).catch(function () {
-                console.error("Error writing document");
-            });
+        function submitInfo(){
+            let instructorInstance = instructorBuilder();
+            let assignmentInstance = assignmentClassBuilder(instructorInstance.ID);
+            sendAssignment(assignmentInstance);
+            sendInstructor(instructorInstance);
         }
+
     </script>
 
     <!-- EDIT functionality  -->
@@ -315,7 +300,6 @@
 
     <!-- validation -->
 
-    //
     <script>
     //     function allValid() { }
 
@@ -376,9 +360,10 @@
         function getInstructorID() { }
 
         function assignmentClassBuilder(instructorID) {
+            console.log(document.getElementById('dueTimeBox').value);
             let newAssignment = new assignment(
                 document.getElementById('courseBox').value,
-                document.getElementById('nameBox').value,
+                document.getElementById('assignmentNameBox').value,
                 document.getElementById('dueDateBox').value,
                 document.getElementById('dueTimeBox').value,
                 document.getElementById('d2lLinkBox').value,
@@ -389,12 +374,10 @@
             return newAssignment;
         }
 
-        //instructor class getter
-
         function instructorBuilder() {
             let newInstructor = new instructor(
-                document.getElementById('instructorNameBox').innerHTML,
-                document.getElementById('instructorEmailBox').innerHTML
+                document.getElementById('instructorNameBox').value,
+                document.getElementById('instructorEmailBox').value
             )
             return newInstructor;
         }
@@ -441,20 +424,29 @@
  <!-- event handlers -->
 
  <script>
-        if (sessionStorage.needsDetails != ''){
+        if (sessionStorage.needsDetails != undefined){
             let assignmentInstance = getElementByIdByCollectionFromLocStorage(sessionStorage.needsDetails, 'assignmentList');
             let instructorInstance = getElementByIdByCollectionFromLocStorage(assignmentInstance.instructorID, 'instructorsList');
             editModeLoader(assignmentInstance, instructorInstance);
         }
 
-        document.getElementById('submitButton').onclick = submitHandler();
+        document.getElementById('submitButton').onclick = submitOnClick;
         
 
-        function submitHandler() {
-            let urlQueries = getUrlQueries()
-            if (urlQueries.length != 0) {
-                editModeLoader(urlQueries[0]);
-            }
+        function submitOnClick() {
+            // document.getElementById('submitButton').click();
+             submitInfo();
+
+
+            // console.log(newAssignment);
+
+            // db.collection("assignments").doc("newAdded").set({
+            //     name: "name"
+            // }).then(function () {
+            //     console.log("Document successfully written!");
+            // }).catch(function () {
+            //     console.error("Error writing document");
+            // });
         }
 
         function cancelHandler() { }
