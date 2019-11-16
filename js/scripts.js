@@ -71,7 +71,7 @@ class assignment {
         this.ID = 'ass';
         this.instructions = instructions;
         this.additionalInformation = additionalInformation;
-        this.instructorID = '';
+        this.instructorID = instructorID;
         for (let i = 0; i < this.d2lLink.length; i++) {
             if (!isNaN(this.d2lLink[i])) {
                 this.ID += this.d2lLink[i];

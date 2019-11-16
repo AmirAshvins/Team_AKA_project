@@ -392,16 +392,16 @@
                 'name': assignmentInstance.name,
                 'dueDate': assignmentInstance.dueDate,
                 'dueTime': assignmentInstance.dueTime,
-                'D2LLink': assignmentInstance.D2LLink,
+                'D2LLink': assignmentInstance.d2lLink,
                 'instructions': assignmentInstance.instructions,
-                'additionalInformation': assignmentInstance.additionalInstructions,
+                'additionalInformation': assignmentInstance.additionalInformation,
                 'instructorID': assignmentInstance.instructorID
             });
         }
 
         function sendInstructor(instructorInstance) {
-            if (!IDinDB('instructors')) {
-                db.collection("assignments").doc(instructorInstance.ID).set({
+            if (!IDinDB('instructors', instructorInstance.ID)) {
+                db.collection("instructors").doc(instructorInstance.ID).set({
                     'name': instructor.name,
                     'email': instructorInstance.email
                 });
