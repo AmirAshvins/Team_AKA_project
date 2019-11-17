@@ -267,8 +267,8 @@
         function submitInfo(){
             let instructorInstance = instructorBuilder();
             let assignmentInstance = assignmentClassBuilder(instructorInstance.ID);
-            sendAssignment(assignmentInstance);
-            sendInstructor(instructorInstance);
+            assignmentInstance.sendToDB();
+            instructorInstance.sendToDB();
         }
 
     </script>
@@ -386,27 +386,7 @@
     <!-- send data -->
 
     <script>
-        function sendAssignment(assignmentInstance) {
-            db.collection("assignments").doc(assignmentInstance.ID).set({
-                'course': assignmentInstance.course,
-                'name': assignmentInstance.name,
-                'dueDate': assignmentInstance.dueDate,
-                'dueTime': assignmentInstance.dueTime,
-                'D2LLink': assignmentInstance.d2lLink,
-                'instructions': assignmentInstance.instructions,
-                'additionalInformation': assignmentInstance.additionalInformation,
-                'instructorID': assignmentInstance.instructorID
-            });
-        }
-
-        function sendInstructor(instructorInstance) {
-            if (!IDinDB('instructors', instructorInstance.ID)) {
-                db.collection("instructors").doc(instructorInstance.ID).set({
-                    'name': instructor.name,
-                    'email': instructorInstance.email
-                });
-            }
-        }
+        
     </script>
 
     <!-- error handling -->

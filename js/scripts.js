@@ -31,7 +31,7 @@ function loadAssignmentsToStorage() {
     });
 }
 
-function loadInstructorsToStorage(){
+function loadInstructorsToStorage() {
     db.collection("instructors").get().then(function (instructorsQuery) {
         let instructorsList = [];
         instructorsQuery.forEach(function (doc) {
@@ -61,6 +61,9 @@ function IDinDB(collectionName, ID) {
         });
 }
 
+// ==========================================
+// CLASS DEFINITIONS
+// ==========================================
 class assignment {
     constructor(course, assignmentName, dueDate, dueTime, d2lLink, instructions, additionalInformation, instructorID) {
         this.course = course;
@@ -78,6 +81,19 @@ class assignment {
             }
         }
     }
+
+    sendToDB() {
+        db.collection("assignments").doc(this.ID).set({
+            'course': this.course,
+            'name': this.name,
+            'dueDate': this.dueDate,
+            'dueTime': this.dueTime,
+            'D2LLink': this.d2lLink,
+            'instructions': this.instructions,
+            'additionalInformation': this.additionalInformation,
+            'instructorID': this.instructorID
+        });
+    }
 }
 
 class instructor {
@@ -93,6 +109,45 @@ class instructor {
             }
         }
     }
+    sendToDB() {
+        db.collection("instructors").doc(this.ID).set({
+            'name': this.name,
+            'email': this.email
+        });
+    }
+}
+
+class user {
+    constructor(ID=null, name=null, school=null, term=null) {
+        this.ID = ID;
+        this.name = name; // may never be used
+        this.school = school; // may never be used
+        this.term = term; // may never be used
+        this.courseList = [];
+        this.completedAssignmentsList = [];
+    }
+
+    sendToDB() {
+        db.collection("users").doc(this.ID).set({
+            'name': this.name,
+            'school': this.school,
+            'term': this.term,
+            'courseList': this.courseList,
+            'completedAssignments': this.completedAssignmentsList
+        });
+    }
+
+    addCourse(newCourse){
+        this.courseList.push(newCourse);
+    }
+
+    removeCourse(trashCourse){
+        delete this.courseList[this.courseList.indexOf(trashCourse)];
+    }
+
+    addCompletedAssignment(completedAssignment){
+        this.completedAssignmentsList.push(completedAssignment);
+    }
 }
 
 // ##########################
@@ -106,10 +161,10 @@ function getUrlQueries() {
     return queries;
 }
 
-function getElementByIdByCollectionFromLocStorage(elementID, collectionName){
+function getElementByIdByCollectionFromLocStorage(elementID, collectionName) {
     let collectionList = JSON.parse(window.localStorage[collectionName]);
-    for (let i=0; i < collectionList.length; i++){
-        if (collectionList[i].ID === elementID){
+    for (let i = 0; i < collectionList.length; i++) {
+        if (collectionList[i].ID === elementID) {
             return collectionList[i];
         }
     }
@@ -140,7 +195,7 @@ function getElementByIdByCollectionFromLocStorage(elementID, collectionName){
 //         let row = document.createElement('tr');
 
 //         for (let j = 0; j < 7; j++){
-            
+
 //             if (i === 0 && j < firstDay) {
 //                 console.log(firstDay);
 //                 let cell = document.createElement('td');
