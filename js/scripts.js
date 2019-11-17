@@ -19,8 +19,8 @@ function loadAssignmentsToStorage() {
     db.collection("assignments").get().then(function (assignmentsQuery) {
         let assignmentList = [];
         assignmentsQuery.forEach(function (doc) {
-            assignmentDetails = doc.data();
-            newAssignment = new assignment(assignmentDetails['course'], assignmentDetails['name'], assignmentDetails['dueDate'],
+            let assignmentDetails = doc.data();
+            let newAssignment = new assignment(assignmentDetails['course'], assignmentDetails['name'], assignmentDetails['dueDate'],
                 assignmentDetails['dueTime'], assignmentDetails['d2lLink'], assignmentDetails['instructions'],
                 assignmentDetails['additionalInformation'], assignmentDetails['instructorID']);
             assignmentList.push(newAssignment);
@@ -35,8 +35,8 @@ function loadInstructorsToStorage() {
     db.collection("instructors").get().then(function (instructorsQuery) {
         let instructorsList = [];
         instructorsQuery.forEach(function (doc) {
-            instructorsDetails = doc.data();
-            newInstructor = new instructor(instructorsDetails['name'], instructorsDetails['email']);
+            let instructorsDetails = doc.data();
+            let newInstructor = new instructor(instructorsDetails['name'], instructorsDetails['email']);
             instructorsList.push(newInstructor);
         });
         window.localStorage.setItem("instructorsList", JSON.stringify(instructorsList));
@@ -88,11 +88,15 @@ class assignment {
             'name': this.name,
             'dueDate': this.dueDate,
             'dueTime': this.dueTime,
-            'D2LLink': this.d2lLink,
+            'd2lLink': this.d2lLink,
             'instructions': this.instructions,
             'additionalInformation': this.additionalInformation,
             'instructorID': this.instructorID
         });
+    }
+
+    kill(){
+        db.collection("assignments").doc(this.ID).delete();
     }
 }
 
@@ -115,14 +119,16 @@ class instructor {
             'email': this.email
         });
     }
+
+    kill(){
+        db.collection("users").doc(this.ID).delete();
+    }
 }
 
 class user {
-    constructor(ID=null, name=null, school=null, term=null) {
+    constructor(ID = null, name = null) {
         this.ID = ID;
         this.name = name; // may never be used
-        this.school = school; // may never be used
-        this.term = term; // may never be used
         this.courseList = [];
         this.completedAssignmentsList = [];
     }
@@ -130,23 +136,74 @@ class user {
     sendToDB() {
         db.collection("users").doc(this.ID).set({
             'name': this.name,
-            'school': this.school,
-            'term': this.term,
-            'courseList': this.courseList,
+            'groupList': this.courseList,
             'completedAssignments': this.completedAssignmentsList
         });
     }
 
-    addCourse(newCourse){
-        this.courseList.push(newCourse);
+    addGroup(newGroup) {
+        this.groupList.push(newGroup);
     }
 
-    removeCourse(trashCourse){
+    removeGroup(groupId) {
+        delete this.groupList[this.courseList.indexOf(newGroup)];
+    }
+
+    addCompletedAssignment(completedAssignment) {
+        this.completedAssignmentsList.push(completedAssignment);
+    }
+
+    kill(){
+        db.collection("users").doc(this.ID).delete();
+    }
+}
+
+class group{
+    constructor(ID, name=null, school = null, term = null){
+        this.ID = ID;
+        this.name = name; //may never be used
+        this.courseList = [];
+        this.school = school; // may never be used
+        this.term = term; // may never be used
+        this.instructorList = [];
+    }
+
+    addCourses(newCourse) {
+        try{
+            this.courseList.concat(newCourse);
+        }catch{
+            this.courseList.push(newCourse);
+        }
+    }
+
+    removeCourse(trashCourse) {
         delete this.courseList[this.courseList.indexOf(trashCourse)];
     }
 
-    addCompletedAssignment(completedAssignment){
-        this.completedAssignmentsList.push(completedAssignment);
+    addInstructors(newInstructors){
+        try{
+            this.instructorList.concat(newInstructors);
+        }catch{
+            this.instructorList.push(newInstructors);
+        }
+    }
+
+    removeInstructor(instructorID){
+        delete this.instructorList[this.instructorList.indexOf(instructorID)];
+    }
+
+    sendToDB() {
+        db.collection("groups").doc(this.ID).set({
+            'name': this.name,
+            'school': this.school,
+            'term': this.term,
+            'groupList': this.courseList,
+            'completedAssignments': this.completedAssignmentsList
+        });
+    }
+
+    kill(){
+        db.collection("groups").doc(this.ID).delete();
     }
 }
 
@@ -169,6 +226,29 @@ function getElementByIdByCollectionFromLocStorage(elementID, collectionName) {
         }
     }
 }
+
+function getAssignmentsByCourseList(courseList) {
+    localStorage.assignmentList ='';
+    courseList.forEach(element => {
+        db.collection('assignments').where('course', '==', element)
+        .get()
+        .then(function (assignmentsQuery) {
+            let assignmentList = [];
+            assignmentsQuery.forEach(function (doc){    
+                let assignmentDetails = doc.data();
+                let newAssignment = new assignment(assignmentDetails['course'], assignmentDetails['name'], assignmentDetails['dueDate'],
+                    assignmentDetails['dueTime'], assignmentDetails['d2lLink'], assignmentDetails['instructions'],
+                    assignmentDetails['additionalInformation'], assignmentDetails['instructorID']);
+                assignmentList.push(newAssignment);
+            });
+            localStorage.assignmentList += JSON.stringify(assignmentList);
+        })
+        .catch(function(error){
+            console.log('we fucked up', error);
+        });
+    });
+}
+
 // let today = new Date();
 // let currentMonth = today.getMonth();
 // let currentYear = today.getFullYear();

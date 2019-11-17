@@ -136,6 +136,10 @@
     <!-- event handlers -->
 
     <script>
+        // getAssignmentsByCourseList(['COMP-1930', 'COMP-1510']);
+        // console.log(localStorage.assignments);
+
+
         db.collection('assignments').onSnapshot(function (){
             document.getElementById('listContainer').innerHTML = "";
             window.localStorage.assignmentsLoaded = false;
@@ -148,6 +152,7 @@
         });
         
         document.onload = onPageLoad();
+
         function onListItemClick(clickedItem) {
             sessionStorage.setItem("needsDetails", clickedItem.id);
             sessionStorage.setItem("previousPage", './main.html');
