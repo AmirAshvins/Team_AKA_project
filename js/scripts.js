@@ -236,27 +236,29 @@ function getElementByIdByCollectionFromLocStorage(elementID, collectionName) {
     }
 }
 
-function getAssignmentsByCourseList(courseList) {
-    localStorage.assignmentList = '';
-    courseList.forEach(element => {
-        db.collection('assignments').where('course', '==', element)
-            .get()
-            .then(function (assignmentsQuery) {
-                let assignmentList = [];
-                assignmentsQuery.forEach(function (doc) {
-                    let assignmentDetails = doc.data();
-                    let newAssignment = new assignment(assignmentDetails['course'], assignmentDetails['name'], assignmentDetails['dueDate'],
-                        assignmentDetails['dueTime'], assignmentDetails['d2lLink'], assignmentDetails['instructions'],
-                        assignmentDetails['additionalInformation'], assignmentDetails['instructorID']);
-                    assignmentList.push(newAssignment);
-                });
-                localStorage.assignmentList += JSON.stringify(assignmentList);
-            })
-            .catch(function (error) {
-                console.log('we fucked up', error);
-            });
-    });
-}
+// DEPRECATED
+
+// function getAssignmentsByCourseList(courseList) {
+//     localStorage.assignmentList = '';
+//     courseList.forEach(element => {
+//         db.collection('assignments').where('course', '==', element)
+//             .get()
+//             .then(function (assignmentsQuery) {
+//                 let assignmentList = [];
+//                 assignmentsQuery.forEach(function (doc) {
+//                     let assignmentDetails = doc.data();
+//                     let newAssignment = new assignment(assignmentDetails['course'], assignmentDetails['name'], assignmentDetails['dueDate'],
+//                         assignmentDetails['dueTime'], assignmentDetails['d2lLink'], assignmentDetails['instructions'],
+//                         assignmentDetails['additionalInformation'], assignmentDetails['instructorID']);
+//                     assignmentList.push(newAssignment);
+//                 });
+//                 localStorage.assignmentList += JSON.stringify(assignmentList);
+//             })
+//             .catch(function (error) {
+//                 console.log('we fucked up', error);
+//             });
+//     });
+// }
 
 function queryDB(valueList, locStorageContainer, collection, propertyToQuery, handlerFunction) {
     localStorage[locStorageContainer] = '';
@@ -290,7 +292,12 @@ function assignmentQueryManager(assignmentsQuery) {
 }
 
 function groupQueryManager(groupQuery) {
-    let groupList = [];
+    let groupList;
+    if (localStorage.groupList != ''){
+        groupList = JSON.parse(localStorage.groupList);
+    }else{
+        groupList = [];
+    }
     groupQuery.forEach(function (doc) {
         let groupDetails = doc.data();
         let newGroup = new group(groupDetails['ID'], groupDetails['name'], groupDetails['school'],
@@ -299,18 +306,26 @@ function groupQueryManager(groupQuery) {
         newGroup.addInstructors(groupDetails['instructorList']);
         groupList.push(newAssignment);
     });
-    localStorage.groupList = concatJSON(localStorage.groupList, groupList);
+    localStorage.groupList = JSON.stringify(groupList);
 }
 
-function concatJSON(JSONDList, list) {
-    if (JSONDList === '') {
-        return JSON.stringify(list);
-    } else {
-        let ParseDJSONDList = JSON.parse(JSONDList);
-        list.concat(ParseDJSONDList);
-        return JSON.stringify(list);
+function instructorQueryManager(instructorQuery){
+    let instructorList;
+    if (localStorage.InstructorList != ''){
+        instructorList = JSON.parse(localStorage.InstructorList);
+    }else{
+        instructorList = [];
     }
+    instructorQuery.forEach(function (doc){
+        let instructorDetails = doc.data();
+        let newInstructor = new instructor(instructorDetails.name, instructorDetails.email);
+        instructorList.push(newInstructor);
+    });
+    localStorage.instructorList = JSON.stringify(instructorList);
 }
+
+
+
 
 
 // let today = new Date();
