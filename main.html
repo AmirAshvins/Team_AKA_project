@@ -126,10 +126,11 @@
 
     <script>
         function loadList() {
-            let parsedAssignmentList = JSON.parse(window.localStorage.assignmentList)
-            for (let i=0; i < parsedAssignmentList.length; i++){
-                buildListRow(parsedAssignmentList[i]);
-            }
+                console.log(window.localStorage.assignmentList);
+                let parsedAssignmentList = JSON.parse(window.localStorage.assignmentList);
+                for (let i = 0; i < parsedAssignmentList.length; i++) {
+                    buildListRow(parsedAssignmentList[i]);
+                }
         }
     </script>
 
@@ -140,17 +141,22 @@
         // console.log(localStorage.assignments);
 
 
-        db.collection('assignments').onSnapshot(function (){
+        queryDB(['COMP-1930', 'COMP-1510'], 'assignmentList' , 'assignments', 'course', assignmentQueryManager)
+        // valueList, locStorageContainer, collection, propertyToQuery, handlerFunction
+
+        // waiter
+
+        db.collection('assignments').onSnapshot(function () {
             document.getElementById('listContainer').innerHTML = "";
             window.localStorage.assignmentsLoaded = false;
             onPageLoad();
         });
-        db.collection('instructors').onSnapshot(function (){
+        db.collection('instructors').onSnapshot(function () {
             document.getElementById('listContainer').innerHTML = "";
             window.localStorage.assignmentsLoaded = false;
             onPageLoad();
         });
-        
+
         document.onload = onPageLoad();
 
         function onListItemClick(clickedItem) {
@@ -160,15 +166,15 @@
         }
 
         function onPageLoad() {
-            if (!window.localStorage.assignmentsLoaded) {
-                window.localStorage.assignmentsLoaded = true;
-                loadAssignmentsToStorage();
-            }
-            if (!window.localStorage.instructorsLoaded) {
-                window.localStorage.instructorsLoaded = true;
-                loadInstructorsToStorage();
-            }
-             loadList();
+            // if (!window.localStorage.assignmentsLoaded) {
+            //     window.localStorage.assignmentsLoaded = true;
+            //     loadAssignmentsToStorage();
+            // }
+            // if (!window.localStorage.instructorsLoaded) {
+            //     window.localStorage.instructorsLoaded = true;
+            //     loadInstructorsToStorage();
+            // }
+            setTimeout(loadList(),0);
         }
 
     </script>
