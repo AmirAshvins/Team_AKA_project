@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="./css/styles.css" type="text/css">
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
-
+    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
 </head>
 
 <body>
@@ -126,11 +127,11 @@
 
     <script>
         function loadList() {
-                console.log(window.localStorage.assignmentList);
-                let parsedAssignmentList = JSON.parse(window.localStorage.assignmentList);
-                for (let i = 0; i < parsedAssignmentList.length; i++) {
-                    buildListRow(parsedAssignmentList[i]);
-                }
+            console.log(window.localStorage.assignmentList);
+            let parsedAssignmentList = JSON.parse(window.localStorage.assignmentList);
+            for (let i = 0; i < parsedAssignmentList.length; i++) {
+                buildListRow(parsedAssignmentList[i]);
+            }
         }
     </script>
 
@@ -141,21 +142,23 @@
         // console.log(localStorage.assignments);
 
 
-        queryDB(['COMP-1930', 'COMP-1510'], 'assignmentList' , 'assignments', 'course', assignmentQueryManager)
+        queryAssignmentsByCourseList(['COMP-1930', 'COMP-1510']);
         // valueList, locStorageContainer, collection, propertyToQuery, handlerFunction
 
         // waiter
 
-        db.collection('assignments').onSnapshot(function () {
-            document.getElementById('listContainer').innerHTML = "";
-            window.localStorage.assignmentsLoaded = false;
-            onPageLoad();
-        });
-        db.collection('instructors').onSnapshot(function () {
-            document.getElementById('listContainer').innerHTML = "";
-            window.localStorage.assignmentsLoaded = false;
-            onPageLoad();
-        });
+        // db.collection('assignments').onSnapshot(function () {
+        //     document.getElementById('listContainer').innerHTML = "";
+        //     window.localStorage.assignmentsLoaded = false;
+        //     onPageLoad();
+        // });
+        // db.collection('instructors').onSnapshot(function () {
+        //     document.getElementById('listContainer').innerHTML = "";
+        //     window.localStorage.assignmentsLoaded = false;
+        //     onPageLoad();
+        // });
+
+        setTimeout(() => { console.log(localStorage.assignmentList) }, 1000)
 
         document.onload = onPageLoad();
 
@@ -174,7 +177,12 @@
             //     window.localStorage.instructorsLoaded = true;
             //     loadInstructorsToStorage();
             // }
-            setTimeout(loadList(),0);
+            let waiter = setInterval(() => {
+                if (sessionStorage.loadedAssignments === "true"){
+                    clearInterval(waiter);
+                    loadList();
+                }
+            }, 100);
         }
 
     </script>
