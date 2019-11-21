@@ -71,7 +71,7 @@ class assignment {
         this.ID = 'ass';
         this.instructions = instructions;
         this.additionalInformation = additionalInformation;
-        this.instructorID = '';
+        this.instructorID = instructorID;
         for (let i = 0; i < this.d2lLink.length; i++) {
             if (!isNaN(this.d2lLink[i])) {
                 this.ID += this.d2lLink[i];
@@ -106,88 +106,71 @@ function getUrlQueries() {
     return queries;
 }
 
-function loadAssignmentDetails(assignmentId){
-    let assignmentInstance = getElementByIdByCollectionFromLocStorage(assignmentId, 'assignmentList');
-    let instructorInstance = getElementByIdByCollectionFromLocStorage(assignmentInstance.instructorID, 'instructorsList');
-    document.getElementById('assignmentNameBox').innerHTML = assignmentInstance.name;
-    document.getElementById('courseBox').innerHTML = assignmentInstance.course;
-    document.getElementById('dueDateBox').innerHTML = assignmentInstance.dueDate;
-    document.getElementById('dueTimeBox').innerHTML = assignmentInstance.dueTime;
-    document.getElementById('d2lLinkBox').href = assignmentInstance.d2lLink;
-    document.getElementById('instructorNameBox').innerHTML = instructorInstance.name;
-    document.getElementById('instructorEmailBox').innerHTML = instructorInstance.email;
-    document.getElementById('instructionsBox').innerHTML = assignmentInstance.instructions;
-    document.getElementById('additionalInformationBox').innerHTML = assignmentInstance.additionalInformation;
-}
-
 function getElementByIdByCollectionFromLocStorage(elementID, collectionName){
     let collectionList = JSON.parse(window.localStorage[collectionName]);
     for (let i=0; i < collectionList.length; i++){
         if (collectionList[i].ID === elementID){
             return collectionList[i];
-        }else{
-            console.log("i'm a stupid machine");
         }
     }
 }
-let today = new Date();
-let currentMonth = today.getMonth();
-let currentYear = today.getFullYear();
+// let today = new Date();
+// let currentMonth = today.getMonth();
+// let currentYear = today.getFullYear();
 
-let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+// let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-let monthAndYear = document.getElementById('monthAndYear')
+// let monthAndYear = document.getElementById('monthAndYear')
 
-showCalendar(currentMonth, currentYear);
+// showCalendar(currentMonth, currentYear);
 
 
-function showCalendar(month, year) {
-    let firstDay = new Date(year, month).getDate();
-    let daysInMonth = 32 - new Date(year, month, 32).getDate();
+// function showCalendar(month, year) {
+//     let firstDay = new Date(year, month).getDate();
+//     let daysInMonth = 32 - new Date(year, month, 32).getDate();
 
-    let tbl = document.getElementById('calendar-body');
+//     let tbl = document.getElementById('calendar-body');
 
-    tbl.innerHTML = '';
-    monthAndYear.innerHTML = months[month] + " " + year;
+//     tbl.innerHTML = '';
+//     monthAndYear.innerHTML = months[month] + " " + year;
 
-    let date = 1;
+//     let date = 1;
 
-    for(let i = 0; i < 6 ; i++) {
-        let row = document.createElement('tr');
+//     for(let i = 0; i < 6 ; i++) {
+//         let row = document.createElement('tr');
 
-        for (let j = 0; j < 7; j++){
+//         for (let j = 0; j < 7; j++){
             
-            if (i === 0 && j < firstDay) {
-                console.log(firstDay);
-                let cell = document.createElement('td');
-                let cellText = document.createTextNode("");
-                cell.appendChild(cellText);
-                row.appendChild(cell);
-            }else if (date > daysInMonth) {
-                break;
-            }else {
-                let cell = document.createElement('td');
-                let cellText = document.createElement(date);
-                cell.appendChild(cellText);
-                row.appendChild(cell);
-            }
+//             if (i === 0 && j < firstDay) {
+//                 console.log(firstDay);
+//                 let cell = document.createElement('td');
+//                 let cellText = document.createTextNode("");
+//                 cell.appendChild(cellText);
+//                 row.appendChild(cell);
+//             }else if (date > daysInMonth) {
+//                 break;
+//             }else {
+//                 let cell = document.createElement('td');
+//                 let cellText = document.createElement(date);
+//                 cell.appendChild(cellText);
+//                 row.appendChild(cell);
+//             }
 
-            date ++;
-        }
-        tbl.appendChild(row);
-    }
-}
+//             date ++;
+//         }
+//         tbl.appendChild(row);
+//     }
+// }
 
-function previous() {
-    currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
-    currentMonth = currentMonth === 0 ? 11 : currentMonth - 1;
-    showCalendar(currentMonth, currentYear);
+// function previous() {
+//     currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
+//     currentMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+//     showCalendar(currentMonth, currentYear);
 
-}
-function next () {
-    currentYear = currentMonth === 11 ? currentYear + 1 : currentYear;
-    currentMonth = (currentMonth + 1) % 12;
-    showCalendar(currentMonth, currentYear);
+// }
+// function next () {
+//     currentYear = currentMonth === 11 ? currentYear + 1 : currentYear;
+//     currentMonth = (currentMonth + 1) % 12;
+//     showCalendar(currentMonth, currentYear);
 
-}
-
+// }

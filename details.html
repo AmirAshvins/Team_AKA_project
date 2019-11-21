@@ -24,7 +24,8 @@
         </section>
 
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-down">
-            <a id="profile" class="btn btn-default" href="###########"><span class="glyphicon glyphicon-user"></span></a>
+            <a id="profile" class="btn btn-default" href="###########"><span
+                    class="glyphicon glyphicon-user"></span></a>
         </div>
     </div>
     <!-- content -->
@@ -60,17 +61,17 @@
             </div>
         </div>
         <div class="row">
-                <div class="col-25">
-                    <label>Instructor name:</label>
-                </div>
-                <p id="instructorNameBox" class="col-75"></p>
+            <div class="col-25">
+                <label>Instructor name:</label>
             </div>
+            <p id="instructorNameBox" class="col-75"></p>
+        </div>
         <div class="row">
-                <div class="col-25">
-                    <label>InstructorEmail:</label>
-                </div>
-                <p id="instructorEmailBox" class="col-75"></p>
+            <div class="col-25">
+                <label>InstructorEmail:</label>
             </div>
+            <p id="instructorEmailBox" class="col-75"></p>
+        </div>
         <hr>
         <div class="row">
             <div class="col-25">
@@ -89,19 +90,58 @@
     <div class="jumbotron footer-div header-footer-div">
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
-                <a href="./main.html" class="btn btn-warning foot-text">List</a>
+                <a class="btn btn-warning foot-text" id="listButton">List</a>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
-                <a href="./calendar.html" class="btn btn-warning foot-text">Calendar</a>
+                <a class="btn btn-warning foot-text" id="calendarButton">Calendar</a>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
-                <a href="./addasignment.html" class="btn btn-warning foot-text">Edit</a>
+                <a class="btn btn-warning foot-text" id="editButton">Edit</a>
             </div>
         </div>
     </div>
-    <!--Get Assignments-->
-    <script>        
+    <!--load details-->
+    <script>
         loadAssignmentDetails(sessionStorage.needsDetails);
+
+        function loadAssignmentDetails(assignmentId) {
+            let assignmentInstance = getElementByIdByCollectionFromLocStorage(assignmentId, 'assignmentList');
+            let instructorInstance = getElementByIdByCollectionFromLocStorage(assignmentInstance.instructorID, 'instructorsList');
+            document.getElementById('assignmentNameBox').innerHTML = assignmentInstance.name;
+            document.getElementById('courseBox').innerHTML = assignmentInstance.course;
+            document.getElementById('dueDateBox').innerHTML = assignmentInstance.dueDate;
+            document.getElementById('dueTimeBox').innerHTML = assignmentInstance.dueTime;
+            document.getElementById('d2lLinkBox').href = assignmentInstance.d2lLink;
+            document.getElementById('instructorNameBox').innerHTML = instructorInstance.name;
+            document.getElementById('instructorEmailBox').innerHTML = instructorInstance.email;
+            document.getElementById('instructionsBox').innerHTML = assignmentInstance.instructions;
+            document.getElementById('additionalInformationBox').innerHTML = assignmentInstance.additionalInformation;
+        }
+    </script>
+
+    <!-- event handlers -->
+
+    <script>
+        document.getElementById('editButton').onclick = editButtonClickHandler();
+        document.getElementById('calendarButton').onclick = calendarButtonClickHandler();
+        document.getElementById('listButton').onclick = listButtonClickHandler();
+
+        function editButtonClickHandler(){
+            sessionStorage.previousPage = "./details.html";
+            window.location.href = "./addasignment.html";
+        }
+
+        function calendarButtonClickHandler(){
+            sessionStorage.needsDetails = '';
+            sessionStorage.previousPage = "./details.html";
+            window.location.href = "./calendar.html"
+        }
+
+        function listButtonClickHandler(){
+            sessionStorage.needsDetails = '';
+            sessionStorage.previousPage = "./details.html";
+            window.location.href = href="./main.html";
+        }
     </script>
 </body>
 

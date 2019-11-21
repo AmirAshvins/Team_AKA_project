@@ -134,31 +134,6 @@
     </div>
     <!-- js -->
 
-
-    <!-- event handlers -->
-
-    <!-- <script>
-        if (sessionStorage.needDetails != ''){
-            editModeLoader(getUrlQueries()[0]);
-        }
-
-        document.getElementById('submitButton').onclick = submitHandler();
-        
-
-        function submitHandler() {
-            let urlQueries = getUrlQueries()
-            if (urlQueries.length != 0) {
-                editModeLoader(urlQueries[0]);
-            }
-        }
-
-        function cancelHandler() { }
-
-        function pageOnLoadHandler() {
-
-        }
-    </script> -->
-
     <!--Autocomplete Function-->
 
     <script>
@@ -286,63 +261,45 @@
         document.getElementById("date").setAttribute("min", today);
     </script> -->
 
-    <!-- ADD functionality -->
+    <!-- submit functions-->
 
     <script>
-        function submitOnClick() {
-            // document.getElementById('submitButton').click();
-
-            console.log("Works");
-            newAssignment = new assignment(document.getElementById('courseBox').value,
-                document.getElementById('assignmentNameBox').value,
-                document.getElementById('dueDateBox').value,
-                document.getElementById('dueTimeBox').value,
-                document.getElementById('d2lLinkBox').value,
-                document.getElementById('instructionsBox').value,
-                document.getElementById('additionalInformationBox').value, "slee789");
-
-            console.log(newAssignment);
-
-            db.collection("assignments").doc("newAdded").set({
-                name: "name"
-            }).then(function () {
-                console.log("Document successfully written!");
-            }).catch(function () {
-                console.error("Error writing document");
-            });
+        function submitInfo(){
+            let instructorInstance = instructorBuilder();
+            let assignmentInstance = assignmentClassBuilder(instructorInstance.ID);
+            sendAssignment(assignmentInstance);
+            sendInstructor(instructorInstance);
         }
+
     </script>
 
     <!-- EDIT functionality  -->
 
     <script>
-        function editModeLoader(assignmentId) {
-            changeLabelsToEdit(assignmentId);
-            loadAssignmentDetails(assignmentId);
+        function editModeLoader(assignmentInstance, instructorInstance) {
+            changeLabelsToEdit(assignmentInstance);
+            loadAssignmentDetails(assignmentInstance, instructorInstance);
         }
 
-        function loadAssignmentDetails(assignmentId) {
-            let assignmentInstance = window.localStorage.assignments.assignmentId;
-            let instructorInstance = window.localStorage.instructors[assignmentInstance.instructorID];
+        function loadAssignmentDetails(assignmentInstance, instructorInstance) {
             document.getElementById('assignmentNameBox').value = assignmentInstance.name;
             document.getElementById('courseBox').value = assignmentInstance.course;
             document.getElementById('dueDateBox').value = assignmentInstance.dueDate;
             document.getElementById('dueTimeBox').value = assignmentInstance.dueTime;
             document.getElementById('d2lLinkBox').value = assignmentInstance.d2lLink;
             document.getElementById('instructorNameBox').value = instructorInstance.name;
-            document.getElementById('instuctorEmailBox').value = instructorInstance.email;
+            document.getElementById('instructorEmailBox').value = instructorInstance.email;
             document.getElementById('instructionsBox').value = assignmentInstance.instructions;
             document.getElementById('additionalInformationBox').value = assignmentInstance.additionalInformation;
         }
 
-        function changeLabelsToEdit(assignmentId) {
-            document.getElementById('headerText').innerHTML = "Edit: " + window.localStorage.assignmentId.name;
+        function changeLabelsToEdit(assignmentInstance) {
+            document.getElementById('headerText').innerHTML = "Edit: " + assignmentInstance.name;
         }
     </script>
 
     <!-- validation -->
 
-    //
     <script>
     //     function allValid() { }
 
@@ -403,9 +360,10 @@
         function getInstructorID() { }
 
         function assignmentClassBuilder(instructorID) {
+            console.log(document.getElementById('dueTimeBox').value);
             let newAssignment = new assignment(
                 document.getElementById('courseBox').value,
-                document.getElementById('nameBox').value,
+                document.getElementById('assignmentNameBox').value,
                 document.getElementById('dueDateBox').value,
                 document.getElementById('dueTimeBox').value,
                 document.getElementById('d2lLinkBox').value,
@@ -416,12 +374,10 @@
             return newAssignment;
         }
 
-        //instructor class getter
-
         function instructorBuilder() {
             let newInstructor = new instructor(
-                document.getElementById('instructorNameBox').innerHTML,
-                document.getElementById('instructorEmailBox').innerHTML
+                document.getElementById('instructorNameBox').value,
+                document.getElementById('instructorEmailBox').value
             )
             return newInstructor;
         }
@@ -436,16 +392,16 @@
                 'name': assignmentInstance.name,
                 'dueDate': assignmentInstance.dueDate,
                 'dueTime': assignmentInstance.dueTime,
-                'D2LLink': assignmentInstance.D2LLink,
+                'D2LLink': assignmentInstance.d2lLink,
                 'instructions': assignmentInstance.instructions,
-                'additionalInformation': assignmentInstance.additionalInstructions,
+                'additionalInformation': assignmentInstance.additionalInformation,
                 'instructorID': assignmentInstance.instructorID
             });
         }
 
         function sendInstructor(instructorInstance) {
-            if (!IDinDB('instructors')) {
-                db.collection("assignments").doc(instructorInstance.ID).set({
+            if (!IDinDB('instructors', instructorInstance.ID)) {
+                db.collection("instructors").doc(instructorInstance.ID).set({
                     'name': instructor.name,
                     'email': instructorInstance.email
                 });
@@ -465,6 +421,40 @@
         }
     </script>
 
+ <!-- event handlers -->
+
+ <script>
+        if (sessionStorage.needsDetails != undefined){
+            let assignmentInstance = getElementByIdByCollectionFromLocStorage(sessionStorage.needsDetails, 'assignmentList');
+            let instructorInstance = getElementByIdByCollectionFromLocStorage(assignmentInstance.instructorID, 'instructorsList');
+            editModeLoader(assignmentInstance, instructorInstance);
+        }
+
+        document.getElementById('submitButton').onclick = submitOnClick;
+        
+
+        function submitOnClick() {
+            // document.getElementById('submitButton').click();
+             submitInfo();
+
+
+            // console.log(newAssignment);
+
+            // db.collection("assignments").doc("newAdded").set({
+            //     name: "name"
+            // }).then(function () {
+            //     console.log("Document successfully written!");
+            // }).catch(function () {
+            //     console.error("Error writing document");
+            // });
+        }
+
+        function cancelHandler() { }
+
+        function pageOnLoadHandler() {
+
+        }
+    </script>
 
 </body>
 

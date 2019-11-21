@@ -146,6 +146,7 @@
             window.localStorage.assignmentsLoaded = false;
             onPageLoad();
         });
+        
         document.onload = onPageLoad();
         function onListItemClick(clickedItem) {
             sessionStorage.setItem("needsDetails", clickedItem.id);
@@ -155,13 +156,14 @@
 
         function onPageLoad() {
             if (!window.localStorage.assignmentsLoaded) {
+                window.localStorage.assignmentsLoaded = true;
                 loadAssignmentsToStorage();
             }
             if (!window.localStorage.instructorsLoaded) {
+                window.localStorage.instructorsLoaded = true;
                 loadInstructorsToStorage();
             }
-            loadInstructorsToStorage();
-            loadList();
+             loadList();
         }
 
     </script>
