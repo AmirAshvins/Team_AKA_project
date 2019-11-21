@@ -29,7 +29,7 @@
 
     <!-- content -->
     <div class="form-container page-content floater">
-        <form autocomplete="off">
+        <form id="addForm" autocomplete="off">
             <div class="row">
                 <div class="col-25">
                     <label for="courseBox">Course</label>
@@ -424,19 +424,17 @@
  <!-- event handlers -->
 
  <script>
-        if (sessionStorage.needsDetails != undefined){
-            let assignmentInstance = getElementByIdByCollectionFromLocStorage(sessionStorage.needsDetails, 'assignmentList');
-            let instructorInstance = getElementByIdByCollectionFromLocStorage(assignmentInstance.instructorID, 'instructorsList');
-            editModeLoader(assignmentInstance, instructorInstance);
-        }
-
-        document.getElementById('submitButton').onclick = submitOnClick;
-        
+        // if (sessionStorage.needsDetails != undefined){
+        //     let assignmentInstance = getElementByIdByCollectionFromLocStorage(sessionStorage.needsDetails, 'assignmentList');
+        //     let instructorInstance = getElementByIdByCollectionFromLocStorage(assignmentInstance.instructorID, 'instructorsList');
+        //     editModeLoader(assignmentInstance, instructorInstance);
+        // }
 
         function submitOnClick() {
-            // document.getElementById('submitButton').click();
-             submitInfo();
-
+            document.getElementById('submitButton').click();
+            
+            document.getElementById("addForm").addEventListener("submit", submitInfo())
+            
 
             // console.log(newAssignment);
 

@@ -122,9 +122,9 @@
     <!-- event handlers -->
 
     <script>
-        document.getElementById('editButton').onclick = editButtonClickHandler();
-        document.getElementById('calendarButton').onclick = calendarButtonClickHandler();
-        document.getElementById('listButton').onclick = listButtonClickHandler();
+        document.getElementById('editButton').onclick = editButtonClickHandler;
+        document.getElementById('calendarButton').onclick = calendarButtonClickHandler;
+        document.getElementById('listButton').onclick = listButtonClickHandler;
 
         function editButtonClickHandler(){
             sessionStorage.previousPage = "./details.html";
