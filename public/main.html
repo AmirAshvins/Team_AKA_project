@@ -155,12 +155,12 @@
         }
 
         function onPageLoad() {
-            if (!window.localStorage.assignmentsLoaded) {
-                window.localStorage.assignmentsLoaded = true;
+            if (!sessionStorage.assignmentsLoaded) {
+                sessionStorage.assignmentsLoaded = true;
                 loadAssignmentsToStorage();
             }
-            if (!window.localStorage.instructorsLoaded) {
-                window.localStorage.instructorsLoaded = true;
+            if (!sessionStorage.instructorsLoaded) {
+                sessionStorage.instructorsLoaded = true;
                 loadInstructorsToStorage();
             }
              loadList();

@@ -25,8 +25,8 @@ function loadAssignmentsToStorage() {
                 assignmentDetails['additionalInformation'], assignmentDetails['instructorID']);
             assignmentList.push(newAssignment);
         });
-        window.localStorage.setItem("list", JSON.stringify(assignmentList));
-        console.log(JSON.parse(window.localStorage.getItem('list')));
+        window.localStorage.setItem("assignmentList", JSON.stringify(assignmentList));
+        console.log(JSON.parse(window.localStorage.getItem('assignemntList')));
         window.localStorage.assignmentsLoaded = true;
     });
 }
