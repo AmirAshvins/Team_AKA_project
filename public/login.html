@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Index</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/styles.css" type="text/css">
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+</head>
+
+<body>
+  <div class="jumbotron header-footer-div header-div">
+    <h2 class="head-text">Log In</h2>
+  </div>
+
+  <div id="firebaseui-auth-container"></div>
+  <div id="loader">Loading...</div>
+
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyA_-CQ7oIjLIeTU8B05p8lD-UbOJ9MXm_Y",
+      authDomain: "team-aka.firebaseapp.com",
+      databaseURL: "https://team-aka.firebaseio.com",
+      projectId: "team-aka",
+      storageBucket: "team-aka.appspot.com",
+      messagingSenderId: "192089508874",
+      appId: "1:192089508874:web:15181dc2fc7a40725ce3f3"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <script>
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    var uiConfig = {
+      callbacks: {
+        signInSuccessWithAuthResult: function (authResult, redirectUrl) {
+          return true;
+        },
+        uiShown: function () {
+          document.getElementById('loader').style.display = 'none';
+        }
+      },
+      signInFlow: 'popup',
+      signInSuccessUrl: 'main.html',
+      signInOptions: [
+        firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      ],
+      tosUrl: '#',
+      privacyPolicyUrl: '#'
+    };
+    ui.start('#firebaseui-auth-container', uiConfig);
+  </script>
+</body>
+
+</html>

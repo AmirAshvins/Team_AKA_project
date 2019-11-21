@@ -1,0 +1,461 @@
+﻿<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add Assignment</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/styles.css" type="text/css">
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+    <!-- recall clasess -->
+    <script src="./js/scripts.js"></script>
+</head>
+
+<body>
+    <!-- header -->
+    <div class="jumbotron header-footer-div header-div">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+        <section class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center align-center-up">
+            <h2 class="head-text" id="headerText">Add Assignment</h2>
+        </section>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-up">
+            <a id="profile" class="btn btn-default" href="###########"><span
+                    class="glyphicon glyphicon-user"></span></a>
+        </div>
+    </div>
+
+    <!-- content -->
+    <div class="form-container page-content floater">
+        <form autocomplete="off">
+            <div class="row">
+                <div class="col-25">
+                    <label for="courseBox">Course</label>
+                </div>
+                <div class="autocomplete col-75">
+                    <input type="text" id="courseBox" name="course" placeholder="Type course code here..."
+                        pattern="COMM-1116|COMP-1100|COMP-1113|COMP-1510|COMP-1536|COMP-1712|COMP-1930" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="assignmentNameBox">Assignment Name</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="assignmentNameBox" name="assignmentName" placeholder="Type name here..."
+                        autocomplete="on" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="dueDateBox">Due Date</label>
+                </div>
+                <div class="col-75">
+                    <input type="date" name="dueDate" id="dueDateBox" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="dueTimeBox">Due Time</label>
+                </div>
+                <div class="col-75">
+                    <input type="time" name="dueTime" id="dueTimeBox" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="d2lLinkBox">D2L Link</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="d2lLinkBox" name="d2lLink" placeholder="Type D2L link here..."
+                        autocomplete="on" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="instructorNameBox">Instructor Name</label>
+                </div>
+                <div class="autocomplete col-75">
+                    <input type="text" id="instructorNameBox" name="instructorName"
+                        placeholder="Type instructor's name here..."
+                        pattern="Sam Lee|Christopher Thompson|Takashi Nakamura|Amir Amintabar|Shravan Yedulla|Neda Changizi"
+                        required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="instructorEmailBox">Instructor Email</label>
+                </div>
+                <div class="autocomplete col-75">
+                    <input type="text" id="instructorEmailBox" name="instructorEmail"
+                        placeholder="Type instructor's email here..."
+                        pattern="slee789@bcit.ca|cthompson98@bcit.ca|Takashi_Nakamura@bcit.ca|aamintabar@bcit.ca|syedulla@bcit.ca|nchangizi@bcit.ca"
+                        required>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-25">
+                    <label for="instructionsBox">Instructions</label>
+                </div>
+                <div class="col-75">
+                    <textarea id="instructionsBox" name="instructions"
+                        placeholder="Type instructions here..."></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="additionalInformationBox">Additional Information</label>
+                </div>
+                <div class="col-75">
+                    <textarea id="additionalInformationBox" name="additionalInformation"
+                        placeholder="Type additional information here..."></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <input id="submitButton" type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+
+    <!-- footer -->
+    <div class="jumbotron footer-div header-footer-div">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
+                <a href="./main.html" class="btn btn-warning foot-text">Back</a>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
+                <button class="btn btn-warning foot-text" onclick="submitOnClick()">Submit</button>
+            </div>
+        </div>
+
+    </div>
+    <!-- js -->
+
+    <!--Autocomplete Function-->
+
+    <script>
+        function autocomplete(inp, arr) {
+            /*the autocomplete function takes two arguments,
+            the text field element and an array of possible autocompleted values:*/
+            var currentFocus;
+            /*execute a function when someone writes in the text field:*/
+            inp.addEventListener("input", function (e) {
+                var a, b, i, val = this.value;
+                /*close any already open lists of autocompleted values*/
+                closeAllLists();
+                if (!val) { return false; }
+                currentFocus = -1;
+                /*create a DIV element that will contain the items (values):*/
+                a = document.createElement("DIV");
+                a.setAttribute("id", this.id + "autocomplete-list");
+                a.setAttribute("class", "autocomplete-items");
+                /*append the DIV element as a child of the autocomplete container:*/
+                this.parentNode.appendChild(a);
+                /*for each item in the array...*/
+                for (i = 0; i < arr.length; i++) {
+                    /*check if the item starts with the same letters as the text field value:*/
+                    if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                        /*create a DIV element for each matching element:*/
+                        b = document.createElement("DIV");
+                        /*make the matching letters bold:*/
+                        b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                        b.innerHTML += arr[i].substr(val.length);
+                        /*insert a input field that will hold the current array item's value:*/
+                        b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                        /*execute a function when someone clicks on the item value (DIV element):*/
+                        b.addEventListener("click", function (e) {
+                            /*insert the value for the autocomplete text field:*/
+                            inp.value = this.getElementsByTagName("input")[0].value;
+                            /*close the list of autocompleted values,
+                            (or any other open lists of autocompleted values:*/
+                            closeAllLists();
+                        });
+                        a.appendChild(b);
+                    }
+                }
+            });
+            /*execute a function presses a key on the keyboard:*/
+            inp.addEventListener("keydown", function (e) {
+                var x = document.getElementById(this.id + "autocomplete-list");
+                if (x) x = x.getElementsByTagName("div");
+                if (e.keyCode == 40) {
+                    /*If the arrow DOWN key is pressed,
+                    increase the currentFocus variable:*/
+                    currentFocus++;
+                    /*and and make the current item more visible:*/
+                    addActive(x);
+                } else if (e.keyCode == 38) { //up
+                    /*If the arrow UP key is pressed,
+                    decrease the currentFocus variable:*/
+                    currentFocus--;
+                    /*and and make the current item more visible:*/
+                    addActive(x);
+                } else if (e.keyCode == 13) {
+                    /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                    e.preventDefault();
+                    if (currentFocus > -1) {
+                        /*and simulate a click on the "active" item:*/
+                        if (x) x[currentFocus].click();
+                    }
+                }
+            });
+            function addActive(x) {
+                /*a function to classify an item as "active":*/
+                if (!x) return false;
+                /*start by removing the "active" class on all items:*/
+                removeActive(x);
+                if (currentFocus >= x.length) currentFocus = 0;
+                if (currentFocus < 0) currentFocus = (x.length - 1);
+                /*add class "autocomplete-active":*/
+                x[currentFocus].classList.add("autocomplete-active");
+            }
+            function removeActive(x) {
+                /*a function to remove the "active" class from all autocomplete items:*/
+                for (var i = 0; i < x.length; i++) {
+                    x[i].classList.remove("autocomplete-active");
+                }
+            }
+            function closeAllLists(elmnt) {
+                /*close all autocomplete lists in the document,
+                except the one passed as an argument:*/
+                var x = document.getElementsByClassName("autocomplete-items");
+                for (var i = 0; i < x.length; i++) {
+                    if (elmnt != x[i] && elmnt != inp) {
+                        x[i].parentNode.removeChild(x[i]);
+                    }
+                }
+            }
+            /*execute a function when someone clicks in the document:*/
+            document.addEventListener("click", function (e) {
+                closeAllLists(e.target);
+            });
+        }
+
+        let courseList = ["COMM-1116", "COMP-1100", "COMP-1113", "COMP-1510", "COMP-1536", "COMP-1712", "COMP-1930"];
+        let instructorNameList = ["Sam Lee", "Christopher Thompson", "Takashi Nakamura", "Amir Amintabar", "Shravan Yedulla", "Neda Changizi"];
+        let instructorEmailList = ["slee789@bcit.ca", "cthompson98@bcit.ca", "Takashi_Nakamura@bcit.ca", "aamintabar@bcit.ca", "syedulla@bcit.ca", "nchangizi@bcit.ca"];
+
+        autocomplete(document.getElementById("courseBox"), courseList);
+        autocomplete(document.getElementById("instructorNameBox"), instructorNameList);
+        autocomplete(document.getElementById("instructorEmailBox"), instructorEmailList);
+    </script>
+
+    <!-- set the current date for the date-->
+
+    <!-- <script>
+        let today = new Date();
+        let dd = today.getDate();
+        let mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById("date").setAttribute("min", today);
+    </script> -->
+
+    <!-- submit functions-->
+
+    <script>
+        function submitInfo(){
+            let instructorInstance = instructorBuilder();
+            let assignmentInstance = assignmentClassBuilder(instructorInstance.ID);
+            sendAssignment(assignmentInstance);
+            sendInstructor(instructorInstance);
+        }
+
+    </script>
+
+    <!-- EDIT functionality  -->
+
+    <script>
+        function editModeLoader(assignmentInstance, instructorInstance) {
+            changeLabelsToEdit(assignmentInstance);
+            loadAssignmentDetails(assignmentInstance, instructorInstance);
+        }
+
+        function loadAssignmentDetails(assignmentInstance, instructorInstance) {
+            document.getElementById('assignmentNameBox').value = assignmentInstance.name;
+            document.getElementById('courseBox').value = assignmentInstance.course;
+            document.getElementById('dueDateBox').value = assignmentInstance.dueDate;
+            document.getElementById('dueTimeBox').value = assignmentInstance.dueTime;
+            document.getElementById('d2lLinkBox').value = assignmentInstance.d2lLink;
+            document.getElementById('instructorNameBox').value = instructorInstance.name;
+            document.getElementById('instructorEmailBox').value = instructorInstance.email;
+            document.getElementById('instructionsBox').value = assignmentInstance.instructions;
+            document.getElementById('additionalInformationBox').value = assignmentInstance.additionalInformation;
+        }
+
+        function changeLabelsToEdit(assignmentInstance) {
+            document.getElementById('headerText').innerHTML = "Edit: " + assignmentInstance.name;
+        }
+    </script>
+
+    <!-- validation -->
+
+    <script>
+    //     function allValid() { }
+
+    //     function allFilled() {
+    //         let entryFields = document.getElementsByClassName('entryFields');
+    //         for (item of entryFields) {
+    //             if (item.innerHTML === '') {
+    //                 invalidField(item.id, ' is empty.')
+    //                 return false;
+    //             }
+    //         }
+    //         return true
+    //     }
+
+    //     // function validateInstructorEmail() {
+    //     //     let hasAt = false;
+    //     //     let hasDotPastAt = false;
+    //     //     let stringPastAt = false;
+    //     //     let stringPastDot = false;
+    //     //     let startsWithLetter = false;
+    //     //     // check that starts with letter
+    //     //     let instructorEmail = document.getElementById('indstructorEmail').innerHTML;
+    //     //     if (instructorEmail[0].charCodeAt() >= 65 && 90 >= instructorEmail[0].charCodeAt() ||
+    //     //         instructorEmail[0].charCodeAt >= 97 && 122 >= instructorEmail[0].charCodeAt()) {
+    //     //         startsWithLetter = true;
+    //     //         for (let i = 0; i < instructorEmail.length; i++) {
+    //     //             // check for @
+    //     //             if (instructorEmail[i] === '@') {
+    //     //                 hasAt = true;
+    //     //             }
+    //     //             //check for string past @
+    //     //             if ((instructorEmail[0].charCodeAt() >= 65 && 90 >= instructorEmail[0].charCodeAt() ||
+    //     //                 instructorEmail[0].charCodeAt >= 97 && 122 >= instructorEmail[0].charCodeAt()) && hasAt) {
+    //     //                 stringPastAt = true;
+    //     //             }
+    //     //             // check for dot past string past @
+    //     //             if (instructorEmail[i] === '.' && hasAt) {
+    //     //                 hasDotPastAt = true;
+    //     //             }
+    //     //             // check for string past dot past string past @
+    //     //             if ((instructorEmail[i].charCodeAt() >= 65 && 90 >= instructorEmail[i].charCodeAt() ||
+    //     //                 instructorEmail[0].charCodeAt >= 97 && 122 >= instructorEmail[].charCodeAt()) && hasDotPastAt) {
+    //     //                 stringPastDot = true;
+    //     //             }
+    //     //         }
+    //     //     }
+    //     //     if (startsWithLetter && hasAt && stringPastAt && hasDotPastAt && stringPastDot) {
+    //     //         return true;
+    //     //     } else {
+    //     //         return false;
+    //     //     }
+    //     // }
+    // </script>
+
+    <!-- collect data into classes -->
+
+    <script>
+        function getInstructorID() { }
+
+        function assignmentClassBuilder(instructorID) {
+            console.log(document.getElementById('dueTimeBox').value);
+            let newAssignment = new assignment(
+                document.getElementById('courseBox').value,
+                document.getElementById('assignmentNameBox').value,
+                document.getElementById('dueDateBox').value,
+                document.getElementById('dueTimeBox').value,
+                document.getElementById('d2lLinkBox').value,
+                document.getElementById('instructionsBox').value,
+                document.getElementById('additionalInformationBox').value,
+                instructorID
+            );
+            return newAssignment;
+        }
+
+        function instructorBuilder() {
+            let newInstructor = new instructor(
+                document.getElementById('instructorNameBox').value,
+                document.getElementById('instructorEmailBox').value
+            )
+            return newInstructor;
+        }
+    </script>
+
+    <!-- send data -->
+
+    <script>
+        function sendAssignment(assignmentInstance) {
+            db.collection("assignments").doc(assignmentInstance.ID).set({
+                'course': assignmentInstance.course,
+                'name': assignmentInstance.name,
+                'dueDate': assignmentInstance.dueDate,
+                'dueTime': assignmentInstance.dueTime,
+                'D2LLink': assignmentInstance.d2lLink,
+                'instructions': assignmentInstance.instructions,
+                'additionalInformation': assignmentInstance.additionalInformation,
+                'instructorID': assignmentInstance.instructorID
+            });
+        }
+
+        function sendInstructor(instructorInstance) {
+            if (!IDinDB('instructors', instructorInstance.ID)) {
+                db.collection("instructors").doc(instructorInstance.ID).set({
+                    'name': instructor.name,
+                    'email': instructorInstance.email
+                });
+            }
+        }
+    </script>
+
+    <!-- error handling -->
+
+    <script>
+        function assignmentInDB() {
+
+        }
+
+        function invalidField(invalidFieldName, errorMessage) {
+
+        }
+    </script>
+
+ <!-- event handlers -->
+
+ <script>
+        if (sessionStorage.needsDetails != undefined){
+            let assignmentInstance = getElementByIdByCollectionFromLocStorage(sessionStorage.needsDetails, 'assignmentList');
+            let instructorInstance = getElementByIdByCollectionFromLocStorage(assignmentInstance.instructorID, 'instructorsList');
+            editModeLoader(assignmentInstance, instructorInstance);
+        }
+
+        document.getElementById('submitButton').onclick = submitOnClick;
+        
+
+        function submitOnClick() {
+            // document.getElementById('submitButton').click();
+             submitInfo();
+
+
+            // console.log(newAssignment);
+
+            // db.collection("assignments").doc("newAdded").set({
+            //     name: "name"
+            // }).then(function () {
+            //     console.log("Document successfully written!");
+            // }).catch(function () {
+            //     console.error("Error writing document");
+            // });
+        }
+
+        function cancelHandler() { }
+
+        function pageOnLoadHandler() {
+
+        }
+    </script>
+
+</body>
+
+</html>
