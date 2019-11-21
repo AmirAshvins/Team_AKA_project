@@ -25,8 +25,8 @@ function loadAssignmentsToStorage() {
                 assignmentDetails['additionalInformation'], assignmentDetails['instructorID']);
             assignmentList.push(newAssignment);
         });
-        window.localStorage.setItem("list", JSON.stringify(assignmentList));
-        console.log(JSON.parse(window.localStorage.getItem('list')));
+        window.localStorage.setItem("assignmentList", JSON.stringify(assignmentList));
+        console.log(JSON.parse(window.localStorage.getItem('assignemntList')));
         window.localStorage.assignmentsLoaded = true;
     });
 }
@@ -127,8 +127,7 @@ showCalendar(currentMonth, currentYear);
 
 
 function showCalendar(month, year) {
-    let firstDay = new Date(year, month).getDay();
-    console.log('the first day is in this month is:' + firstDay)
+    let firstDay = new Date(year, month).getDate();
     let daysInMonth = 32 - new Date(year, month, 32).getDate();
 
     let tbl = document.getElementById('calendar-body');
@@ -155,10 +154,9 @@ function showCalendar(month, year) {
                 let cellText = document.createTextNode(date);
                 cell.appendChild(cellText);
                 row.appendChild(cell);
-                date ++;
             }
 
-            // date ++;
+            date ++;
         }
         tbl.appendChild(row);
     }
