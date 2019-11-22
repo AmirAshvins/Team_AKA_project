@@ -136,18 +136,19 @@
     <!-- event handlers -->
 
     <script>
-        db.collection('assignments').onSnapshot(function (){
-            document.getElementById('listContainer').innerHTML = "";
-            window.localStorage.assignmentsLoaded = false;
-            onPageLoad();
-        });
-        db.collection('instructors').onSnapshot(function (){
-            document.getElementById('listContainer').innerHTML = "";
-            window.localStorage.assignmentsLoaded = false;
-            onPageLoad();
-        });
+        // db.collection('assignments').onSnapshot(function (){
+        //     document.getElementById('listContainer').innerHTML = "";
+        //     window.localStorage.assignmentsLoaded = false;
+        //     onPageLoad();
+        // });
+        // db.collection('instructors').onSnapshot(function (){
+        //     document.getElementById('listContainer').innerHTML = "";
+        //     window.localStorage.assignmentsLoaded = false;
+        //     onPageLoad();
+        // });
         
-        document.onload = onPageLoad();
+        onPageLoad();
+
         function onListItemClick(clickedItem) {
             sessionStorage.setItem("needsDetails", clickedItem.id);
             sessionStorage.setItem("previousPage", './main.html');
@@ -155,15 +156,18 @@
         }
 
         function onPageLoad() {
-            if (!window.localStorage.assignmentsLoaded) {
-                window.localStorage.assignmentsLoaded = true;
+            if (sessionStorage.assignmentsLoaded != 'true') {
                 loadAssignmentsToStorage();
             }
-            if (!window.localStorage.instructorsLoaded) {
-                window.localStorage.instructorsLoaded = true;
+            if (sessionStorage.instructorsLoaded != 'true') {
                 loadInstructorsToStorage();
             }
-             loadList();
+            waiter = setInterval(()=>{
+                if (sessionStorage.assignmentsLoaded == "true" && sessionStorage.instructorsLoaded == "true"){
+                    loadList();
+                    clearInterval(waiter);
+                }
+            }, 20);
         }
 
     </script>
