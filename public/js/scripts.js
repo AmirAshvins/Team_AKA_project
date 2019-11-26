@@ -26,8 +26,8 @@ function loadAssignmentsToStorage() {
             assignmentList.push(newAssignment);
         });
         window.localStorage.setItem("assignmentList", JSON.stringify(assignmentList));
-        console.log(JSON.parse(window.localStorage.getItem('assignemntList')));
-        window.localStorage.assignmentsLoaded = true;
+        console.log(JSON.parse(window.localStorage.getItem('assignmentList')));
+        sessionStorage.assignmentsLoaded = true;
     });
 }
 
@@ -41,7 +41,7 @@ function loadInstructorsToStorage(){
         });
         window.localStorage.setItem("instructorsList", JSON.stringify(instructorsList));
         console.log(JSON.parse(window.localStorage.getItem('instructorsList')));
-        window.localStorage.instructorsLoaded = true;
+        sessionStorage.instructorsLoaded = true;
     });
 }
 
@@ -68,7 +68,7 @@ class assignment {
         this.dueDate = dueDate;
         this.dueTime = dueTime;
         this.d2lLink = d2lLink;
-        this.ID = 'ass';
+        this.ID = 'assignment';
         this.instructions = instructions;
         this.additionalInformation = additionalInformation;
         this.instructorID = instructorID;

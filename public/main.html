@@ -74,11 +74,15 @@
             // Build due time
             let dueTimeCol = buildDueTimeCol(assignmentInstance.dueTime);
 
+            // Build completed check
+            let completedCol = buildDueTimeCol();
+
             // put it all together
             listRow.appendChild(dueDateCol);
             listRow.appendChild(dueTimeCol);
             listRow.appendChild(assignmentNameCol);
             listRow.appendChild(courseNameCol);
+            listRow.appendChild(completedCol);
             document.getElementById('listContainer').appendChild(listRow);
         }
 
@@ -120,6 +124,13 @@
             dueTimeCol.innerHTML = "<p class='list-due-time list-text'>" + dueTime + "</p>";
             return dueTimeCol
         }    
+
+        function buildCompletedCol(completed) {
+            let completedCol = document.createElement('div');
+            completedCol.className = "col-lg-2 col-md-2 col-sm-2 col-xs-2 text-left";
+            completedCol.innerHTML = "<input type=\"checkBox\">";
+            return completedCol
+        }
     </script>
 
     <!-- load list -->
