@@ -114,7 +114,14 @@
             dueTimeCol.className = "col-lg-2 col-md-2 col-sm-2 col-xs-2 text-left";
             dueTimeCol.innerHTML = "<p class='list-due-time list-text'>" + dueTime + "</p>";
             return dueTimeCol
-        }    
+        }
+
+        function buildCompletedCol() {
+            let completedCol = document.createElement('div');
+            completedCol.className = "col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center";
+            completedCol.innerHTML = "<input type='checkbox' onclick='onCompletedClick'>";
+            return completedCol
+        }
     </script>
 
     <!-- load list -->
@@ -148,6 +155,11 @@
             sessionStorage.setItem("needsDetails", clickedItem.id);
             sessionStorage.setItem("previousPage", './main.html');
             window.location.href = "./details.html";
+        }
+
+        function onCompletedClick() {
+            console.log("Clicked!");
+            console.log('Hello');
         }
 
         function onPageLoad() {
