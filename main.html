@@ -123,6 +123,13 @@
             newListContainer.id = 'listContainer';
             document.getElementById('contentDiv').appendChild(newListContainer);
         }
+
+        function buildCompletedCol() {
+            let completedCol = document.createElement('div');
+            completedCol.className = "col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center";
+            completedCol.innerHTML = "<input type='checkbox' onclick='onCompletedClick'>";
+            return completedCol
+        }
     </script>
 
     <!-- load list -->
@@ -140,7 +147,7 @@
             let user = JSON.parse(localStorage.user);
             for (assignment of user.completedAssignments){
                 let assignmentRowDOM = document.getElementById(assignment);
-                assignmentRowDOM.style.backgroundColor = 'yellow';
+                assignmentRowDOM.style.backgroundColor = 'red';
             }
         }
     </script>
@@ -148,17 +155,7 @@
     <!-- event handlers -->
 
     <script>
-        db.collection('assignments').onSnapshot(function () {
-            document.getElementById('listContainer').innerHTML = "";
-            window.localStorage.assignmentsLoaded = false;
-            onPageLoad();
-        });
-
-        db.collection('instructors').onSnapshot(function () {
-            document.getElementById('listContainer').innerHTML = "";
-            window.localStorage.assignmentsLoaded = false;
-            onPageLoad();
-        });
+        
 
         sessionStorage.assignmentsLoaded = 'false';
         sessionStorage.instructorsLoaded = 'false';
@@ -170,6 +167,10 @@
             window.location.href = "./details.html";
         }
 
+        function onCompletedClick() {
+            console.log("Clicked!");
+        }
+
         function onPageLoad() {
             if (sessionStorage.assignmentsLoaded != 'true') {
                 loadAssignmentsToStorage();
@@ -179,7 +180,7 @@
             }
 
             let waiter = setInterval(() => {
-                if (allLoaded) {
+                if (allLoaded()) {
                     resetListContainer();
                     loadList();
                     clearInterval(waiter);

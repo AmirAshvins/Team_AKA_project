@@ -181,3 +181,15 @@ class user {
         }
     }
 }
+
+db.collection('assignments').onSnapshot(function () {
+    document.getElementById('listContainer').innerHTML = "";
+    window.localStorage.assignmentsLoaded = false;
+    onPageLoad();
+});
+
+db.collection('instructors').onSnapshot(function () {
+    document.getElementById('listContainer').innerHTML = "";
+    window.localStorage.assignmentsLoaded = false;
+    onPageLoad();
+});
