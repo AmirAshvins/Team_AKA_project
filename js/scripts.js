@@ -31,7 +31,7 @@ function loadAssignmentsToStorage() {
     });
 }
 
-function loadInstructorsToStorage(){
+function loadInstructorsToStorage() {
     db.collection("instructors").get().then(function (instructorsQuery) {
         let instructorsList = [];
         instructorsQuery.forEach(function (doc) {
@@ -45,6 +45,19 @@ function loadInstructorsToStorage(){
     });
 }
 
+function loadCoursesToStorage() {
+    db.collection("courses").get().then(function (courseQuery) {
+        let courseList = [];
+        courseQuery.forEach(function (doc) {
+            courseDetails = doc.data();
+            newCourse = new course(courseDetails['courseCode'], courseDetails['courseName']);
+            courseList.push(newCourse);
+        });
+        window.localStorage.setItem("courseList", JSON.stringify(courseList));
+        console.log(JSON.parse(window.localStorage.getItem('courseList')));
+        sessionStorage.coursesLoaded = true;
+    });
+}
 
 function IDinDB(collectionName, ID) {
     db.collection(collectionName).doc(ID).get()
@@ -100,57 +113,71 @@ class instructor {
     }
 }
 
-class user{
-    constructor(userID, userName){
+class user {
+    constructor(userID, userName) {
         this.ID = userID;
         this.name = userName;
         this.completedAssignments = [];
-        db.collection('users').doc(this.ID).get().then((doc)=>{
-            if (doc.exists){
+        db.collection('users').doc(this.ID).get().then((doc) => {
+            if (doc.exists) {
                 this.getCompletedAssignments()
-            }else{
+            } else {
                 this.sendUserToDB();
                 sessionStorage.loadedUser = true;
             }
         });
     }
 
-    getCompletedAssignments(){
-        db.collection('users').doc(this.ID).get().then((doc)=>{
+    getCompletedAssignments() {
+        db.collection('users').doc(this.ID).get().then((doc) => {
             this.completedAssignments = doc.data().completedAssignments;
             localStorage.user = JSON.stringify(this);
             sessionStorage.loadedUser = true;
-        }).catch((err)=>{
+        }).catch((err) => {
             console.log('error while loading completed assignments', err)
         });
     }
 
-    sendUserToDB(){
+    sendUserToDB() {
         db.collection('users').doc(this.ID).set({
             'name': this.name,
             'completedAssignments': this.completedAssignments,
         })
-    }
-}
 
-// ##########################
-// UTILITIES
+        class course {
+            constructor(courseCode, courseName) {
+                this.courseCode = courseCode;
+                this.courseName = courseName;
+            }
+        }
 
-function getUrlQueries() {
-    let urlQuery = decodeURI(window.location.search());
-    let queries = urlQuery.split('?');
-    delete queries[0];
-    console.log("success");
-    return queries;
-}
+        // ##########################
+        // UTILITIES
 
-function getElementByIdByCollectionFromLocStorage(elementID, collectionName){
-    let collectionList = JSON.parse(window.localStorage[collectionName]);
-    for (let i=0; i < collectionList.length; i++){
-        if (collectionList[i].ID === elementID){
-            return collectionList[i];
+        function getUrlQueries() {
+            let urlQuery = decodeURI(window.location.search());
+            let queries = urlQuery.split('?');
+            delete queries[0];
+            console.log("success");
+            return queries;
+        }
+
+        function getElementByIdByCollectionFromLocStorage(elementID, collectionName) {
+            let collectionList = JSON.parse(window.localStorage[collectionName]);
+            for (let i = 0; i < collectionList.length; i++) {
+                if (collectionList[i].ID === elementID) {
+                    return collectionList[i];
+                }
+            }
+        }
+
+        function getCollectionDetails(collectionList, detail) {
+            detailList = [];
+            collectionList = JSON.parse(window.localStorage.getItem(collectionList));
+            collectionList.forEach(function (item) {
+                detailList.push(item[detail]);
+            })
+            return (detailList)
         }
     }
 }
-
-

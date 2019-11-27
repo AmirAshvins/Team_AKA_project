@@ -17,14 +17,9 @@
 
     <!-- header -->
     <div class="jumbotron header-div header-footer-div">
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
-        <section class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center align-center-up">
+        <section class="text-center align-center-up">
             <h2 class="head-text">Your List</h>
         </section>
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-up">
-            <a id="profile" class="btn btn-default" href="###########"><span
-                    class="glyphicon glyphicon-user"></span></a>
-        </div>
     </div>
 
     <!-- content -->
@@ -137,6 +132,14 @@
             let parsedAssignmentList = JSON.parse(window.localStorage.assignmentList)
             for (let i = 0; i < parsedAssignmentList.length; i++) {
                 buildListRow(parsedAssignmentList[i]);
+            }
+        }
+
+        function markCompletedAssignments(){
+            let completedAssignments = JSON.parse(localStorage.user.completedAssignments);
+            for (assignment of completedAssignments){
+                let assignmentRowDOM = document.getElementById(assignment.ID);
+                assignmentRowDOM.style.backgroundColor = 'yellow';
             }
         }
     </script>

@@ -17,14 +17,9 @@
 <body>
     <!-- header -->
     <div class="jumbotron header-footer-div header-div">
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
-        <section class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center align-center-up">
+        <section class="text-center align-center-up">
             <h2 class="head-text" id="headerText">Add Assignment</h2>
         </section>
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-up">
-            <a id="profile" class="btn btn-default" href="###########"><span
-                    class="glyphicon glyphicon-user"></span></a>
-        </div>
     </div>
 
     <!-- content -->
@@ -234,19 +229,9 @@
             });
         }
 
-        let courseList = ["COMM-1116", "COMP-1100", "COMP-1113", "COMP-1510", "COMP-1536", "COMP-1712", "COMP-1930"];
-        let instructorNameList = ["Sam Lee", "Christopher Thompson", "Takashi Nakamura", "Amir Amintabar", "Shravan Yedulla", "Neda Changizi"];
-        let instructorEmailList = ["slee789@bcit.ca", "cthompson98@bcit.ca", "Takashi_Nakamura@bcit.ca", "aamintabar@bcit.ca", "syedulla@bcit.ca", "nchangizi@bcit.ca"];
-
-        // function (collectionname, fieldNeeded) 
-        // resultlist =[]
-        // variable = loc stor [collectionname]
-        // for item in collectname 
-        // resultlist.push(item[fieldneeded])
-
-        autocomplete(document.getElementById("courseBox"), courseList);
-        autocomplete(document.getElementById("instructorNameBox"), instructorNameList);
-        autocomplete(document.getElementById("instructorEmailBox"), instructorEmailList);
+        autocomplete(document.getElementById("courseBox"), getCollectionDetails("courseList", "courseCode"));
+        autocomplete(document.getElementById("instructorNameBox"), getCollectionDetails("instructorsList", "name"));
+        autocomplete(document.getElementById("instructorEmailBox"), getCollectionDetails("instructorsList", "email"));
     </script>
 
     <!-- set the current date for the date-->
