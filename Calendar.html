@@ -25,9 +25,13 @@
     <!-- content -->
     <!-- <div class="container page-content"> -->
     <div class="container col-sm-4 col-md-7 col-lg-4 mt-5">
+
         <div class="card list-row">
+
             <h3 class="card-header section-header" id="monthAndYear">Month and Year</h3>
+
             <table class="table boardered table-responsive-sm list-row" id="calendar">
+                <!-- creates the header for the calendar -->
 
                 <head>
                     <tr id="dayNames">
@@ -43,6 +47,7 @@
                 <tbody class="list-row" id="calendar-body"> </tbody>
             </table>
 
+            <!-- the container for the buttons of the calendar.-->
             <div class="form-inline">
                 <button class="btn btn-outline-primary col-sm-6 section-header" onclick=previous()>Previous</button>
                 <button class="btn btn-outline-primary col-sm-6 section-header" onclick=next()>Next</button>
@@ -98,49 +103,45 @@
                             for (let i = 0; i < dueDateArray.length; i++) {
 
                                 // setting the dots if the dates have due dates.
-                                let myDate = dueDateArray[i].split("/");
+                                let myDate = dueDateArray[i].split("-");
 
                                 // This if else statemnent takes care of whether adding zeros before the month number and the dauy number or not.
                                 if (month >= 0 && month < 10) {
                                     if (date > 0 && date < 10) {
-                                        if (myDate[2] == `${year}` && myDate[1] == `0${(month + 1)}` && myDate[0] == `0${date}`) {
+                                        if (myDate[0] == `${year}` && myDate[1] == `0${(month + 1)}` && myDate[2] == `0${date}`) {
 
                                             cellText.className = "AssignmentExists";
-
-                                        } else {
-                                            if (myDate[2] == `${year}` && myDate[1] == `0${(month + 1)}` && myDate[0] == `${date}`) {
-
-                                                cellText.className = "AssignmentExists";
-
-                                            }
                                         }
-
                                     }
                                     else {
-                                        if (date > 0 && date < 10) {
-                                            if (myDate[2] == `${year}` && myDate[1] == `${(month + 1)}` && myDate[0] == `0${date}`) {
+                                        if (myDate[0] == `${year}` && myDate[1] == `0${(month + 1)}` && myDate[2] == `${date}`) {
 
-                                                cellText.className = "AssignmentExists";
-
-                                            } else {
-                                                if (myDate[2] == `${year}` && myDate[1] == `${(month + 1)}` && myDate[0] == `${date}`) {
-
-                                                    cellText.className = "AssignmentExists";
-
-                                                }
-                                            }
+                                            cellText.className = "AssignmentExists";
 
                                         }
                                     }
                                 }
+                                else {
+                                    if (date > 0 && date < 10) {
+                                        if (myDate[0] == `${year}` && myDate[1] == `${(month + 1)}` && myDate[2] == `0${date}`) {
 
+                                            cellText.className = "AssignmentExists";
+                                        }
+                                    } else {
+                                        if (myDate[0] == `${year}` && myDate[1] == `${(month + 1)}` && myDate[2] == `${date}`) {
+
+                                            cellText.className = "AssignmentExists";
+                                        }
+                                    }
+
+                                }
                             }
                             cell.appendChild(cellText);
                             row.appendChild(cell);
                             date++;
                         }
-                        tbl.appendChild(row);
                     }
+                    tbl.appendChild(row);
                 }
             }
             // handles the calendar when the user clicks to see the previous months
@@ -162,7 +163,7 @@
 
             function loadDueDates() {
                 let dueDateList = [];
-                let parsedAssignmentList = JSON.parse(window.localStorage.assignmentlist)
+                let parsedAssignmentList = JSON.parse(window.localStorage.assignmentList)
                 for (let i = 0; i < parsedAssignmentList.length; i++) {
                     dueDateList.push(parsedAssignmentList[i].dueDate)
                 }

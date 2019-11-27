@@ -179,9 +179,12 @@
             waiter = setInterval(()=>{
                 if (sessionStorage.assignmentsLoaded == "true" && sessionStorage.instructorsLoaded == "true"){
                     loadList();
+                    getAssignmentDueDate();
+                    deletePassedAssignments();
                     clearInterval(waiter);
                 }
             }, 20);
+
         }
 
     </script>
