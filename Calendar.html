@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Calendar</title>
 
+    <!-- importing css bootstrap and the scripts from firebase and firestore -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/styles.css" type="text/css">
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
@@ -24,12 +25,12 @@
     <!-- content -->
     <!-- <div class="container page-content"> -->
     <div class="container col-sm-4 col-md-7 col-lg-4 mt-5">
-        <div class="card">
-            <h3 class="card-header" id="monthAndYear">Month and Year</h3>
-            <table class="table boardered table-responsive-sm" id="calendar">
+        <div class="card list-row">
+            <h3 class="card-header section-header" id="monthAndYear">Month and Year</h3>
+            <table class="table boardered table-responsive-sm list-row" id="calendar">
 
                 <head>
-                    <tr>
+                    <tr id="dayNames">
                         <th>Sun</th>
                         <th>Mon</th>
                         <th>Tue</th>
@@ -39,35 +40,50 @@
                         <th>Sat</th>
                     </tr>
                 </head>
-                <tbody id="calendar-body"> </tbody>
+                <tbody class="list-row" id="calendar-body"> </tbody>
             </table>
 
             <div class="form-inline">
-                <button class="btn btn-outline-primary col-sm-6" onclick=previous()>Previous</button>
-                <button class="btn btn-outline-primary col-sm-6" onclick=next()>Next</button>
+                <button class="btn btn-outline-primary col-sm-6 section-header" onclick=previous()>Previous</button>
+                <button class="btn btn-outline-primary col-sm-6 section-header" onclick=next()>Next</button>
             </div>
         </div>
 
         <script>
             // Creating the Calendar dates based on each year.
 
-            document.onload = onPageLoad();
+            // document.onload = onPageLoad();
 
-            function onPageLoad() {
-
-                let today = new Date();
-                let currentMonth = today.getMonth();
-                let currentYear = today.getFullYear();
-
-                let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-                let monthAndYear = document.getElementById('monthAndYear')
-
-                showCalendar(currentMonth, currentYear, months, monthAndYear);
-            }
+            let today = new Date();
+            let currentMonth = today.getMonth();
+            let currentYear = today.getFullYear();
 
 
-            function showCalendar(month, year, List_of_months, element) {
+            let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+            let monthAndYear = document.getElementById('monthAndYear')
+            let dueDateList = loadDueDates();
+            document.onload = showCalendar(currentMonth, currentYear, months, monthAndYear, dueDateList);
+
+
+            // it will show the calendar upon loading the page.
+            // function onPageLoad(currentMonth, currentYear, months, monthAndYear, dueDateList) {
+
+            //     // // let today = new Date();
+            //     // let currentMonth = today.getMonth();
+            //     // let currentYear = today.getFullYear();
+
+
+            //     // let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+            //     // let monthAndYear = document.getElementById('monthAndYear')
+            //     // let dueDateList = loadDueDates();
+
+            //     showCalendar(currentMonth, currentYear, months, monthAndYear, dueDateList);
+            // }
+
+            // shows the calendar to the screen
+            function showCalendar(month, year, List_of_months, element, dueDateArray) {
                 let firstDay = new Date(year, month).getDay();
                 let daysInMonth = 32 - new Date(year, month, 32).getDate();
 
@@ -76,7 +92,8 @@
                 tbl.innerHTML = '';
                 element.innerHTML = List_of_months[month] + " " + year;
 
-                let date = 1;
+
+                let date = 01;
 
                 for (let i = 0; i < 6; i++) {
                     let row = document.createElement('tr');
@@ -92,29 +109,87 @@
                             break;
                         } else {
                             let cell = document.createElement('td');
-                            let cellText = document.createTextNode(date);
+                            let cellText = document.createElement('p');
+                            cellText.innerHTML = `${date}`;
+                            for (let i = 0; i < dueDateArray.length; i++) {
+
+                                // setting the dots if the dates have due dates.
+                                let myDate = dueDateArray[i].split("/");
+                                // console.log(`the month we want: ${month + 1} and we have ${parseInt(myDate[1])}`)
+                                // console.log(`the year we want: ${year} and we have ${parseInt(myDate[2])}`)
+                                // console.log(`the day we want: ${date} and we have ${parseInt(myDate[0])}`)
+
+                                if (month >= 0 && month < 10) {
+                                    if (date > 0 && date < 10) {
+                                        if (myDate[2] == `${year}` && myDate[1] == `0${(month + 1)}` && myDate[0] == `0${date}`) {
+
+                                            cellText.className = "AssignmentExists";
+
+                                        } else {
+                                            if (myDate[2] == `${year}` && myDate[1] == `0${(month + 1)}` && myDate[0] == `${date}`) {
+
+                                                cellText.className = "AssignmentExists";
+
+                                            }
+                                        }
+
+                                    }
+                                    else {
+                                        if (date > 0 && date < 10) {
+                                            if (myDate[2] == `${year}` && myDate[1] == `${(month + 1)}` && myDate[0] == `0${date}`) {
+
+                                                cellText.className = "AssignmentExists";
+
+                                            } else {
+                                                if (myDate[2] == `${year}` && myDate[1] == `${(month + 1)}` && myDate[0] == `${date}`) {
+
+                                                    cellText.className = "AssignmentExists";
+
+                                                }
+                                            }
+
+                                        }
+                                    }
+                                }
+                                // cell.appendChild(cellText);
+                                // row.appendChild(cell);
+                                // date++;
+                            }
                             cell.appendChild(cellText);
                             row.appendChild(cell);
                             date++;
                         }
+                        tbl.appendChild(row);
                     }
-                    tbl.appendChild(row);
                 }
             }
-
+            // handles the calendar when the user clicks to see the previous months
             function previous() {
                 currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
                 currentMonth = currentMonth === 0 ? 11 : currentMonth - 1;
-                showCalendar(currentMonth, currentYear);
+                showCalendar(currentMonth, currentYear, months, monthAndYear, dueDateList);
 
             }
+
+            // handles the calendar when the user clicks to see the next month
             function next() {
                 currentYear = currentMonth === 11 ? currentYear + 1 : currentYear;
                 currentMonth = (currentMonth + 1) % 12;
-                showCalendar(currentMonth, currentYear);
+                showCalendar(currentMonth, currentYear, months, monthAndYear, dueDateList);
+            }
 
+            //load the assignment from the local storage>
+
+            function loadDueDates() {
+                let dueDateList = [];
+                let parsedAssignmentList = JSON.parse(window.localStorage.assignmentlist)
+                for (let i = 0; i < parsedAssignmentList.length; i++) {
+                    dueDateList.push(parsedAssignmentList[i].dueDate)
+                }
+                return dueDateList;
             }
         </script>
+
 
     </div>
 
