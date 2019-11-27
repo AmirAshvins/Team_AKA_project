@@ -21,6 +21,10 @@
         <section class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center align-center-up">
             <h2 class="head-text" id="headerText">Add Assignment</h2>
         </section>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-up">
+            <a id="profile" class="btn btn-default" href="###########"><span
+                    class="glyphicon glyphicon-user"></span></a>
+        </div>
     </div>
 
     <!-- content -->
@@ -309,7 +313,6 @@
 
     <script>
         function sendAssignment(assignmentInstance) {
-            console.log("Hello!");
             db.collection("assignments").doc(assignmentInstance.ID).set({
                 'course': assignmentInstance.course,
                 'name': assignmentInstance.name,
@@ -319,7 +322,7 @@
                 'instructions': assignmentInstance.instructions,
                 'additionalInformation': assignmentInstance.additionalInformation,
                 'instructorID': assignmentInstance.instructorID
-            }).then(console.log("Done!")).catch(console.log("Failed!"));
+            });
         }
 
         function sendInstructor(instructorInstance) {
@@ -327,7 +330,7 @@
                 db.collection("instructors").doc(instructorInstance.ID).set({
                     'name': instructorInstance.name,
                     'email': instructorInstance.email
-                }).then(console.log("Done!")).catch(console.log("Failed too!"));
+                });
             }
         }
     </script>
