@@ -31,7 +31,7 @@ function loadAssignmentsToStorage() {
     });
 }
 
-function loadInstructorsToStorage(){
+function loadInstructorsToStorage() {
     db.collection("instructors").get().then(function (instructorsQuery) {
         let instructorsList = [];
         instructorsQuery.forEach(function (doc) {
@@ -106,11 +106,49 @@ function getUrlQueries() {
     return queries;
 }
 
-function getElementByIdByCollectionFromLocStorage(elementID, collectionName){
+function getElementByIdByCollectionFromLocStorage(elementID, collectionName) {
     let collectionList = JSON.parse(window.localStorage[collectionName]);
-    for (let i=0; i < collectionList.length; i++){
-        if (collectionList[i].ID === elementID){
+    for (let i = 0; i < collectionList.length; i++) {
+        if (collectionList[i].ID === elementID) {
             return collectionList[i];
+        }
+    }
+}
+
+function getAssignmentDueDate() {
+    let assignments = JSON.parse(localStorage.assignmentList);
+    let assignmentDueDateList = []
+    assignments.forEach((assignment) => {
+        assignmentDueDateList.push({
+            'assID': assignment.ID,
+            'dueDate': assignment.dueDate
+        })
+
+    })
+    return assignmentDueDateList
+}
+
+function makeDateObject (list) {
+    object = new Date(list[0], list[1], list[2]);
+    return object
+}
+
+function deletePassedAssignments() {
+    let dateList = getAssignmentDueDate();
+    let today = new Date();
+    let todaysDay = today.getDate();
+    for (let i = 0; i < dateList.length; i++) {
+        
+        let theDateList = dateList[i]['dueDate'].split('-');
+        let correctVersionOfDate = makeDateObject(theDateList);
+        if (Math.abs(parseInt(correctVersionOfDate) - parseInt(todaysDay)) >= 3) {
+            db.collection('assignments').doc(dateList[i]['assID']).delete().then(function () {
+                console.log('delete is successful')
+            }
+            ).catch(function (error) {
+                console.error('We have aproblem we didnt delete the item :( ');
+
+            })
         }
     }
 }

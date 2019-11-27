@@ -25,10 +25,13 @@
     <!-- content -->
     <!-- <div class="container page-content"> -->
     <div class="container col-sm-4 col-md-7 col-lg-4 mt-5">
-        <div class="card list-row">
-            <h3 class="card-header section-header" id="monthAndYear">Month and Year</h3>
-            <table class="table boardered table-responsive-sm list-row" id="calendar">
 
+        <div class="card list-row">
+
+            <h3 class="card-header section-header" id="monthAndYear">Month and Year</h3>
+
+            <table class="table boardered table-responsive-sm list-row" id="calendar">
+                <!-- creates the header for the calendar -->
                 <head>
                     <tr id="dayNames">
                         <th>Sun</th>
@@ -43,6 +46,7 @@
                 <tbody class="list-row" id="calendar-body"> </tbody>
             </table>
 
+            <!-- the container for the buttons of the calendar.-->
             <div class="form-inline">
                 <button class="btn btn-outline-primary col-sm-6 section-header" onclick=previous()>Previous</button>
                 <button class="btn btn-outline-primary col-sm-6 section-header" onclick=next()>Next</button>
@@ -50,8 +54,8 @@
         </div>
 
         <script>
-         
-        //  Starts with getting the date month and year and paasing it to the create calendar.
+
+            //  Starts with getting the date month and year and paasing it to the create calendar.
 
             let today = new Date();
             let currentMonth = today.getMonth();
@@ -99,7 +103,7 @@
 
                                 // setting the dots if the dates have due dates.
                                 let myDate = dueDateArray[i].split("/");
-                                
+
                                 // This if else statemnent takes care of whether adding zeros before the month number and the dauy number or not.
                                 if (month >= 0 && month < 10) {
                                     if (date > 0 && date < 10) {
@@ -133,7 +137,7 @@
                                         }
                                     }
                                 }
-                               
+
                             }
                             cell.appendChild(cellText);
                             row.appendChild(cell);
