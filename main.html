@@ -133,12 +133,13 @@
             for (let i = 0; i < parsedAssignmentList.length; i++) {
                 buildListRow(parsedAssignmentList[i]);
             }
+            markCompletedAssignments();
         }
 
         function markCompletedAssignments(){
-            let completedAssignments = JSON.parse(localStorage.user.completedAssignments);
-            for (assignment of completedAssignments){
-                let assignmentRowDOM = document.getElementById(assignment.ID);
+            let user = JSON.parse(localStorage.user);
+            for (assignment of user.completedAssignments){
+                let assignmentRowDOM = document.getElementById(assignment);
                 assignmentRowDOM.style.backgroundColor = 'yellow';
             }
         }
