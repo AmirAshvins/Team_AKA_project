@@ -16,14 +16,9 @@
 
     <!-- header -->
     <div class="jumbotron header-div header-footer-div">
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
-        <section class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center align-center-up">
+        <section class="text-center align-center-up">
             <h2 class="head-text">Your List</h>
         </section>
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-up">
-            <a id="profile" class="btn btn-default" href="###########"><span
-                    class="glyphicon glyphicon-user"></span></a>
-        </div>
     </div>
 
     <!-- content -->
@@ -129,7 +124,7 @@
         function buildCompletedCol() {
             let completedCol = document.createElement('div');
             completedCol.className = "col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center";
-            completedCol.innerHTML = "<input type=\"checkbox\">";
+            completedCol.innerHTML = "<input type='checkbox' onclick='completedClick()'>";
             return completedCol
         }
     </script>
@@ -176,6 +171,10 @@
                 loadInstructorsToStorage();
             }
              loadList();
+        }
+
+        function completedClick() {
+            continue
         }
 
     </script>
