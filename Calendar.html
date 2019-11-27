@@ -17,7 +17,7 @@
 <body>
     <!-- header -->
     <div class="jumbotron header-footer-div header-div">
-        <section class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        <section class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
             <h2 class="head-text ">Calendar</h2>
         </section>
     </div>
@@ -50,9 +50,8 @@
         </div>
 
         <script>
-            // Creating the Calendar dates based on each year.
-
-            // document.onload = onPageLoad();
+         
+        //  Starts with getting the date month and year and paasing it to the create calendar.
 
             let today = new Date();
             let currentMonth = today.getMonth();
@@ -65,24 +64,7 @@
             let dueDateList = loadDueDates();
             document.onload = showCalendar(currentMonth, currentYear, months, monthAndYear, dueDateList);
 
-
-            // it will show the calendar upon loading the page.
-            // function onPageLoad(currentMonth, currentYear, months, monthAndYear, dueDateList) {
-
-            //     // // let today = new Date();
-            //     // let currentMonth = today.getMonth();
-            //     // let currentYear = today.getFullYear();
-
-
-            //     // let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-            //     // let monthAndYear = document.getElementById('monthAndYear')
-            //     // let dueDateList = loadDueDates();
-
-            //     showCalendar(currentMonth, currentYear, months, monthAndYear, dueDateList);
-            // }
-
-            // shows the calendar to the screen
+            // Creates the calendar and shows it
             function showCalendar(month, year, List_of_months, element, dueDateArray) {
                 let firstDay = new Date(year, month).getDay();
                 let daysInMonth = 32 - new Date(year, month, 32).getDate();
@@ -95,9 +77,11 @@
 
                 let date = 01;
 
+                // creates the rows for the calendar
                 for (let i = 0; i < 6; i++) {
                     let row = document.createElement('tr');
 
+                    // creates the dates if they are the same as the weekday of the starting day for each month
                     for (let j = 0; j < 7; j++) {
 
                         if (i === 0 && j < firstDay) {
@@ -115,10 +99,8 @@
 
                                 // setting the dots if the dates have due dates.
                                 let myDate = dueDateArray[i].split("/");
-                                // console.log(`the month we want: ${month + 1} and we have ${parseInt(myDate[1])}`)
-                                // console.log(`the year we want: ${year} and we have ${parseInt(myDate[2])}`)
-                                // console.log(`the day we want: ${date} and we have ${parseInt(myDate[0])}`)
-
+                                
+                                // This if else statemnent takes care of whether adding zeros before the month number and the dauy number or not.
                                 if (month >= 0 && month < 10) {
                                     if (date > 0 && date < 10) {
                                         if (myDate[2] == `${year}` && myDate[1] == `0${(month + 1)}` && myDate[0] == `0${date}`) {
@@ -151,9 +133,7 @@
                                         }
                                     }
                                 }
-                                // cell.appendChild(cellText);
-                                // row.appendChild(cell);
-                                // date++;
+                               
                             }
                             cell.appendChild(cellText);
                             row.appendChild(cell);

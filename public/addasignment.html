@@ -243,24 +243,6 @@
         autocomplete(document.getElementById("instructorEmailBox"), instructorEmailList);
     </script>
 
-    <!-- set the current date for the date-->
-
-    <!-- <script>
-        let today = new Date();
-        let dd = today.getDate();
-        let mm = today.getMonth() + 1;
-        var yyyy = today.getFullYear();
-        if (dd < 10) {
-            dd = '0' + dd
-        }
-        if (mm < 10) {
-            mm = '0' + mm
-        }
-
-        today = yyyy + '-' + mm + '-' + dd;
-        document.getElementById("date").setAttribute("min", today);
-    </script> -->
-
     <!-- submit functions-->
 
     <script>
@@ -270,7 +252,6 @@
             sendAssignment(assignmentInstance);
             sendInstructor(instructorInstance);
         }
-
     </script>
 
     <!-- EDIT functionality  -->
@@ -298,62 +279,6 @@
         }
     </script>
 
-    <!-- validation -->
-
-    <script>
-    //     function allValid() { }
-
-    //     function allFilled() {
-    //         let entryFields = document.getElementsByClassName('entryFields');
-    //         for (item of entryFields) {
-    //             if (item.innerHTML === '') {
-    //                 invalidField(item.id, ' is empty.')
-    //                 return false;
-    //             }
-    //         }
-    //         return true
-    //     }
-
-    //     // function validateInstructorEmail() {
-    //     //     let hasAt = false;
-    //     //     let hasDotPastAt = false;
-    //     //     let stringPastAt = false;
-    //     //     let stringPastDot = false;
-    //     //     let startsWithLetter = false;
-    //     //     // check that starts with letter
-    //     //     let instructorEmail = document.getElementById('indstructorEmail').innerHTML;
-    //     //     if (instructorEmail[0].charCodeAt() >= 65 && 90 >= instructorEmail[0].charCodeAt() ||
-    //     //         instructorEmail[0].charCodeAt >= 97 && 122 >= instructorEmail[0].charCodeAt()) {
-    //     //         startsWithLetter = true;
-    //     //         for (let i = 0; i < instructorEmail.length; i++) {
-    //     //             // check for @
-    //     //             if (instructorEmail[i] === '@') {
-    //     //                 hasAt = true;
-    //     //             }
-    //     //             //check for string past @
-    //     //             if ((instructorEmail[0].charCodeAt() >= 65 && 90 >= instructorEmail[0].charCodeAt() ||
-    //     //                 instructorEmail[0].charCodeAt >= 97 && 122 >= instructorEmail[0].charCodeAt()) && hasAt) {
-    //     //                 stringPastAt = true;
-    //     //             }
-    //     //             // check for dot past string past @
-    //     //             if (instructorEmail[i] === '.' && hasAt) {
-    //     //                 hasDotPastAt = true;
-    //     //             }
-    //     //             // check for string past dot past string past @
-    //     //             if ((instructorEmail[i].charCodeAt() >= 65 && 90 >= instructorEmail[i].charCodeAt() ||
-    //     //                 instructorEmail[0].charCodeAt >= 97 && 122 >= instructorEmail[].charCodeAt()) && hasDotPastAt) {
-    //     //                 stringPastDot = true;
-    //     //             }
-    //     //         }
-    //     //     }
-    //     //     if (startsWithLetter && hasAt && stringPastAt && hasDotPastAt && stringPastDot) {
-    //     //         return true;
-    //     //     } else {
-    //     //         return false;
-    //     //     }
-    //     // }
-    // </script>
-
     <!-- collect data into classes -->
 
     <script>
@@ -375,10 +300,11 @@
         }
 
         function instructorBuilder() {
+            console.log(document.getElementById('instructorNameBox').value);
             let newInstructor = new instructor(
                 document.getElementById('instructorNameBox').value,
                 document.getElementById('instructorEmailBox').value
-            )
+            );
             return newInstructor;
         }
     </script>
@@ -392,7 +318,7 @@
                 'name': assignmentInstance.name,
                 'dueDate': assignmentInstance.dueDate,
                 'dueTime': assignmentInstance.dueTime,
-                'D2LLink': assignmentInstance.d2lLink,
+                'd2lLink': assignmentInstance.d2lLink,
                 'instructions': assignmentInstance.instructions,
                 'additionalInformation': assignmentInstance.additionalInformation,
                 'instructorID': assignmentInstance.instructorID
@@ -402,7 +328,7 @@
         function sendInstructor(instructorInstance) {
             if (!IDinDB('instructors', instructorInstance.ID)) {
                 db.collection("instructors").doc(instructorInstance.ID).set({
-                    'name': instructor.name,
+                    'name': instructorInstance.name,
                     'email': instructorInstance.email
                 });
             }
@@ -430,29 +356,9 @@
             editModeLoader(assignmentInstance, instructorInstance);
         }
 
-
-        
-
         function submitOnClick() {
             document.getElementById('submitButton').click();
-             submitInfo();
-
-
-            // console.log(newAssignment);
-
-            // db.collection("assignments").doc("newAdded").set({
-            //     name: "name"
-            // }).then(function () {
-            //     console.log("Document successfully written!");
-            // }).catch(function () {
-            //     console.error("Error writing document");
-            // });
-        }
-
-        function cancelHandler() { }
-
-        function pageOnLoadHandler() {
-
+            submitInfo();
         }
     </script>
 
