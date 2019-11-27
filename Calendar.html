@@ -50,8 +50,8 @@
         </div>
 
         <script>
-         
-        //  Starts with getting the date month and year and paasing it to the create calendar.
+
+            //  Starts with getting the date month and year and paasing it to the create calendar.
 
             let today = new Date();
             let currentMonth = today.getMonth();
@@ -99,7 +99,7 @@
 
                                 // setting the dots if the dates have due dates.
                                 let myDate = dueDateArray[i].split("/");
-                                
+
                                 // This if else statemnent takes care of whether adding zeros before the month number and the dauy number or not.
                                 if (month >= 0 && month < 10) {
                                     if (date > 0 && date < 10) {
@@ -133,7 +133,7 @@
                                         }
                                     }
                                 }
-                               
+
                             }
                             cell.appendChild(cellText);
                             row.appendChild(cell);

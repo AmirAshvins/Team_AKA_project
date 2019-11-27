@@ -45,6 +45,19 @@ function loadInstructorsToStorage(){
     });
 }
 
+function loadCoursesToStorage() {
+    db.collection("courses").get().then(function (courseQuery) {
+        let courseList = [];
+        courseQuery.forEach(function (doc) {
+            courseDetails = doc.data();
+            newCourse = new course(courseDetails['courseCode'], courseDetails['courseName']);
+            courseList.push(newCourse);
+        });
+        window.localStorage.setItem("courseList", JSON.stringify(courseList));
+        console.log(JSON.parse(window.localStorage.getItem('courseList')));
+        sessionStorage.coursesLoaded = true;
+    });
+}
 
 function IDinDB(collectionName, ID) {
     db.collection(collectionName).doc(ID).get()
@@ -95,6 +108,13 @@ class instructor {
     }
 }
 
+class course {
+    constructor(courseCode, courseName) {
+        this.courseCode = courseCode;
+        this.courseName = courseName;
+    }
+}
+
 // ##########################
 // UTILITIES
 
@@ -113,4 +133,13 @@ function getElementByIdByCollectionFromLocStorage(elementID, collectionName){
             return collectionList[i];
         }
     }
+}
+
+function getCollectionDetails(collectionList, detail) {
+    detailList = [];
+    collectionList = JSON.parse(window.localStorage.getItem(collectionList));
+    collectionList.forEach(function (item) {
+        detailList.push(item[detail]);
+    })
+    return (detailList)
 }

@@ -234,13 +234,9 @@
             });
         }
 
-        let courseList = ["COMM-1116", "COMP-1100", "COMP-1113", "COMP-1510", "COMP-1536", "COMP-1712", "COMP-1930"];
-        let instructorNameList = ["Sam Lee", "Christopher Thompson", "Takashi Nakamura", "Amir Amintabar", "Shravan Yedulla", "Neda Changizi"];
-        let instructorEmailList = ["slee789@bcit.ca", "cthompson98@bcit.ca", "Takashi_Nakamura@bcit.ca", "aamintabar@bcit.ca", "syedulla@bcit.ca", "nchangizi@bcit.ca"];
-
-        autocomplete(document.getElementById("courseBox"), courseList);
-        autocomplete(document.getElementById("instructorNameBox"), instructorNameList);
-        autocomplete(document.getElementById("instructorEmailBox"), instructorEmailList);
+        autocomplete(document.getElementById("courseBox"), getCollectionDetails("courseList", "courseCode"));
+        autocomplete(document.getElementById("instructorNameBox"), getCollectionDetails("instructorsList", "name"));
+        autocomplete(document.getElementById("instructorEmailBox"), getCollectionDetails("instructorsList", "email"));
     </script>
 
     <!-- set the current date for the date-->
