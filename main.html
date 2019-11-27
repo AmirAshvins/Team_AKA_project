@@ -169,6 +169,7 @@
 
         function onCompletedClick() {
             console.log("Clicked!");
+            console.log('Hello');
         }
 
         function onPageLoad() {
@@ -183,9 +184,12 @@
                 if (allLoaded()) {
                     resetListContainer();
                     loadList();
+                    getAssignmentDueDate();
+                    deletePassedAssignments();
                     clearInterval(waiter);
                 }
             }, 20);
+
         }
 
         firebase.auth().onAuthStateChanged((authUser) => {
