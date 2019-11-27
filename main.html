@@ -27,7 +27,7 @@
     </div>
 
     <!-- content -->
-    <div class="container page-content">
+    <div class="container page-content" id='contentDiv'>
         <div class="row section-header section-item">
             <p class="col-lg-2 col-md-2 col-sm-2 col-xs-2 section-heading list-text addMargin"> Due Date</p>
             <p class="col-lg-2 col-md-2 col-sm-2 col-xs-2 section-heading list-text addMargin"> Due Time</p>
@@ -119,7 +119,14 @@
             dueTimeCol.className = "col-lg-2 col-md-2 col-sm-2 col-xs-2 text-left";
             dueTimeCol.innerHTML = "<p class='list-due-time list-text'>" + dueTime + "</p>";
             return dueTimeCol
-        }    
+        } 
+        
+        function resetListContainer(){
+            document.getElementById('contentDiv').removeChild(document.getElementById('listContainer'));
+            let newListContainer = document.createElement('div');
+            newListContainer.id = 'listContainer';
+            document.getElementById('contentDiv').appendChild(newListContainer);
+        }
     </script>
 
     <!-- load list -->
@@ -136,17 +143,20 @@
     <!-- event handlers -->
 
     <script>
-        // db.collection('assignments').onSnapshot(function (){
-        //     document.getElementById('listContainer').innerHTML = "";
-        //     window.localStorage.assignmentsLoaded = false;
-        //     onPageLoad();
-        // });
-        // db.collection('instructors').onSnapshot(function (){
-        //     document.getElementById('listContainer').innerHTML = "";
-        //     window.localStorage.assignmentsLoaded = false;
-        //     onPageLoad();
-        // });
+        db.collection('assignments').onSnapshot(function (){
+            document.getElementById('listContainer').innerHTML = "";
+            window.localStorage.assignmentsLoaded = false;
+            onPageLoad();
+        });
+
+        db.collection('instructors').onSnapshot(function (){
+            document.getElementById('listContainer').innerHTML = "";
+            window.localStorage.assignmentsLoaded = false;
+            onPageLoad();
+        });
         
+        sessionStorage.assignmentsLoaded = 'false';
+        sessionStorage.instructorsLoaded = 'false';
         onPageLoad();
 
         function onListItemClick(clickedItem) {
@@ -162,8 +172,9 @@
             if (sessionStorage.instructorsLoaded != 'true') {
                 loadInstructorsToStorage();
             }
-            waiter = setInterval(()=>{
+            let waiter = setInterval(()=>{
                 if (sessionStorage.assignmentsLoaded == "true" && sessionStorage.instructorsLoaded == "true"){
+                    resetListContainer();
                     loadList();
                     clearInterval(waiter);
                 }
