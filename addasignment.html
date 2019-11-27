@@ -238,6 +238,12 @@
         let instructorNameList = ["Sam Lee", "Christopher Thompson", "Takashi Nakamura", "Amir Amintabar", "Shravan Yedulla", "Neda Changizi"];
         let instructorEmailList = ["slee789@bcit.ca", "cthompson98@bcit.ca", "Takashi_Nakamura@bcit.ca", "aamintabar@bcit.ca", "syedulla@bcit.ca", "nchangizi@bcit.ca"];
 
+        // function (collectionname, fieldNeeded) 
+        // resultlist =[]
+        // variable = loc stor [collectionname]
+        // for item in collectname 
+        // resultlist.push(item[fieldneeded])
+
         autocomplete(document.getElementById("courseBox"), courseList);
         autocomplete(document.getElementById("instructorNameBox"), instructorNameList);
         autocomplete(document.getElementById("instructorEmailBox"), instructorEmailList);
@@ -341,6 +347,10 @@
                 'instructions': assignmentInstance.instructions,
                 'additionalInformation': assignmentInstance.additionalInformation,
                 'instructorID': assignmentInstance.instructorID
+            }).then(()=>{
+                console.log('Assignment sent succesfully');
+            }).catch((err)=>{
+                console.log('firebase let you down when sending assignment', err);
             });
         }
 
@@ -349,7 +359,11 @@
                 db.collection("instructors").doc(instructorInstance.ID).set({
                     'name': instructorInstance.name,
                     'email': instructorInstance.email
-                });
+                }).then(()=>{
+                console.log('instructor sent succesfully');
+            }).catch((err)=>{
+                console.log('firebase let you down when sending instructor', err);
+            });
             }
         }
     </script>

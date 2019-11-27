@@ -61,6 +61,11 @@ function IDinDB(collectionName, ID) {
         });
 }
 
+/* 
+ 
+CLASS DEFINITIONS
+
+ */
 class assignment {
     constructor(course, assignmentName, dueDate, dueTime, d2lLink, instructions, additionalInformation, instructorID) {
         this.course = course;
@@ -95,6 +100,39 @@ class instructor {
     }
 }
 
+class user{
+    constructor(userID, userName){
+        this.ID = userID;
+        this.name = userName;
+        this.completedAssignments = [];
+        db.collection('users').doc(this.ID).get().then((doc)=>{
+            if (doc.exists){
+                this.getCompletedAssignments()
+            }else{
+                this.sendUserToDB();
+                sessionStorage.loadedUser = true;
+            }
+        });
+    }
+
+    getCompletedAssignments(){
+        db.collection('users').doc(this.ID).get().then((doc)=>{
+            this.completedAssignments = doc.data().completedAssignments;
+            localStorage.user = JSON.stringify(this);
+            sessionStorage.loadedUser = true;
+        }).catch((err)=>{
+            console.log('error while loading completed assignments', err)
+        });
+    }
+
+    sendUserToDB(){
+        db.collection('users').doc(this.ID).set({
+            'name': this.name,
+            'completedAssignments': this.completedAssignments,
+        })
+    }
+}
+
 // ##########################
 // UTILITIES
 
@@ -114,3 +152,5 @@ function getElementByIdByCollectionFromLocStorage(elementID, collectionName){
         }
     }
 }
+
+

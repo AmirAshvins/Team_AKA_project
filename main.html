@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./css/styles.css" type="text/css">
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
 
 </head>
 
@@ -119,9 +120,9 @@
             dueTimeCol.className = "col-lg-2 col-md-2 col-sm-2 col-xs-2 text-left";
             dueTimeCol.innerHTML = "<p class='list-due-time list-text'>" + dueTime + "</p>";
             return dueTimeCol
-        } 
-        
-        function resetListContainer(){
+        }
+
+        function resetListContainer() {
             document.getElementById('contentDiv').removeChild(document.getElementById('listContainer'));
             let newListContainer = document.createElement('div');
             newListContainer.id = 'listContainer';
@@ -134,7 +135,7 @@
     <script>
         function loadList() {
             let parsedAssignmentList = JSON.parse(window.localStorage.assignmentList)
-            for (let i=0; i < parsedAssignmentList.length; i++){
+            for (let i = 0; i < parsedAssignmentList.length; i++) {
                 buildListRow(parsedAssignmentList[i]);
             }
         }
@@ -143,18 +144,18 @@
     <!-- event handlers -->
 
     <script>
-        db.collection('assignments').onSnapshot(function (){
+        db.collection('assignments').onSnapshot(function () {
             document.getElementById('listContainer').innerHTML = "";
             window.localStorage.assignmentsLoaded = false;
             onPageLoad();
         });
 
-        db.collection('instructors').onSnapshot(function (){
+        db.collection('instructors').onSnapshot(function () {
             document.getElementById('listContainer').innerHTML = "";
             window.localStorage.assignmentsLoaded = false;
             onPageLoad();
         });
-        
+
         sessionStorage.assignmentsLoaded = 'false';
         sessionStorage.instructorsLoaded = 'false';
         onPageLoad();
@@ -172,13 +173,23 @@
             if (sessionStorage.instructorsLoaded != 'true') {
                 loadInstructorsToStorage();
             }
-            let waiter = setInterval(()=>{
-                if (sessionStorage.assignmentsLoaded == "true" && sessionStorage.instructorsLoaded == "true"){
+
+            let waiter = setInterval(() => {
+                if (allLoaded) {
                     resetListContainer();
                     loadList();
                     clearInterval(waiter);
                 }
             }, 20);
+        }
+
+        firebase.auth().onAuthStateChanged((authUser) => {
+                    var currentUser = new user(authUser.uid, authUser.displayName)
+                    sessionStorage.loadedUser = false;                    
+                });
+
+        function allLoaded(){
+            return sessionStorage.assignmentsLoaded == "true" && sessionStorage.instructorsLoaded == "true" && sessionStorage.loadedUser == "true"
         }
 
     </script>
