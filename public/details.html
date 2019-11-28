@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 
-    <!-- Imports the css, bootstrap, and firebase modules -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/styles.css" type="text/css">
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
@@ -17,111 +16,77 @@
 <body>
     <!-- header -->
     <div class="jumbotron header-footer-div header-div">
-        <section class="text-center align-center-up">
+
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+
+        <section class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center align-center-up">
             <h2 class="head-text">Assignment Details</h2>
         </section>
+
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-down">
+            <a id="profile" class="btn btn-default" href="###########"><span
+                    class="glyphicon glyphicon-user"></span></a>
+        </div>
     </div>
-
     <!-- content -->
-
     <div class="form-container page-content">
-
-
         <div class="row">
-            <!-- the course row -->
-
             <div class="col-25">
                 <label>Course:</label>
             </div>
             <p id="courseBox" class="col-75"></p>
         </div>
-
-
         <div class="row">
-             <!-- the Assignment name row -->
-
             <div class="col-25">
                 <label>Assignment Name:</label>
             </div>
             <p id="assignmentNameBox" class="col-75"></p>
         </div>
-
-
         <div class="row">
-             <!-- the Due date row -->
-
             <div class="col-25">
                 <label>Due Date:</label>
             </div>
             <p id="dueDateBox" class="col-75"></p>
         </div>
-
-
         <div class="row">
-             <!-- the Due time row -->
-
             <div class="col-25">
                 <label>Due Time:</label>
             </div>
             <p id="dueTimeBox" class="col-75"></p>
         </div>
-
-
         <div class="row">
-             <!-- the D2L Link row -->
-
             <div class="col-25">
                 <label>D2L Link:</label>
-                <a id="d2lLinkBox" class="glyphicon glyphicon-link align-center-down" target="_blank"></a>
+                <a id="d2lLinkBox" class="glyphicon glyphicon-link align-center-down"></a>
             </div>
         </div>
-
-
         <div class="row">
-             <!-- the Instructor name row -->
-
             <div class="col-25">
                 <label>Instructor name:</label>
             </div>
             <p id="instructorNameBox" class="col-75"></p>
         </div>
-
-
         <div class="row">
-             <!-- the INstrucotr Email row -->
-
             <div class="col-25">
-                <label>Instructor Email:</label>
+                <label>InstructorEmail:</label>
             </div>
             <p id="instructorEmailBox" class="col-75"></p>
         </div>
-
         <hr>
-
-
         <div class="row">
-             <!-- the Instructions row -->
-
             <div class="col-25">
                 <label>Instructions:</label>
             </div>
             <p id="instructionsBox" class="col-75"></p>
         </div>
-
-
         <div class="row">
-             <!-- the Additional info row -->
-
             <div class="col-25">
                 <label>Additional Information:</label>
             </div>
             <p id="additionalInformationBox" class="col-75"></p>
         </div>
-
     </div>
-
-
-    <!-- footer containing the buttons -->
+    <!-- footer -->
     <div class="jumbotron footer-div header-footer-div">
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
@@ -135,12 +100,9 @@
             </div>
         </div>
     </div>
-
     <!--load details-->
     <script>
         loadAssignmentDetails(sessionStorage.needsDetails);
-
-        // loads the assingments upon the page loading.
 
         function loadAssignmentDetails(assignmentId) {
             let assignmentInstance = getElementByIdByCollectionFromLocStorage(assignmentId, 'assignmentList');
@@ -160,25 +122,21 @@
     <!-- event handlers -->
 
     <script>
-
         document.getElementById('editButton').onclick = editButtonClickHandler;
         document.getElementById('calendarButton').onclick = calendarButtonClickHandler;
         document.getElementById('listButton').onclick = listButtonClickHandler;
 
-        // handles the button for editing assingments.
         function editButtonClickHandler(){
             sessionStorage.previousPage = "./details.html";
             window.location.href = "./addasignment.html";
         }
 
-        // handles the button for the calendar page
         function calendarButtonClickHandler(){
             sessionStorage.needsDetails = '';
             sessionStorage.previousPage = "./details.html";
             window.location.href = "./calendar.html"
         }
 
-        // handles the button for list page.
         function listButtonClickHandler(){
             sessionStorage.needsDetails = '';
             sessionStorage.previousPage = "./details.html";

@@ -38,7 +38,7 @@ p, h2{
     transform: translate(0, 25%);
 }
 
-/* @media screen and (min-width: 768px) {
+@media screen and (min-width: 768px) {
     .head-text {
         font-size: 250%;
         position: static;
@@ -82,7 +82,7 @@ p, h2{
         line-height: 3vw;
         transform: translate(0, -50%);
     }
-} */
+}
 
 .noBottomMargin{
     margin-bottom: -10px;
@@ -327,7 +327,4 @@ color: #ffffff;
 .strikethrough{
     text-decoration: line-through;
     background-color: lightgray;
-}
-.forFun {
-    font-size: 0.001em;
 }

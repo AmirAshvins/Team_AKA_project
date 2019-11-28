@@ -17,12 +17,10 @@
 <body>
 
     <!-- header -->
-    <div class="jumbotron" style="background-color: rgb(255, 167, 60); top: 0px; width: 100%; margin: 0;height: 1vh;">
-            <h2 class="display-4" style="width: 100%; margin: auto; border: 0em;">Your List</h2>
-            <!-- <h2 class="head-text">Your List</h2> -->
-        <!-- <section class="text-center align-center-up">
-            <h2 class="head-text">Your List</h2>
-        </section> -->
+    <div class="jumbotron header-div header-footer-div">
+        <section class="text-center align-center-up">
+            <h2 class="head-text">Your List</h>
+        </section>
     </div>
 
     <!-- content -->
@@ -222,7 +220,8 @@
 
         firebase.auth().onAuthStateChanged((authUser) => {
                     var currentUser = new user(authUser.uid, authUser.displayName)
-                    sessionStorage.loadedUser = false;                    
+                    sessionStorage.loadedUser = false;
+                    sessionStorage.currentUser = JSON.stringify(currentUser)                    
                 });
 
         function allLoaded(){

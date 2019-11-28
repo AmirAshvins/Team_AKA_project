@@ -26,6 +26,13 @@
 
     <div class="form-container page-content">
 
+        <div class="row">
+            <div class="col-25">
+                <label>Mark as complete:</label>
+            </div>
+            <input type="checkbox" class="col-75" style="transform:scale(2)"
+                onclick="addToComplete(sessionStorage.needsDetails)">
+        </div>
 
         <div class="row">
             <!-- the course row -->
@@ -38,7 +45,7 @@
 
 
         <div class="row">
-             <!-- the Assignment name row -->
+            <!-- the Assignment name row -->
 
             <div class="col-25">
                 <label>Assignment Name:</label>
@@ -48,7 +55,7 @@
 
 
         <div class="row">
-             <!-- the Due date row -->
+            <!-- the Due date row -->
 
             <div class="col-25">
                 <label>Due Date:</label>
@@ -58,7 +65,7 @@
 
 
         <div class="row">
-             <!-- the Due time row -->
+            <!-- the Due time row -->
 
             <div class="col-25">
                 <label>Due Time:</label>
@@ -68,7 +75,7 @@
 
 
         <div class="row">
-             <!-- the D2L Link row -->
+            <!-- the D2L Link row -->
 
             <div class="col-25">
                 <label>D2L Link:</label>
@@ -78,7 +85,7 @@
 
 
         <div class="row">
-             <!-- the Instructor name row -->
+            <!-- the Instructor name row -->
 
             <div class="col-25">
                 <label>Instructor name:</label>
@@ -88,7 +95,7 @@
 
 
         <div class="row">
-             <!-- the INstrucotr Email row -->
+            <!-- the INstrucotr Email row -->
 
             <div class="col-25">
                 <label>Instructor Email:</label>
@@ -100,7 +107,7 @@
 
 
         <div class="row">
-             <!-- the Instructions row -->
+            <!-- the Instructions row -->
 
             <div class="col-25">
                 <label>Instructions:</label>
@@ -110,14 +117,13 @@
 
 
         <div class="row">
-             <!-- the Additional info row -->
+            <!-- the Additional info row -->
 
             <div class="col-25">
                 <label>Additional Information:</label>
             </div>
             <p id="additionalInformationBox" class="col-75"></p>
         </div>
-
     </div>
 
 
@@ -166,23 +172,31 @@
         document.getElementById('listButton').onclick = listButtonClickHandler;
 
         // handles the button for editing assingments.
-        function editButtonClickHandler(){
+        function editButtonClickHandler() {
             sessionStorage.previousPage = "./details.html";
             window.location.href = "./addasignment.html";
         }
 
         // handles the button for the calendar page
-        function calendarButtonClickHandler(){
+        function calendarButtonClickHandler() {
             sessionStorage.needsDetails = '';
             sessionStorage.previousPage = "./details.html";
             window.location.href = "./calendar.html"
         }
 
         // handles the button for list page.
-        function listButtonClickHandler(){
+        function listButtonClickHandler() {
             sessionStorage.needsDetails = '';
             sessionStorage.previousPage = "./details.html";
-            window.location.href = href="./main.html";
+            window.location.href = href = "./main.html";
+        }
+
+        function addToComplete(assignmentId) {
+            let currentUser = JSON.parse(localStorage.user);
+            currentUser.completedAssignments.push(assignmentId);
+            currentUser.sendUserToDB();
+            sessionStorage.loadedUser = "false";
+            localStorage.currentUser = JSON.stringify(user);
         }
     </script>
 </body>
