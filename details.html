@@ -159,6 +159,10 @@
             document.getElementById('instructorEmailBox').innerHTML = instructorInstance.email;
             document.getElementById('instructionsBox').innerHTML = assignmentInstance.instructions;
             document.getElementById('additionalInformationBox').innerHTML = assignmentInstance.additionalInformation;
+            let currentUser = JSON.parse(localStorage.user);
+            if (currentUser.completedAssignments.includes(assignmentId)){
+                document.getElementById('completeCheckBox').checked = "true";
+            }
         }
     </script>
 

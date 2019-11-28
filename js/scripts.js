@@ -144,7 +144,11 @@ function sendUserToDB(currentUser) {
     db.collection('users').doc(currentUser.ID).set({
         'name': currentUser.name,
         'completedAssignments': currentUser.completedAssignments,
-    })
+    }).then(()=>{
+        console.log('successfully sent user');
+    }).catch((err)=>{
+        console.log('firestore sucks at sending users', err)
+    });
 }
 
 
