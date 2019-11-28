@@ -16,7 +16,7 @@ firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
 
 function loadAssignmentsToStorage() {
-    db.collection("assignments").get().then(function (assignmentsQuery) {
+    db.collection("assignments").orderBy('dueDate', 'asc').get().then(function (assignmentsQuery) {
         let assignmentList = [];
         assignmentsQuery.forEach(function (doc) {
             assignmentDetails = doc.data();
