@@ -5,7 +5,14 @@
     <title>List Page</title>
     <meta lang="english">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/v/dt/dt-1.10.20/b-1.6.1/cr-1.5.2/fh-3.1.6/r-2.2.3/rg-1.1.1/sc-2.0.1/datatables.min.css" />
+    <script type="text/javascript"
+        src="https://cdn.datatables.net/v/dt/dt-1.10.20/b-1.6.1/cr-1.5.2/fh-3.1.6/r-2.2.3/rg-1.1.1/sc-2.0.1/datatables.min.js"></script>
     <link rel="stylesheet" href="./css/styles.css" type="text/css">
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
@@ -23,6 +30,18 @@
 
     <!-- content -->
     <div class="container page-content">
+        <!-- <table id="example" class="table table-striped table-bordered" style="width:90%;text-align: center;margin:auto">
+            <thead>
+                <tr>
+                    <th>Due Date</th>
+                    <th>Due Time</th>
+                    <th>Assignment Name</th>
+                    <th>Course</th>
+                    <th>Completed</th>
+                </tr>
+            </thead>
+            <tbody id="tableDetails"></tbody>
+        </table> -->
         <div class="row section-header section-item">
             <p class="col-lg-2 col-md-2 col-sm-2 col-xs-2 section-heading list-text addMargin"> Due Date</p>
             <p class="col-lg-2 col-md-2 col-sm-2 col-xs-2 section-heading list-text addMargin"> Due Time</p>
@@ -53,6 +72,75 @@
     <!-- build list -->
 
     <script>
+        // function buildListRow(assignmentInstance) {
+        //     let listRow = document.createElement('tr');
+        //     listRow.id = assignmentInstance.id;
+
+        //     //build course name
+        //     let courseNameCol = buildCourseNameCol(assignmentInstance);
+
+        //     // build assignmentName
+        //     let assignmentNameCol = buildAssignmentNameCol(assignmentInstance);
+
+        //     // Build due date
+        //     let dueDateCol = buildDueDateCol(assignmentInstance);
+
+        //     // Build due time
+        //     let dueTimeCol = buildDueTimeCol(assignmentInstance);
+
+        //     // Build completed check box
+        //     let completedCol = buildCompletedCol();
+
+        //     listRow.appendChild(dueDateCol);
+        //     listRow.appendChild(dueTimeCol);
+        //     listRow.appendChild(assignmentNameCol);
+        //     listRow.appendChild(courseNameCol);
+        //     listRow.appendChild(completedCol);
+        //     document.getElementById("tableDetails").appendChild(listRow);
+        // }
+
+        // function buildCourseNameCol(assignmentInstance) {
+        //     let courseNameCol = document.createElement('td');
+        //     courseNameCol.innerHTML = assignmentInstance.courseName;
+        //     courseNameCol.onclick = function () {
+        //         onListItemClick(assignmentInstance);
+        //     }
+        //     return courseNameCol;
+        // }
+
+        // function buildAssignmentNameCol(assignmentInstance) {
+        //     let assignmentNameCol = document.createElement('td');
+        //     assignmentNameCol.innerHTML = assignmentInstance.assignmentName;
+        //     assignmentNameCol.onclick = function () {
+        //         onListItemClick(assignmentInstance);
+        //     }
+        //     return assignmentNameCol;
+        // }
+
+        // function buildDueDateCol(assignmentInstance) {
+        //     let dueDateCol = document.createElement('td');
+        //     dueDateCol.innerHTML = assignmentInstance.dueDate;
+        //     dueDateCol.onclick = function () {
+        //         onListItemClick(assignmentInstance);
+        //     }
+        //     return dueDateCol
+        // }
+
+        // function buildDueTimeCol(assignmentInstance) {
+        //     let dueTimeCol = document.createElement('td');
+        //     dueTimeCol.innerHTML = assignmentInstance.dueTime;
+        //     dueTimeCol.onclick = function () {
+        //         onListItemClick(assignmentInstance);
+        //     }
+        //     return dueTimeCol
+        // }
+
+        // function buildCompletedCol() {
+        //     let completedCol = document.createElement('td');
+        //     completedCol.innerHTML = "<input type='checkbox' onclick='onCompletedClick'>";
+        //     return completedCol
+        // }
+
         function buildListRow(assignmentInstance) {
 
             // Build the main container
@@ -134,7 +222,7 @@
     <script>
         function loadList() {
             let parsedAssignmentList = JSON.parse(window.localStorage.assignmentList)
-            for (let i=0; i < parsedAssignmentList.length; i++){
+            for (let i = 0; i < parsedAssignmentList.length; i++) {
                 buildListRow(parsedAssignmentList[i]);
             }
         }
@@ -153,7 +241,7 @@
         //     window.localStorage.assignmentsLoaded = false;
         //     onPageLoad();
         // });
-        
+
         onPageLoad();
 
         function onListItemClick(clickedItem) {
@@ -176,8 +264,8 @@
             if (sessionStorage.coursesLoaded != 'true') {
                 loadCoursesToStorage();
             }
-            waiter = setInterval(()=>{
-                if (sessionStorage.assignmentsLoaded == "true" && sessionStorage.instructorsLoaded == "true"){
+            waiter = setInterval(() => {
+                if (sessionStorage.assignmentsLoaded == "true" && sessionStorage.instructorsLoaded == "true") {
                     loadList();
                     getAssignmentDueDate();
                     deletePassedAssignments();
@@ -187,6 +275,9 @@
 
         }
 
+        // $(document).ready(function () {
+        //     $('#example').DataTable();
+        // });
     </script>
 
 </body>
