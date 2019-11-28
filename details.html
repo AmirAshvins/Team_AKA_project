@@ -30,8 +30,7 @@
             <div class="col-25">
                 <label>Mark as complete:</label>
             </div>
-            <input type="checkbox" class="col-75" style="transform:scale(2)"
-                onclick="addToComplete(sessionStorage.needsDetails)">
+            <input id="completeCheckBox" type="checkbox" class="col-75" style="transform:scale(2)">
         </div>
 
         <div class="row">
@@ -166,7 +165,7 @@
     <!-- event handlers -->
 
     <script>
-
+        document.getElementById('completeCheckBox').onclick= completeCBHandler;
         document.getElementById('editButton').onclick = editButtonClickHandler;
         document.getElementById('calendarButton').onclick = calendarButtonClickHandler;
         document.getElementById('listButton').onclick = listButtonClickHandler;
@@ -189,6 +188,11 @@
             sessionStorage.needsDetails = '';
             sessionStorage.previousPage = "./details.html";
             window.location.href = href = "./main.html";
+        }
+
+        function completeCBHandler(){
+            let CB = document.getElementById('completeCheckBox');
+            if (CB.)
         }
 
         function addToComplete(assignmentId) {
