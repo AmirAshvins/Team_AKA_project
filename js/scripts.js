@@ -138,13 +138,13 @@ class user {
             console.log('error while loading completed assignments', err)
         });
     }
+}
 
-    sendUserToDB() {
-        db.collection('users').doc(this.ID).set({
-            'name': this.name,
-            'completedAssignments': this.completedAssignments,
-        })
-    }
+function sendUserToDB(currentUser) {
+    db.collection('users').doc(currentUser.ID).set({
+        'name': currentUser.name,
+        'completedAssignments': currentUser.completedAssignments,
+    })
 }
 
 
