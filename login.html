@@ -5,27 +5,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Index</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <title>Login</title>
+  <!--Link to external CSS stylesheet-->
   <link rel="stylesheet" href="./css/styles.css" type="text/css">
+  <!--CSS and scripts for bootstrap and jquery-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <!--Scripts for Firebase-->
   <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
   <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
 </head>
 
 <body>
+  <!--Creates the header bar-->
   <div class="jumbotron header-footer-div header-div">
     <h2 class="head-text">Log In</h2>
   </div>
 
+  <!--Creates the authentication input box-->
   <div id="firebaseui-auth-container"></div>
+  <!--Creates the loading div when authentication input box is loading-->
   <div id="loader">Loading...</div>
 
   <script>
+    /*Intializes Firebase*/
     var firebaseConfig = {
       apiKey: "AIzaSyA_-CQ7oIjLIeTU8B05p8lD-UbOJ9MXm_Y",
       authDomain: "team-aka.firebaseapp.com",
@@ -39,6 +46,7 @@
   </script>
 
   <script>
+    /*Initializes Firebase ui for authentication and loader*/
     var ui = new firebaseui.auth.AuthUI(firebase.auth());
     var uiConfig = {
       callbacks: {

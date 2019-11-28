@@ -23,39 +23,30 @@
     </div>
 
     <!-- content -->
-
     <div class="form-container page-content">
-
-
         <div class="row">
             <!-- the course row -->
-
             <div class="col-25">
                 <label>Course:</label>
             </div>
             <p id="courseBox" class="col-75"></p>
         </div>
 
-
         <div class="row">
              <!-- the Assignment name row -->
-
             <div class="col-25">
                 <label>Assignment Name:</label>
             </div>
             <p id="assignmentNameBox" class="col-75"></p>
         </div>
 
-
         <div class="row">
              <!-- the Due date row -->
-
             <div class="col-25">
                 <label>Due Date:</label>
             </div>
             <p id="dueDateBox" class="col-75"></p>
         </div>
-
 
         <div class="row">
              <!-- the Due time row -->
@@ -66,30 +57,24 @@
             <p id="dueTimeBox" class="col-75"></p>
         </div>
 
-
         <div class="row">
              <!-- the D2L Link row -->
-
             <div class="col-25">
                 <label>D2L Link:</label>
                 <a id="d2lLinkBox" class="glyphicon glyphicon-link align-center-down" target="_blank"></a>
             </div>
         </div>
 
-
         <div class="row">
              <!-- the Instructor name row -->
-
             <div class="col-25">
                 <label>Instructor name:</label>
             </div>
             <p id="instructorNameBox" class="col-75"></p>
         </div>
 
-
         <div class="row">
              <!-- the INstrucotr Email row -->
-
             <div class="col-25">
                 <label>Instructor Email:</label>
             </div>
@@ -97,7 +82,6 @@
         </div>
 
         <hr>
-
 
         <div class="row">
              <!-- the Instructions row -->
@@ -108,7 +92,6 @@
             <p id="instructionsBox" class="col-75"></p>
         </div>
 
-
         <div class="row">
              <!-- the Additional info row -->
 
@@ -117,7 +100,6 @@
             </div>
             <p id="additionalInformationBox" class="col-75"></p>
         </div>
-
     </div>
 
 
@@ -141,7 +123,6 @@
         loadAssignmentDetails(sessionStorage.needsDetails);
 
         // loads the assingments upon the page loading.
-
         function loadAssignmentDetails(assignmentId) {
             let assignmentInstance = getElementByIdByCollectionFromLocStorage(assignmentId, 'assignmentList');
             let instructorInstance = getElementByIdByCollectionFromLocStorage(assignmentInstance.instructorID, 'instructorsList');
@@ -158,9 +139,7 @@
     </script>
 
     <!-- event handlers -->
-
     <script>
-
         document.getElementById('editButton').onclick = editButtonClickHandler;
         document.getElementById('calendarButton').onclick = calendarButtonClickHandler;
         document.getElementById('listButton').onclick = listButtonClickHandler;

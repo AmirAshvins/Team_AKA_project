@@ -1,41 +1,24 @@
-/* GENERIC CSS */
+/*GENERIC CSS*/
+/*Centers element horizontally*/
 .horizontal-center{
     margin-top: 50px;
     text-align: center;
 }
 
+/*Centers text and colours it black*/
 p, h2{
     text-align: center;
     color: black;
 }
 
+/*Sets glyphicon sizes*/
 .glyphicon {
     font-size: 200%;
 }
 
-#profile.btn {
-    border-style: outset;
-    border-color: darkorange;
-    border-width: 3px;
-    border-radius: 100%;
-}
-
+/*Sets an element to be inline*/
 .inline-elem{
     display: inline;
-}
-
-#headers{
-    text-align: center;
-    background-color: darkgray;
-    color: orange;
-}
-
-.align-center-up{
-    transform: translate(0, -50%);
-}
-
-.align-center-down{
-    transform: translate(0, 25%);
 }
 
 /* @media screen and (min-width: 768px) {
@@ -84,17 +67,19 @@ p, h2{
     }
 } */
 
+/*Removes bottom margin*/
 .noBottomMargin{
     margin-bottom: -10px;
 }
 
+/*Adds margin at the top and bottom of element*/
 .addMargin{
     margin-bottom: 10px;
     margin-top: 10px;
 }
 
+/*Styling for body*/
 body{
-    
     padding: 0px;
     top: 0px;
     left: 0px;
@@ -103,26 +88,10 @@ body{
     background-image: url("../images/landing_page_bg.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    /* overflow: hidden; */
+    font: 16px Arial;  
 }
 
-.header-footer-div{
-    width: 100%;
-    margin: 0;
-    height: 1vh;
-}
-
-.header-div{
-    background-color: rgb(255, 167, 60);
-    top: 0px;
-}
-
-.footer-div{
-    position: fixed;
-    background-color: rgba(255, 255, 255, 0);
-    bottom: 0px;
-}
-
+/*Styles the page content between the header and footer*/
 .page-content{
     margin-left: auto;
     margin-right: auto;
@@ -133,48 +102,95 @@ body{
     overflow-x: hidden;
 }
 
+/*Styles container for features on landing page*/
+.floater {
+    background-color: rgba(250, 253, 226, 0.5);
+    border-radius: 8px;
+}
+
+/*HEADERS AND FOOTERS*/
+/*Styles headers*/
+#headers{
+    text-align: center;
+    background-color: darkgray;
+    color: orange;
+}
+
+/*Styles size of header and footer*/
+.header-footer-div{
+    width: 100%;
+    margin: 0;
+    height: 1vh;
+}
+
+/*Styles color and position of header*/
+.header-div{
+    background-color: rgb(255, 167, 60);
+    top: 0px;
+}
+
+/*Styles color and position of footer*/
+.footer-div{
+    position: fixed;
+    background-color: rgba(255, 255, 255, 0);
+    bottom: 0px;
+}
+
+/*Aligns header elements to be centered vertically*/
+.align-center-up{
+    transform: translate(0, -50%);
+}
+
+/*Aligns footer elements to be centered vertically*/
+.align-center-down{
+    transform: translate(0, 25%);
+}
+
 /* LIST PAGE CSS */
+/*Styles section headers for list*/
 .section-header{
     background-color: rgb(216, 136, 83);
     height: 5vw;
 }
 
+/*Styles section header's margin and border*/
 .section-item{
     margin-bottom: 5px;
     margin-top: 5px;
     border-radius: 8px;
 }
 
+/*Styles section headers font*/
 .section-heading {
     font-weight: bold;
     margin-top: 1vw;
 }
 
+/*Sets colour of list row and changes the user's cursor*/
 .list-row {
     background-color:rgb(250, 253, 226);
     cursor: pointer;
 }
 
+/*Styles text in list rows*/
 .list-text {
     color: black;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.75vw;
 }
 
+/*Sets height of list container*/
 #listContainer{
     height: 50vw;
 }
 
-.floater {
-    background-color: rgba(250, 253, 226, 0.5);
-    border-radius: 8px;
-}
-    /* CSS BY ID */
-
+/*LOGIN CSS*/
+/*Styles the login button's height*/
 #loginButtonDiv{
     height: 30%;
 }
 
+/*Positions the authentication container*/
 #firebaseui-auth-container{
     position: static;
     margin-top: 10%;
@@ -182,14 +198,14 @@ body{
     margin-right: auto;
 }
 
-/*Styling for Add Assignment */
-/* Style the label to display next to the inputs */
+/*ADD ASSIGNMENT FORM CSS*/
+/*Style the label to display next to the inputs*/
 label {
 padding: 12px 12px 12px 0;
 display: inline-block;
 }
 
-/* Style the submit button */
+/*Style the submit button*/
 input[type=submit] {
 background-color: #4CAF50;
 color: white;
@@ -201,7 +217,7 @@ float: right;
 display: none;
 }
 
-/* Style the container */
+/*Style the container*/
 .form-container {
 border-radius: 5px;
 background-color:rgba(255, 255, 255, 0.3);
@@ -210,16 +226,20 @@ height: 70vh;
 overflow-y: scroll;
 }
 
+/*Style the scrollbar for form container*/
 .form-container::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 7px;
 }
+
+/*Style the scrollbar for form container*/
 .form-container::-webkit-scrollbar-thumb {
     border-radius: 4px;
     background-color: rgba(0, 0, 0, 0.5);
     box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
 
+/*Styles text area elements in form*/
 textarea {
     width: 350px;
     height: 25%;
@@ -229,49 +249,48 @@ textarea {
     font-size: 16px;
 }
 
-/* Floating column for labels: 25% width */
+/*Floating column for labels: 25% width*/
 .col-25 {
 float: left;
 width: 25%;
 margin-top: 6px;
 }
 
-/* Floating column for inputs: 75% width */
+/*Floating column for inputs: 75% width*/
 .col-75 {
 float: left;
 width: 75%;
 margin-top: 6px;
 }
 
-/* Clear floats after the columns */
+/*Clear floats after the columns*/
 .row:after {
 content: "";
 display: table;
 clear: both;
 }
 
+/*Styling for responsiveness of form*/
 @media screen and (max-width: 600px) {
-.col-25, .col-75, input[type=submit] {
-    width: 100%;
-    margin-top: 0;
-}
+    .col-25, .col-75, input[type=submit] {
+        width: 100%;
+        margin-top: 0;
+    }
 }
 
-/* Autocomplete styling*/
+/*AUTOCOMPLETE CSS*/
+/*Styles all elements' box-sizing*/
 * {
 box-sizing: border-box;
 }
 
-body {
-font: 16px Arial;  
-}
-
-/*the container must be positioned relative:*/
+/*Sets position of autocomplete container*/
 .autocomplete {
 position: relative;
 display: inline-block;
 }
 
+/*Styles input elements*/
 input {
 border: 1px solid transparent;
 background-color: #f1f1f1;
@@ -279,25 +298,27 @@ padding: 10px;
 font-size: 16px;
 }
 
+/*Styles text input*/
 input[type=text] {
 background-color: #f1f1f1;
 width: 350px;
 overflow-x: scroll;
 }
 
+/*Styles autocomplete items*/
 .autocomplete-items {
 position: absolute;
 border: 1px solid #d4d4d4;
 border-bottom: none;
 border-top: none;
 z-index: 99;
-/*position the autocomplete items to be the same width as the container:*/
 top: 100%;
 left: 0;
 right: 0;
 width: 350px;
 }
 
+/*Styles autocomplete items and divs*/
 .autocomplete-items div {
 padding: 10px;
 cursor: pointer;
@@ -305,16 +326,19 @@ background-color: #fff;
 border-bottom: 1px solid #d4d4d4; 
 }
 
-/*when hovering an item:*/
+/*Styling for when hovering over an item*/
 .autocomplete-items div:hover {
 background-color: #e9e9e9; 
 }
 
-/*when navigating through the items using the arrow keys:*/
+/*Styling for when navigating through the items using the arrow keys*/
 .autocomplete-active {
 background-color: DodgerBlue !important; 
 color: #ffffff; 
 }
+
+/*CALENDAR*/
+/*Styling for an assignment that exists on a date on the calendar*/
 .AssignmentExists {
     padding: 0.1em;
     height: 1.5em;
@@ -324,10 +348,13 @@ color: #ffffff;
 
 }
 
+/*Styling for strike through*/
 .strikethrough{
     text-decoration: line-through;
     background-color: lightgray;
 }
+
+/*???*/
 .forFun {
     font-size: 0.001em;
 }

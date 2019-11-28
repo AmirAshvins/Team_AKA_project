@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Add Assignment</title>
-
-    <!-- importing bootstrap, css firestore and firebase. -->
+    <!--Import bootstrap and external CSS-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/styles.css" type="text/css">
+    <!--Import Firebase-->
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
-    <!-- recall clasess -->
+    <!--Import external JS-->
     <script src="./js/scripts.js"></script>
 </head>
 
@@ -26,13 +26,9 @@
     <!-- content -->
     <div class="form-container page-content floater">
         <form autocomplete="off">
-
             <!--making the rows  -->
-
             <div class="row">
-
                 <!-- this is the course row -->
-
                 <div class="col-25">
                     <label for="courseBox">Course</label>
                 </div>
@@ -42,9 +38,7 @@
                 </div>
             </div>
             <div class="row">
-
                 <!-- this is the assignment name row -->
-
                 <div class="col-25">
                     <label for="assignmentNameBox">Assignment Name</label>
                 </div>
@@ -54,9 +48,7 @@
                 </div>
             </div>
             <div class="row">
-
                 <!-- this is the Due Date row -->
-
                 <div class="col-25">
                     <label for="dueDateBox">Due Date</label>
                 </div>
@@ -66,9 +58,7 @@
             </div>
             <div class="row">
                 <div class="col-25">
-
                     <!-- this is the Due Time row -->
-
                     <label for="dueTimeBox">Due Time</label>
                 </div>
                 <div class="col-75">
@@ -76,9 +66,7 @@
                 </div>
             </div>
             <div class="row">
-
                 <!-- this is the D2L link row -->
-
                 <div class="col-25">
                     <label for="d2lLinkBox">D2L Link</label>
                 </div>
@@ -89,9 +77,7 @@
             </div>
             <div class="row">
                 <div class="col-25">
-
                     <!-- this is the instructor name row -->
-
                     <label for="instructorNameBox">Instructor Name</label>
                 </div>
                 <div class="autocomplete col-75">
@@ -103,9 +89,7 @@
             </div>
             <div class="row">
                 <div class="col-25">
-
                     <!-- this is the Instructor email row -->
-
                     <label for="instructorEmailBox">Instructor Email</label>
                 </div>
                 <div class="autocomplete col-75">
@@ -118,9 +102,7 @@
             <hr>
             <div class="row">
                 <div class="col-25">
-
                     <!-- this is the instructions row -->
-
                     <label for="instructionsBox">Instructions</label>
                 </div>
                 <div class="col-75">
@@ -130,9 +112,7 @@
             </div>
             <div class="row">
                 <div class="col-25">
-
                     <!-- this is the additional informations row -->
-
                     <label for="additionalInformationBox">Additional Information</label>
                 </div>
                 <div class="col-75">
@@ -141,9 +121,7 @@
                 </div>
             </div>
             <div class="row">
-
                 <!-- this is the button for sumbit but it is invisible and handled by the button in the bottom div -->
-
                 <input id="submitButton" type="submit" value="Submit">
             </div>
         </form>
@@ -161,10 +139,9 @@
         </div>
 
     </div>
+
     <!-- js -->
-
     <!--Autocomplete Function-->
-
     <script>
         // the autocomplete 
         function autocomplete(inp, arr) {
@@ -207,6 +184,7 @@
                     }
                 }
             });
+
             /*execute a function presses a key on the keyboard:*/
             inp.addEventListener("keydown", function (e) {
                 var x = document.getElementById(this.id + "autocomplete-list");
@@ -232,6 +210,7 @@
                     }
                 }
             });
+
             function addActive(x) {
                 /*a function to classify an item as "active":*/
                 if (!x) return false;
@@ -242,12 +221,14 @@
                 /*add class "autocomplete-active":*/
                 x[currentFocus].classList.add("autocomplete-active");
             }
+
             function removeActive(x) {
                 /*a function to remove the "active" class from all autocomplete items:*/
                 for (var i = 0; i < x.length; i++) {
                     x[i].classList.remove("autocomplete-active");
                 }
             }
+
             function closeAllLists(elmnt) {
                 /*close all autocomplete lists in the document,
                 except the one passed as an argument:*/
@@ -258,12 +239,14 @@
                     }
                 }
             }
+
             /*execute a function when someone clicks in the document:*/
             document.addEventListener("click", function (e) {
                 closeAllLists(e.target);
             });
         }
 
+        /*Sets the autocomplete values for courseBox, instructorNameBox, and instructorEmailBox*/
         autocomplete(document.getElementById("courseBox"), getCollectionDetails("assignmentList", "courseCode"));
         autocomplete(document.getElementById("instructorNameBox"), getCollectionDetails("instructorsList", "name"));
         autocomplete(document.getElementById("instructorEmailBox"), getCollectionDetails("instructorsList", "email"));
@@ -271,16 +254,15 @@
 
 
     <!-- submit functions-->
-
     <script>
         function submitInfo() {
             let instructorInstance = instructorBuilder();
             let assignmentInstance = assignmentClassBuilder(instructorInstance.ID);
             sendAssignment(assignmentInstance);
             sendInstructor(instructorInstance);
-            try{
+            try {
                 delete sessionStorage.needsDetails;
-            }catch{
+            } catch{
                 console.log('find me');
             }
         }
@@ -288,15 +270,14 @@
     </script>
 
     <!-- EDIT functionality  -->
-
     <script>
-
         // When page of edit assingment is called, it preloads the assingmetn details
         function editModeLoader(assignmentInstance, instructorInstance) {
             changeLabelsToEdit(assignmentInstance);
             loadAssignmentDetails(assignmentInstance, instructorInstance);
         }
 
+        // Loads assignment details into input boxes
         function loadAssignmentDetails(assignmentInstance, instructorInstance) {
             document.getElementById('assignmentNameBox').value = assignmentInstance.name;
             document.getElementById('courseBox').value = assignmentInstance.course;
@@ -316,11 +297,8 @@
     </script>
 
     <!-- collect data into classes -->
-
     <script>
-
         // Build an instance of the assingment.
-
         function assignmentClassBuilder(instructorID) {
             console.log(document.getElementById('dueTimeBox').value);
             let newAssignment = new assignment(
@@ -336,9 +314,7 @@
             return newAssignment;
         }
 
-
-        // Creates a calss of instructor
-
+        // Creates a class of instructor
         function instructorBuilder() {
             console.log(document.getElementById('instructorNameBox').value);
             let newInstructor = new instructor(
@@ -350,11 +326,8 @@
     </script>
 
     <!-- send data -->
-
     <script>
-
         // sends the assingment to the databse.
-
         function sendAssignment(assignmentInstance) {
             db.collection("assignments").doc(assignmentInstance.ID).set({
                 'course': assignmentInstance.course,
@@ -365,33 +338,30 @@
                 'instructions': assignmentInstance.instructions,
                 'additionalInformation': assignmentInstance.additionalInformation,
                 'instructorID': assignmentInstance.instructorID
-            }).then(()=>{
+            }).then(() => {
                 console.log('Assignment sent succesfully');
-            }).catch((err)=>{
+            }).catch((err) => {
                 console.log('firebase let you down when sending assignment', err);
             });
         }
 
         // Sends the instructor calss to the data base.
-
         function sendInstructor(instructorInstance) {
             if (!IDinDB('instructors', instructorInstance.ID)) {
                 db.collection("instructors").doc(instructorInstance.ID).set({
                     'name': instructorInstance.name,
                     'email': instructorInstance.email
-                }).then(()=>{
-                console.log('instructor sent succesfully');
-            }).catch((err)=>{
-                console.log('firebase let you down when sending instructor', err);
-            });
+                }).then(() => {
+                    console.log('instructor sent succesfully');
+                }).catch((err) => {
+                    console.log('firebase let you down when sending instructor', err);
+                });
             }
         }
     </script>
 
     <!-- event handlers -->
-
     <script>
-
         if (sessionStorage.needsDetails != undefined) {
             let assignmentInstance = getElementByIdByCollectionFromLocStorage(sessionStorage.needsDetails, 'assignmentList');
             let instructorInstance = getElementByIdByCollectionFromLocStorage(assignmentInstance.instructorID, 'instructorsList');
@@ -399,7 +369,6 @@
         }
 
         // handles the event when the submit button is clicked.
-
         function submitOnClick() {
             document.getElementById('submitButton').click();
             submitInfo();
@@ -407,4 +376,5 @@
 
     </script>
 </body>
+
 </html>
