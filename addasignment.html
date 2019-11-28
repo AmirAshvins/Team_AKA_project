@@ -376,7 +376,7 @@
         // Sends the instructor calss to the data base.
 
         function sendInstructor(instructorInstance) {
-            if (!IDinDB('instructors', instructorInstance.ID)) {
+           
                 db.collection("instructors").doc(instructorInstance.ID).set({
                     'name': instructorInstance.name,
                     'email': instructorInstance.email
@@ -385,7 +385,6 @@
             }).catch((err)=>{
                 console.log('firebase let you down when sending instructor', err);
             });
-            }
         }
     </script>
 
