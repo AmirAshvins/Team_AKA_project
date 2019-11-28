@@ -360,6 +360,10 @@
                 'instructions': assignmentInstance.instructions,
                 'additionalInformation': assignmentInstance.additionalInformation,
                 'instructorID': assignmentInstance.instructorID
+            }).then(()=>{
+                console.log('Assignment sent succesfully');
+            }).catch((err)=>{
+                console.log('firebase let you down when sending assignment', err);
             });
         }
 
@@ -370,7 +374,11 @@
                 db.collection("instructors").doc(instructorInstance.ID).set({
                     'name': instructorInstance.name,
                     'email': instructorInstance.email
-                });
+                }).then(()=>{
+                console.log('instructor sent succesfully');
+            }).catch((err)=>{
+                console.log('firebase let you down when sending instructor', err);
+            });
             }
         }
     </script>

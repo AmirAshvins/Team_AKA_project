@@ -74,6 +74,12 @@ function IDinDB(collectionName, ID) {
         });
 }
 
+/* 
+ 
+CLASS DEFINITIONS
+
+ */
+// The assignment class
 class assignment {
     constructor(course, assignmentName, dueDate, dueTime, d2lLink, instructions, additionalInformation, instructorID) {
         this.course = course;
@@ -92,7 +98,7 @@ class assignment {
         }
     }
 }
-
+// the instructor class
 class instructor {
     constructor(instructorName, instructorEmail) {
         this.ID = '';
@@ -107,25 +113,72 @@ class instructor {
         }
     }
 }
-
-class course {
-    constructor(courseCode, courseName) {
-        this.courseCode = courseCode;
-        this.courseName = courseName;
+// the user class
+class user {
+    constructor(userID, userName) {
+        this.ID = userID;
+        this.name = userName;
+        this.completedAssignments = [];
+        db.collection('users').doc(this.ID).get().then((doc) => {
+            if (doc.exists) {
+                this.getCompletedAssignments()
+            } else {
+                this.sendUserToDB();
+                sessionStorage.loadedUser = true;
+            }
+        });
     }
-}
 
-// ##########################
-// UTILITIES
+    getCompletedAssignments() {
+        db.collection('users').doc(this.ID).get().then((doc) => {
+            this.completedAssignments = doc.data().completedAssignments;
+            localStorage.user = JSON.stringify(this);
+            sessionStorage.loadedUser = true;
+        }).catch((err) => {
+            console.log('error while loading completed assignments', err)
+        });
+    }
 
-function getUrlQueries() {
-    let urlQuery = decodeURI(window.location.search());
-    let queries = urlQuery.split('?');
-    delete queries[0];
-    console.log("success");
-    return queries;
-}
+    sendUserToDB() {
+        db.collection('users').doc(this.ID).set({
+            'name': this.name,
+            'completedAssignments': this.completedAssignments,
+        })
 
+        class course {
+            constructor(courseCode, courseName) {
+                this.courseCode = courseCode;
+                this.courseName = courseName;
+            }
+        }
+
+        // ##########################
+        // UTILITIES
+
+        function getUrlQueries() {
+            let urlQuery = decodeURI(window.location.search());
+            let queries = urlQuery.split('?');
+            delete queries[0];
+            console.log("success");
+            return queries;
+        }
+
+        function getElementByIdByCollectionFromLocStorage(elementID, collectionName) {
+            let collectionList = JSON.parse(window.localStorage[collectionName]);
+            for (let i = 0; i < collectionList.length; i++) {
+                if (collectionList[i].ID === elementID) {
+                    return collectionList[i];
+                }
+            }
+        }
+
+        function getCollectionDetails(collectionList, detail) {
+            detailList = [];
+            collectionList = JSON.parse(window.localStorage.getItem(collectionList));
+            collectionList.forEach(function (item) {
+                detailList.push(item[detail]);
+            })
+            return (detailList)
 function getElementByIdByCollectionFromLocStorage(elementID, collectionName) {
     let collectionList = JSON.parse(window.localStorage[collectionName]);
     for (let i = 0; i < collectionList.length; i++) {
@@ -135,6 +188,17 @@ function getElementByIdByCollectionFromLocStorage(elementID, collectionName) {
     }
 }
 
+db.collection('assignments').onSnapshot(function () {
+    document.getElementById('listContainer').innerHTML = "";
+    window.localStorage.assignmentsLoaded = false;
+    onPageLoad();
+});
+
+db.collection('instructors').onSnapshot(function () {
+    document.getElementById('listContainer').innerHTML = "";
+    window.localStorage.assignmentsLoaded = false;
+    onPageLoad();
+});
 function getAssignmentDueDate() {
     let assignments = JSON.parse(localStorage.assignmentList);
     let assignmentDueDateList = []

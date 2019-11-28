@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./css/styles.css" type="text/css">
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
 
 </head>
 
@@ -25,6 +26,7 @@
     <!-- content -->
     <div class="container page-content">
         <!-- The container for the header of the list -->
+    <div class="container page-content" id='contentDiv'>
         <div class="row section-header section-item">
             <p class="col-lg-2 col-md-2 col-sm-2 col-xs-2 section-heading list-text addMargin"> Due Date</p>
             <p class="col-lg-2 col-md-2 col-sm-2 col-xs-2 section-heading list-text addMargin"> Due Time</p>
@@ -126,6 +128,13 @@
         }
 
         // ends the row
+        function resetListContainer() {
+            document.getElementById('contentDiv').removeChild(document.getElementById('listContainer'));
+            let newListContainer = document.createElement('div');
+            newListContainer.id = 'listContainer';
+            document.getElementById('contentDiv').appendChild(newListContainer);
+        }
+
         function buildCompletedCol() {
             let completedCol = document.createElement('div');
             completedCol.className = "col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center";
@@ -143,12 +152,23 @@
             for (let i = 0; i < parsedAssignmentList.length; i++) {
                 buildListRow(parsedAssignmentList[i]);
             }
+            markCompletedAssignments();
+        }
+
+        function markCompletedAssignments(){
+            let user = JSON.parse(localStorage.user);
+            for (assignment of user.completedAssignments){
+                let assignmentRowDOM = document.getElementById(assignment);
+                assignmentRowDOM.style.backgroundColor = 'red';
+            }
         }
     </script>
 
     <!-- event handlers -->
 
     <script>
+        sessionStorage.assignmentsLoaded = 'false';
+        sessionStorage.instructorsLoaded = 'false';
         onPageLoad();
 
         // handels the redirection to the details page.
@@ -172,11 +192,10 @@
             if (sessionStorage.instructorsLoaded != 'true') {
                 loadInstructorsToStorage();
             }
-            if (sessionStorage.coursesLoaded != 'true') {
-                loadCoursesToStorage();
-            }
-            waiter = setInterval(() => {
-                if (sessionStorage.assignmentsLoaded == "true" && sessionStorage.instructorsLoaded == "true") {
+
+            let waiter = setInterval(() => {
+                if (allLoaded()) {
+                    resetListContainer();
                     loadList();
                     getAssignmentDueDate();
                     deletePassedAssignments();
@@ -184,6 +203,16 @@
                 }
             }, 20);
         }
+
+        firebase.auth().onAuthStateChanged((authUser) => {
+                    var currentUser = new user(authUser.uid, authUser.displayName)
+                    sessionStorage.loadedUser = false;                    
+                });
+
+        function allLoaded(){
+            return sessionStorage.assignmentsLoaded == "true" && sessionStorage.instructorsLoaded == "true" && sessionStorage.loadedUser == "true"
+        }
+
     </script>
 </body>
 </html>
