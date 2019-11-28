@@ -21,7 +21,8 @@ p, h2{
     display: inline;
 }
 
-/* @media screen and (min-width: 768px) {
+/*Styling for header text*/
+@media screen and (min-width: 768px) {
     .head-text {
         font-size: 250%;
         position: static;
@@ -43,6 +44,7 @@ p, h2{
     }
 }
 
+/*Styling for footer text*/
 @media screen and (min-width: 768px) {
     .foot-text {
         font-size: 250%;
@@ -65,7 +67,7 @@ p, h2{
         line-height: 3vw;
         transform: translate(0, -50%);
     }
-} */
+}
 
 /*Removes bottom margin*/
 .noBottomMargin{
