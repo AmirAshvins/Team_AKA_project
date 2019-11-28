@@ -229,30 +229,11 @@
             });
         }
 
-        autocomplete(document.getElementById("courseBox"), getCollectionDetails("courseList", "courseCode"));
+        autocomplete(document.getElementById("courseBox"), getCollectionDetails("assignmentList", "courseCode"));
         autocomplete(document.getElementById("instructorNameBox"), getCollectionDetails("instructorsList", "name"));
         autocomplete(document.getElementById("instructorEmailBox"), getCollectionDetails("instructorsList", "email"));
     </script>
 
-    <!-- set the current date for the date-->
-
-    <!-- <script>
-        let today = new Date();
-        let dd = today.getDate();
-        let mm = today.getMonth() + 1;
-        var yyyy = today.getFullYear();
-        if (dd < 10) {
-            dd = '0' + dd
-        }
-        if (mm < 10) {
-            mm = '0' + mm
-        }
-
-        today = yyyy + '-' + mm + '-' + dd;
-        document.getElementById("date").setAttribute("min", today);
-    </script> -->
-
-    <!-- submit functions-->
 
     <script>
         function submitInfo(){
@@ -260,6 +241,11 @@
             let assignmentInstance = assignmentClassBuilder(instructorInstance.ID);
             sendAssignment(assignmentInstance);
             sendInstructor(instructorInstance);
+            try{
+                delete sessionStorage.needsDetails;
+            }catch{
+                console.log('find me');
+            }
         }
 
     </script>

@@ -323,3 +323,8 @@ color: #ffffff;
     background-color:rgb(255, 208, 0);
 
 }
+
+.strikethrough{
+    text-decoration: line-through;
+    background-color: lightgray;
+}
