@@ -264,7 +264,7 @@
             });
         }
 
-        autocomplete(document.getElementById("courseBox"), getCollectionDetails("assignmentList", "courseCode"));
+        autocomplete(document.getElementById("courseBox"), getCollectionDetails("assignmentList", "course"));
         autocomplete(document.getElementById("instructorNameBox"), getCollectionDetails("instructorsList", "name"));
         autocomplete(document.getElementById("instructorEmailBox"), getCollectionDetails("instructorsList", "email"));
     </script>
@@ -291,7 +291,7 @@
 
     <script>
 
-        // When page of edit assingment is called, it preloads the assingmetn details
+        // When page of edit assingment is called, it preloads the assingment details
         function editModeLoader(assignmentInstance, instructorInstance) {
             changeLabelsToEdit(assignmentInstance);
             loadAssignmentDetails(assignmentInstance, instructorInstance);
