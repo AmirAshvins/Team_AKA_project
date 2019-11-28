@@ -192,13 +192,25 @@
 
         function completeCBHandler(){
             let CB = document.getElementById('completeCheckBox');
-            if (CB.)
+            if (CB.checked){
+                addToComplete(sessionStorage.needsDetails);
+            }else{
+                removeFromCompleted(sessionStorage.needsDetails);
+            }
         }
 
-        function addToComplete(assignmentId) {
+        function addToComplete(assignmentID) {
             let currentUser = JSON.parse(localStorage.user);
-            currentUser.completedAssignments.push(assignmentId);
-            currentUser.sendUserToDB();
+            currentUser.completedAssignments.push(assignmentID);
+            sendUserToDB(currentUser);
+            sessionStorage.loadedUser = "false";
+            localStorage.currentUser = JSON.stringify(user);
+        }
+
+        function removeFromCompleted(assignmentID){
+            let currentUser = JSON.parse(localStorage.user);
+            delete currentUser.completedAssignments[currentUser.completedAssignments.indexOf(assignmentID)];
+            sendUserToDB(currentUser);
             sessionStorage.loadedUser = "false";
             localStorage.currentUser = JSON.stringify(user);
         }
