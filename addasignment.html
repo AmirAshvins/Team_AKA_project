@@ -278,9 +278,9 @@
             let assignmentInstance = assignmentClassBuilder(instructorInstance.ID);
             sendAssignment(assignmentInstance);
             sendInstructor(instructorInstance);
-            try{
+            try {
                 delete sessionStorage.needsDetails;
-            }catch{
+            } catch{
                 console.log('find me');
             }
             window.location = 'main.html';
@@ -366,9 +366,9 @@
                 'instructions': assignmentInstance.instructions,
                 'additionalInformation': assignmentInstance.additionalInformation,
                 'instructorID': assignmentInstance.instructorID
-            }).then(()=>{
+            }).then(() => {
                 console.log('Assignment sent succesfully');
-            }).catch((err)=>{
+            }).catch((err) => {
                 console.log('firebase let you down when sending assignment', err);
             });
         }
@@ -380,11 +380,11 @@
                 db.collection("instructors").doc(instructorInstance.ID).set({
                     'name': instructorInstance.name,
                     'email': instructorInstance.email
-                }).then(()=>{
-                console.log('instructor sent succesfully');
-            }).catch((err)=>{
-                console.log('firebase let you down when sending instructor', err);
-            });
+                }).then(() => {
+                    console.log('instructor sent succesfully');
+                }).catch((err) => {
+                    console.log('firebase let you down when sending instructor', err);
+                });
             }
         }
     </script>
@@ -408,4 +408,5 @@
 
     </script>
 </body>
+
 </html>

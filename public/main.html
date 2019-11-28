@@ -5,40 +5,36 @@
     <title>List Page</title>
     <meta lang="english">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- importing css, bootstap and firebase features -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/styles.css" type="text/css">
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
 
 </head>
 
 <body>
-
     <!-- header -->
     <div class="jumbotron header-div header-footer-div">
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
-        <section class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center align-center-up">
-            <h2 class="head-text">Your List</h>
-        </section>
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center align-center-up">
-            <a id="profile" class="btn btn-default" href="###########"><span
-                    class="glyphicon glyphicon-user"></span></a>
-        </div>
+            <h2 class="display-4" style="width: 100%; margin: auto; border: 0em;">Your List</h2>
     </div>
 
     <!-- content -->
     <div class="container page-content">
-        <div class="row section-header section-item">
-            <p class="col-lg-2 col-md-2 col-sm-2 col-xs-2 section-heading list-text addMargin"> Due Date</p>
-            <p class="col-lg-2 col-md-2 col-sm-2 col-xs-2 section-heading list-text addMargin"> Due Time</p>
-            <p class="col-lg-4 col-md-4 col-sm-4 col-xs-4 section-heading list-text addMargin"> Assignment Name</p>
-            <p class="col-lg-2 col-md-2 col-sm-2 col-xs-2 section-heading list-text addMargin"> Course</p>
-            <p class="col-lg-2 col-md-2 col-sm-2 col-xs-2 section-heading list-text addMargin"> Completed?</p>
+        <!-- The container for the header of the list -->
+        <div class="container page-content" id='contentDiv'>
+            <div class="row section-header section-item">
+                <p class="col-lg-2 col-md-2 col-sm-2 col-xs-2 section-heading  noBottomMargin"> Due Date</p>
+                <p class="col-lg-2 col-md-2 col-sm-2 col-xs-2 section-heading  noBottomMargin"> Due Time</p>
+                <p class="col-lg-6 col-md-6 col-sm-6 col-xs-6 section-heading  noBottomMargin"> Assignment Name</p>
+                <p class="col-lg-2 col-md-2 col-sm-2 col-xs-2 section-heading  noBottomMargin"> Course</p>
+            </div>
+            <div id="listContainer"></div>
         </div>
-        <div id="listContainer"></div>
     </div>
 
-    <!-- footer -->
+    <!-- footer contining buttons for other pages -->
     <div class="jumbotron footer-div header-footer-div">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
@@ -49,15 +45,18 @@
             </div>
         </div>
     </div>
+    
 
-    <!-- JS -->
+    <!-- importing the scripts requred for this page-->
 
     <script src="./js/scripts.js" type="text/javascript"></script>
 
 
-    <!-- build list -->
+    <!-- build list row-->
 
     <script>
+
+        // builds the main container for the list row
         function buildListRow(assignmentInstance) {
 
             // Build the main container
@@ -75,18 +74,15 @@
             // Build due time
             let dueTimeCol = buildDueTimeCol(assignmentInstance.dueTime);
 
-            // Build completed check
-            let completedCol = buildCompletedCol();
-
             // put it all together
             listRow.appendChild(dueDateCol);
             listRow.appendChild(dueTimeCol);
             listRow.appendChild(assignmentNameCol);
             listRow.appendChild(courseNameCol);
-            listRow.appendChild(completedCol);
             document.getElementById('listContainer').appendChild(listRow);
         }
 
+        // creates the rows inside the list
         function buildRow(assignmentId) {
             // Build a col of auto span
             let listRow = document.createElement('div');
@@ -98,6 +94,7 @@
             return listRow;
         }
 
+        // builds the column for course name inside the row
         function buildCourseNameCol(courseName) {
             let courseNameCol = document.createElement('div');
             courseNameCol.className = "col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right";
@@ -105,13 +102,15 @@
             return courseNameCol;
         }
 
+        // builds the column for the assignment name inside the row
         function buildAssignmentNameCol(assignmentName) {
             let assignmentNameCol = document.createElement('div');
-            assignmentNameCol.className = "col-lg-4 col-md-4 col-sm-4 col-xs-4 text-left";
+            assignmentNameCol.className = "col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left";
             assignmentNameCol.innerHTML = "<p class='list-assignment-name list-text'>" + assignmentName + "</p>";
             return assignmentNameCol;
         }
 
+        // builds the due date column inside the row
         function buildDueDateCol(dueDate) {
             let dueDateCol = document.createElement('div');
             dueDateCol.className = "col-lg-2 col-md-2 col-sm-2 col-xs-2 text-left";
@@ -119,17 +118,26 @@
             return dueDateCol
         }
 
+        // builds the due time column inside the row
         function buildDueTimeCol(dueTime) {
             let dueTimeCol = document.createElement('div');
             dueTimeCol.className = "col-lg-2 col-md-2 col-sm-2 col-xs-2 text-left";
             dueTimeCol.innerHTML = "<p class='list-due-time list-text'>" + dueTime + "</p>";
             return dueTimeCol
-        }    
+        }
+
+        // ends the row
+        function resetListContainer() {
+            document.getElementById('contentDiv').removeChild(document.getElementById('listContainer'));
+            let newListContainer = document.createElement('div');
+            newListContainer.id = 'listContainer';
+            document.getElementById('contentDiv').appendChild(newListContainer);
+        }
 
         function buildCompletedCol() {
             let completedCol = document.createElement('div');
             completedCol.className = "col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center";
-            completedCol.innerHTML = "<input type=\"checkbox\">";
+            completedCol.innerHTML = "<input type='checkbox' onclick='onCompletedClick'>";
             return completedCol
         }
     </script>
@@ -137,10 +145,38 @@
     <!-- load list -->
 
     <script>
+        // loads the list based on the assignments inside the database
         function loadList() {
             let parsedAssignmentList = JSON.parse(window.localStorage.assignmentList)
-            for (let i=0; i < parsedAssignmentList.length; i++){
+            for (let i = 0; i < parsedAssignmentList.length; i++) {
                 buildListRow(parsedAssignmentList[i]);
+            }
+            markCompletedAssignments();
+        }
+
+        function markCompletedAssignments() {
+            let user = JSON.parse(localStorage.user);
+            for (assignment of user.completedAssignments) {
+                let assignmentRowDOM = document.getElementById(assignment);
+                if (assignmentRowDOM != null) {
+                    for (childrenDOM of assignmentRowDOM.children) {
+                        childrenDOM.className = "strikethrough " + childrenDOM.className;
+                    }
+                    assignmentRowDOM.className = "strikethrough " + assignmentRowDOM.className;
+                }
+            }
+        }
+
+        function unmarkCompletedAssignment(assignmentID) {
+            assignmentRowDOM = document.getElementById(assignmentID);
+            for (assignment of user.completedAssignments) {
+                let assignmentRowDOM = document.getElementById(assignment);
+                if (assignmentRowDOM != null) {
+                    for (childrenDOM of assignmentRowDOM.children) {
+                        childrenDOM.className = childrenDOM.className.slice(13);
+                    }
+                    assignmentRowDOM.className = assignmentRowDOM.className.slice(13);
+                }
             }
         }
     </script>
@@ -148,38 +184,54 @@
     <!-- event handlers -->
 
     <script>
-        db.collection('assignments').onSnapshot(function (){
-            document.getElementById('listContainer').innerHTML = "";
-            window.localStorage.assignmentsLoaded = false;
-            onPageLoad();
-        });
-        db.collection('instructors').onSnapshot(function (){
-            document.getElementById('listContainer').innerHTML = "";
-            window.localStorage.assignmentsLoaded = false;
-            onPageLoad();
-        });
-        
-        document.onload = onPageLoad();
+        sessionStorage.assignmentsLoaded = 'false';
+        sessionStorage.instructorsLoaded = 'false';
+        onPageLoad();
+
+        // handels the redirection to the details page.
         function onListItemClick(clickedItem) {
             sessionStorage.setItem("needsDetails", clickedItem.id);
             sessionStorage.setItem("previousPage", './main.html');
             window.location.href = "./details.html";
         }
 
+        // handles the when the assingments are completed
+        function onCompletedClick() {
+            console.log("Clicked!");
+            console.log('Hello');
+        }
+
+        // handles the events on pageload
         function onPageLoad() {
-            if (!sessionStorage.assignmentsLoaded) {
-                sessionStorage.assignmentsLoaded = true;
+            if (sessionStorage.assignmentsLoaded != 'true') {
                 loadAssignmentsToStorage();
             }
-            if (!sessionStorage.instructorsLoaded) {
-                sessionStorage.instructorsLoaded = true;
+            if (sessionStorage.instructorsLoaded != 'true') {
                 loadInstructorsToStorage();
             }
-             loadList();
+
+            let waiter = setInterval(() => {
+                if (allLoaded()) {
+                    resetListContainer();
+                    loadList();
+                    getAssignmentDueDate();
+                    deletePassedAssignments();
+                    clearInterval(waiter);
+                }
+            }, 20);
+        }
+
+        firebase.auth().onAuthStateChanged((authUser) => {
+            var currentUser = new user(authUser.uid, authUser.displayName)
+            sessionStorage.loadedUser = false;
+            sessionStorage.currentUser = JSON.stringify(currentUser)
+        });
+
+        function allLoaded() {
+            return sessionStorage.assignmentsLoaded == "true" && sessionStorage.instructorsLoaded == "true" && sessionStorage.loadedUser == "true"
         }
 
     </script>
-
 </body>
 
 </html>
