@@ -28,7 +28,7 @@
 
         <div class="card list-row">
 
-            <h3 class="card-header section-header" id="monthAndYear">Month and Year</h3>
+            <h3 class="card-header " id="monthAndYear">Month and Year</h3>
 
             <table class="table boardered table-responsive-sm list-row" id="calendar">
 
@@ -51,8 +51,8 @@
 
             <!-- the container for the buttons of the calendar-->
             <div class="form-inline">
-                <button class="btn btn-outline-primary col-sm-6 section-header" onclick=previous()>Previous</button>
-                <button class="btn btn-outline-primary col-sm-6 section-header" onclick=next()>Next</button>
+                <button class="btn btn-outline-primary col-sm-6 " onclick=previous()>Previous</button>
+                <button class="btn btn-outline-primary col-sm-6 " onclick=next()>Next</button>
             </div>
         </div>
 
@@ -104,6 +104,7 @@
                         } else {
                             let cell = document.createElement('td');
                             let cellText = document.createElement('p');
+                            cellText.calssName = 'forFun';
                             cellText.innerHTML = `${date}`;
                             for (let i = 0; i < dueDateArray.length; i++) {
 

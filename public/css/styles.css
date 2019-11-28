@@ -315,3 +315,16 @@ background-color: #e9e9e9;
 background-color: DodgerBlue !important; 
 color: #ffffff; 
 }
+.AssignmentExists {
+    padding: 0.1em;
+    height: 1.5em;
+    width: 1.5em;
+    border-radius: 15px;
+    background-color:rgb(255, 208, 0);
+
+}
+
+.strikethrough{
+    text-decoration: line-through;
+    background-color: lightgray;
+}

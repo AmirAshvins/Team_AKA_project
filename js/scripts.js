@@ -98,6 +98,7 @@ class assignment {
         }
     }
 }
+
 // the instructor class
 class instructor {
     constructor(instructorName, instructorEmail) {
@@ -113,6 +114,7 @@ class instructor {
         }
     }
 }
+
 // the user class
 class user {
     constructor(userID, userName) {
@@ -147,7 +149,7 @@ class user {
     }
 }
 
-
+// the course class.
 class course {
     constructor(courseCode, courseName) {
         this.courseCode = courseCode;
@@ -158,14 +160,8 @@ class course {
 // ##########################
 // UTILITIES
 
-function getUrlQueries() {
-    let urlQuery = decodeURI(window.location.search());
-    let queries = urlQuery.split('?');
-    delete queries[0];
-    console.log("success");
-    return queries;
-}
 
+// get the element by id by the collection from the local storage.
 function getElementByIdByCollectionFromLocStorage(elementID, collectionName) {
     let collectionList = JSON.parse(window.localStorage[collectionName]);
     for (let i = 0; i < collectionList.length; i++) {
@@ -175,6 +171,7 @@ function getElementByIdByCollectionFromLocStorage(elementID, collectionName) {
     }
 }
 
+// gets the due dates of all assignments 
 function getAssignmentDueDate() {
     let assignments = JSON.parse(localStorage.assignmentList);
     let assignmentDueDateList = []
@@ -188,11 +185,14 @@ function getAssignmentDueDate() {
     return assignmentDueDateList
 }
 
+
+// given a date constructs a proper date object readable from the computer
 function makeDateObject(list) {
     object = new Date(list[0], list[1], list[2]);
     return object
 }
 
+// deletes the assignments that are passed their due date.
 function deletePassedAssignments() {
     let dateList = getAssignmentDueDate();
     let today = new Date();
@@ -212,6 +212,7 @@ function deletePassedAssignments() {
     }
 }
 
+// makes a list for a specified field from a specified collection.
 function getCollectionDetails(collectionName, detail) {
     detailList = [];
     collectionName = JSON.parse(window.localStorage.getItem(collectionName));
