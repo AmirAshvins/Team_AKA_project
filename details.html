@@ -213,10 +213,11 @@
 
         function removeFromCompleted(assignmentID){
             let currentUser = JSON.parse(localStorage.user);
-            delete currentUser.completedAssignments[currentUser.completedAssignments.indexOf(assignmentID)];
+            let badIndex = currentUser.completedAssignments.indexOf(assignmentID);
+            delete currentUser.completedAssignments[badIndex];
             sendUserToDB(currentUser);
             sessionStorage.loadedUser = "false";
-            localStorage.currentUser = JSON.stringify(user);
+            localStorage.currentUser = JSON.stringify(currentUser);
         }
     </script>
 </body>
