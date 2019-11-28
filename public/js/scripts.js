@@ -31,7 +31,7 @@ function loadAssignmentsToStorage() {
     });
 }
 
-function loadInstructorsToStorage(){
+function loadInstructorsToStorage() {
     db.collection("instructors").get().then(function (instructorsQuery) {
         let instructorsList = [];
         instructorsQuery.forEach(function (doc) {
@@ -45,6 +45,19 @@ function loadInstructorsToStorage(){
     });
 }
 
+function loadCoursesToStorage() {
+    db.collection("courses").get().then(function (courseQuery) {
+        let courseList = [];
+        courseQuery.forEach(function (doc) {
+            courseDetails = doc.data();
+            newCourse = new course(courseDetails['courseCode'], courseDetails['courseName']);
+            courseList.push(newCourse);
+        });
+        window.localStorage.setItem("courseList", JSON.stringify(courseList));
+        console.log(JSON.parse(window.localStorage.getItem('courseList')));
+        sessionStorage.coursesLoaded = true;
+    });
+}
 
 function IDinDB(collectionName, ID) {
     db.collection(collectionName).doc(ID).get()
@@ -61,6 +74,12 @@ function IDinDB(collectionName, ID) {
         });
 }
 
+/* 
+ 
+CLASS DEFINITIONS
+
+ */
+// The assignment class
 class assignment {
     constructor(course, assignmentName, dueDate, dueTime, d2lLink, instructions, additionalInformation, instructorID) {
         this.course = course;
@@ -68,7 +87,7 @@ class assignment {
         this.dueDate = dueDate;
         this.dueTime = dueTime;
         this.d2lLink = d2lLink;
-        this.ID = 'assignment';
+        this.ID = 'ass';
         this.instructions = instructions;
         this.additionalInformation = additionalInformation;
         this.instructorID = instructorID;
@@ -80,6 +99,7 @@ class assignment {
     }
 }
 
+// the instructor class
 class instructor {
     constructor(instructorName, instructorEmail) {
         this.ID = '';
@@ -95,22 +115,118 @@ class instructor {
     }
 }
 
+// the user class
+class user {
+    constructor(userID, userName) {
+        this.ID = userID;
+        this.name = userName;
+        this.completedAssignments = [];
+        db.collection('users').doc(this.ID).get().then((doc) => {
+            if (doc.exists) {
+                this.getCompletedAssignments()
+            } else {
+                this.sendUserToDB();
+                sessionStorage.loadedUser = true;
+            }
+        });
+    }
+
+    getCompletedAssignments() {
+        db.collection('users').doc(this.ID).get().then((doc) => {
+            this.completedAssignments = doc.data().completedAssignments;
+            localStorage.user = JSON.stringify(this);
+            sessionStorage.loadedUser = true;
+        }).catch((err) => {
+            console.log('error while loading completed assignments', err)
+        });
+    }
+
+    sendUserToDB() {
+        db.collection('users').doc(this.ID).set({
+            'name': this.name,
+            'completedAssignments': this.completedAssignments,
+        })
+    }
+}
+
+// the course class.
+class course {
+    constructor(courseCode, courseName) {
+        this.courseCode = courseCode;
+        this.courseName = courseName;
+    }
+}
+
 // ##########################
 // UTILITIES
 
-function getUrlQueries() {
-    let urlQuery = decodeURI(window.location.search());
-    let queries = urlQuery.split('?');
-    delete queries[0];
-    console.log("success");
-    return queries;
-}
 
-function getElementByIdByCollectionFromLocStorage(elementID, collectionName){
+// get the element by id by the collection from the local storage.
+function getElementByIdByCollectionFromLocStorage(elementID, collectionName) {
     let collectionList = JSON.parse(window.localStorage[collectionName]);
-    for (let i=0; i < collectionList.length; i++){
-        if (collectionList[i].ID === elementID){
+    for (let i = 0; i < collectionList.length; i++) {
+        if (collectionList[i].ID === elementID) {
             return collectionList[i];
         }
     }
 }
+
+// gets the due dates of all assignments 
+function getAssignmentDueDate() {
+    let assignments = JSON.parse(localStorage.assignmentList);
+    let assignmentDueDateList = []
+    assignments.forEach((assignment) => {
+        assignmentDueDateList.push({
+            'assID': assignment.ID,
+            'dueDate': assignment.dueDate
+        })
+
+    })
+    return assignmentDueDateList
+}
+
+
+// given a date constructs a proper date object readable from the computer
+function makeDateObject(list) {
+    object = new Date(list[0], list[1], list[2]);
+    return object
+}
+
+// deletes the assignments that are passed their due date.
+function deletePassedAssignments() {
+    let dateList = getAssignmentDueDate();
+    let today = new Date();
+    let todaysDay = today.getDate();
+    for (let i = 0; i < dateList.length; i++) {
+
+        let theDateList = dateList[i]['dueDate'].split('-');
+        let correctVersionOfDate = makeDateObject(theDateList);
+        if (Math.abs(parseInt(correctVersionOfDate) - parseInt(todaysDay)) >= 3) {
+            db.collection('assignments').doc(dateList[i]['assID']).delete().then(function () {
+                console.log('delete is successful')
+            }
+            ).catch(function (error) {
+                console.error('We have aproblem we didnt delete the item :( ', error);
+            })
+        }
+    }
+}
+
+// makes a list for a specified field from a specified collection.
+function getCollectionDetails(collectionName, detail) {
+    detailList = [];
+    collectionName = JSON.parse(window.localStorage.getItem(collectionName));
+    collectionName.forEach(function (item) {
+        detailList.push(item[detail]);
+    })
+    return (detailList)
+}
+
+
+db.collection('assignments').onSnapshot(function () {
+    window.localStorage.assignmentsLoaded = false;
+});
+
+db.collection('instructors').onSnapshot(function () {
+    window.localStorage.assignmentsLoaded = false;
+});

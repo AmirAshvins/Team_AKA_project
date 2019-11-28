@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Add Assignment</title>
 
+    <!-- importing bootstrap, css firestore and firebase. -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/styles.css" type="text/css">
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
@@ -25,7 +26,13 @@
     <!-- content -->
     <div class="form-container page-content floater">
         <form autocomplete="off">
+
+            <!--making the rows  -->
+
             <div class="row">
+
+                <!-- this is the course row -->
+
                 <div class="col-25">
                     <label for="courseBox">Course</label>
                 </div>
@@ -35,6 +42,9 @@
                 </div>
             </div>
             <div class="row">
+
+                <!-- this is the assignment name row -->
+
                 <div class="col-25">
                     <label for="assignmentNameBox">Assignment Name</label>
                 </div>
@@ -44,6 +54,9 @@
                 </div>
             </div>
             <div class="row">
+
+                <!-- this is the Due Date row -->
+
                 <div class="col-25">
                     <label for="dueDateBox">Due Date</label>
                 </div>
@@ -53,6 +66,9 @@
             </div>
             <div class="row">
                 <div class="col-25">
+
+                    <!-- this is the Due Time row -->
+
                     <label for="dueTimeBox">Due Time</label>
                 </div>
                 <div class="col-75">
@@ -60,6 +76,9 @@
                 </div>
             </div>
             <div class="row">
+
+                <!-- this is the D2L link row -->
+
                 <div class="col-25">
                     <label for="d2lLinkBox">D2L Link</label>
                 </div>
@@ -70,6 +89,9 @@
             </div>
             <div class="row">
                 <div class="col-25">
+
+                    <!-- this is the instructor name row -->
+
                     <label for="instructorNameBox">Instructor Name</label>
                 </div>
                 <div class="autocomplete col-75">
@@ -81,6 +103,9 @@
             </div>
             <div class="row">
                 <div class="col-25">
+
+                    <!-- this is the Instructor email row -->
+
                     <label for="instructorEmailBox">Instructor Email</label>
                 </div>
                 <div class="autocomplete col-75">
@@ -93,6 +118,9 @@
             <hr>
             <div class="row">
                 <div class="col-25">
+
+                    <!-- this is the instructions row -->
+
                     <label for="instructionsBox">Instructions</label>
                 </div>
                 <div class="col-75">
@@ -102,6 +130,9 @@
             </div>
             <div class="row">
                 <div class="col-25">
+
+                    <!-- this is the additional informations row -->
+
                     <label for="additionalInformationBox">Additional Information</label>
                 </div>
                 <div class="col-75">
@@ -110,6 +141,9 @@
                 </div>
             </div>
             <div class="row">
+
+                <!-- this is the button for sumbit but it is invisible and handled by the button in the bottom div -->
+
                 <input id="submitButton" type="submit" value="Submit">
             </div>
         </form>
@@ -132,6 +166,7 @@
     <!--Autocomplete Function-->
 
     <script>
+        // the autocomplete 
         function autocomplete(inp, arr) {
             /*the autocomplete function takes two arguments,
             the text field element and an array of possible autocompleted values:*/
@@ -229,37 +264,25 @@
             });
         }
 
-        autocomplete(document.getElementById("courseBox"), getCollectionDetails("courseList", "courseCode"));
+        autocomplete(document.getElementById("courseBox"), getCollectionDetails("assignmentList", "courseCode"));
         autocomplete(document.getElementById("instructorNameBox"), getCollectionDetails("instructorsList", "name"));
         autocomplete(document.getElementById("instructorEmailBox"), getCollectionDetails("instructorsList", "email"));
     </script>
 
-    <!-- set the current date for the date-->
-
-    <!-- <script>
-        let today = new Date();
-        let dd = today.getDate();
-        let mm = today.getMonth() + 1;
-        var yyyy = today.getFullYear();
-        if (dd < 10) {
-            dd = '0' + dd
-        }
-        if (mm < 10) {
-            mm = '0' + mm
-        }
-
-        today = yyyy + '-' + mm + '-' + dd;
-        document.getElementById("date").setAttribute("min", today);
-    </script> -->
 
     <!-- submit functions-->
 
     <script>
-        function submitInfo(){
+        function submitInfo() {
             let instructorInstance = instructorBuilder();
             let assignmentInstance = assignmentClassBuilder(instructorInstance.ID);
             sendAssignment(assignmentInstance);
             sendInstructor(instructorInstance);
+            try{
+                delete sessionStorage.needsDetails;
+            }catch{
+                console.log('find me');
+            }
         }
 
     </script>
@@ -267,6 +290,8 @@
     <!-- EDIT functionality  -->
 
     <script>
+
+        // When page of edit assingment is called, it preloads the assingmetn details
         function editModeLoader(assignmentInstance, instructorInstance) {
             changeLabelsToEdit(assignmentInstance);
             loadAssignmentDetails(assignmentInstance, instructorInstance);
@@ -284,6 +309,7 @@
             document.getElementById('additionalInformationBox').value = assignmentInstance.additionalInformation;
         }
 
+        // changes the label of the page
         function changeLabelsToEdit(assignmentInstance) {
             document.getElementById('headerText').innerHTML = "Edit: " + assignmentInstance.name;
         }
@@ -292,7 +318,8 @@
     <!-- collect data into classes -->
 
     <script>
-        function getInstructorID() { }
+
+        // Build an instance of the assingment.
 
         function assignmentClassBuilder(instructorID) {
             console.log(document.getElementById('dueTimeBox').value);
@@ -309,6 +336,9 @@
             return newAssignment;
         }
 
+
+        // Creates a calss of instructor
+
         function instructorBuilder() {
             console.log(document.getElementById('instructorNameBox').value);
             let newInstructor = new instructor(
@@ -322,6 +352,9 @@
     <!-- send data -->
 
     <script>
+
+        // sends the assingment to the databse.
+
         function sendAssignment(assignmentInstance) {
             db.collection("assignments").doc(assignmentInstance.ID).set({
                 'course': assignmentInstance.course,
@@ -332,64 +365,46 @@
                 'instructions': assignmentInstance.instructions,
                 'additionalInformation': assignmentInstance.additionalInformation,
                 'instructorID': assignmentInstance.instructorID
+            }).then(()=>{
+                console.log('Assignment sent succesfully');
+            }).catch((err)=>{
+                console.log('firebase let you down when sending assignment', err);
             });
         }
+
+        // Sends the instructor calss to the data base.
 
         function sendInstructor(instructorInstance) {
             if (!IDinDB('instructors', instructorInstance.ID)) {
                 db.collection("instructors").doc(instructorInstance.ID).set({
                     'name': instructorInstance.name,
                     'email': instructorInstance.email
-                });
+                }).then(()=>{
+                console.log('instructor sent succesfully');
+            }).catch((err)=>{
+                console.log('firebase let you down when sending instructor', err);
+            });
             }
         }
     </script>
 
-    <!-- error handling -->
+    <!-- event handlers -->
 
     <script>
-        function assignmentInDB() {
 
-        }
-
-        function invalidField(invalidFieldName, errorMessage) {
-
-        }
-    </script>
-
- <!-- event handlers -->
-
- <script>
-        if (sessionStorage.needsDetails != undefined){
+        if (sessionStorage.needsDetails != undefined) {
             let assignmentInstance = getElementByIdByCollectionFromLocStorage(sessionStorage.needsDetails, 'assignmentList');
             let instructorInstance = getElementByIdByCollectionFromLocStorage(assignmentInstance.instructorID, 'instructorsList');
             editModeLoader(assignmentInstance, instructorInstance);
         }
 
-
-        
+        // handles the event when the submit button is clicked.
 
         function submitOnClick() {
             document.getElementById('submitButton').click();
             submitInfo();
-
-
-            // console.log(newAssignment);
-
-            // db.collection("assignments").doc("newAdded").set({
-            //     name: "name"
-            // }).then(function () {
-            //     console.log("Document successfully written!");
-            // }).catch(function () {
-            //     console.error("Error writing document");
-            // });
         }
 
-        function cancelHandler() { }
-
-        function pageOnLoadHandler() { }
     </script>
-
 </body>
-
 </html>

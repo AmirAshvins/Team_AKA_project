@@ -22,18 +22,19 @@
         </section>
     </div>
 
-    <!-- content -->
-    <!-- <div class="container page-content"> -->
+   <!-- content -->
+    <!-- making the layout of the calendar, like the container of it -->
     <div class="container col-sm-4 col-md-7 col-lg-4 mt-5">
 
         <div class="card list-row">
 
-            <h3 class="card-header section-header" id="monthAndYear">Month and Year</h3>
+            <h3 class="card-header " id="monthAndYear">Month and Year</h3>
 
             <table class="table boardered table-responsive-sm list-row" id="calendar">
-                <!-- creates the header for the calendar -->
 
                 <head>
+                     <!-- this is the header of the calendar -->
+                     
                     <tr id="dayNames">
                         <th>Sun</th>
                         <th>Mon</th>
@@ -44,13 +45,14 @@
                         <th>Sat</th>
                     </tr>
                 </head>
+                <!-- this is the body of the calendar-->
                 <tbody class="list-row" id="calendar-body"> </tbody>
             </table>
 
-            <!-- the container for the buttons of the calendar.-->
+            <!-- the container for the buttons of the calendar-->
             <div class="form-inline">
-                <button class="btn btn-outline-primary col-sm-6 section-header" onclick=previous()>Previous</button>
-                <button class="btn btn-outline-primary col-sm-6 section-header" onclick=next()>Next</button>
+                <button class="btn btn-outline-primary col-sm-6 " onclick=previous()>Previous</button>
+                <button class="btn btn-outline-primary col-sm-6 " onclick=next()>Next</button>
             </div>
         </div>
 
@@ -69,7 +71,9 @@
             let dueDateList = loadDueDates();
             document.onload = showCalendar(currentMonth, currentYear, months, monthAndYear, dueDateList);
 
+
             // Creates the calendar and shows it
+
             function showCalendar(month, year, List_of_months, element, dueDateArray) {
                 let firstDay = new Date(year, month).getDay();
                 let daysInMonth = 32 - new Date(year, month, 32).getDate();
@@ -83,6 +87,7 @@
                 let date = 01;
 
                 // creates the rows for the calendar
+
                 for (let i = 0; i < 6; i++) {
                     let row = document.createElement('tr');
 
@@ -99,6 +104,7 @@
                         } else {
                             let cell = document.createElement('td');
                             let cellText = document.createElement('p');
+                            cellText.calssName = 'forFun';
                             cellText.innerHTML = `${date}`;
                             for (let i = 0; i < dueDateArray.length; i++) {
 
@@ -136,6 +142,8 @@
 
                                 }
                             }
+                            // adding the elements to the DOM tree.
+
                             cell.appendChild(cellText);
                             row.appendChild(cell);
                             date++;
