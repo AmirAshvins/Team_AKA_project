@@ -144,41 +144,28 @@ class user {
             'name': this.name,
             'completedAssignments': this.completedAssignments,
         })
+    }
+}
 
-        class course {
-            constructor(courseCode, courseName) {
-                this.courseCode = courseCode;
-                this.courseName = courseName;
-            }
-        }
 
-        // ##########################
-        // UTILITIES
+class course {
+    constructor(courseCode, courseName) {
+        this.courseCode = courseCode;
+        this.courseName = courseName;
+    }
+}
 
-        function getUrlQueries() {
-            let urlQuery = decodeURI(window.location.search());
-            let queries = urlQuery.split('?');
-            delete queries[0];
-            console.log("success");
-            return queries;
-        }
+// ##########################
+// UTILITIES
 
-        function getElementByIdByCollectionFromLocStorage(elementID, collectionName) {
-            let collectionList = JSON.parse(window.localStorage[collectionName]);
-            for (let i = 0; i < collectionList.length; i++) {
-                if (collectionList[i].ID === elementID) {
-                    return collectionList[i];
-                }
-            }
-        }
+function getUrlQueries() {
+    let urlQuery = decodeURI(window.location.search());
+    let queries = urlQuery.split('?');
+    delete queries[0];
+    console.log("success");
+    return queries;
+}
 
-        function getCollectionDetails(collectionList, detail) {
-            detailList = [];
-            collectionList = JSON.parse(window.localStorage.getItem(collectionList));
-            collectionList.forEach(function (item) {
-                detailList.push(item[detail]);
-            })
-            return (detailList)
 function getElementByIdByCollectionFromLocStorage(elementID, collectionName) {
     let collectionList = JSON.parse(window.localStorage[collectionName]);
     for (let i = 0; i < collectionList.length; i++) {
@@ -188,17 +175,6 @@ function getElementByIdByCollectionFromLocStorage(elementID, collectionName) {
     }
 }
 
-db.collection('assignments').onSnapshot(function () {
-    document.getElementById('listContainer').innerHTML = "";
-    window.localStorage.assignmentsLoaded = false;
-    onPageLoad();
-});
-
-db.collection('instructors').onSnapshot(function () {
-    document.getElementById('listContainer').innerHTML = "";
-    window.localStorage.assignmentsLoaded = false;
-    onPageLoad();
-});
 function getAssignmentDueDate() {
     let assignments = JSON.parse(localStorage.assignmentList);
     let assignmentDueDateList = []
@@ -212,7 +188,7 @@ function getAssignmentDueDate() {
     return assignmentDueDateList
 }
 
-function makeDateObject (list) {
+function makeDateObject(list) {
     object = new Date(list[0], list[1], list[2]);
     return object
 }
@@ -222,7 +198,7 @@ function deletePassedAssignments() {
     let today = new Date();
     let todaysDay = today.getDate();
     for (let i = 0; i < dateList.length; i++) {
-        
+
         let theDateList = dateList[i]['dueDate'].split('-');
         let correctVersionOfDate = makeDateObject(theDateList);
         if (Math.abs(parseInt(correctVersionOfDate) - parseInt(todaysDay)) >= 3) {
@@ -230,17 +206,26 @@ function deletePassedAssignments() {
                 console.log('delete is successful')
             }
             ).catch(function (error) {
-                console.error('We have aproblem we didnt delete the item :( ');
-
+                console.error('We have aproblem we didnt delete the item :( ', error);
             })
         }
     }
 }
-function getCollectionDetails(collectionList, detail) {
+
+function getCollectionDetails(collectionName, detail) {
     detailList = [];
-    collectionList = JSON.parse(window.localStorage.getItem(collectionList));
-    collectionList.forEach(function (item) {
+    collectionName = JSON.parse(window.localStorage.getItem(collectionName));
+    collectionName.forEach(function (item) {
         detailList.push(item[detail]);
     })
     return (detailList)
 }
+
+
+db.collection('assignments').onSnapshot(function () {
+    window.localStorage.assignmentsLoaded = false;
+});
+
+db.collection('instructors').onSnapshot(function () {
+    window.localStorage.assignmentsLoaded = false;
+});

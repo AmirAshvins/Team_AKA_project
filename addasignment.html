@@ -264,7 +264,7 @@
             });
         }
 
-        autocomplete(document.getElementById("courseBox"), getCollectionDetails("courseList", "courseCode"));
+        autocomplete(document.getElementById("courseBox"), getCollectionDetails("assignmentList", "courseCode"));
         autocomplete(document.getElementById("instructorNameBox"), getCollectionDetails("instructorsList", "name"));
         autocomplete(document.getElementById("instructorEmailBox"), getCollectionDetails("instructorsList", "email"));
     </script>
@@ -278,6 +278,11 @@
             let assignmentInstance = assignmentClassBuilder(instructorInstance.ID);
             sendAssignment(assignmentInstance);
             sendInstructor(instructorInstance);
+            try{
+                delete sessionStorage.needsDetails;
+            }catch{
+                console.log('find me');
+            }
         }
 
     </script>
