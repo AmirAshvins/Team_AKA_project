@@ -123,7 +123,7 @@ class user {
             if (doc.exists) {
                 this.getCompletedAssignments()
             } else {
-                this.sendUserToDB();
+                sendUserToDB(this);
                 sessionStorage.loadedUser = true;
             }
         });

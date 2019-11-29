@@ -264,7 +264,7 @@
             });
         }
 
-        autocomplete(document.getElementById("courseBox"), getCollectionDetails("courseList", "courseCode"));
+        autocomplete(document.getElementById("courseBox"), getCollectionDetails("assignmentList", "course"));
         autocomplete(document.getElementById("instructorNameBox"), getCollectionDetails("instructorsList", "name"));
         autocomplete(document.getElementById("instructorEmailBox"), getCollectionDetails("instructorsList", "email"));
     </script>
@@ -376,16 +376,15 @@
         // Sends the instructor calss to the data base.
 
         function sendInstructor(instructorInstance) {
-            if (!IDinDB('instructors', instructorInstance.ID)) {
+           
                 db.collection("instructors").doc(instructorInstance.ID).set({
                     'name': instructorInstance.name,
                     'email': instructorInstance.email
-                }).then(() => {
-                    console.log('instructor sent succesfully');
-                }).catch((err) => {
-                    console.log('firebase let you down when sending instructor', err);
-                });
-            }
+                }).then(()=>{
+                console.log('instructor sent succesfully');
+            }).catch((err)=>{
+                console.log('firebase let you down when sending instructor', err);
+            });
         }
     </script>
 
