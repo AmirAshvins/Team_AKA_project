@@ -97,7 +97,7 @@ span{
         font-family: Arial, Helvetica, sans-serif;
         font-weight: bolder;
         line-height: 30px;
-        transform: translate(-25%, -100%);
+        transform: translate(0, -50%);
     }
 }
 
@@ -132,7 +132,6 @@ body{
     background-image: url("../images/landing_page_bg_1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    /* overflow: hidden; */
 }
 
 .header-footer-div{
@@ -232,8 +231,8 @@ body{
     background-color: rgba(250, 253, 226, 0.5);
     border-radius: 8px;
     padding: 5px;
-    overflow-y: scroll;
     height: 90%;
+    overflow-y: scroll;
 }
 
 /* CSS BY ID */
@@ -286,7 +285,9 @@ overflow-y: scroll;
 }
 
 ::-webkit-scrollbar {
-    -webkit-appearance: none;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 1px rgba(255,255,255,.5);
     width: 7px;
 }
 ::-webkit-scrollbar-thumb {
