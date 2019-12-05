@@ -97,20 +97,20 @@ span{
         font-family: Arial, Helvetica, sans-serif;
         font-weight: bolder;
         line-height: 30px;
-        transform: translate(0, -50%);
+        transform: translate(-25%, -100%);
     }
 }
 
 @media screen and (max-width: 767px) {
     .foot-text {
-        font-size: 150%;
+        font-size: 200%;
         color: white;
         /* position: static; */
-        margin-top: 1vw;
+        margin: auto;
         font-family: Arial, Helvetica, sans-serif;
         font-weight: bolder;
         line-height: 30px;
-        transform: translate(0, -200%);
+        transform: translate(0%, 0%);
     }
 }
 
@@ -149,13 +149,14 @@ body{
 }
 
 .footer-div{
-    position: fixed;
+    display: block;
     background-color: rgba(255, 255, 255, 0);
     bottom: 0px;
+    padding-top: 3%;
 }
 
 .page-content{
-    height: 80%;
+    height: 75%;
     margin-top: 2px;
     margin-bottom: 2px;
     margin-left: 1%;
@@ -223,7 +224,7 @@ body{
 }
 
 #listContainer{
-    height: 75%;
+    height: 85%;
     overflow-y: scroll;
 }
 
@@ -353,7 +354,8 @@ clear: both;
 * {box-sizing: border-box;}
 
 body {
-font: 16px Arial;  
+font: 16px Arial;
+overflow: hidden;
 }
 
 /* aligning the check box in the details page */
