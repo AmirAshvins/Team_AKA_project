@@ -4,7 +4,6 @@
 
 function loadAssignmentDetails(assignmentId) {
     let assignmentInstance = getElementByIdByCollectionFromLocStorage(assignmentId, 'assignmentList');
-    let instructorInstance = getElementByIdByCollectionFromLocStorage(assignmentInstance.instructorID, 'instructorsList');
     document.getElementById('assignmentNameBox').innerHTML = assignmentInstance.name;
     document.getElementById('courseBox').innerHTML = assignmentInstance.course;
     document.getElementById('dueDateBox').innerHTML = assignmentInstance.dueDate;
