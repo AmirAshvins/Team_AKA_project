@@ -267,9 +267,7 @@ clear: both;
 }
 
 /* Autocomplete styling*/
-* {
-box-sizing: border-box;
-}
+* {box-sizing: border-box;}
 
 body {
 font: 16px Arial;  

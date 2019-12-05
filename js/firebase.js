@@ -21,8 +21,7 @@ function loadAssignmentsToStorage() {
         assignmentsQuery.forEach(function (doc) {
             assignmentDetails = doc.data();
             newAssignment = new assignment(assignmentDetails['course'], assignmentDetails['name'], assignmentDetails['dueDate'],
-                assignmentDetails['dueTime'], assignmentDetails['d2lLink'], assignmentDetails['instructions'],
-                assignmentDetails['additionalInformation'], assignmentDetails['instructorID']);
+                assignmentDetails['dueTime'], assignmentDetails['d2lLink'], assignmentDetails['instructions'],);
             assignmentList.push(newAssignment);
         });
         window.localStorage.setItem("assignmentList", JSON.stringify(assignmentList));
@@ -31,19 +30,6 @@ function loadAssignmentsToStorage() {
     });
 }
 
-// function loadInstructorsToStorage() {
-//     db.collection("instructors").get().then(function (instructorsQuery) {
-//         let instructorsList = [];
-//         instructorsQuery.forEach(function (doc) {
-//             instructorsDetails = doc.data();
-//             newInstructor = new instructor(instructorsDetails['name'], instructorsDetails['email']);
-//             instructorsList.push(newInstructor);
-//         });
-//         window.localStorage.setItem("instructorsList", JSON.stringify(instructorsList));
-//         console.log(JSON.parse(window.localStorage.getItem('instructorsList')));
-//         sessionStorage.instructorsLoaded = true;
-//     });
-// }
 
 function loadCoursesToStorage() {
     db.collection("courses").get().then(function (courseQuery) {
@@ -94,10 +80,13 @@ function sendAssignment(assignmentInstance) {
         'dueTime': assignmentInstance.dueTime,
         'd2lLink': assignmentInstance.d2lLink,
         'instructions': assignmentInstance.instructions,
-        'additionalInformation': assignmentInstance.additionalInformation,
-        'instructorID': assignmentInstance.instructorID
     }).then(() => {
-        if (confirm())
+        if (IDinDB('assignments', assignmentInstance.ID)){
+            if (!alert('Assignment edited.')){}
+        }else{
+            if (!alert('Assignment added.')){}
+        }
+        window.location = "./main.html"
         console.log('Assignment sent succesfully');
     }).catch((err) => {
         window.alert(err)
@@ -105,27 +94,12 @@ function sendAssignment(assignmentInstance) {
     });
 }
 
-// Sends the instructor calss to the data base.
-
-// function sendInstructor(instructorInstance) {
-   
-//         db.collection("instructors").doc(instructorInstance.ID).set({
-//             'name': instructorInstance.name,
-//             'email': instructorInstance.email
-//         }).then(()=>{
-//         console.log('instructor sent succesfully');
-//     }).catch((err)=>{
-//         console.log('firebase let you down when sending instructor', err);
-//     });
-// }
-
 
 function deletePassedAssignments() {
     let dateList = getAssignmentDueDate();
     let today = new Date();
     let todaysDay = today.getDate();
     for (let i = 0; i < dateList.length; i++) {
-
         let theDateList = dateList[i]['dueDate'].split('-');
         let correctVersionOfDate = DateObject(theDateList);
         if (Math.abs(parseInt(correctVersionOfDate) - parseInt(todaysDay)) >= 3) {
@@ -143,7 +117,3 @@ function deletePassedAssignments() {
 db.collection('assignments').onSnapshot(function () {
     window.localStorage.assignmentsLoaded = false;
 });
-
-// db.collection('instructors').onSnapshot(function () {
-//     window.localStorage.assignmentsLoaded = false;
-// });
