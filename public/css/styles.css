@@ -95,7 +95,7 @@ span{
 
 @media screen and (min-width: 768px) {
     .foot-text {
-        font-size: 200%;
+        font-size: 300%;
         color: black;
         /* position: static; */
         margin-bottom: 1vw;
@@ -108,14 +108,14 @@ span{
 
 @media screen and (max-width: 767px) {
     .foot-text {
-        font-size: 200%;
+        font-size: 300%;
         color: black;
         /* position: static; */
         margin-top: 1vw;
         font-family: Arial, Helvetica, sans-serif;
         font-weight: bolder;
         line-height: 30px;
-        transform: translate(0, -50%);
+        transform: translate(0, -200%);
     }
 }
 
@@ -178,8 +178,7 @@ body{
     margin-bottom: 5px;
     margin-top: 5px;
     border-radius: 8px;
-    padding-left: 1%;
-    padding-right: 1%;
+    padding-right: 5%;
 }
 
 .section-heading {
@@ -279,30 +278,44 @@ display: none;
 
 /* Style the container */
 .form-container {
+margin-top: 10px;
 border-radius: 5px;
 background-color:rgba(255, 255, 255, 0.3);
-padding: 30px;
+padding: 5px;
 height: 70vh;
 overflow-y: scroll;
 }
 
-.form-container::-webkit-scrollbar {
+::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 7px;
 }
-.form-container::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     border-radius: 4px;
     background-color: rgba(0, 0, 0, 0.5);
     box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
 
-textarea {
-    width: 350px;
-    height: 25%;
-    border: 1px solid transparent;
-    background-color: #f1f1f1;
-    padding: 10px;
-    font-size: 16px;
+@media screen and (min-width: 768px) {
+    textarea {
+        width: 350px;
+        height: 25%;
+        border: 1px solid transparent;
+        background-color: #f1f1f1;
+        padding: 10px;
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    textarea {
+        width: 200px;
+        height: 25%;
+        border: 1px solid transparent;
+        background-color: #f1f1f1;
+        padding: 10px;
+        font-size: 16px;
+    }
 }
 
 /* Aligning the text to be center for the lables of details page */
@@ -368,10 +381,20 @@ padding: 10px;
 font-size: 16px;
 }
 
-input[type=text] {
-background-color: #f1f1f1;
-width: 350px;
-overflow-x: scroll;
+@media screen and (min-width: 768px) {
+    input[type=text] {
+        background-color: #f1f1f1;
+        width: 350px;
+        overflow-x: scroll;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    input[type=text] {
+        background-color: #f1f1f1;
+        width: 200px;
+        overflow-x: scroll;
+    }
 }
 
 .autocomplete-items {
@@ -384,7 +407,18 @@ z-index: 99;
 top: 100%;
 left: 0;
 right: 0;
-width: 350px;
+}
+
+@media screen and (min-width: 768px) {
+    .autocomplete-items {
+        width: 350px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .autocomplete-items {
+        width: 200px;
+    }
 }
 
 .autocomplete-items div {
