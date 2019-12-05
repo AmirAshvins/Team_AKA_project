@@ -121,23 +121,9 @@ db.collection('assignments').onSnapshot(function () {
 document.getElementById('logout').onclick = ()=>{
     firebase.auth().signOut().then(function() {
         alert('You are logged out')
+        window.location = "./index.html";
       }).catch(function(error) {
-        console.log('Logout failed.')
+        console.log('Logout failed.');
       });
 }
 
-firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
-  .then(function() {
-    // Existing and future Auth states are now persisted in the current
-    // session only. Closing the window would clear any existing state even
-    // if a user forgets to sign out.
-    // ...
-    // New sign-in will be persisted with session persistence.
-    return firebase.auth().signInWithEmailAndPassword(email, password);
-  })
-  .catch(function(error) {
-    // Handle Errors here.
-    let errorCode = error.code;
-    let errorMessage = error.message;
-    console.log(errorCode, errorMessage);
-  })

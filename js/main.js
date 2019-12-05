@@ -44,6 +44,7 @@ function onPageLoad() {
 
     let waiter = setInterval(() => {
         if (allLoaded()) {
+            document.getElementById("headerText").innerHTML = JSON.parse(sessionStorage.user).name + "'s List";
             resetListContainer();
             loadList();
             getAssignmentDueDate();
@@ -57,14 +58,17 @@ function allLoaded() {
     return sessionStorage.assignmentsLoaded == "true" && sessionStorage.loadedUser == "true"
 }
 
-sessionStorage.assignmentsLoaded = 'false';
-// sessionStorage.instructorsLoaded = 'false';
-delete sessionStorage.needsDetails;
-document.getElementById("headerText").innerHTML = JSON.parse(sessionStorage.user).name + "'s List";
-onPageLoad();
+
+
 
 firebase.auth().onAuthStateChanged((authUser) => {
     var currentUser = new user(authUser.uid, authUser.displayName)
     sessionStorage.loadedUser = false;
-    sessionStorage.currentUser = JSON.stringify(currentUser)
+    sessionStorage.user = JSON.stringify(currentUser)
 });
+
+sessionStorage.assignmentsLoaded = 'false';
+// sessionStorage.instructorsLoaded = 'false';
+delete sessionStorage.needsDetails;
+
+onPageLoad();
