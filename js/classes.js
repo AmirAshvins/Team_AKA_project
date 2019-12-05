@@ -41,7 +41,7 @@ class user {
 
     getCompletedAssignments() {
         db.collection('users').doc(this.ID).get().then((doc) => {
-            this.completedAssignments = doc.data().completedAssignments;
+            this.completedAssignments = Array.from( new Set(doc.data().completedAssignments));
             sessionStorage.user = JSON.stringify(this);
             sessionStorage.loadedUser = true;
         }).catch((err) => {
