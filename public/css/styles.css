@@ -95,7 +95,7 @@ span{
         font-size: 200%;
         color: white;
         /* position: static; */
-        margin-bottom: 1vw;
+        margin-bottom: auto;
         font-family: Arial, Helvetica, sans-serif;
         font-weight: bolder;
         line-height: 30px;
@@ -112,7 +112,7 @@ span{
         font-family: Arial, Helvetica, sans-serif;
         font-weight: bolder;
         line-height: 30px;
-        transform: translate(0%, 0%);
+        transform: translate(0%, 0);
     }
 }
 
@@ -139,7 +139,7 @@ body{
 .header-footer-div{
     width: 100%;
     margin: 0;
-    height: 1vh;
+    height: 0.5vh;
 }
 
 .header-div{
@@ -154,7 +154,7 @@ body{
     display: block;
     background-color: rgba(255, 255, 255, 0);
     bottom: 0px;
-    padding-top: 3%;
+    padding-top: 0;
 }
 
 .footer-button{
@@ -243,7 +243,7 @@ body{
     overflow-y: scroll;
 }
 
-.container{
+#features{
     height: 90%;
 }
 
@@ -272,6 +272,7 @@ body{
 label {
 padding: 12px 12px 12px 0;
 display: inline-block;
+color: black;
 }
 
 /* Style the submit button */
