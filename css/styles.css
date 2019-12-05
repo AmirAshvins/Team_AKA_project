@@ -95,7 +95,7 @@ span{
 
 @media screen and (min-width: 768px) {
     .foot-text {
-        font-size: 200%;
+        font-size: 300%;
         color: black;
         /* position: static; */
         margin-bottom: 1vw;
@@ -108,14 +108,14 @@ span{
 
 @media screen and (max-width: 767px) {
     .foot-text {
-        font-size: 200%;
+        font-size: 300%;
         color: black;
         /* position: static; */
         margin-top: 1vw;
         font-family: Arial, Helvetica, sans-serif;
         font-weight: bolder;
         line-height: 30px;
-        transform: translate(0, -50%);
+        transform: translate(0, -200%);
     }
 }
 
@@ -178,8 +178,7 @@ body{
     margin-bottom: 5px;
     margin-top: 5px;
     border-radius: 8px;
-    padding-left: 1%;
-    padding-right: 1%;
+    padding-right: 5%;
 }
 
 .section-heading {
