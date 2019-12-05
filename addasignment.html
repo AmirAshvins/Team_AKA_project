@@ -31,73 +31,80 @@
 
                 <!-- this is the course row -->
 
-                <div class="col-25">
-                    <label for="courseBox">Course</label>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <label for="courseBox">Course *</label>
                 </div>
-                <div class="autocomplete col-75">
-                    <input type="text" id="courseBox" name="course" placeholder="Type course code here..."
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 autocomplete">
+                    <input type="text" id="courseBox" name="course" placeholder="COMP-1510"
                         required>
                 </div>
             </div>
+            
             <div class="row">
 
                 <!-- this is the assignment name row -->
 
-                <div class="col-25">
-                    <label for="assignmentNameBox">Assignment Name</label>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <label for="assignmentNameBox">Assignment Name *</label>
                 </div>
-                <div class="col-75">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 autocomplete">
                     <input type="text" id="assignmentNameBox" name="assignmentName" placeholder="Type name here..."
                         autocomplete="on" required>
                 </div>
             </div>
+
             <div class="row">
 
                 <!-- this is the Due Date row -->
 
-                <div class="col-25">
-                    <label for="dueDateBox">Due Date</label>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <label for="dueDateBox">Due Date *</label>
                 </div>
-                <div class="col-75">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 autocomplete">
                     <input type="date" name="dueDate" id="dueDateBox" required>
                 </div>
             </div>
+
             <div class="row">
-                <div class="col-25">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 
                     <!-- this is the Due Time row -->
 
-                    <label for="dueTimeBox">Due Time</label>
+                    <label for="dueTimeBox">Due Time *</label>
                 </div>
-                <div class="col-75">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 autocomplete">
                     <input type="time" name="dueTime" id="dueTimeBox" required>
                 </div>
             </div>
+
             <div class="row">
 
                 <!-- this is the D2L link row -->
 
-                <div class="col-25">
-                    <label for="d2lLinkBox">D2L Link</label>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <label for="d2lLinkBox">D2L Link *</label>
                 </div>
-                <div class="col-75">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 autocomplete">
                     <input type="text" id="d2lLinkBox" name="d2lLink" placeholder="Type D2L link here..."
                         autocomplete="on" required>
                 </div>
             </div>
+
             <hr>
+
             <div class="row">
-                <div class="col-25">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 
                     <!-- this is the instructions row -->
 
                     <label for="instructionsBox">Instructions</label>
                 </div>
-                <div class="col-75">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 autocomplete">
                     <textarea id="instructionsBox" name="instructions"
                         placeholder="Type instructions here..."></textarea>
                 </div>
             </div>
+
             <div class="row">
 
                 <!-- this is the button for sumbit but it is invisible and handled by the button in the bottom div -->
@@ -108,6 +115,7 @@
     </div>
 
     <!-- footer -->
+    <div><p>*required field</p></div>
     <div class="jumbotron footer-div header-footer-div">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">

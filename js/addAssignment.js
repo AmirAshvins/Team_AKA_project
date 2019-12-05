@@ -1,4 +1,3 @@
-
 // When page of edit assingment is called, it preloads the assingment details
 function editModeLoader(assignmentInstance) {
     changeLabelsToEdit(assignmentInstance);
@@ -43,12 +42,15 @@ function submitOnClick() {
 function submitInfo(event) {
     event.preventDefault();
     let assignmentInstance = assignmentClassBuilder();
-    
-    sendAssignment(assignmentInstance); 
+    if (confirm("Please confirm the submission")) {
+        sendAssignment(assignmentInstance); 
     try {
         delete sessionStorage.needsDetails;
     } catch{
         console.log('find me');
+    }
+    }else {
+        return false
     }
 }
 
