@@ -97,7 +97,7 @@ function sendAssignment(assignmentInstance) {
         'additionalInformation': assignmentInstance.additionalInformation,
         'instructorID': assignmentInstance.instructorID
     }).then(() => {
-        showAssignmentSentModal();
+        if (confirm())
         console.log('Assignment sent succesfully');
     }).catch((err) => {
         window.alert(err)
