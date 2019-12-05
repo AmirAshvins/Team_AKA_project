@@ -16,7 +16,7 @@ firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
 
 function loadAssignmentsToStorage() {
-    db.collection("assignments").get().then(function (assignmentsQuery) {
+    db.collection("assignments").orderBy('dueDate', 'asc').get().then(function (assignmentsQuery) {
         let assignmentList = [];
         assignmentsQuery.forEach(function (doc) {
             assignmentDetails = doc.data();
@@ -98,7 +98,6 @@ class assignment {
         }
     }
 }
-
 // the instructor class
 class instructor {
     constructor(instructorName, instructorEmail) {
@@ -114,7 +113,6 @@ class instructor {
         }
     }
 }
-
 // the user class
 class user {
     constructor(userID, userName) {
@@ -125,7 +123,7 @@ class user {
             if (doc.exists) {
                 this.getCompletedAssignments()
             } else {
-                this.sendUserToDB();
+                sendUserToDB(this);
                 sessionStorage.loadedUser = true;
             }
         });
@@ -140,16 +138,20 @@ class user {
             console.log('error while loading completed assignments', err)
         });
     }
-
-    sendUserToDB() {
-        db.collection('users').doc(this.ID).set({
-            'name': this.name,
-            'completedAssignments': this.completedAssignments,
-        })
-    }
 }
 
-// the course class.
+function sendUserToDB(currentUser) {
+    db.collection('users').doc(currentUser.ID).set({
+        'name': currentUser.name,
+        'completedAssignments': currentUser.completedAssignments,
+    }).then(()=>{
+        console.log('successfully sent user');
+    }).catch((err)=>{
+        console.log('firestore sucks at sending users', err)
+    });
+}
+
+
 class course {
     constructor(courseCode, courseName) {
         this.courseCode = courseCode;
@@ -160,8 +162,14 @@ class course {
 // ##########################
 // UTILITIES
 
+function getUrlQueries() {
+    let urlQuery = decodeURI(window.location.search());
+    let queries = urlQuery.split('?');
+    delete queries[0];
+    console.log("success");
+    return queries;
+}
 
-// get the element by id by the collection from the local storage.
 function getElementByIdByCollectionFromLocStorage(elementID, collectionName) {
     let collectionList = JSON.parse(window.localStorage[collectionName]);
     for (let i = 0; i < collectionList.length; i++) {
@@ -171,7 +179,6 @@ function getElementByIdByCollectionFromLocStorage(elementID, collectionName) {
     }
 }
 
-// gets the due dates of all assignments 
 function getAssignmentDueDate() {
     let assignments = JSON.parse(localStorage.assignmentList);
     let assignmentDueDateList = []
@@ -185,14 +192,11 @@ function getAssignmentDueDate() {
     return assignmentDueDateList
 }
 
-
-// given a date constructs a proper date object readable from the computer
 function makeDateObject(list) {
     object = new Date(list[0], list[1], list[2]);
     return object
 }
 
-// deletes the assignments that are passed their due date.
 function deletePassedAssignments() {
     let dateList = getAssignmentDueDate();
     let today = new Date();
@@ -212,7 +216,6 @@ function deletePassedAssignments() {
     }
 }
 
-// makes a list for a specified field from a specified collection.
 function getCollectionDetails(collectionName, detail) {
     detailList = [];
     collectionName = JSON.parse(window.localStorage.getItem(collectionName));

@@ -38,7 +38,7 @@ p, h2{
     transform: translate(0, 25%);
 }
 
-/* @media screen and (min-width: 768px) {
+@media screen and (min-width: 768px) {
     .head-text {
         font-size: 250%;
         position: static;
@@ -82,7 +82,7 @@ p, h2{
         line-height: 3vw;
         transform: translate(0, -50%);
     }
-} */
+}
 
 .noBottomMargin{
     margin-bottom: -10px;
@@ -94,7 +94,6 @@ p, h2{
 }
 
 body{
-    
     padding: 0px;
     top: 0px;
     left: 0px;
@@ -135,8 +134,9 @@ body{
 
 /* LIST PAGE CSS */
 .section-header{
+    font-size: 16px;
     background-color: rgb(216, 136, 83);
-    height: 5vw;
+    height: 3em;
 }
 
 .section-item{
@@ -147,7 +147,15 @@ body{
 
 .section-heading {
     font-weight: bold;
-    margin-top: 1vw;
+    margin-top: 0.5em;
+}
+
+@media screen and (max-width: 400px){
+    .section-heading {
+        font-weight: bold;
+        margin-top: 0.5em;
+        font-size: 12px;
+    }
 }
 
 .list-row {
@@ -156,9 +164,19 @@ body{
 }
 
 .list-text {
+    margin-top: 1.3em;
     color: black;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.75vw;
+    font-size: 16px;
+}
+
+@media screen and (max-width: 400px){
+    .list-text {
+        margin-top: 1.3em;
+        color: black;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+    } 
 }
 
 #listContainer{
@@ -229,18 +247,9 @@ textarea {
     font-size: 16px;
 }
 
-/* Floating column for labels: 25% width */
-.col-25 {
-float: left;
-width: 25%;
-margin-top: 6px;
-}
-
-/* Floating column for inputs: 75% width */
-.col-75 {
-float: left;
-width: 75%;
-margin-top: 6px;
+/* Aligning the text to be center for the lables of details page */
+.detailLable {
+    text-align: center;
 }
 
 /* Clear floats after the columns */
@@ -265,6 +274,16 @@ box-sizing: border-box;
 body {
 font: 16px Arial;  
 }
+
+ /* aligning the check box in the details page */
+ input[type="radio"],
+ input[type="checkbox"] {
+   margin: 0.9em 0 0;
+   margin-top: 1px \9;
+   margin-left: 9.5em;
+   line-height: normal;
+   text-align: center;
+ }
 
 /*the container must be positioned relative:*/
 .autocomplete {
@@ -328,6 +347,8 @@ color: #ffffff;
     text-decoration: line-through;
     background-color: lightgray;
 }
-.forFun {
-    font-size: 0.001em;
+
+input[type=checkbox]
+{
+  -webkit-appearance:checkbox;
 }
