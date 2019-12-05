@@ -279,30 +279,44 @@ display: none;
 
 /* Style the container */
 .form-container {
+margin-top: 10px;
 border-radius: 5px;
 background-color:rgba(255, 255, 255, 0.3);
-padding: 30px;
+padding: 5px;
 height: 70vh;
 overflow-y: scroll;
 }
 
-.form-container::-webkit-scrollbar {
+::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 7px;
 }
-.form-container::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     border-radius: 4px;
     background-color: rgba(0, 0, 0, 0.5);
     box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
 
-textarea {
-    width: 350px;
-    height: 25%;
-    border: 1px solid transparent;
-    background-color: #f1f1f1;
-    padding: 10px;
-    font-size: 16px;
+@media screen and (min-width: 768px) {
+    textarea {
+        width: 350px;
+        height: 25%;
+        border: 1px solid transparent;
+        background-color: #f1f1f1;
+        padding: 10px;
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    textarea {
+        width: 200px;
+        height: 25%;
+        border: 1px solid transparent;
+        background-color: #f1f1f1;
+        padding: 10px;
+        font-size: 16px;
+    }
 }
 
 /* Aligning the text to be center for the lables of details page */
@@ -368,10 +382,20 @@ padding: 10px;
 font-size: 16px;
 }
 
-input[type=text] {
-background-color: #f1f1f1;
-width: 350px;
-overflow-x: scroll;
+@media screen and (min-width: 768px) {
+    input[type=text] {
+        background-color: #f1f1f1;
+        width: 350px;
+        overflow-x: scroll;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    input[type=text] {
+        background-color: #f1f1f1;
+        width: 200px;
+        overflow-x: scroll;
+    }
 }
 
 .autocomplete-items {
@@ -384,7 +408,18 @@ z-index: 99;
 top: 100%;
 left: 0;
 right: 0;
-width: 350px;
+}
+
+@media screen and (min-width: 768px) {
+    .autocomplete-items {
+        width: 350px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .autocomplete-items {
+        width: 200px;
+    }
 }
 
 .autocomplete-items div {
