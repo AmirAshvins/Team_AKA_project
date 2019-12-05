@@ -10,8 +10,6 @@ function loadAssignmentDetails(assignmentId) {
     document.getElementById('dueDateBox').innerHTML = assignmentInstance.dueDate;
     document.getElementById('dueTimeBox').innerHTML = assignmentInstance.dueTime;
     document.getElementById('d2lLinkBox').href = assignmentInstance.d2lLink;
-    document.getElementById('instructorNameBox').innerHTML = instructorInstance.name;
-    document.getElementById('instructorEmailBox').innerHTML = instructorInstance.email;
     document.getElementById('instructionsBox').innerHTML = assignmentInstance.instructions;
     let currentUser = JSON.parse(localStorage.user);
     if (currentUser.completedAssignments.includes(assignmentId)) {

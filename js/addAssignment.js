@@ -22,7 +22,7 @@ function changeLabelsToEdit(assignmentInstance) {
 
 // Build an instance of the assingment.
 
-function assignmentClassBuilder(instructorID) {
+function assignmentClassBuilder() {
     console.log(document.getElementById('dueTimeBox').value);
     let newAssignment = new assignment(
         document.getElementById('courseBox').value,
@@ -30,14 +30,10 @@ function assignmentClassBuilder(instructorID) {
         document.getElementById('dueDateBox').value,
         document.getElementById('dueTimeBox').value,
         document.getElementById('d2lLinkBox').value,
-        document.getElementById('instructionsBox').value,
-        instructorID
+        document.getElementById('instructionsBox').value
     );
     return newAssignment;
 }
-
-
-// handles the event when the submit button is clicked.
 
 function submitOnClick() {
     document.getElementById('submitButton').click();
@@ -47,22 +43,15 @@ function submitInfo(event) {
     event.preventDefault();
     let assignmentInstance = assignmentClassBuilder();
     if (confirm("Please confirm the submission")) {
-        sendAssignment(assignmentInstance);
+        sendAssignment(assignmentInstance); 
     try {
         delete sessionStorage.needsDetails;
     } catch{
         console.log('find me');
     }
-    }else{
+    }else {
         return false
     }
-    // sendAssignment(assignmentInstance);
-    // sendInstructor(instructorInstance);   
-    // try {
-    //     delete sessionStorage.needsDetails;
-    // } catch{
-    //     console.log('find me');
-    // }
 }
 
 /*
@@ -70,12 +59,9 @@ on page load
 */
 
 autocomplete(document.getElementById("courseBox"), getCollectionDetails("assignmentList", "course"));
-// autocomplete(document.getElementById("instructorNameBox"), getCollectionDetails("instructorsList", "name"));
-// autocomplete(document.getElementById("instructorEmailBox"), getCollectionDetails("instructorsList", "email"));
 document.getElementById('form').addEventListener('submit', submitInfo)
 
 if (sessionStorage.needsDetails != undefined) {
     let assignmentInstance = getElementByIdByCollectionFromLocStorage(sessionStorage.needsDetails, 'assignmentList');
-    // let instructorInstance = getElementByIdByCollectionFromLocStorage(assignmentInstance.instructorID, 'instructorsList');
     editModeLoader(assignmentInstance);
 }

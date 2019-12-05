@@ -62,7 +62,7 @@ p, h2{
 
 @media screen and (min-width: 768px) {
     .foot-text {
-        font-size: 250%;
+        font-size: 200%;
         color: black;
         position: static;
         margin-bottom: 1vw;
@@ -75,8 +75,8 @@ p, h2{
 
 @media screen and (max-width: 767px) {
     .foot-text {
-        font-size: 150%;
-        
+        font-size: 200%;
+        color: black;
         position: static;
         margin-top: 1vw;
         font-family: Arial, Helvetica, sans-serif;
@@ -125,7 +125,7 @@ body{
 }
 
 .page-content{
-    height: 86%;
+    height: 80%;
     margin-top: 2px;
     margin-bottom: 2px;
     margin-left: 1%;
@@ -165,6 +165,12 @@ body{
     cursor: pointer;
 }
 
+/* to get rid of the extra margins inside the main list */
+.row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
 .list-text {
     margin-top: 1.3em;
     color: black;
@@ -182,7 +188,8 @@ body{
 }
 
 #listContainer{
-    height: 50vw;
+    height: 91%;
+    overflow-y: scroll;
 }
 
 .floater {
@@ -254,6 +261,20 @@ textarea {
     text-align: center;
 }
 
+/* Floating column for labels: 25% width */
+.col-25 {
+float: left;
+width: 25%;
+margin-top: 6px;
+}
+
+/* Floating column for inputs: 75% width */
+.col-75 {
+float: left;
+width: 75%;
+margin-top: 6px;
+}
+
 /* Clear floats after the columns */
 .row:after {
 content: "";
@@ -269,9 +290,7 @@ clear: both;
 }
 
 /* Autocomplete styling*/
-* {
-box-sizing: border-box;
-}
+* {box-sizing: border-box;}
 
 body {
 font: 16px Arial;  
@@ -280,7 +299,7 @@ font: 16px Arial;
  /* aligning the check box in the details page */
  input[type="radio"],
  input[type="checkbox"] {
-   /* margin: 0.9em 0 0; */
+   margin: 0.9em 0 0;
    margin-top: 1px \9;
    /* margin-left: 12em; */
    line-height: normal;
@@ -355,7 +374,7 @@ input[type=checkbox]
   -webkit-appearance:checkbox;
 }
 
-@media only screen and (max-width:400px) {
+/* @media only screen and (max-width:400px) {
     #courseBox {
         display: inline-block;
     }
@@ -367,7 +386,7 @@ input[type=checkbox]
         width: 10em;
         overflow-x: scroll;
     }
-}
+} */
 
 /* #courseBox {
     background-color: #f1f1f1;

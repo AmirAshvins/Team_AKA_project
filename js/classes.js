@@ -22,21 +22,7 @@ class assignment {
         }
     }
 }
-// the instructor class
-// class instructor {
-//     constructor(instructorName, instructorEmail) {
-//         this.ID = '';
-//         this.name = instructorName;
-//         this.email = instructorEmail;
-//         for (let i = 0; i < this.email.length; i++) {
-//             if (this.email[i] != '@') {
-//                 this.ID += this.email[i];
-//             } else {
-//                 break;
-//             }
-//         }
-//     }
-// }
+
 // the user class
 class user {
     constructor(userID, userName) {
