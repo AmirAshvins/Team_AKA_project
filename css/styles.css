@@ -39,24 +39,30 @@ p, h2{
 }
 
 @media screen and (min-width: 768px) {
-    .head-text {
+    .head-text{
         font-size: 250%;
-        position: static;
+        /* position: static; */
         margin: 0;
         font-family: Arial, Helvetica, sans-serif;
         font-weight: bolder;
         line-height: 0px;
+        transform: translateX(4%);
     }
+}
+
+#headerText {
+    transform: translateX(4%);
 }
 
 @media screen and (max-width: 767px) {
     .head-text {
         font-size: 150%;
-        position: static;
+        /* position: static; */
         margin: 0;
         font-family: Arial, Helvetica, sans-serif;
         font-weight: bolder;
         line-height: 0px;
+        transform: translateX(4%);
     }
 }
 
@@ -64,7 +70,7 @@ p, h2{
     .foot-text {
         font-size: 200%;
         color: black;
-        position: static;
+        /* position: static; */
         margin-bottom: 1vw;
         font-family: Arial, Helvetica, sans-serif;
         font-weight: bolder;
@@ -77,7 +83,7 @@ p, h2{
     .foot-text {
         font-size: 200%;
         color: black;
-        position: static;
+        /* position: static; */
         margin-top: 1vw;
         font-family: Arial, Helvetica, sans-serif;
         font-weight: bolder;
@@ -169,6 +175,7 @@ body{
 .row {
     margin-left: 0px;
     margin-right: 0px;
+    margin-bottom: 5px;
 }
 
 .list-text {
@@ -188,7 +195,7 @@ body{
 }
 
 #listContainer{
-    height: 91%;
+    height: 75%;
     overflow-y: scroll;
 }
 
@@ -375,22 +382,9 @@ input[type=checkbox]
   -webkit-appearance:checkbox;
 }
 
-/* @media only screen and (max-width:400px) {
-    #courseBox {
-        display: inline-block;
-    }
+#logout {
+
+    height: 1.5em;
+    widows: auto;
+    cursor: pointer;
 }
-
-@media only screen and (min-width:401px) {
-    #courseBox {
-        background-color: #f1f1f1;
-        width: 10em;
-        overflow-x: scroll;
-    }
-} */
-
-/* #courseBox {
-    background-color: #f1f1f1;
-    width: 10em;
-    overflow-x: scroll;
-} */
