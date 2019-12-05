@@ -39,9 +39,11 @@ function listButtonClickHandler() {
 
 function confirmCheckBox() {
     let CB = document.getElementById('completeCheckBox');
-    if (CB.checked && confirm("Are you sure you want to cross out the assginment")){
-        addToComplete(sessionStorage.needsDetails);
-    }else if(confirm("Are you sure you want to uncross the assginment") === true){
+    if (CB.checked) {
+        if (confirm("Are you sure you want to cross out the assginment")) {
+            addToComplete(sessionStorage.needsDetails);
+        }
+    } else if (confirm("Are you sure you want to uncross the assginment") === true) {
         removeFromCompleted(sessionStorage.needsDetails);
     }
 }
@@ -55,7 +57,7 @@ function addToComplete(assignmentID) {
     sessionStorage.currentUser = JSON.stringify(user);
 }
 
-function removeFromCompleted(assignmentID){
+function removeFromCompleted(assignmentID) {
     let currentUser = JSON.parse(sessionStorage.user);
     let badIndex = currentUser.completedAssignments.indexOf(assignmentID);
     currentUser.completedAssignments.splice(badIndex, 1);
@@ -64,7 +66,7 @@ function removeFromCompleted(assignmentID){
     sessionStorage.currentUser = JSON.stringify(currentUser);
 }
 
-document.getElementById('completeCheckBox').onclick= confirmCheckBox;
+document.getElementById('completeCheckBox').onclick = confirmCheckBox;
 document.getElementById('editButton').onclick = editButtonClickHandler;
 document.getElementById('listButton').onclick = listButtonClickHandler;
 loadAssignmentDetails(sessionStorage.needsDetails);
