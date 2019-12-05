@@ -1,0 +1,73 @@
+
+/* 
+ 
+CLASS DEFINITIONS
+
+ */
+// The assignment class
+class assignment {
+    constructor(course, assignmentName, dueDate, dueTime, d2lLink, instructions, additionalInformation, instructorID) {
+        this.course = course;
+        this.name = assignmentName;
+        this.dueDate = dueDate;
+        this.dueTime = dueTime;
+        this.d2lLink = d2lLink;
+        this.ID = 'ass';
+        this.instructions = instructions;
+        this.additionalInformation = additionalInformation;
+        this.instructorID = instructorID;
+        for (let i = 0; i < this.d2lLink.length; i++) {
+            if (!isNaN(this.d2lLink[i])) {
+                this.ID += this.d2lLink[i];
+            }
+        }
+    }
+}
+// the instructor class
+class instructor {
+    constructor(instructorName, instructorEmail) {
+        this.ID = '';
+        this.name = instructorName;
+        this.email = instructorEmail;
+        for (let i = 0; i < this.email.length; i++) {
+            if (this.email[i] != '@') {
+                this.ID += this.email[i];
+            } else {
+                break;
+            }
+        }
+    }
+}
+// the user class
+class user {
+    constructor(userID, userName) {
+        this.ID = userID;
+        this.name = userName;
+        this.completedAssignments = [];
+        db.collection('users').doc(this.ID).get().then((doc) => {
+            if (doc.exists) {
+                this.getCompletedAssignments()
+            } else {
+                sendUserToDB(this);
+                sessionStorage.loadedUser = true;
+            }
+        });
+    }
+
+    getCompletedAssignments() {
+        db.collection('users').doc(this.ID).get().then((doc) => {
+            this.completedAssignments = doc.data().completedAssignments;
+            localStorage.user = JSON.stringify(this);
+            sessionStorage.loadedUser = true;
+        }).catch((err) => {
+            console.log('error while loading completed assignments', err)
+        });
+    }
+}
+
+class course {
+    constructor(courseCode, courseName) {
+        this.courseCode = courseCode;
+        this.courseName = courseName;
+    }
+}
