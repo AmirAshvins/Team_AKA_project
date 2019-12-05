@@ -22,21 +22,12 @@ span{
     font-size: 200%;
 }
 
-#profile.btn {
-    border-style: outset;
-    border-color: darkorange;
-    border-width: 3px;
-    border-radius: 100%;
+.btn-primary{
+    background-color: #213c51;
 }
 
 .inline-elem{
     display: inline;
-}
-
-#headers{
-    text-align: center;
-    background-color: darkgray;
-    color: orange;
 }
 
 .align-center-up{
@@ -50,6 +41,7 @@ span{
 @media screen and (min-width: 768px) {
     .head-text{
         font-size: 250%;
+        color: white;
         /* position: static; */
         margin: 0;
         font-family: Arial, Helvetica, sans-serif;
@@ -61,6 +53,7 @@ span{
 @media screen and (max-width: 767px) {
     .head-text {
         font-size: 150%;
+        color: white;
         /* position: static; */
         margin: 0;
         font-family: Arial, Helvetica, sans-serif;
@@ -72,6 +65,7 @@ span{
 @media screen and (min-width: 768px) {
     .center-head-text{
         font-size: 250%;
+        color: white;
         /* position: static; */
         margin: 0;
         font-family: Arial, Helvetica, sans-serif;
@@ -84,6 +78,7 @@ span{
 @media screen and (max-width: 767px) {
     .center-head-text{
         font-size: 150%;
+        color: white;
         /* position: static; */
         margin: 0;
         font-family: Arial, Helvetica, sans-serif;
@@ -96,7 +91,7 @@ span{
 @media screen and (min-width: 768px) {
     .foot-text {
         font-size: 200%;
-        color: black;
+        color: white;
         /* position: static; */
         margin-bottom: 1vw;
         font-family: Arial, Helvetica, sans-serif;
@@ -109,7 +104,7 @@ span{
 @media screen and (max-width: 767px) {
     .foot-text {
         font-size: 200%;
-        color: black;
+        color: white;
         /* position: static; */
         margin: auto;
         font-family: Arial, Helvetica, sans-serif;
@@ -134,7 +129,7 @@ body{
     left: 0px;
     height: 100vh;
     width: 100vw;
-    background-image: url("../images/landing_page_bg.jpg");
+    background-image: url("../images/landing_page_bg_1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     /* overflow: hidden; */
@@ -147,7 +142,9 @@ body{
 }
 
 .header-div{
-    background-color: rgb(255, 167, 60);
+    background-image: url("../images/denim.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
     top: 0px;
 }
 
@@ -171,7 +168,7 @@ body{
 /* LIST PAGE CSS */
 .section-header{
     font-size: 16px;
-    background-color: rgb(216, 136, 83);
+    background-color: black;
     height: 3em;
 }
 
@@ -183,6 +180,7 @@ body{
 }
 
 .section-heading {
+    color: white;
     font-weight: bold;
     margin-top: 0.5em;
     padding-left: 1%;
@@ -198,7 +196,7 @@ body{
 }
 
 .list-row {
-    background-color:rgb(250, 253, 226);
+    background-color:white;
     cursor: pointer;
 }
 
@@ -451,7 +449,7 @@ color: #ffffff;
 
 .strikethrough{
     text-decoration: line-through;
-    background-color: lightgray;
+    background-color: #ba920a;
     border-radius: 8px;
 }
 
