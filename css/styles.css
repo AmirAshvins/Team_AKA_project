@@ -23,7 +23,9 @@ span{
 }
 
 .btn-primary{
+    vertical-align: top;
     background-color: #213c51;
+    display: inline;
 }
 
 .inline-elem{
@@ -148,10 +150,16 @@ body{
 }
 
 .footer-div{
+    margin-top: 2%;
     display: block;
     background-color: rgba(255, 255, 255, 0);
     bottom: 0px;
     padding-top: 3%;
+}
+
+.footer-button{
+    display: inline;
+    vertical-align: top;
 }
 
 .page-content{
