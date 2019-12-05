@@ -1,20 +1,18 @@
 
 // When page of edit assingment is called, it preloads the assingment details
-function editModeLoader(assignmentInstance, instructorInstance) {
+function editModeLoader(assignmentInstance) {
     changeLabelsToEdit(assignmentInstance);
-    loadAssignmentDetails(assignmentInstance, instructorInstance);
+    loadAssignmentDetails(assignmentInstance);
 }
 
-function loadAssignmentDetails(assignmentInstance, instructorInstance) {
+function loadAssignmentDetails(assignmentInstance) {
     document.getElementById('assignmentNameBox').value = assignmentInstance.name;
     document.getElementById('courseBox').value = assignmentInstance.course;
     document.getElementById('dueDateBox').value = assignmentInstance.dueDate;
     document.getElementById('dueTimeBox').value = assignmentInstance.dueTime;
     document.getElementById('d2lLinkBox').value = assignmentInstance.d2lLink;
-    document.getElementById('instructorNameBox').value = instructorInstance.name;
-    document.getElementById('instructorEmailBox').value = instructorInstance.email;
     document.getElementById('instructionsBox').value = assignmentInstance.instructions;
-    document.getElementById('additionalInformationBox').value = assignmentInstance.additionalInformation;
+    
 }
 
 // changes the label of the page
@@ -34,7 +32,6 @@ function assignmentClassBuilder(instructorID) {
         document.getElementById('dueTimeBox').value,
         document.getElementById('d2lLinkBox').value,
         document.getElementById('instructionsBox').value,
-        document.getElementById('additionalInformationBox').value,
         instructorID
     );
     return newAssignment;
@@ -43,14 +40,14 @@ function assignmentClassBuilder(instructorID) {
 
 // Creates an instructor instance
 
-function instructorBuilder() {
-    console.log(document.getElementById('instructorNameBox').value);
-    let newInstructor = new instructor(
-        document.getElementById('instructorNameBox').value,
-        document.getElementById('instructorEmailBox').value
-    );
-    return newInstructor;
-}
+// function instructorBuilder() {
+//     console.log(document.getElementById('instructorNameBox').value);
+//     let newInstructor = new instructor(
+//         document.getElementById('instructorNameBox').value,
+//         document.getElementById('instructorEmailBox').value
+//     );
+//     return newInstructor;
+// }
 
 // handles the event when the submit button is clicked.
 
@@ -60,7 +57,7 @@ function submitOnClick() {
 
 function submitInfo(event) {
     event.preventDefault();
-    let instructorInstance = instructorBuilder();
+    // let instructorInstance = instructorBuilder();
     let assignmentInstance = assignmentClassBuilder(instructorInstance.ID);
     sendAssignment(assignmentInstance);
     sendInstructor(instructorInstance);   
@@ -76,12 +73,12 @@ on page load
 */
 
 autocomplete(document.getElementById("courseBox"), getCollectionDetails("assignmentList", "course"));
-autocomplete(document.getElementById("instructorNameBox"), getCollectionDetails("instructorsList", "name"));
-autocomplete(document.getElementById("instructorEmailBox"), getCollectionDetails("instructorsList", "email"));
+// autocomplete(document.getElementById("instructorNameBox"), getCollectionDetails("instructorsList", "name"));
+// autocomplete(document.getElementById("instructorEmailBox"), getCollectionDetails("instructorsList", "email"));
 document.getElementById('form').addEventListener('submit', submitInfo)
 
 if (sessionStorage.needsDetails != undefined) {
     let assignmentInstance = getElementByIdByCollectionFromLocStorage(sessionStorage.needsDetails, 'assignmentList');
-    let instructorInstance = getElementByIdByCollectionFromLocStorage(assignmentInstance.instructorID, 'instructorsList');
-    editModeLoader(assignmentInstance, instructorInstance);
+    // let instructorInstance = getElementByIdByCollectionFromLocStorage(assignmentInstance.instructorID, 'instructorsList');
+    editModeLoader(assignmentInstance);
 }

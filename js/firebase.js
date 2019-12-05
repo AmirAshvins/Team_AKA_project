@@ -31,19 +31,19 @@ function loadAssignmentsToStorage() {
     });
 }
 
-function loadInstructorsToStorage() {
-    db.collection("instructors").get().then(function (instructorsQuery) {
-        let instructorsList = [];
-        instructorsQuery.forEach(function (doc) {
-            instructorsDetails = doc.data();
-            newInstructor = new instructor(instructorsDetails['name'], instructorsDetails['email']);
-            instructorsList.push(newInstructor);
-        });
-        window.localStorage.setItem("instructorsList", JSON.stringify(instructorsList));
-        console.log(JSON.parse(window.localStorage.getItem('instructorsList')));
-        sessionStorage.instructorsLoaded = true;
-    });
-}
+// function loadInstructorsToStorage() {
+//     db.collection("instructors").get().then(function (instructorsQuery) {
+//         let instructorsList = [];
+//         instructorsQuery.forEach(function (doc) {
+//             instructorsDetails = doc.data();
+//             newInstructor = new instructor(instructorsDetails['name'], instructorsDetails['email']);
+//             instructorsList.push(newInstructor);
+//         });
+//         window.localStorage.setItem("instructorsList", JSON.stringify(instructorsList));
+//         console.log(JSON.parse(window.localStorage.getItem('instructorsList')));
+//         sessionStorage.instructorsLoaded = true;
+//     });
+// }
 
 function loadCoursesToStorage() {
     db.collection("courses").get().then(function (courseQuery) {
@@ -107,17 +107,17 @@ function sendAssignment(assignmentInstance) {
 
 // Sends the instructor calss to the data base.
 
-function sendInstructor(instructorInstance) {
+// function sendInstructor(instructorInstance) {
    
-        db.collection("instructors").doc(instructorInstance.ID).set({
-            'name': instructorInstance.name,
-            'email': instructorInstance.email
-        }).then(()=>{
-        console.log('instructor sent succesfully');
-    }).catch((err)=>{
-        console.log('firebase let you down when sending instructor', err);
-    });
-}
+//         db.collection("instructors").doc(instructorInstance.ID).set({
+//             'name': instructorInstance.name,
+//             'email': instructorInstance.email
+//         }).then(()=>{
+//         console.log('instructor sent succesfully');
+//     }).catch((err)=>{
+//         console.log('firebase let you down when sending instructor', err);
+//     });
+// }
 
 
 function deletePassedAssignments() {
@@ -144,6 +144,6 @@ db.collection('assignments').onSnapshot(function () {
     window.localStorage.assignmentsLoaded = false;
 });
 
-db.collection('instructors').onSnapshot(function () {
-    window.localStorage.assignmentsLoaded = false;
-});
+// db.collection('instructors').onSnapshot(function () {
+//     window.localStorage.assignmentsLoaded = false;
+// });

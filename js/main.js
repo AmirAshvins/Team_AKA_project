@@ -51,9 +51,9 @@ function onPageLoad() {
     if (sessionStorage.assignmentsLoaded != 'true') {
         loadAssignmentsToStorage();
     }
-    if (sessionStorage.instructorsLoaded != 'true') {
-        loadInstructorsToStorage();
-    }
+    // if (sessionStorage.instructorsLoaded != 'true') {
+    //     loadInstructorsToStorage();
+    // }
 
     let waiter = setInterval(() => {
         if (allLoaded()) {
@@ -67,11 +67,11 @@ function onPageLoad() {
 }
 
 function allLoaded() {
-    return sessionStorage.assignmentsLoaded == "true" && sessionStorage.instructorsLoaded == "true" && sessionStorage.loadedUser == "true"
+    return sessionStorage.assignmentsLoaded == "true" && sessionStorage.loadedUser == "true"
 }
 
 sessionStorage.assignmentsLoaded = 'false';
-sessionStorage.instructorsLoaded = 'false';
+// sessionStorage.instructorsLoaded = 'false';
 delete sessionStorage.needsDetails;
 onPageLoad();
 

@@ -13,7 +13,6 @@ function loadAssignmentDetails(assignmentId) {
     document.getElementById('instructorNameBox').innerHTML = instructorInstance.name;
     document.getElementById('instructorEmailBox').innerHTML = instructorInstance.email;
     document.getElementById('instructionsBox').innerHTML = assignmentInstance.instructions;
-    document.getElementById('additionalInformationBox').innerHTML = assignmentInstance.additionalInformation;
     let currentUser = JSON.parse(localStorage.user);
     if (currentUser.completedAssignments.includes(assignmentId)) {
         document.getElementById('completeCheckBox').checked = "true";
@@ -40,14 +39,15 @@ function listButtonClickHandler() {
     window.location.href = href = "./main.html";
 }
 
-function completeCBHandler(){
+function confirmCheckBox() {
     let CB = document.getElementById('completeCheckBox');
-    if (CB.checked){
+    if (CB.checked && confirm("Are you sure you want to cross out the assginment")){
         addToComplete(sessionStorage.needsDetails);
-    }else{
+    }else if(confirm("Are you sure you want to uncross the assginment")){
         removeFromCompleted(sessionStorage.needsDetails);
     }
 }
+
 
 function addToComplete(assignmentID) {
     let currentUser = JSON.parse(localStorage.user);
@@ -66,8 +66,7 @@ function removeFromCompleted(assignmentID){
     localStorage.currentUser = JSON.stringify(currentUser);
 }
 
-document.getElementById('completeCheckBox').onclick= completeCBHandler;
+document.getElementById('completeCheckBox').onclick= confirmCheckBox;
 document.getElementById('editButton').onclick = editButtonClickHandler;
-document.getElementById('calendarButton').onclick = calendarButtonClickHandler;
 document.getElementById('listButton').onclick = listButtonClickHandler;
 loadAssignmentDetails(sessionStorage.needsDetails);

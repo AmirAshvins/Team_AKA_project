@@ -14,8 +14,7 @@ class assignment {
         this.d2lLink = d2lLink;
         this.ID = 'ass';
         this.instructions = instructions;
-        this.additionalInformation = additionalInformation;
-        this.instructorID = instructorID;
+        // this.instructorID = instructorID;
         for (let i = 0; i < this.d2lLink.length; i++) {
             if (!isNaN(this.d2lLink[i])) {
                 this.ID += this.d2lLink[i];
@@ -24,20 +23,20 @@ class assignment {
     }
 }
 // the instructor class
-class instructor {
-    constructor(instructorName, instructorEmail) {
-        this.ID = '';
-        this.name = instructorName;
-        this.email = instructorEmail;
-        for (let i = 0; i < this.email.length; i++) {
-            if (this.email[i] != '@') {
-                this.ID += this.email[i];
-            } else {
-                break;
-            }
-        }
-    }
-}
+// class instructor {
+//     constructor(instructorName, instructorEmail) {
+//         this.ID = '';
+//         this.name = instructorName;
+//         this.email = instructorEmail;
+//         for (let i = 0; i < this.email.length; i++) {
+//             if (this.email[i] != '@') {
+//                 this.ID += this.email[i];
+//             } else {
+//                 break;
+//             }
+//         }
+//     }
+// }
 // the user class
 class user {
     constructor(userID, userName) {

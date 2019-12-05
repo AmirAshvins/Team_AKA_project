@@ -26,101 +26,85 @@
     <div class="form-container page-content">
 
         <div class="row">
-            <div class="col-25">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <label>Mark as complete:</label>
             </div>
-            <input id="completeCheckBox" type="checkbox" class="col-75" style="transform:scale(2)">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
+                <input id="completeCheckBox" type="checkbox" style="transform:scale(2);">
+            </div>
+            <!-- <input id="completeCheckBox" type="checkbox" class="col-75" style="transform:scale(2)">   -->
         </div>
 
         <div class="row">
             <!-- the course row -->
 
-            <div class="col-25">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <label>Course:</label>
             </div>
-            <p id="courseBox" class="col-75"></p>
+            <div>
+                <label id="courseBox" class="col-lg-6 col-md-6 col-sm-6 col-xs-6 detailLable"></label>
+            </div>
         </div>
 
 
         <div class="row">
             <!-- the Assignment name row -->
 
-            <div class="col-25">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <label>Assignment Name:</label>
             </div>
-            <p id="assignmentNameBox" class="col-75"></p>
+            <div>
+                <label id="assignmentNameBox" class="col-lg-6 col-md-6 col-sm-6 col-xs-6 detailLable"></label>
+            </div>
         </div>
 
 
         <div class="row">
             <!-- the Due date row -->
 
-            <div class="col-25">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <label>Due Date:</label>
             </div>
-            <p id="dueDateBox" class="col-75"></p>
+            <div>
+                <label id="dueDateBox" class="col-lg-6 col-md-6 col-sm-6 col-xs-6 detailLable"></label>
+            </div>
         </div>
 
 
         <div class="row">
             <!-- the Due time row -->
 
-            <div class="col-25">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <label>Due Time:</label>
             </div>
-            <p id="dueTimeBox" class="col-75"></p>
+            <div>
+                <label id="dueTimeBox" class="col-lg-6 col-md-6 col-sm-6 col-xs-6 detailLable"></label>
+            </div>
         </div>
 
 
         <div class="row">
             <!-- the D2L Link row -->
 
-            <div class="col-25">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <label>D2L Link:</label>
-                <a id="d2lLinkBox" class="glyphicon glyphicon-link align-center-down" target="_blank"></a>
             </div>
-        </div>
-
-
-        <div class="row">
-            <!-- the Instructor name row -->
-
-            <div class="col-25">
-                <label>Instructor name:</label>
+            <div>
+                <a id="d2lLinkBox" class="glyphicon glyphicon-link align-center-down col-lg-6 col-md-6 col-sm-6 col-xs-6 detailLable" target="_blank"></a>
             </div>
-            <p id="instructorNameBox" class="col-75"></p>
-        </div>
-
-
-        <div class="row">
-            <!-- the INstrucotr Email row -->
-
-            <div class="col-25">
-                <label>Instructor Email:</label>
-            </div>
-            <p id="instructorEmailBox" class="col-75"></p>
         </div>
 
         <hr>
 
-
         <div class="row">
             <!-- the Instructions row -->
 
-            <div class="col-25">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <label>Instructions:</label>
             </div>
-            <p id="instructionsBox" class="col-75"></p>
-        </div>
-
-
-        <div class="row">
-            <!-- the Additional info row -->
-
-            <div class="col-25">
-                <label>Additional Information:</label>
+            <div>
+                <label id="instructionsBox" class="col-lg-6 col-md-6 col-sm-6 col-xs-6 detailLable"></label>
             </div>
-            <p id="additionalInformationBox" class="col-75"></p>
         </div>
     </div>
 
@@ -128,13 +112,10 @@
     <!-- footer containing the buttons -->
     <div class="jumbotron footer-div header-footer-div">
         <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
                 <a class="btn btn-warning foot-text" id="listButton" href="./main.html">List</a>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
-                <a class="btn btn-warning foot-text" id="calendarButton" href="./Calendar.html">Calendar</a>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
                 <a class="btn btn-warning foot-text" id="editButton" href="./addasignment.html">Edit</a>
             </div>
         </div>

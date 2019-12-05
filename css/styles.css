@@ -247,18 +247,9 @@ textarea {
     font-size: 16px;
 }
 
-/* Floating column for labels: 25% width */
-.col-25 {
-float: left;
-width: 25%;
-margin-top: 6px;
-}
-
-/* Floating column for inputs: 75% width */
-.col-75 {
-float: left;
-width: 75%;
-margin-top: 6px;
+/* Aligning the text to be center for the lables of details page */
+.detailLable {
+    text-align: center;
 }
 
 /* Clear floats after the columns */
@@ -283,6 +274,16 @@ box-sizing: border-box;
 body {
 font: 16px Arial;  
 }
+
+ /* aligning the check box in the details page */
+ input[type="radio"],
+ input[type="checkbox"] {
+   /* margin: 0.9em 0 0; */
+   margin-top: 1px \9;
+   /* margin-left: 12em; */
+   line-height: normal;
+   text-align: center;
+ }
 
 /*the container must be positioned relative:*/
 .autocomplete {
