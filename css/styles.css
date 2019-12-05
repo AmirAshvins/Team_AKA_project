@@ -9,6 +9,15 @@ p, h2{
     color: black;
 }
 
+p{
+    font-size: 100%;
+    padding: 5px;
+}
+
+span{
+    padding: 5px;
+}
+
 .glyphicon {
     font-size: 200%;
 }
@@ -46,12 +55,7 @@ p, h2{
         font-family: Arial, Helvetica, sans-serif;
         font-weight: bolder;
         line-height: 0px;
-        transform: translateX(4%);
     }
-}
-
-#headerText {
-    transform: translateX(4%);
 }
 
 @media screen and (max-width: 767px) {
@@ -62,7 +66,30 @@ p, h2{
         font-family: Arial, Helvetica, sans-serif;
         font-weight: bolder;
         line-height: 0px;
-        transform: translateX(4%);
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .center-head-text{
+        font-size: 250%;
+        /* position: static; */
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bolder;
+        line-height: 0px;
+        transform: translateX(10%);
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .center-head-text{
+        font-size: 150%;
+        /* position: static; */
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bolder;
+        line-height: 0px;
+        transform: translateX(10%);
     }
 }
 
@@ -74,7 +101,7 @@ p, h2{
         margin-bottom: 1vw;
         font-family: Arial, Helvetica, sans-serif;
         font-weight: bolder;
-        line-height: 3vw;
+        line-height: 30px;
         transform: translate(0, -50%);
     }
 }
@@ -87,7 +114,7 @@ p, h2{
         margin-top: 1vw;
         font-family: Arial, Helvetica, sans-serif;
         font-weight: bolder;
-        line-height: 3vw;
+        line-height: 30px;
         transform: translate(0, -50%);
     }
 }
@@ -151,11 +178,15 @@ body{
     margin-bottom: 5px;
     margin-top: 5px;
     border-radius: 8px;
+    padding-left: 1%;
+    padding-right: 1%;
 }
 
 .section-heading {
     font-weight: bold;
     margin-top: 0.5em;
+    padding-left: 1%;
+    padding-right: 1%;
 }
 
 @media screen and (max-width: 400px){
@@ -202,11 +233,22 @@ body{
 .floater {
     background-color: rgba(250, 253, 226, 0.5);
     border-radius: 8px;
+    padding: 5px;
+    overflow-y: scroll;
+    height: 90%;
 }
-    /* CSS BY ID */
 
-#loginButtonDiv{
-    height: 30%;
+/* CSS BY ID */
+@media screen and (min-width: 768px) {
+    #loginButtonDiv{
+        height: 20%;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #loginButtonDiv{
+        height: 10%;
+    }
 }
 
 #firebaseui-auth-container{
@@ -303,15 +345,15 @@ body {
 font: 16px Arial;  
 }
 
- /* aligning the check box in the details page */
- input[type="radio"],
- input[type="checkbox"] {
+/* aligning the check box in the details page */
+input[type="radio"],
+input[type="checkbox"] {
    margin: 0.9em 0 0;
    margin-top: 1px \9;
    /* margin-left: 12em; */
    line-height: normal;
    text-align: center;
- }
+}
 
 /*the container must be positioned relative:*/
 .autocomplete {
