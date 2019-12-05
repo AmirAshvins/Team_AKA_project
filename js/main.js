@@ -8,7 +8,7 @@ function loadList() {
 }
 
 function markCompletedAssignments() {
-    let user = JSON.parse(localStorage.user);
+    let user = JSON.parse(sessionStorage.user);
     for (assignment of user.completedAssignments) {
         let assignmentRowDOM = document.getElementById(assignment);
         if (assignmentRowDOM != null) {
@@ -16,19 +16,6 @@ function markCompletedAssignments() {
                 childrenDOM.className = "strikethrough " + childrenDOM.className;
             }
             assignmentRowDOM.className = "strikethrough " + assignmentRowDOM.className;
-        }
-    }
-}
-
-function unmarkCompletedAssignment(assignmentID) {
-    assignmentRowDOM = document.getElementById(assignmentID);
-    for (assignment of user.completedAssignments) {
-        let assignmentRowDOM = document.getElementById(assignment);
-        if (assignmentRowDOM != null) {
-            for (childrenDOM of assignmentRowDOM.children) {
-                childrenDOM.className = childrenDOM.className.slice(13);
-            }
-            assignmentRowDOM.className = assignmentRowDOM.className.slice(13);
         }
     }
 }

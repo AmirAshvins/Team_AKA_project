@@ -42,7 +42,7 @@ class user {
     getCompletedAssignments() {
         db.collection('users').doc(this.ID).get().then((doc) => {
             this.completedAssignments = doc.data().completedAssignments;
-            localStorage.user = JSON.stringify(this);
+            sessionStorage.user = JSON.stringify(this);
             sessionStorage.loadedUser = true;
         }).catch((err) => {
             console.log('error while loading completed assignments', err)

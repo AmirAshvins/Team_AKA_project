@@ -344,6 +344,7 @@ color: #ffffff;
 .strikethrough{
     text-decoration: line-through;
     background-color: lightgray;
+    border-radius: 8px;
 }
 
 input[type=checkbox]

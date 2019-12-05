@@ -11,7 +11,7 @@ function loadAssignmentDetails(assignmentId) {
     document.getElementById('dueTimeBox').innerHTML = assignmentInstance.dueTime;
     document.getElementById('d2lLinkBox').href = assignmentInstance.d2lLink;
     document.getElementById('instructionsBox').innerHTML = assignmentInstance.instructions;
-    let currentUser = JSON.parse(localStorage.user);
+    let currentUser = JSON.parse(sessionStorage.user);
     if (currentUser.completedAssignments.includes(assignmentId)) {
         document.getElementById('completeCheckBox').checked = "true";
     }
@@ -41,27 +41,27 @@ function confirmCheckBox() {
     let CB = document.getElementById('completeCheckBox');
     if (CB.checked && confirm("Are you sure you want to cross out the assginment")){
         addToComplete(sessionStorage.needsDetails);
-    }else if(confirm("Are you sure you want to uncross the assginment")){
+    }else if(confirm("Are you sure you want to uncross the assginment") === true){
         removeFromCompleted(sessionStorage.needsDetails);
     }
 }
 
 
 function addToComplete(assignmentID) {
-    let currentUser = JSON.parse(localStorage.user);
+    let currentUser = JSON.parse(sessionStorage.user);
     currentUser.completedAssignments.push(assignmentID);
     sendUserToDB(currentUser);
     sessionStorage.loadedUser = "false";
-    localStorage.currentUser = JSON.stringify(user);
+    sessionStorage.currentUser = JSON.stringify(user);
 }
 
 function removeFromCompleted(assignmentID){
-    let currentUser = JSON.parse(localStorage.user);
+    let currentUser = JSON.parse(sessionStorage.user);
     let badIndex = currentUser.completedAssignments.indexOf(assignmentID);
-    delete currentUser.completedAssignments[badIndex];
+    currentUser.completedAssignments.splice(badIndex, 1);
     sendUserToDB(currentUser);
     sessionStorage.loadedUser = "false";
-    localStorage.currentUser = JSON.stringify(currentUser);
+    sessionStorage.currentUser = JSON.stringify(currentUser);
 }
 
 document.getElementById('completeCheckBox').onclick= confirmCheckBox;
