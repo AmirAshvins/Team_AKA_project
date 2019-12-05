@@ -103,14 +103,14 @@ span{
 
 @media screen and (max-width: 767px) {
     .foot-text {
-        font-size: 150%;
+        font-size: 200%;
         color: white;
         /* position: static; */
-        margin-top: 1vw;
+        margin: auto;
         font-family: Arial, Helvetica, sans-serif;
         font-weight: bolder;
         line-height: 30px;
-        transform: translate(0, -200%);
+        transform: translate(0%, 0%);
     }
 }
 
@@ -129,10 +129,9 @@ body{
     left: 0px;
     height: 100vh;
     width: 100vw;
-    background-image: url("./images/landing_page_bg_1.jpg");
+    background-image: url("../images/landing_page_bg_1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    /* overflow: hidden; */
 }
 
 .header-footer-div{
@@ -142,20 +141,21 @@ body{
 }
 
 .header-div{
-    background-image: url("./images/denim.jpg");
+    background-image: url("../images/denim.png");
     background-repeat: no-repeat;
     background-size: cover;
     top: 0px;
 }
 
 .footer-div{
-    position: fixed;
+    display: block;
     background-color: rgba(255, 255, 255, 0);
     bottom: 0px;
+    padding-top: 3%;
 }
 
 .page-content{
-    height: 80%;
+    height: 75%;
     margin-top: 2px;
     margin-bottom: 2px;
     margin-left: 1%;
@@ -223,7 +223,7 @@ body{
 }
 
 #listContainer{
-    height: 75%;
+    height: 85%;
     overflow-y: scroll;
 }
 
@@ -231,8 +231,8 @@ body{
     background-color: rgba(250, 253, 226, 0.5);
     border-radius: 8px;
     padding: 5px;
-    overflow-y: scroll;
     height: 90%;
+    overflow-y: scroll;
 }
 
 /* CSS BY ID */
@@ -285,7 +285,9 @@ overflow-y: scroll;
 }
 
 ::-webkit-scrollbar {
-    -webkit-appearance: none;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 1px rgba(255,255,255,.5);
     width: 7px;
 }
 ::-webkit-scrollbar-thumb {
@@ -353,7 +355,8 @@ clear: both;
 * {box-sizing: border-box;}
 
 body {
-font: 16px Arial;  
+font: 16px Arial;
+overflow: hidden;
 }
 
 /* aligning the check box in the details page */
