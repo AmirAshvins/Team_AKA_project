@@ -58,7 +58,7 @@ function submitInfo(event) {
 on page load
 */
 
-autocomplete(document.getElementById("courseBox"), getCollectionDetails("assignmentList", "course"));
+autocomplete(document.getElementById("courseBox"), Array.from(new Set(getCollectionDetails("assignmentList", "course"))));
 document.getElementById('form').addEventListener('submit', submitInfo)
 
 if (sessionStorage.needsDetails != undefined) {

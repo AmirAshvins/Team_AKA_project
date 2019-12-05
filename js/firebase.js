@@ -120,9 +120,9 @@ db.collection('assignments').onSnapshot(function () {
 
 document.getElementById('logout').onclick = ()=>{
     firebase.auth().signOut().then(function() {
-        // Sign-out successful.
+        alert('You are logged out')
       }).catch(function(error) {
-        // An error happened.
+        console.log('Logout failed.')
       });
 }
 
