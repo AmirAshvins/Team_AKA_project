@@ -102,7 +102,7 @@ span{
         font-family: Arial, Helvetica, sans-serif;
         font-weight: bolder;
         line-height: 30px;
-        transform: translate(-25%, -75%);
+        transform: translate(-25%, -100%);
     }
 }
 
@@ -155,7 +155,7 @@ body{
     display: block;
     background-color: rgba(255, 255, 255, 0);
     bottom: 0px;
-    padding-top: 5%
+    padding-top: 3%;
 }
 
 .page-content{
