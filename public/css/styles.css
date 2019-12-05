@@ -129,7 +129,7 @@ body{
     left: 0px;
     height: 100vh;
     width: 100vw;
-    background-image: url("../images/landing_page_bg_1.jpg");
+    background-image: url("./images/landing_page_bg_1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     /* overflow: hidden; */
@@ -142,7 +142,7 @@ body{
 }
 
 .header-div{
-    background-image: url("../images/denim.jpg");
+    background-image: url("./images/denim.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     top: 0px;
