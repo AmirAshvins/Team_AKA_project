@@ -73,6 +73,7 @@ function allLoaded() {
 sessionStorage.assignmentsLoaded = 'false';
 // sessionStorage.instructorsLoaded = 'false';
 delete sessionStorage.needsDetails;
+document.getElementById("headerText").innerHTML = JSON.parse(localStorage.user).name + "'s List";
 onPageLoad();
 
 firebase.auth().onAuthStateChanged((authUser) => {
@@ -80,3 +81,4 @@ firebase.auth().onAuthStateChanged((authUser) => {
     sessionStorage.loadedUser = false;
     sessionStorage.currentUser = JSON.stringify(currentUser)
 });
+

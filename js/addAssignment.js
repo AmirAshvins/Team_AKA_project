@@ -1,4 +1,3 @@
-
 // When page of edit assingment is called, it preloads the assingment details
 function editModeLoader(assignmentInstance) {
     changeLabelsToEdit(assignmentInstance);
@@ -38,17 +37,6 @@ function assignmentClassBuilder(instructorID) {
 }
 
 
-// Creates an instructor instance
-
-// function instructorBuilder() {
-//     console.log(document.getElementById('instructorNameBox').value);
-//     let newInstructor = new instructor(
-//         document.getElementById('instructorNameBox').value,
-//         document.getElementById('instructorEmailBox').value
-//     );
-//     return newInstructor;
-// }
-
 // handles the event when the submit button is clicked.
 
 function submitOnClick() {
@@ -57,15 +45,24 @@ function submitOnClick() {
 
 function submitInfo(event) {
     event.preventDefault();
-    // let instructorInstance = instructorBuilder();
-    let assignmentInstance = assignmentClassBuilder(instructorInstance.ID);
-    sendAssignment(assignmentInstance);
-    sendInstructor(instructorInstance);   
+    let assignmentInstance = assignmentClassBuilder();
+    if (confirm("Please confirm the submission")) {
+        sendAssignment(assignmentInstance);
     try {
         delete sessionStorage.needsDetails;
     } catch{
         console.log('find me');
     }
+    }else{
+        return false
+    }
+    // sendAssignment(assignmentInstance);
+    // sendInstructor(instructorInstance);   
+    // try {
+    //     delete sessionStorage.needsDetails;
+    // } catch{
+    //     console.log('find me');
+    // }
 }
 
 /*
