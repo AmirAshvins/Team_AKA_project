@@ -1,8 +1,13 @@
 
 
-// loads the assingments upon the page loading.
-
 function loadAssignmentDetails(assignmentId) {
+    /*
+    Load assignment details to DOM.
+
+    :precondition: assignmentID must be a string
+    :precondition: assignmentID must be present in localStorage assignmentList
+    :post0condition: will get the assignment instance from storage and load the details to the DOM
+     */
     let assignmentInstance = getElementByIdByCollectionFromLocStorage(assignmentId, 'assignmentList');
     document.getElementById('assignmentNameBox').innerHTML = assignmentInstance.name;
     document.getElementById('courseBox').innerHTML = assignmentInstance.course;
@@ -16,34 +21,54 @@ function loadAssignmentDetails(assignmentId) {
     }
 }
 
-// handles the button for editing assingments.
 function editButtonClickHandler() {
+    /**
+     * Handle the edit button onclick
+     * 
+     * :post-condition: will set the details.html page as back redirect (previousPage) in sessionstorage
+     * :post-condition: will redirect to addassignment.html
+     */
     sessionStorage.previousPage = "./details.html";
-    window.location.href = "./addasignment.html";
+    window.location.href = "./addassignment.html";
 }
 
-// handles the button for the calendar page
-function calendarButtonClickHandler() {
-    sessionStorage.needsDetails = '';
-    sessionStorage.previousPage = "./details.html";
-    window.location.href = "./calendar.html"
-}
 
-// handles the button for list page.
+
+
 function listButtonClickHandler() {
+    /**
+    * Handle the edit button onclick
+    * 
+    * :post-condition: will set the details.html page as back redirect (previousPage) in sessionstorage
+    * :post-condition: will redirect to main.html
+    * :post-condition: will delete sessionStorage.needsDetails
+    */
+    delete sessionStorage.needsDetails;
     sessionStorage.needsDetails = '';
     sessionStorage.previousPage = "./details.html";
     window.location.href = href = "./main.html";
 }
 
-function confirmCheckBox() {
+function completedCheckBoxClickHandler() {
+    /**
+    * Handle the completeCheckBox onclick
+    * 
+    * :post-condition: will determine if the box has been checked or unchecked
+    * :post-condition: will redirect to addassignment.html
+    */
     let CB = document.getElementById('completeCheckBox');
     if (CB.checked) {
         if (confirm("Are you sure you want to cross out the assginment")) {
             addToComplete(sessionStorage.needsDetails);
+        } else {
+            CB.checked = false;
         }
-    } else if (confirm("Are you sure you want to uncross the assginment") === true) {
-        removeFromCompleted(sessionStorage.needsDetails);
+    } else {
+        if (confirm("Are you sure you want to uncross the assginment") === true) {
+            removeFromCompleted(sessionStorage.needsDetails);
+        }else {
+            CB.checked = true
+        }
     }
 }
 
@@ -65,7 +90,7 @@ function removeFromCompleted(assignmentID) {
     sessionStorage.currentUser = JSON.stringify(currentUser);
 }
 
-document.getElementById('completeCheckBox').onclick = confirmCheckBox;
+document.getElementById('completeCheckBox').onclick = completedCheckBoxClickHandler;
 document.getElementById('editButton').onclick = editButtonClickHandler;
 document.getElementById('listButton').onclick = listButtonClickHandler;
 loadAssignmentDetails(sessionStorage.needsDetails);

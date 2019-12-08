@@ -3,10 +3,27 @@
  
 CLASS DEFINITIONS
 
+*/
+
+/*
+
+The Assignment class represents an assignment.
+
+It takes the following parameters:
+-course : string
+-assignmentName : string
+-dueDate : string
+-dueTime : string
+-d2lLink : string
+-instructions :string
+-additionalInformation : string
+-ID : string
+
+The ID will be created from the numbers present in the d2lLink
+
  */
-// The assignment class
 class assignment {
-    constructor(course, assignmentName, dueDate, dueTime, d2lLink, instructions, additionalInformation, instructorID) {
+    constructor(course, assignmentName, dueDate, dueTime, d2lLink, instructions, additionalInformation) {
         this.course = course;
         this.name = assignmentName;
         this.dueDate = dueDate;
@@ -14,7 +31,6 @@ class assignment {
         this.d2lLink = d2lLink;
         this.ID = 'ass';
         this.instructions = instructions;
-        // this.instructorID = instructorID;
         for (let i = 0; i < this.d2lLink.length; i++) {
             if (!isNaN(this.d2lLink[i])) {
                 this.ID += this.d2lLink[i];
@@ -23,7 +39,23 @@ class assignment {
     }
 }
 
-// the user class
+
+/*
+The User class represents a user
+
+The stored parameters are:]
+-ID : alphanumerical
+-name : string
+-completedAssignments : list of assignment IDs
+
+Upon instantiation, it will asses if user exists. If the user exists, it will query for completedAssignments. 
+Else, it will send the new user to DB.
+
+methods: 
+-getCompletedAssignments. Will query the DB for a list of assignment IDs that represent completed assignments
+
+
+*/
 class user {
     constructor(userID, userName) {
         this.ID = userID;
@@ -47,12 +79,5 @@ class user {
         }).catch((err) => {
             console.log('error while loading completed assignments', err)
         });
-    }
-}
-
-class course {
-    constructor(courseCode, courseName) {
-        this.courseCode = courseCode;
-        this.courseName = courseName;
     }
 }

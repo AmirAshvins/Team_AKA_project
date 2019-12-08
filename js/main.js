@@ -33,14 +33,16 @@ function onCompletedClick() {
     console.log('Hello');
 }
 
+function addButtonClickHandler(){
+    sessionStorage.previousPage = './main.html';
+    location = './addassignment.html'
+}
+
 // handles the events on pageload
 function onPageLoad() {
     if (sessionStorage.assignmentsLoaded != 'true') {
         loadAssignmentsToStorage();
     }
-    // if (sessionStorage.instructorsLoaded != 'true') {
-    //     loadInstructorsToStorage();
-    // }
 
     let waiter = setInterval(() => {
         if (allLoaded()) {
@@ -67,8 +69,8 @@ firebase.auth().onAuthStateChanged((authUser) => {
     sessionStorage.user = JSON.stringify(currentUser)
 });
 
+document.getElementById('addButton').onclick = addButtonClickHandler;
 sessionStorage.assignmentsLoaded = 'false';
-// sessionStorage.instructorsLoaded = 'false';
 delete sessionStorage.needsDetails;
 
 onPageLoad();
