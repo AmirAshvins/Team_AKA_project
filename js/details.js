@@ -15,7 +15,7 @@ function loadAssignmentDetails(assignmentId) {
     document.getElementById('dueTimeBox').innerHTML = assignmentInstance.dueTime;
     document.getElementById('d2lLinkBox').href = assignmentInstance.d2lLink;
     document.getElementById('instructionsBox').innerHTML = assignmentInstance.instructions;
-    let currentUser = JSON.parse(sessionStorage.user);
+    let currentUser = JSON.parse(sessionStorage.currentUser);
     if (currentUser.completedAssignments.includes(assignmentId)) {
         document.getElementById('completeCheckBox').checked = "true";
     }
@@ -80,7 +80,9 @@ function addToComplete(assignmentID) {
      * 
      * :precondition: assignmentID must be a string.
      * :precondition: sessionStorage.user must exist
-     * :post-conditon: will add the assignment to session
+     * :post-conditon: will add the assignment to sessionStorage.currentUser.completedAssignments list.
+     * :post-condition: will send the user to DB
+     * :post-condition: will flag sessionStorage.loadedUser as false
      */
     let currentUser = JSON.parse(sessionStorage.currentUser);
     currentUser.completedAssignments.push(assignmentID);
@@ -90,7 +92,16 @@ function addToComplete(assignmentID) {
 }
 
 function removeFromCompleted(assignmentID) {
-    let currentUser = JSON.parse(sessionStorage.user);
+    /**
+     * remove assignment to the completed list in sessionStorage
+     * 
+     * :precondition: assignmentID must be a string.
+     * :precondition: sessionStorage.user must exist
+     * :post-conditon: will remove the assignment to sessionStorage.currentUser.completedAssignments list.
+     * :post-condition: will send the user to DB
+     * :post-condition: will flag sessionStorage.loadedUser as false
+     */
+    let currentUser = JSON.parse(sessionStorage.currentUser);
     let badIndex = currentUser.completedAssignments.indexOf(assignmentID);
     currentUser.completedAssignments.splice(badIndex, 1);
     sendUserToDB(currentUser);
@@ -98,7 +109,10 @@ function removeFromCompleted(assignmentID) {
     sessionStorage.currentUser = JSON.stringify(currentUser);
 }
 
+// assign event handlers
 document.getElementById('completeCheckBox').onclick = completedCheckBoxClickHandler;
 document.getElementById('editButton').onclick = editButtonClickHandler;
 document.getElementById('listButton').onclick = listButtonClickHandler;
+
+// immediately load the assignment details to DOM
 loadAssignmentDetails(sessionStorage.needsDetails);

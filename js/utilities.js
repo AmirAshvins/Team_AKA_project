@@ -3,14 +3,6 @@
 // ##########################
 // UTILITIES
 
-function getUrlQueries() {
-    let urlQuery = decodeURI(window.location.search());
-    let queries = urlQuery.split('?');
-    delete queries[0];
-    console.log("success");
-    return queries;
-}
-
 function getElementByIdByCollectionFromLocStorage(elementID, collectionName) {
     let collectionList = JSON.parse(window.localStorage[collectionName]);
     for (let i = 0; i < collectionList.length; i++) {
