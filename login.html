@@ -52,11 +52,6 @@
               let errorMessage = error.message;
               console.log(errorCode, errorMessage);
             })
-          firebase.auth().onAuthStateChanged((authUser) => {
-            var currentUser = new user(authUser.uid, authUser.displayName)
-            sessionStorage.loadedUser = false;
-            sessionStorage.user = JSON.stringify(currentUser)
-          });
           return true;
         },
         uiShown: function () {

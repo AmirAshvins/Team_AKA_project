@@ -8,7 +8,7 @@ function loadList() {
 }
 
 function markCompletedAssignments() {
-    let user = JSON.parse(sessionStorage.user);
+    let user = JSON.parse(sessionStorage.currentUser);
     for (assignment of user.completedAssignments) {
         let assignmentRowDOM = document.getElementById(assignment);
         if (assignmentRowDOM != null) {
@@ -46,7 +46,7 @@ function onPageLoad() {
 
     let waiter = setInterval(() => {
         if (allLoaded()) {
-            document.getElementById("headerText").innerHTML = JSON.parse(sessionStorage.user).name + "'s List";
+            document.getElementById("headerText").innerHTML = JSON.parse(sessionStorage.currentUser).name + "'s List";
             resetListContainer();
             loadList();
             getAssignmentDueDate();
@@ -66,7 +66,7 @@ function allLoaded() {
 firebase.auth().onAuthStateChanged((authUser) => {
     var currentUser = new user(authUser.uid, authUser.displayName)
     sessionStorage.loadedUser = false;
-    sessionStorage.user = JSON.stringify(currentUser)
+    sessionStorage.currentUser = JSON.stringify(currentUser)
 });
 
 document.getElementById('addButton').onclick = addButtonClickHandler;

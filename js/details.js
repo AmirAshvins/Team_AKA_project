@@ -54,7 +54,8 @@ function completedCheckBoxClickHandler() {
     * Handle the completeCheckBox onclick
     * 
     * :post-condition: will determine if the box has been checked or unchecked
-    * :post-condition: will redirect to addassignment.html
+    * :post-condition: will promt user to confirm
+    * :post-condition: will either add or remove the assignment ID from sessionStorage.comepletedAssignments list
     */
     let CB = document.getElementById('completeCheckBox');
     if (CB.checked) {
@@ -74,11 +75,18 @@ function completedCheckBoxClickHandler() {
 
 
 function addToComplete(assignmentID) {
-    let currentUser = JSON.parse(sessionStorage.user);
+    /**
+     * Add assignment to the completed list in sessionStorage
+     * 
+     * :precondition: assignmentID must be a string.
+     * :precondition: sessionStorage.user must exist
+     * :post-conditon: will add the assignment to session
+     */
+    let currentUser = JSON.parse(sessionStorage.currentUser);
     currentUser.completedAssignments.push(assignmentID);
     sendUserToDB(currentUser);
     sessionStorage.loadedUser = "false";
-    sessionStorage.currentUser = JSON.stringify(user);
+    sessionStorage.currentUser = JSON.stringify(currentUser);
 }
 
 function removeFromCompleted(assignmentID) {
