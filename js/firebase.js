@@ -98,7 +98,11 @@ function sendAssignment(assignmentInstance) {
 
 function deletePassedAssignments() {
     /**
+     * Delete assignments that are passed due after 3 days  
      * 
+     * :preconditions: the assignment objects msut have Due date and Time date attributes.
+     * :post-condition: will get the due dates of the assignments and populates the list.
+     * :post-condition: will remove those that their due dates are passed by 72 hours. 
      */
     let dateList = getAssignmentDueDate();
     let today = new Date();
