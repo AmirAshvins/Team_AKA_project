@@ -102,7 +102,7 @@ function buildDueDateCol(dueDate) {
     let dueDateCol = document.createElement('div');
     dueDateCol.className = "col-lg-2 col-md-2 col-sm-2 col-xs-2 text-left";
     dueDateCol.innerHTML = "<p class='list-due-date list-text'>" + dueDate + "</p>";
-    return dueDateCol
+    return dueDateCol;
 }
 
 // builds the due time column inside the row
@@ -119,7 +119,7 @@ function buildDueTimeCol(dueTime) {
     let dueTimeCol = document.createElement('div');
     dueTimeCol.className = "col-lg-2 col-md-2 col-sm-2 col-xs-2 text-left";
     dueTimeCol.innerHTML = "<p class='list-due-time list-text'>" + dueTime + "</p>";
-    return dueTimeCol
+    return dueTimeCol;
 }
 
 

@@ -7,7 +7,7 @@ function loadList() {
      * :post-condition: will build all the list rows needed to represent all the assignments in localStorage.assignmentList
      * :post-condition: will mark all completed assignments
      */
-    let parsedAssignmentList = JSON.parse(window.localStorage.assignmentList)
+    let parsedAssignmentList = JSON.parse(window.localStorage.assignmentList);
     for (let i = 0; i < parsedAssignmentList.length; i++) {
         buildListRow(parsedAssignmentList[i]);
     }
@@ -55,7 +55,7 @@ function addButtonClickHandler(){
      * :post-condition: will redirect to addassignment.html
      */
     sessionStorage.previousPage = './main.html';
-    location = './addassignment.html'
+    location = './addassignment.html';
 }
 
 function onPageLoad() {

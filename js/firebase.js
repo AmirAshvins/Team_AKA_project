@@ -112,7 +112,7 @@ function deletePassedAssignments() {
             }
             ).catch(function (error) {
                 console.error('We have aproblem we didnt delete the item :( ', error);
-            })
+            });
         }
     }
 }
@@ -137,8 +137,8 @@ document.getElementById('logout').onclick = () => {
         window.location = "./index.html";
         console.log('user signed out')
     }).catch(function (error) {
-        alert('failed to logout\nerror code:', error)
+        alert('failed to logout\nerror code:', error);
         console.log('Logout failed.');
     });
-}
+};
 
